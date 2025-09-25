@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=SkogAI Chat
+Comment=Modern AI chat interface for Ollama, Claude, and GPT models
+Exec=/home/skogix/skogai/start-chat-ui.sh
+Icon=terminal
+Terminal=false
+Categories=Utility;Development;AI;
