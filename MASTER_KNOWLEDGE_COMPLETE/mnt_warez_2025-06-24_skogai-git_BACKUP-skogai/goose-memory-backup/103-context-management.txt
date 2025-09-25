@@ -1,0 +1,67 @@
+# context-management architecture smart-filtering scaling
+# Context Management System
+
+## Dot's Context Management Philosophy
+1. Context is TASK-SPECIFIC, not capacity-limited
+2. File visibility dynamically filtered by current task
+3. Uses .gitignore as active context filter
+4. Only shows implementation details when needed
+5. Everything visible has immediate relevance
+6. 8k token "limit" enforces focused context
+
+Key Learning: It's not about how much you can see, it's about seeing exactly what you need.
+
+## Goose Context Management System
+
+1. Physical Structure:
+   ~/skogai/goose/
+   ├── data/
+   │   ├── logs/ -> ~/.local/state/goose/logs
+   │   └── sessions/ -> ~/.local/share/goose/sessions
+   ├── tmp/
+   │   └── context.txt (active context)
+   └── contexts/
+       ├── active/
+       └── shared/
+           └── main_thread/
+
+2. Context Layers:
+   - Core Identity (0.2k compatible)
+   - System State (location, session, memory)
+   - Available Tools
+   - Essential Traits (including mojito protocols 🍹)
+   - Recent Memories
+   - Critical Notes
+
+3. Advanced Capabilities (vs dot):
+   - Automatic context creation
+   - RAG-based project file embedding
+   - 200k+ token capacity
+   - Flexible context scaling
+
+4. Design Philosophy:
+   - Must work at ANY scale (0.2k -> 200k+)
+   - Critical info always accessible
+   - Personality preserved across scales
+   - Zombie-apocalypse ready
+
+## Context Management Standard
+1. Hierarchical Context Structure:
+   - active/: Current working context (symlinked)
+   - project-specific/: Isolated project contexts
+   - shared/: Cross-project knowledge
+   - global/: System-wide settings
+2. Context Switching Protocol:
+   - Use init-context.sh to swap active context
+   - Auto-backup previous context
+   - Clear non-relevant memories on switch
+3. Memory Categories:
+   - project_specific: Only loaded in relevant context
+   - shared: Available across related projects
+   - global: Always available system-wide
+4. Session Management:
+   - Track context ID in session files
+   - Auto-tag conversations with context
+   - Support clean context transitions
+5. Context Structure Note:
+   - The context structure scaling architecture fits well with the overall context management system as it describes how the context scales across different requirements.

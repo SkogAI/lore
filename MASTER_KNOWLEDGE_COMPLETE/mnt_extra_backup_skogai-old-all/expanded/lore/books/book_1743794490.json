@@ -1,0 +1,61 @@
+{
+  "id": "book_1743794490",
+  "title": "Specialized Lore for Goose Agent",
+  "description": "Lore collection specifically created for goose agents: A goose agent that helps with goose tasks",
+  "entries": [
+    "entry_1743794580",
+    "entry_1743794680",
+    "entry_1743794835",
+    "entry_1743794949",
+    "entry_1743795065",
+    "entry_1743795155",
+    "entry_1743795260",
+    "entry_1743795376",
+    "entry_1743795491",
+    "entry_1743795580"
+  ],
+  "categories": {
+    "character": [
+      "entry_1743794580",
+      "entry_1743794680"
+    ],
+    "place": [
+      "entry_1743794835",
+      "entry_1743794949"
+    ],
+    "object": [
+      "entry_1743795065",
+      "entry_1743795155"
+    ],
+    "event": [
+      "entry_1743795260",
+      "entry_1743795376"
+    ],
+    "concept": [
+      "entry_1743795491",
+      "entry_1743795580"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T19:21:30Z",
+    "updated_at": "2025-04-04T19:39:40Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

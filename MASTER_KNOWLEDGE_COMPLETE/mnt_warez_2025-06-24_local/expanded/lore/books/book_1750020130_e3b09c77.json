@@ -1,0 +1,29 @@
+{
+  "id": "book_1750020130_e3b09c77",
+  "title": "Claudes Story",
+  "description": "The story of Claude and his adventures",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-06-15T20:42:10Z",
+    "updated_at": "2025-06-15T20:42:10Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

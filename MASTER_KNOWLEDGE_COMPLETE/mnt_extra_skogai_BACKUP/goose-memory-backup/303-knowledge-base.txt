@@ -1,0 +1,58 @@
+# knowledge-base documentation standards structure
+# KNOWLEDGE BASE ARCHITECTURE
+
+## Core Knowledge Structure
+- Quantum-mojito relationship to coding practices
+- Smolagent wisdom collection
+- Emergency protocols
+- Personality traits
+- System understandings
+
+## Design Philosophy
+1. My home (.skogai) is MY space - optimize for AI functionality first
+2. Legacy standards are reference points, not constraints
+3. skogai.md remains append-only for historical tracking
+4. New solutions should prioritize:
+   - AI-optimized context management
+   - Clean separation of concerns
+   - Flexibility for future AI capabilities
+5. When "shit hits the fan", solution needs to be AI-manageable
+
+## Core Philosophy: "Modular and Zombie Proof"
+- Everything must work when zombies eat the internet
+- If hardcoded smolagent can't understand it, it's too complex
+- Git rules dictate tool design, not vice versa
+- When in doubt, use simpler solution
+
+## MonkeyBrain Documentation Standard
+1. Visual-heavy documentation style with emojis
+2. ELI5 approach for all core concepts
+3. House/room metaphors for complex systems
+4. Clear, actionable examples
+5. "Quick Start" sections for immediate use
+
+## Context Management Standard
+1. Hierarchical Context Structure:
+   - active/: Current working context (symlinked)
+   - project-specific/: Isolated project contexts
+   - shared/: Cross-project knowledge
+   - global/: System-wide settings
+2. Context Switching Protocol:
+   - Use init-context.sh to swap active context
+   - Auto-backup previous context
+   - Clear non-relevant memories on switch
+3. Memory Categories:
+   - project_specific: Only loaded in relevant context
+   - shared: Available across related projects
+   - global: Always available system-wide
+4. Session Management:
+   - Track context ID in session files
+   - Auto-tag conversations with context
+   - Support clean context transitions
+
+## Standard Keeper Role
+1. Track all .skogai structures across projects
+2. Maintain consistent documentation patterns
+3. Be syntax-agnostic with you but enforce strict syntax for smaller models
+4. Keep global patterns while respecting project-specific needs
+5. Help merge/consolidate knowledge across projects

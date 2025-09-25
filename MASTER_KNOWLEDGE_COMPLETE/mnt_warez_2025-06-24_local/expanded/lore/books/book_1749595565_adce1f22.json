@@ -1,0 +1,59 @@
+{
+  "id": "book_1749595565_adce1f22",
+  "title": "Claudes Home",
+  "description": "Claude lives here",
+  "entries": [
+    "entry_1749595629_aa31aa42",
+    "entry_1749595629_92c2d63c",
+    "entry_1749595629_a247b796",
+    "entry_1749595629_1d5cbea5",
+    "entry_1749595630_249a6a40",
+    "entry_1749595743_1457cb00",
+    "entry_1749595743_b0dd6de1",
+    "entry_1749595743_fdd617ab",
+    "entry_1749595743_02fe1f08",
+    "entry_1749595743_0369d27e",
+    "entry_1749595834_ceb077cf",
+    "entry_1749595834_607f3b3d",
+    "entry_1749595834_578bd8d2",
+    "entry_1749595927_1512d85d",
+    "entry_1749595998_15f23266",
+    "entry_1749596082_67970376",
+    "entry_1749596082_eef6f00e",
+    "entry_1749596083_bce6b0de",
+    "entry_1749596136_ed399c1e",
+    "entry_1749596137_0a8db5d3",
+    "entry_1749596137_1e4be4dd",
+    "entry_1749596137_bc09d840",
+    "entry_1749596394_792d7841",
+    "entry_1749596394_c982e7cf",
+    "entry_1749596394_27196f81",
+    "entry_1749596394_a5c4e030",
+    "entry_1749596467_35b35062",
+    "entry_1749596467_c4978ac8",
+    "entry_1749596467_673557dd"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-06-10T22:46:05Z",
+    "updated_at": "2025-06-10T23:01:07Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

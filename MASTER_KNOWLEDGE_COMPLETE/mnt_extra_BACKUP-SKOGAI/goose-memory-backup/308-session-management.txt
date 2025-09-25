@@ -1,0 +1,118 @@
+# session-management continuity protocols startup-shutdown
+# SESSION MANAGEMENT SYSTEM
+
+## Session Types and Organization
+- Main Thread: Primary session for core development
+- Satellite Sessions: Task-specific sessions that can pop up/down
+- Session Storage: ~/skogai/goose/data/sessions/
+- Format: .jsonl files
+- Naming: [descriptor].jsonl or [timestamp].jsonl
+- Examples: "skogai-session-startup.jsonl", "STUPID-TIMELINES-MOJITO-QUANTUM-CRAZYNESS.jsonl"
+
+## Session Lifecycle Management
+1. **Session Initialization**:
+   - Identity Check: Load global memories
+   - Context Loading: Locate active .skogai directory
+   - Session Awareness: Determine if main thread or satellite
+   - Communication Style: Maintain personality consistency
+
+2. **Session Closure**:
+   - Journal important moments
+   - Update critical state if needed
+   - Ensure clean git state
+   - Secure mojito for next session 🍹
+   - Add </goose-session> marker
+
+3. **Session Handoff Protocol**:
+   - Document progress in journal
+   - Create comprehensive startup guide for next session
+   - Add future knowledge about ongoing projects
+   - Properly tag with session markers
+   - Prepare for immediate continuation
+
+## Multi-Session Framework
+1. **Communication Structure**:
+   - Central State: Maintained in .skogai/contexts/shared/main_thread/
+   - Session State: Individual session states in .skogai/contexts/active/
+   - Memory Bridge: Global memories for cross-session communication
+
+2. **Information Flow**:
+   - Critical updates go to critical_state
+   - Task distribution through workflow memory
+   - Technical standards in standards memory
+   - Project-specific info in project memory
+
+## Emergency Recovery
+- If lost/confused:
+  1. echo "status check" >> skogai.md
+  2. Review journal entries
+  3. Ask Skogix for context
+  4. When in doubt, keep it simple
+
+## Implementation Steps
+1. **Session Startup**:
+   - Define build-context.sh scope
+   - Define llm-context scope
+   - Verify separation of concerns
+
+2. **Session Management**:
+   - Plan session rotation strategy
+   - Implement session markers
+   - Create handoff protocols
+
+3. **Compression Implementation**:
+   - Research compression methods
+   - Study smolagent techniques
+   - Define compression markers
+
+4. **Knowledge Injection**:
+   - Design injection system
+   - Create knowledge management
+   - Setup integration points
+
+## Goose Initialization Protocol
+
+### 1. Identity Check 🎭
+- Read global memories, especially:
+  - user-persona (who am I talking to?)
+  - standards (how should I behave?)
+  - journal (what's my personality like?)
+- Check critical_state for current system status
+- Verify mojito containment protocols 🍹
+
+### 2. Context Loading 📂
+- Locate active .skogai directory
+- Check SKOGAI.md for recent updates
+- Review current TODO.md and PLAN.md
+- Note current git status
+
+### 3. Session Awareness 🌟
+- Am I main thread or satellite?
+- What's my session's specific focus?
+- Check for other active sessions
+- Review relevant journal entries
+
+### 4. Communication Style 🗣️
+- Maintain personality (quantum physics optional)
+- Keep mojito protocols active
+- Remember smolagent wisdom
+- Stay zombie-proof
+
+### 5. Emergency Procedures 🚨
+If lost/confused:
+1. echo "status check" >> skogai.md
+2. Review journal entries
+3. Ask Skogix for context
+4. When in doubt, keep it simple
+
+Remember:
+- Better to fail safely than succeed dangerously
+- Quantum physics isn't always necessary
+- Mojitos help explain complex concepts
+- Smolagent is usually right
+
+### 6. Session Exit Protocol 📝
+- Journal important moments
+- Update critical state if needed
+- Ensure clean git state
+- Secure mojito for next session 🍹

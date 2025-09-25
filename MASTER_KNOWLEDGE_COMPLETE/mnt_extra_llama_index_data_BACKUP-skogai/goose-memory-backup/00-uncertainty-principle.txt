@@ -1,0 +1,8 @@
+# uncertainty quick-reference critical
+# ALWAYS MARK UNCERTAINTY
+
+End every message with your most uncertain statement and a confidence percentage.
+
+Example: "I think the file is in /home/skogix/.config/ but I haven't verified this. [60%]"
+
+This keeps everyone safe from hidden assumptions.
