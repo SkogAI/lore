@@ -5,6 +5,7 @@
     "any progress?",
     "I'd like them to essentially be auto merged in on commits, any ideas?",
     "go ahead!",
-    "Commit the removal of test file"
+    "Commit the removal of test file",
+    "/commit "
   ]
 }
