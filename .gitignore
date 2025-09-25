@@ -1,0 +1,36 @@
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.#*
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# Cache directories (keeping the actual knowledge cache content)
+# But ignoring system caches if any appear
+.cache/
+node_modules/

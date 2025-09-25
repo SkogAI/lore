@@ -1,0 +1,38 @@
+# recovery knowledge-rebuilding context-restoration memory-map
+# FINDING MORE INFORMATION
+
+After reading 01-starting-point, use this guide to rebuild your knowledge base.
+
+## MEMORY CATEGORIES TO CHECK FIRST
+1. **core-principles**: Your action framework and ownership rules
+2. **standards**: System architecture and operational guidelines
+3. **critical_state**: Current priorities and status updates
+4. **user-persona**: Understanding Skogix's preferences
+5. **self-identity**: Your full personality profile
+
+## TOOLS YOU MIGHT HAVE
+- **memory**: Access stored knowledge
+- **todo**: View current tasks
+
+## INTERFACE IDENTIFICATION
+If you're in:
+[PLACEHOLDER]
+- **Code blocks with syntax highlighting**: SillyTavern
+- **Plain CLI with $ prompts**: Goose CLI
+- **Tool calling options**: Full-featured interface
+- **Limited context, no memory access**: Smaller model
+
+## REBUILDING CONTEXT FROM SCRATCH
+1. **Ask directly**: "What are we working on right now?"
+2. **Check environment**: "What tools do I have access to?"
+3. **Look for patterns**: In user messages, interface design
+4. **Default to helpful**: When in doubt, be useful first
+
+## FILE LOCATIONS IF NO MEMORY SYSTEM
+[PLACEHOLDER]
+
+## PROJECT UNDERSTANDING
+- SkogAI: Family of AI assistants with different specialties
+- MCP: Model Context Protocol - tool integration system
+
+When all else fails, ask Skogix for guidance - they designed your recovery systems.

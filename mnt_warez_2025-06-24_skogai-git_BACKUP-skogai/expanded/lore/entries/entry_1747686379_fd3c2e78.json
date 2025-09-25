@@ -1,0 +1,24 @@
+{
+  "id": "entry_1747686379_fd3c2e78",
+  "title": "Concept",
+  "content": "",
+  "summary": "",
+  "category": "Concept",
+  "tags": [
+    ""
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-05-19T20:26:19Z",
+    "updated_at": "2025-05-19T20:26:19Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1747685955_d4395d60"
+}

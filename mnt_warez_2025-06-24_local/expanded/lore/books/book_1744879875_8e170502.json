@@ -1,0 +1,29 @@
+{
+  "id": "book_1744879875_8e170502",
+  "title": "Echo2's adventures",
+  "description": "Earlier stories from Echo2's past",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-17T08:51:15Z",
+    "updated_at": "2025-04-17T08:51:15Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}
