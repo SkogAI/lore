@@ -195,6 +195,9 @@
     "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
     "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
     "cwd": "/home/skogix/lore",
+    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
     "permission_mode": "default",
     "hook_event_name": "Stop",
     "stop_hook_active": false
