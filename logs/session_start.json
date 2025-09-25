@@ -1,0 +1,30 @@
+[
+  {
+    "session_id": "cc43d60a-c612-479e-8c62-5d467a6fc94a",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/cc43d60a-c612-479e-8c62-5d467a6fc94a.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "d65eeb13-b0af-45a5-a287-6b3b70a0b75d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/d65eeb13-b0af-45a5-a287-6b3b70a0b75d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "74957883-265f-4fd6-abe0-591f20078b05",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/74957883-265f-4fd6-abe0-591f20078b05.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "c9a738e7-8283-4582-8aaa-3bc3673ede6f",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/c9a738e7-8283-4582-8aaa-3bc3673ede6f.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  }
+]
