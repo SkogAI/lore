@@ -142,5 +142,45 @@
     "permission_mode": "default",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "/gh-issue \"We need to - by a combination of replace via scripts and by setting standards - make sure that hard coded paths will be replaced and not introduced again. We have skogcli config and it works for things other than ontology as well\""
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "CLAUDE! YOU KNOW WHAT?!"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "black-magic-swoopa ./ and ../skogai/docs/lore after the \"oh shit\" moment!"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "good, now tell me exactly what happende!"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "what? talk straight to me - what the fuck are you talking about?"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "how about this: `cd $HOME && ast-grep \"oh shit\""
   }
 ]

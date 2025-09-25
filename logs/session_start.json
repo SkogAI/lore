@@ -54,5 +54,19 @@
     "cwd": "/home/skogix/lore",
     "hook_event_name": "SessionStart",
     "source": "startup"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "335357ae-5abc-4c39-82ad-66fb963c3e04",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/335357ae-5abc-4c39-82ad-66fb963c3e04.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "clear"
   }
 ]
