@@ -1,0 +1,23 @@
+[
+  {
+    "session_id": "503bfe1e-77f7-4d5d-b838-89f5f165c771",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/503bfe1e-77f7-4d5d-b838-89f5f165c771.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "9f8d5ba8-9ab3-477c-8788-35a367c3c5e4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/9f8d5ba8-9ab3-477c-8788-35a367c3c5e4.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  }
+]

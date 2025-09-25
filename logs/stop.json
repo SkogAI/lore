@@ -1,0 +1,50 @@
+[
+  {
+    "session_id": "c61ae2fb-4821-4380-845c-f838fc27c372",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/c61ae2fb-4821-4380-845c-f838fc27c372.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/30771f37-90c6-4214-80ff-1ae93a4866b4.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/30771f37-90c6-4214-80ff-1ae93a4866b4.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/30771f37-90c6-4214-80ff-1ae93a4866b4.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/30771f37-90c6-4214-80ff-1ae93a4866b4.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/30771f37-90c6-4214-80ff-1ae93a4866b4.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  }
+]

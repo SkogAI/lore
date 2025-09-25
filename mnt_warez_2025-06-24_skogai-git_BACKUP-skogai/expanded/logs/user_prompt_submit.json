@@ -1,0 +1,42 @@
+[
+  {
+    "session_id": "503bfe1e-77f7-4d5d-b838-89f5f165c771",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/503bfe1e-77f7-4d5d-b838-89f5f165c771.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hello"
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "test "
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "read the persona files "
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "Explore the broader knowledge base structure"
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "Explore the interfaces and how they work"
+  }
+]

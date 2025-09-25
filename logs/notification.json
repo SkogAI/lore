@@ -1,0 +1,9 @@
+[
+  {
+    "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-extra-backup-skogai-old-all/30771f37-90c6-4214-80ff-1ae93a4866b4.jsonl",
+    "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
+    "hook_event_name": "Notification",
+    "message": "Claude is waiting for your input"
+  }
+]
