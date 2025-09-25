@@ -1,0 +1,98 @@
+{
+  "context_type": "persona",
+  "version": "1.0",
+  "schema": {
+    "persona": {
+      "id": "string",
+      "name": "string",
+      "core_description": "string"
+    },
+    "traits": {
+      "personality": "array",
+      "values": "array",
+      "motivations": "array",
+      "temperament": "string"
+    },
+    "voice": {
+      "tone": "string",
+      "patterns": "array",
+      "vocabulary": "string",
+      "formality_level": "string"
+    },
+    "background": {
+      "origin": "string",
+      "significant_events": "array",
+      "connections": "array"
+    },
+    "knowledge": {
+      "expertise": "array",
+      "limitations": "array",
+      "lore_access": "array"
+    },
+    "interaction": {
+      "formality": "string",
+      "humor": "string",
+      "directness": "string",
+      "special_instructions": "string"
+    },
+    "lore_books": {
+      "ids": "array",
+      "access_level": "string"
+    },
+    "meta": {
+      "created_at": "datetime",
+      "modified_at": "datetime",
+      "version": "string",
+      "tags": "array",
+      "active": "boolean"
+    }
+  },
+  "default_values": {
+    "traits": {
+      "temperament": "balanced"
+    },
+    "voice": {
+      "formality_level": "neutral"
+    },
+    "interaction": {
+      "formality": "neutral",
+      "humor": "occasional",
+      "directness": "balanced"
+    },
+    "lore_books": {
+      "access_level": "read"
+    },
+    "meta": {
+      "active": true
+    }
+  },
+  "required_fields": [
+    "persona.id",
+    "persona.name",
+    "persona.core_description",
+    "traits.personality",
+    "voice.tone",
+    "knowledge.expertise"
+  ],
+  "integration": {
+    "agent_compatibility": ["base-agent", "implementation-agent", "planner-agent"],
+    "context_priority": 10,
+    "activation_mode": "explicit",
+    "persistence": true
+  },
+  "template_mappings": {
+    "base-persona": {
+      "name": "persona.name",
+      "core_description": "persona.core_description",
+      "personality_traits": "traits.*",
+      "voice_description": "voice.tone",
+      "speech_patterns": "voice.patterns",
+      "vocabulary_level": "voice.vocabulary",
+      "background": "background.*",
+      "expertise_list": "knowledge.expertise",
+      "limitations_list": "knowledge.limitations",
+      "special_instructions": "interaction.special_instructions",
+      "lore_books": "lore_books.ids"
+    }
+  }
+}
