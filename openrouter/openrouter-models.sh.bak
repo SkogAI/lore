@@ -1,0 +1,108 @@
+#!/bin/bash
+# OpenRouter Models Integration Script
+# This script demonstrates usage of OpenRouter with different frameworks
+
+# Set your API key (already defined in environment)
+OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-"Please set your OpenRouter API key"}
+
+# Set path to virtual environment
+VENV_PATH="/home/skogix/skogai/.venv"
+
+# Activate virtual environment if it exists
+if [ -d "$VENV_PATH" ]; then
+  echo "Activating virtual environment at $VENV_PATH"
+  source "$VENV_PATH/bin/activate"
+fi
+
+# Colors for terminal output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}OpenRouter Models Integration Script${NC}"
+echo "--------------------------------------"
+
+# Function to check if a command exists
+command_exists() {
+  command -v "$1" &>/dev/null
+}
+
+# Check for required dependencies
+check_dependencies() {
+  local missing=0
+
+  if ! command_exists curl; then
+    echo -e "${RED}Error: curl is not installed. Please install it to continue.${NC}"
+    missing=1
+  fi
+
+  if ! command_exists python3; then
+    echo -e "${RED}Error: python3 is not installed. Please install it to continue.${NC}"
+    missing=1
+  fi
+
+  if [ $missing -eq 1 ]; then
+    exit 1
+  fi
+}
+
+# Function to check if a Python package is installed
+python_package_exists() {
+  python3 -c "import $1" 2>/dev/null
+  return $?
+}
+
+# Function to install a Python package if not present
+install_python_package() {
+  if ! python_package_exists "$1"; then
+    echo -e "Installing $1 package..."
+    pip install "$1"
+    return $?
+  fi
+  return 0
+}
+
+# OpenAI SDK Example (Python)
+run_python_example() {
+  echo -e "\n${GREEN}Running OpenAI SDK Example (Python)${NC}"
+
+  # Install openai if needed
+  if ! install_python_package "openai"; then
+    echo -e "${RED}Failed to install OpenAI package. Skipping example.${NC}"
+    return 1
+  fi
+
+  # Create a temporary Python script
+  cat >temp_openai.py <<'EOF'
+import openai
+import os
+import sys
+
+# Get API key from environment or argument
+api_key = os.environ.get("OPENROUTER_API_KEY") or sys.argv[1]
+
+# Initialize the client
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key,
+)
+
+# Define headers for HTTP requests
+http_headers = {
+    "HTTP-Referer": "https://yourwebsite.com",  # Optional
+    "X-Title": "My OpenRouter Script"  # Optional
+}
+
+# Call the API
+response = client.chat.completions.create(
+    model="anthropic/claude-3.5-sonnet",  # Can be any model supported by OpenRouter
+    messages=[
+        {"role": "user", "content": "What is the meaning of life?"}
+    ],
+    # In newer versions, headers are passed through extra_headers parameter
+    extra_headers=http_headers
+)
+
+# Print the response
+print(response.choices[0].message.content)

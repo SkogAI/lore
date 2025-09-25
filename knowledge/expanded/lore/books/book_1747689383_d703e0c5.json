@@ -1,0 +1,29 @@
+{
+  "id": "book_1747689383_d703e0c5",
+  "title": "Dot's Journals",
+  "description": "Dot's inner thoughts and personality",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-05-19T21:16:23Z",
+    "updated_at": "2025-05-19T21:16:23Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

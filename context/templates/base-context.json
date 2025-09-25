@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "created": "",
+  "last_updated": "",
+  "session_id": "",
+  "context_type": "base",
+  "active_knowledge": [],
+  "user_profile": {
+    "preferences": {},
+    "history_summary": ""
+  },
+  "system_state": {
+    "orchestrator_mode": "standard",
+    "active_agents": [],
+    "memory_priority": "core"
+  },
+  "interaction_state": {
+    "current_task": "",
+    "task_progress": 0,
+    "pending_actions": []
+  }
+}

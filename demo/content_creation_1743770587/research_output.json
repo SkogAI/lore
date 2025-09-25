@@ -1,0 +1,42 @@
+{
+  "topic": "SkogAI lore",
+  "key_facts": [
+    "This is a simulated key fact about SkogAI lore",
+    "This is another key fact about SkogAI lore",
+    "This is a third important fact about SkogAI lore"
+  ],
+  "main_concepts": [
+    {
+      "name": "Main concept of SkogAI lore",
+      "definition": "Definition of this concept",
+      "importance": "Why this concept matters to SkogAI lore"
+    },
+    {
+      "name": "Secondary concept",
+      "definition": "Definition of second concept",
+      "importance": "Relevance to SkogAI lore"
+    }
+  ],
+  "relationships": [
+    "How main concepts relate to each other",
+    "Historical or logical progression of concepts"
+  ],
+  "potential_sections": [
+    "Introduction to SkogAI lore",
+    "Historical background",
+    "Main elements of SkogAI lore",
+    "Practical applications",
+    "Future developments"
+  ],
+  "sources": [
+    {
+      "title": "Simulated source 1",
+      "key_contribution": "Provides historical context"
+    },
+    {
+      "title": "Simulated source 2",
+      "key_contribution": "Offers technical details"
+    }
+  ],
+  "confidence": 85
+}

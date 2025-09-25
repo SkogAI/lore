@@ -1,0 +1,38 @@
+{
+  "title": "",
+  "introduction": [
+    "",
+    "Key point 1: Reinforcement learning (RL) has come a long way since its introduction in the 1980s, transforming from simple algorithms to complex embodied AI systems.",
+    "Key point 2: This article will explore the evolution of RL in robotics, highlighting key milestones and innovations that have enabled robots to learn and adapt in their environment.",
+    ""
+  ],
+  "structure": [
+    {
+      "title": "**Early Days of RL in Robotics**",
+      "subsections": [
+        "Subsection 1.1: Early RL algorithms were used for simple tasks such as robotic arm control and obstacle avoidance.",
+        "Subsection 1.2: The first generation of RL algorithms was limited to small-scale, controlled environments."
+      ]
+    },
+    {
+      "title": "**RL Takes a Leap Forward: Complex Tasks and Humanoid Robots**",
+      "subsections": [
+        "Subsection 2.1: In the 2000s, RL began to be applied to more complex tasks, including humanoid robot control and manipulation of objects.",
+        "Subsection 2.2: This marked a significant shift towards more advanced and sophisticated robotic systems."
+      ]
+    },
+    {
+      "title": "**The Rise of Embodied AI**",
+      "subsections": [
+        "Subsection 3.1: Embodied AI integrates AI with robots and other physical systems, enabling them to interact with and learn from their environment.",
+        "Subsection 3.2: Today, embodied AI is revolutionizing robotics, allowing robots to learn complex tasks through trial and error.",
+        ""
+      ]
+    }
+  ],
+  "conclusion": [
+    "",
+    "Summary point 1: The evolution of RL in robotics has been marked by significant advancements, from simple algorithms to complex embodied AI systems.",
+    "Summary point 2: As RL continues to evolve, we can expect even more sophisticated robotic systems that are capable of learning and adapting in a wide range of environments."
+  ]
+}

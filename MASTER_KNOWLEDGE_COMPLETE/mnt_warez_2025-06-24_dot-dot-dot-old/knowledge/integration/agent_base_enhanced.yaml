@@ -1,0 +1,5 @@
+name: skogai_base_enhanced
+chat_command: cd /home/skogix/.skogai-base && ./run.sh
+inbox: echo {message} >> /home/skogix/.skogai-base/inbox.md
+legacy_compatible: true
+context_system: true

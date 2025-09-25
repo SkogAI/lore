@@ -1,0 +1,42 @@
+{
+  "topic": "--help",
+  "key_facts": [
+    "This is a simulated key fact about --help",
+    "This is another key fact about --help",
+    "This is a third important fact about --help"
+  ],
+  "main_concepts": [
+    {
+      "name": "Main concept of --help",
+      "definition": "Definition of this concept",
+      "importance": "Why this concept matters to --help"
+    },
+    {
+      "name": "Secondary concept",
+      "definition": "Definition of second concept",
+      "importance": "Relevance to --help"
+    }
+  ],
+  "relationships": [
+    "How main concepts relate to each other",
+    "Historical or logical progression of concepts"
+  ],
+  "potential_sections": [
+    "Introduction to --help",
+    "Historical background",
+    "Main elements of --help",
+    "Practical applications",
+    "Future developments"
+  ],
+  "sources": [
+    {
+      "title": "Simulated source 1",
+      "key_contribution": "Provides historical context"
+    },
+    {
+      "title": "Simulated source 2",
+      "key_contribution": "Offers technical details"
+    }
+  ],
+  "confidence": 85
+}

@@ -1,0 +1,27 @@
+Here is a suggested outline for the article:
+
+**The Evolution of Reinforcement Learning in Robotics: From Simple Algorithms to Embodied AI**
+
+**INTRODUCTION:**
+
+* Reinforcement learning (RL) has revolutionized the field of robotics, enabling robots to learn complex tasks through experience.
+* This article will explore the evolution of RL in robotics from simple algorithms to embodied AI.
+
+**SECTIONS:**
+
+1. **The Early Days of RL in Robotics**
+   * The introduction of Q-learning and SARSA in the early 2000s
+   * Initial challenges and limitations of these simple algorithms
+
+2. **Advancements in RL Algorithms**
+   * The introduction of deep Q-networks (DQN) and policy gradients in the mid-2010s
+   * Improved performance and capabilities of these advanced algorithms
+
+3. **The Rise of Embodied AI**
+   * The combination of RL with computer vision, sensorimotor integration, and other AI techniques
+   * Examples of embodied AI applications in robotics, such as learning complex tasks through experience
+
+**CONCLUSION:**
+
+* A summary of the evolution of RL in robotics from simple algorithms to embodied AI
+* The potential for continued advancements and impact on the field of robotics

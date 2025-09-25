@@ -1,0 +1,73 @@
+{
+  "id": "book_1745043574",
+  "title": "Specialized Lore for Huhu Agent",
+  "description": "Lore collection specifically created for HUHU agents: WAWA",
+  "entries": [
+    "entry_1745043629",
+    "entry_1745043693",
+    "entry_1745043730",
+    "entry_1745043769",
+    "entry_1745043817",
+    "entry_1745043879",
+    "entry_1745043912",
+    "entry_1745043952",
+    "entry_1745043988",
+    "entry_1745044027",
+    "entry_1745044060",
+    "entry_1745044104",
+    "entry_1745044137",
+    "entry_1745044169",
+    "entry_1745044206"
+  ],
+  "categories": {
+    "character": [
+      "entry_1745043629",
+      "entry_1745043693",
+      "entry_1745043730"
+    ],
+    "place": [
+      "entry_1745043769",
+      "entry_1745043817",
+      "entry_1745043879"
+    ],
+    "object": [
+      "entry_1745043912",
+      "entry_1745043952",
+      "entry_1745043988"
+    ],
+    "event": [
+      "entry_1745044027",
+      "entry_1745044060",
+      "entry_1745044104"
+    ],
+    "concept": [
+      "entry_1745044137",
+      "entry_1745044169",
+      "entry_1745044206"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1745044223"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-19T06:19:34Z",
+    "updated_at": "2025-04-19T06:30:23Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

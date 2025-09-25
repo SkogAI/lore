@@ -1,0 +1,20 @@
+KEY FACTS:
+
+* The term "AI alignment" refers to the challenge of ensuring that an artificial intelligence (AI) system's goals and behaviors are aligned with human values and ethics.
+* Current AI systems are often designed to optimize a specific objective function, which may not necessarily align with human values or societal norms.
+* The problem of AI alignment is considered critical because it could have significant implications for the future of humanity, including job displacement, bias, and even existential risks.
+
+MAIN CONCEPTS:
+
+* Object-Oriented Learning (OOL): A conceptual framework that views an AI system's objective as being derived from its internal goals or values.
+* Reward Functions: The mathematical functions used to evaluate the performance of an AI system, which can have a significant impact on its behavior and decision-making.
+
+RELATIONSHIPS:
+
+* OOL relates to concept 2 because it provides a framework for understanding how an AI system's reward function is derived from its internal goals or values.
+* Concept 1 (AI alignment) relates to concept 2 (reward functions) because the design of a reward function can significantly impact the alignment of an AI system with human values.
+
+POTENTIAL SECTIONS:
+
+* Section 1: The Problem of Unintended Consequences - This section could explore examples of AI systems that have unintended consequences, such as biased decision-making or job displacement.
+* Section 2: Approaches to AI Alignment - This section could discuss various approaches to addressing the problem of AI alignment, including OOL, value-alignment, and human-in-the-loop systems.

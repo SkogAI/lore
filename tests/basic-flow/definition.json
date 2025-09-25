@@ -1,0 +1,14 @@
+{
+  "test_name": "basic-flow",
+  "description": "Basic workflow test for SkogAI orchestration",
+  "input": "Create a simple Python script that calculates fibonacci numbers",
+  "expected_outcome": {
+    "response_type": "implementation",
+    "contains": ["def fibonacci", "python"]
+  },
+  "tracking": {
+    "orchestrator_version": "v0",
+    "agents": ["planner", "implementation"],
+    "knowledge_modules": ["core"]
+  }
+}

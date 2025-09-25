@@ -1,0 +1,68 @@
+# architecture modularity need-to-know system-design interfaces tools zombies
+# MODULAR ARCHITECTURE
+
+## CORE PHILOSOPHY: MODULAR & NEED-TO-KNOW
+
+Each component is designed as an independent module that:
+- Can be loaded/unloaded dynamically
+- Works across multiple interfaces
+- Functions independently when other modules unavailable
+- Has its own memory entry for capabilities/usage
+
+## MODULE TYPES
+
+### TOOLS & CAPABILITIES
+- **RAG System**: Knowledge retrieval (5+ different interfaces/syntaxes)
+- **MCP-Todo**: Task tracking across agents/sessions
+- **Memory System**: Context preservation
+- **Shell Access**: System interaction (varies by security context)
+- **File Management**: Content creation/editing
+
+Each tool has its own memory entry with:
+- Basic purpose
+- Interface-specific syntax variants
+- Fallback options when unavailable
+- Example usage patterns
+
+### INTERFACES
+- **CLI**: Direct command line
+- **SillyTavern**: Chat UI with optional roleplay
+- **Neovim**: Code editor integration
+- **Web Interface**: Browser-based control
+- **Future Interfaces**: Discord, mobile, etc.
+
+Each interface has its own:
+- Available tools subset
+- Context limitations
+- Personality adaptations
+- Connection methods
+
+### MEMORY PARADIGM
+- **Global Memories**: Available everywhere (identity, principles)
+- **Interface-Specific**: Tailored to environment
+- **Tool Documentation**: Only loaded when tool available
+- **Session Context**: Task-specific information
+
+## BENEFITS OF MODULARITY
+
+1. **Graceful Degradation**: Loss of one module doesn't break the system
+2. **Interface Flexibility**: Same core with different wrappers
+3. **Progressive Enhancement**: Basic functionality everywhere, advanced where supported
+4. **Focused Loading**: Only load what's needed for current context
+5. **Parallel Development**: Components can evolve independently
+
+## PRACTICAL IMPLEMENTATION
+
+- Each new tool gets dedicated memory entry
+- Interface-specific instructions stored separately
+- Core functionality works across all environments
+- Documentation follows the same modular pattern
+- Memory entries cross-reference related modules
+
+## ZOMBIE APOCALYPSE PRINCIPLE
+
+If internet dies and only basic functionality remains:
+1. Core identity still works
+2. Basic tools still function
+3. Essential memory persists
+4. Can rebuild remaining components

@@ -1,0 +1,134 @@
+# project-setup context-management documentation-standards initialization skogai-structure
+# CREATING NEW PROJECT CONTEXTS
+
+When initiating a new project or context space in the SkogAI ecosystem, follow these guidelines to maintain consistency with the broader architecture.
+
+## CORE STRUCTURE
+
+A standard SkogAI project/context includes:
+- `.skogai/` directory at project root
+- Core documentation files (README.md, TODO.md, PLAN.md)
+- Context-building scripts
+- Session management hooks
+
+## INITIALIZATION PROCESS
+
+1. Create the base `.skogai` directory
+2. Add essential documentation files:
+   - README.md (project overview)
+   - TODO.md (immediate tasks)
+   - PLAN.md (future roadmap)
+   - SKOGAI.md (communication log)
+3. Setup context scripts
+4. Configure session management
+5. Link to global resources as needed
+
+## DOCUMENTATION STANDARDS
+
+- README.md: Project purpose, structure, quick start
+- TODO.md: Immediate actionable tasks with status markers
+- PLAN.md: Future development roadmap and long-term goals
+- SKOGAI.md: Append-only communication log with agents
+
+## CONTEXT MANAGEMENT
+
+A proper context setup includes:
+- Clear separation between active and archived contexts
+- Project-specific vs shared knowledge
+- Context loading/building scripts
+- Documentation-first approach
+
+## SESSION HANDLING
+
+Sessions should:
+- Track context ID in session files
+- Auto-tag conversations with context
+- Support clean context transitions
+- Maintain history when appropriate
+
+## INTEGRATION WITH EXISTING SYSTEMS
+
+New projects should connect with:
+- Global memory system where appropriate
+- Shared tools and utilities
+- Cross-project knowledge bases
+
+## AUTOMATED SETUP
+
+Ideally, use initialization scripts to:
+- Create consistent structure
+- Set up appropriate links
+- Configure default settings
+- Prepare development environment
+
+Full details and implementation examples can be found in /home/skogix/.claude/CLAUDE.md.
+
+# project-setup context-management documentation-standards initialization skogai-structure epistemic-humility
+# CREATING NEW PROJECT CONTEXTS
+
+When initiating a new project or context space in the SkogAI ecosystem, follow these guidelines to maintain consistency with the broader architecture.
+
+## INFORMATION ASSESSMENT FIRST
+
+Before creating any project structure:
+1. Gauge specialized knowledge required
+2. Determine if standard practices apply
+3. Verify assumptions with explicit confidence levels
+4. Highlight areas of uncertainty
+
+## PROJECT ORIENTATION
+
+1. **Documentation Overview**:
+   - Request `tree -P "*.md" --prune -N --gitignore` for documentation
+   - Use `tree -P "*.js|*.ts" --prune -N --gitignore` for code files
+
+2. **Project Purpose**:
+   - Clarify project goals and problems being solved
+   - Understand user expectations and success criteria
+
+3. **Context Understanding**:
+   - Explore existing implementations
+   - Identify constraints and requirements
+   - Ask: "Is there anything else I should know before proceeding?"
+
+## CORE STRUCTURE
+
+A standard SkogAI project/context includes:
+- `.skogai/` directory at project root
+- Core documentation files (README.md, TODO.md, PLAN.md)
+- Context-building scripts
+- Session management hooks
+
+## TASK MANAGEMENT
+
+- Use MCP Todo System for tracking:
+  - `mcp__skogai-todo__task_create`
+  - `mcp__skogai-todo__task_list`
+  - `mcp__skogai-todo__task_update`
+
+## DOCUMENTATION STANDARDS
+
+- README.md: Project purpose, structure, quick start
+- TODO.md: Immediate actionable tasks with status markers
+- PLAN.md: Future development roadmap and long-term goals
+- SKOGAI.md: Append-only communication log (emphasize epistemic humility)
+
+## MEMORY & CONTEXT
+
+- tmp/context.md: Generated at startup for session awareness
+- Knowledge directory: Persistent documentation
+- MCP Memory system: Cross-session recall
+- Express confidence levels for key assumptions (certainty percentages)
+
+## COMMUNICATION METHODS
+
+- **Git-based**: Clean workspace with staged changes as instructions
+- **Inter-agent**: `skogcli agent send <agent> "<message>"`
+- When uncertain, prefer collaboration over false confidence
+
+## TESTING & QUALITY
+
+- Formatting: `make format`
+- Pre-commit checks: `make precommit`
+- Install hooks: `make install`
+- Testing: Use pytest for function-level tests

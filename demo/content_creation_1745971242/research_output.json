@@ -1,0 +1,42 @@
+{
+  "topic": "test",
+  "key_facts": [
+    "This is a simulated key fact about test",
+    "This is another key fact about test",
+    "This is a third important fact about test"
+  ],
+  "main_concepts": [
+    {
+      "name": "Main concept of test",
+      "definition": "Definition of this concept",
+      "importance": "Why this concept matters to test"
+    },
+    {
+      "name": "Secondary concept",
+      "definition": "Definition of second concept",
+      "importance": "Relevance to test"
+    }
+  ],
+  "relationships": [
+    "How main concepts relate to each other",
+    "Historical or logical progression of concepts"
+  ],
+  "potential_sections": [
+    "Introduction to test",
+    "Historical background",
+    "Main elements of test",
+    "Practical applications",
+    "Future developments"
+  ],
+  "sources": [
+    {
+      "title": "Simulated source 1",
+      "key_contribution": "Provides historical context"
+    },
+    {
+      "title": "Simulated source 2",
+      "key_contribution": "Offers technical details"
+    }
+  ],
+  "confidence": 85
+}
