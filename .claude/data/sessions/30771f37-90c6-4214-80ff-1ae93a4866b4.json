@@ -2,5 +2,9 @@
   "session_id": "30771f37-90c6-4214-80ff-1ae93a4866b4",
   "prompts": [
     "oh noo. is the repo actually inside MASTER_KNOWLEDGE/ and dont include the the current pwd? -.-"
+    "Oops, try again",
+    "gh repo create in the SkogAI org as lore",
+    "perfect! next up - document the whole shebang",
+    "perfect. are you up to help me with some github workflows so we can keep tabs on this remote as well? @.github/workflow/ have the two i've used before as well as well as `gh secret list --org skogai` should show the current tokens"
   ]
 }
