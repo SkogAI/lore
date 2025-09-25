@@ -6,5 +6,21 @@
     "permission_mode": "bypassPermissions",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "oh noo. is the repo actually inside MASTER_KNOWLEDGE/ and dont include the the current pwd? -.-"
+  },
+  {
+    "session_id": "cc43d60a-c612-479e-8c62-5d467a6fc94a",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/cc43d60a-c612-479e-8c62-5d467a6fc94a.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hello"
+  },
+  {
+    "session_id": "74957883-265f-4fd6-abe0-591f20078b05",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/74957883-265f-4fd6-abe0-591f20078b05.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hello"
   }
 ]
