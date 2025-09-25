@@ -586,5 +586,58 @@
       "command": "git commit -m \"$(cat <<'EOF'\nAdd auto-staging pre-commit hook for log files\n\nAutomatically includes log files and Claude session data in commits\nto track system activity and debugging information.\n\nGenerated with [Claude Code](https://claude.ai/code)\nvia [Happy](https://happy.engineering)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nCo-Authored-By: Happy <yesreply@happy.engineering>\nEOF\n)\"",
       "description": "Create commit with pre-commit hook"
     }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git log -1 --stat",
+      "description": "Show last commit details"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Test pre-commit hook with actual commit",
+          "status": "completed",
+          "activeForm": "Testing pre-commit hook with actual commit"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "rm test_file.txt && git rm test_file.txt",
+      "description": "Remove test file"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git commit -m \"$(cat <<'EOF'\nRemove test file used for pre-commit hook verification\n\nGenerated with [Claude Code](https://claude.ai/code)\nvia [Happy](https://happy.engineering)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nCo-Authored-By: Happy <yesreply@happy.engineering>\nEOF\n)\"",
+      "description": "Commit test file removal"
+    }
   }
 ]
