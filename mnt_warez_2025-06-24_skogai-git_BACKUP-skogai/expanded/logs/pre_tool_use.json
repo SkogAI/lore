@@ -1,0 +1,374 @@
+[
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "mcp__happy__change_title",
+    "tool_input": {
+      "title": "Testing Skogai Knowledge Base"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/docs/persona/guides/skogai-character-guide.md"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/docs/persona/guides/skogai-lorebook-system.md"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Map the directory structure of the knowledge base",
+          "status": "in_progress",
+          "activeForm": "Mapping the directory structure of the knowledge base"
+        },
+        {
+          "content": "Explore key directories and their contents",
+          "status": "pending",
+          "activeForm": "Exploring key directories and their contents"
+        },
+        {
+          "content": "Identify core documentation and configuration files",
+          "status": "pending",
+          "activeForm": "Identifying core documentation and configuration files"
+        },
+        {
+          "content": "Analyze the relationship between different components",
+          "status": "pending",
+          "activeForm": "Analyzing the relationship between different components"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "find ../.. -type f -name \"*.md\" | head -20",
+      "description": "Find markdown files in project"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../..",
+      "description": "List root project structure"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "tree -L 3 ../.. -I 'node_modules|.git' | head -50",
+      "description": "Show project tree structure"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Map the directory structure of the knowledge base",
+          "status": "completed",
+          "activeForm": "Mapping the directory structure of the knowledge base"
+        },
+        {
+          "content": "Explore key directories and their contents",
+          "status": "in_progress",
+          "activeForm": "Exploring key directories and their contents"
+        },
+        {
+          "content": "Identify core documentation and configuration files",
+          "status": "pending",
+          "activeForm": "Identifying core documentation and configuration files"
+        },
+        {
+          "content": "Analyze the relationship between different components",
+          "status": "pending",
+          "activeForm": "Analyzing the relationship between different components"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../..",
+      "description": "List knowledge directory structure"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../docs/",
+      "description": "Explore docs directory"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../agents/",
+      "description": "Explore agents directory"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Glob",
+    "tool_input": {
+      "pattern": "../../agents/claude/*.md"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Map the directory structure of the knowledge base",
+          "status": "completed",
+          "activeForm": "Mapping the directory structure of the knowledge base"
+        },
+        {
+          "content": "Explore key directories and their contents",
+          "status": "completed",
+          "activeForm": "Exploring key directories and their contents"
+        },
+        {
+          "content": "Identify core documentation and configuration files",
+          "status": "in_progress",
+          "activeForm": "Identifying core documentation and configuration files"
+        },
+        {
+          "content": "Analyze the relationship between different components",
+          "status": "pending",
+          "activeForm": "Analyzing the relationship between different components"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/agents/claude/SKOGAI.md",
+      "limit": 50
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../persona/",
+      "description": "List persona directory"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../interfaces/",
+      "description": "List interfaces directory"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../docs/memory/",
+      "description": "Explore memory documentation"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../docs/skogai/",
+      "description": "Explore skogai documentation"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la ../../scripts/",
+      "description": "List scripts directory"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Map the directory structure of the knowledge base",
+          "status": "completed",
+          "activeForm": "Mapping the directory structure of the knowledge base"
+        },
+        {
+          "content": "Explore key directories and their contents",
+          "status": "completed",
+          "activeForm": "Exploring key directories and their contents"
+        },
+        {
+          "content": "Identify core documentation and configuration files",
+          "status": "completed",
+          "activeForm": "Identifying core documentation and configuration files"
+        },
+        {
+          "content": "Analyze the relationship between different components",
+          "status": "in_progress",
+          "activeForm": "Analyzing the relationship between different components"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "file ../../docs/memory/skogai-memory-system.d",
+      "description": "Check file type"
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/persona/extra.md",
+      "limit": 50
+    }
+  },
+  {
+    "session_id": "b94c851a-0ae6-4901-8473-26549707cabb",
+    "transcript_path": "/home/skogix/.claude/projects/-mnt-warez-2025-06-24-skogai-git-BACKUP-skogai-knowledge-expanded/b94c851a-0ae6-4901-8473-26549707cabb.jsonl",
+    "cwd": "/mnt/warez/2025-06-24/skogai-git/BACKUP-skogai/knowledge/expanded",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Map the directory structure of the knowledge base",
+          "status": "completed",
+          "activeForm": "Mapping the directory structure of the knowledge base"
+        },
+        {
+          "content": "Explore key directories and their contents",
+          "status": "completed",
+          "activeForm": "Exploring key directories and their contents"
+        },
+        {
+          "content": "Identify core documentation and configuration files",
+          "status": "completed",
+          "activeForm": "Identifying core documentation and configuration files"
+        },
+        {
+          "content": "Analyze the relationship between different components",
+          "status": "completed",
+          "activeForm": "Analyzing the relationship between different components"
+        }
+      ]
+    }
+  }
+]
