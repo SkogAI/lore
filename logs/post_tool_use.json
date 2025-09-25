@@ -1384,5 +1384,76 @@
         }
       ]
     }
+  },
+  {
+    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "mcp__happy__change_title",
+    "tool_input": {
+      "title": "Testing Git Worktree"
+    },
+    "tool_response": [
+      {
+        "type": "text",
+        "text": "Successfully changed chat title to: \"Testing Git Worktree\""
+      }
+    ]
+  },
+  {
+    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git worktree list",
+      "description": "List all git worktrees"
+    },
+    "tool_response": {
+      "stdout": "/home/skogix/lore                             451a869 [feature/tmp]\n/home/skogix/lore/.dev/worktree/sharp-beacon  451a869 [sharp-beacon]",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
+  },
+  {
+    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "pwd",
+      "description": "Show current directory"
+    },
+    "tool_response": {
+      "stdout": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
+  },
+  {
+    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status",
+      "description": "Check git status in worktree"
+    },
+    "tool_response": {
+      "stdout": "On branch sharp-beacon\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   logs/post_tool_use.json\n\tmodified:   logs/pre_tool_use.json\n\tmodified:   logs/session_start.json\n\tmodified:   logs/user_prompt_submit.json\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t.claude/data/sessions/421ae44e-15e7-4f07-8430-a32a650a9b80.json\n\t.claude/data/sessions/9401bff6-5db5-4b03-b132-91511ddaa5af.json\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
   }
 ]
