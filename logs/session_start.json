@@ -47,5 +47,12 @@
     "cwd": "/home/skogix/lore",
     "hook_event_name": "SessionStart",
     "source": "startup"
+  },
+  {
+    "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
   }
 ]

@@ -6,6 +6,7 @@
     "I'd like them to essentially be auto merged in on commits, any ideas?",
     "go ahead!",
     "Commit the removal of test file",
-    "/commit "
+    "/commit ",
+    "/plan-execution create a workflow for setting up branches with git glow and worktrees "
   ]
 }

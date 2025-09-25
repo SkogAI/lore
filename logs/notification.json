@@ -5,5 +5,12 @@
     "cwd": "/mnt/extra/backup/skogai-old-all/MASTER_KNOWLEDGE_COMPLETE",
     "hook_event_name": "Notification",
     "message": "Claude is waiting for your input"
+  },
+  {
+    "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+    "cwd": "/home/skogix/lore",
+    "hook_event_name": "Notification",
+    "message": "Claude needs your permission to use Bash"
   }
 ]

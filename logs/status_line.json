@@ -578,5 +578,179 @@
       "exceeds_200k_tokens": false
     },
     "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(develop\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
+  },
+  {
+    "timestamp": "2025-09-25T17:20:34.641573",
+    "input_data": {
+      "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+      "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+      "cwd": "/home/skogix/lore",
+      "model": {
+        "id": "claude-opus-4-1-20250805",
+        "display_name": "Opus 4.1"
+      },
+      "workspace": {
+        "current_dir": "/home/skogix/lore",
+        "project_dir": "/home/skogix/lore"
+      },
+      "version": "1.0.124",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0,
+        "total_duration_ms": 19067,
+        "total_api_duration_ms": 0,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(feature/tmp\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
+  },
+  {
+    "timestamp": "2025-09-25T17:22:22.230564",
+    "input_data": {
+      "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+      "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+      "cwd": "/home/skogix/lore",
+      "model": {
+        "id": "claude-opus-4-1-20250805",
+        "display_name": "Opus 4.1"
+      },
+      "workspace": {
+        "current_dir": "/home/skogix/lore",
+        "project_dir": "/home/skogix/lore"
+      },
+      "version": "1.0.124",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0,
+        "total_duration_ms": 126763,
+        "total_api_duration_ms": 0,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(feature/tmp\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
+  },
+  {
+    "timestamp": "2025-09-25T17:23:30.195241",
+    "input_data": {
+      "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+      "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+      "cwd": "/home/skogix/lore",
+      "model": {
+        "id": "claude-opus-4-1-20250805",
+        "display_name": "Opus 4.1"
+      },
+      "workspace": {
+        "current_dir": "/home/skogix/lore",
+        "project_dir": "/home/skogix/lore"
+      },
+      "version": "1.0.124",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.12929325,
+        "total_duration_ms": 194774,
+        "total_api_duration_ms": 7200,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(feature/tmp\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
+  },
+  {
+    "timestamp": "2025-09-25T17:26:25.519716",
+    "input_data": {
+      "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+      "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+      "cwd": "/home/skogix/lore",
+      "model": {
+        "id": "claude-opus-4-1-20250805",
+        "display_name": "Opus 4.1"
+      },
+      "workspace": {
+        "current_dir": "/home/skogix/lore",
+        "project_dir": "/home/skogix/lore"
+      },
+      "version": "1.0.124",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5645699499999999,
+        "total_duration_ms": 370082,
+        "total_api_duration_ms": 132404,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(feature/tmp\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
+  },
+  {
+    "timestamp": "2025-09-25T17:26:25.966186",
+    "input_data": {
+      "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+      "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+      "cwd": "/home/skogix/lore",
+      "model": {
+        "id": "claude-opus-4-1-20250805",
+        "display_name": "Opus 4.1"
+      },
+      "workspace": {
+        "current_dir": "/home/skogix/lore",
+        "project_dir": "/home/skogix/lore"
+      },
+      "version": "1.0.124",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.5645699499999999,
+        "total_duration_ms": 370533,
+        "total_api_duration_ms": 132404,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(feature/tmp\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
+  },
+  {
+    "timestamp": "2025-09-25T17:26:59.377811",
+    "input_data": {
+      "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+      "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+      "cwd": "/home/skogix/lore",
+      "model": {
+        "id": "claude-opus-4-1-20250805",
+        "display_name": "Opus 4.1"
+      },
+      "workspace": {
+        "current_dir": "/home/skogix/lore",
+        "project_dir": "/home/skogix/lore"
+      },
+      "version": "1.0.124",
+      "output_style": {
+        "name": "default"
+      },
+      "cost": {
+        "total_cost_usd": 0.6136049999999998,
+        "total_duration_ms": 403946,
+        "total_api_duration_ms": 166676,
+        "total_lines_added": 0,
+        "total_lines_removed": 0
+      },
+      "exceeds_200k_tokens": false
+    },
+    "status_line_output": "\u001b[32m~/lore\u001b[0m \u001b[34m(feature/tmp\u001b[0m \u001b[31m\u2717\u001b[0m\u001b[34m)\u001b[0m \u001b[90m[Opus]\u001b[0m"
   }
 ]

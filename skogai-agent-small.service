@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=%h/skogai
-ExecStart=%h/skogai/skogai-agent-small-service.sh llama3
+WorkingDirectory=%h/lore
+ExecStart=%h/lore/skogai-agent-small-service.sh llama3
 Restart=always
 RestartSec=10
 
