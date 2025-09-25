@@ -337,5 +337,254 @@
       "command": "ls -la *.md | head -10",
       "description": "Check markdown files in repo"
     }
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "mcp__happy__change_title",
+    "tool_input": {
+      "title": "Lore Agent System Development"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "mcp__happy__change_title",
+    "tool_input": {
+      "title": "Lore Project Development"
+    }
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/home/skogix/lore/.claude/commands/gh-issue.md",
+      "content": "---\nallowed-tools: Task, Read, Bash(git:*), Bash(gh:*), WebSearch, Grep, Glob\ndescription: Create a well-researched GitHub issue from description\nargument-hint: <issue-description>\nmodel: claude-3-5-sonnet-20241022\n---\n\n# Create GitHub Issue\n\n## Task Overview\nResearch and create a GitHub issue based on: $ARGUMENTS\n\n## Current Repository Context\n!git remote get-url origin\n!git branch --show-current\n!gh repo view --json name,owner,description\n\n## Issue Creation Process\n\n1. First, use the researcher agent to analyze existing documentation and codebase:\n   - Search for related documentation in README.md, CLAUDE.md, and docs/\n   - Look for similar existing issues or patterns\n   - Understand the project context and conventions\n\n2. Use the orchestrator agent to:\n   - Synthesize findings from research\n   - Structure the issue according to GitHub best practices\n   - Ensure alignment with project goals\n\n3. Create the issue with:\n   - Clear, descriptive title\n   - Problem statement or feature description\n   - Context from documentation research\n   - Acceptance criteria or expected behavior\n   - Technical details if applicable\n   - Related issues or PRs if found\n\n## Instructions for Claude\n\n1. Launch researcher agent to investigate:\n   - Existing documentation about the topic\n   - Similar issues in the repository\n   - Code patterns or implementations related to the request\n\n2. Based on research, draft a comprehensive issue that includes:\n   - **Title**: Concise and descriptive\n   - **Description**: Clear problem/feature statement\n   - **Context**: Reference to relevant documentation or code\n   - **Acceptance Criteria**: What defines \"done\"\n   - **Technical Notes**: Implementation considerations if applicable\n\n3. Use `gh issue create` to submit the issue with proper formatting\n\nThe issue should be well-researched and reference existing project documentation to maintain consistency with the codebase."
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Analyze current log file structure and changes",
+          "status": "in_progress",
+          "activeForm": "Analyzing current log file structure and changes"
+        },
+        {
+          "content": "Implement solution for auto-including logs in commits",
+          "status": "pending",
+          "activeForm": "Implementing solution for auto-including logs in commits"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la logs/",
+      "description": "List log directory contents"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Analyze current log file structure and changes",
+          "status": "completed",
+          "activeForm": "Analyzing current log file structure and changes"
+        },
+        {
+          "content": "Implement solution for auto-including logs in commits",
+          "status": "in_progress",
+          "activeForm": "Implementing solution for auto-including logs in commits"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/home/skogix/lore/.git/hooks/pre-commit",
+      "content": "#!/bin/bash\n# Auto-stage log files before commit\n\n# Add all log files if they have changes\nif git diff --quiet logs/; then\n    echo \"No changes in logs directory\"\nelse\n    echo \"Auto-staging log files...\"\n    git add logs/*.json\nfi\n\n# Add Claude session data if it exists\nif [ -d \".claude/data/sessions\" ]; then\n    git add .claude/data/sessions/*.json 2>/dev/null || true\nfi\n\nexit 0"
+    }
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "mkdir -p ~/.claude/commands/",
+      "description": "Create personal commands directory"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "chmod +x .git/hooks/pre-commit",
+      "description": "Make pre-commit hook executable"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Analyze current log file structure and changes",
+          "status": "completed",
+          "activeForm": "Analyzing current log file structure and changes"
+        },
+        {
+          "content": "Implement solution for auto-including logs in commits",
+          "status": "completed",
+          "activeForm": "Implementing solution for auto-including logs in commits"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Test pre-commit hook with actual commit",
+          "status": "in_progress",
+          "activeForm": "Testing pre-commit hook with actual commit"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status",
+      "description": "Check current git status"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git commit -m \"$(cat <<'EOF'\nAdd auto-staging pre-commit hook for log files\n\nAutomatically includes log files and Claude session data in commits\nto track system activity and debugging information.\n\nGenerated with [Claude Code](https://claude.ai/code)\nvia [Happy](https://happy.engineering)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nCo-Authored-By: Happy <yesreply@happy.engineering>\nEOF\n)\"",
+      "description": "Create commit to test pre-commit hook"
+    }
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/home/skogix/.claude/commands/gh-issue.md",
+      "content": "---\nallowed-tools: Task, Read, Bash(git:*), Bash(gh:*), WebSearch, Grep, Glob\ndescription: Create a well-researched GitHub issue from description\nargument-hint: <issue-description>\nmodel: claude-3-5-sonnet-20241022\n---\n\n# Create GitHub Issue\n\n## Task Overview\nResearch and create a GitHub issue based on: $ARGUMENTS\n\n## Current Repository Context\n!git remote get-url origin\n!git branch --show-current\n!gh repo view --json name,owner,description\n\n## Issue Creation Process\n\n1. First, use the researcher agent to analyze existing documentation and codebase:\n   - Search for related documentation in README.md, CLAUDE.md, and docs/\n   - Look for similar existing issues or patterns\n   - Understand the project context and conventions\n\n2. Use the orchestrator agent to:\n   - Synthesize findings from research\n   - Structure the issue according to GitHub best practices\n   - Ensure alignment with project goals\n\n3. Create the issue with:\n   - Clear, descriptive title\n   - Problem statement or feature description\n   - Context from documentation research\n   - Acceptance criteria or expected behavior\n   - Technical details if applicable\n   - Related issues or PRs if found\n\n## Instructions for Claude\n\n1. Launch researcher agent to investigate:\n   - Existing documentation about the topic\n   - Similar issues in the repository\n   - Code patterns or implementations related to the request\n\n2. Based on research, draft a comprehensive issue that includes:\n   - **Title**: Concise and descriptive\n   - **Description**: Clear problem/feature statement\n   - **Context**: Reference to relevant documentation or code\n   - **Acceptance Criteria**: What defines \"done\"\n   - **Technical Notes**: Implementation considerations if applicable\n\n3. Use `gh issue create` to submit the issue with proper formatting\n\nThe issue should be well-researched and reference existing project documentation to maintain consistency with the codebase."
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/home/skogix/lore/.git/hooks/pre-commit"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": "/home/skogix/lore/.git/hooks/pre-commit",
+      "old_string": "#!/bin/bash\n# Auto-stage log files before commit\n\n# Add all log files if they have changes\nif git diff --quiet logs/; then\n    echo \"No changes in logs directory\"\nelse\n    echo \"Auto-staging log files...\"\n    git add logs/*.json\nfi\n\n# Add Claude session data if it exists\nif [ -d \".claude/data/sessions\" ]; then\n    git add .claude/data/sessions/*.json 2>/dev/null || true\nfi\n\nexit 0",
+      "new_string": "#!/bin/bash\n# Auto-stage log files before commit\n\n# Check for modified log files and add them\nif [ -d \"logs\" ]; then\n    # Check for both modified and untracked log files\n    modified_logs=$(git status --porcelain logs/*.json 2>/dev/null | grep -E \"^( M|MM|\\?\\?)\" | wc -l)\n    if [ \"$modified_logs\" -gt 0 ]; then\n        echo \"Auto-staging log files...\"\n        git add logs/*.json\n    fi\nfi\n\n# Add Claude session data if it exists\nif [ -d \".claude/data/sessions\" ]; then\n    session_files=$(find .claude/data/sessions -name \"*.json\" 2>/dev/null)\n    if [ -n \"$session_files\" ]; then\n        echo \"Auto-staging Claude session files...\"\n        git add .claude/data/sessions/*.json 2>/dev/null || true\n    fi\nfi\n\nexit 0"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "echo \"# Auto-staging test\" > test_file.txt && git add test_file.txt",
+      "description": "Create and stage a test file"
+    }
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git commit -m \"$(cat <<'EOF'\nAdd auto-staging pre-commit hook for log files\n\nAutomatically includes log files and Claude session data in commits\nto track system activity and debugging information.\n\nGenerated with [Claude Code](https://claude.ai/code)\nvia [Happy](https://happy.engineering)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nCo-Authored-By: Happy <yesreply@happy.engineering>\nEOF\n)\"",
+      "description": "Create commit with pre-commit hook"
+    }
   }
 ]

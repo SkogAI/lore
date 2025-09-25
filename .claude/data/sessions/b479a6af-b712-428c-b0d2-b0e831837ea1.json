@@ -1,0 +1,9 @@
+{
+  "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+  "prompts": [
+    "hi",
+    "/add-command a command which uses the available agents and slash commands to create a gh issue from the argument description. research and basing the issue on already existing documentation is a must ",
+    "would not the task tool be included for agents to be spawned? ",
+    "maybe?:p"
+  ]
+}

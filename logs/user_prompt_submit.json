@@ -22,5 +22,69 @@
     "permission_mode": "default",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "hello"
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hi"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hi"
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/add-command a command which uses the available agents and slash commands to create a gh issue from the argument description. research and basing the issue on already existing documentation is a must "
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "would not the task tool be included for agents to be spawned? "
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "any progress?"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "I'd like them to essentially be auto merged in on commits, any ideas?"
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "maybe?:p"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "go ahead!"
   }
 ]
