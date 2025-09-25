@@ -1,0 +1,79 @@
+{
+  "title": "Comprehensive Guide to --help",
+  "target_audience": "General audience with basic interest in --help",
+  "purpose": "To inform and educate about --help",
+  "structure": [
+    {
+      "section_title": "Introduction to --help",
+      "key_points": [
+        "Opening with engaging hook about --help",
+        "Why --help matters",
+        "What reader will learn"
+      ],
+      "target_length": "2-3 paragraphs",
+      "research_references": [
+        "Use key_facts[0] for opening statement"
+      ]
+    },
+    {
+      "section_title": "Background and Context",
+      "key_points": [
+        "Historical development of --help",
+        "Evolution of understanding",
+        "Current relevance"
+      ],
+      "target_length": "3-4 paragraphs",
+      "research_references": [
+        "Include main_concepts[0] definition",
+        "Reference sources[0] for historical context"
+      ]
+    },
+    {
+      "section_title": "Key Elements of --help",
+      "key_points": [
+        "Main component 1",
+        "Main component 2",
+        "How components interact"
+      ],
+      "target_length": "4-5 paragraphs",
+      "research_references": [
+        "Use relationships[0] to explain interactions",
+        "Connect to main_concepts[1]"
+      ]
+    },
+    {
+      "section_title": "Applications and Implications",
+      "key_points": [
+        "Practical uses of --help",
+        "Impact on related fields",
+        "Future potential"
+      ],
+      "target_length": "3-4 paragraphs",
+      "research_references": [
+        "Build on key_facts[2]",
+        "Reference sources[1] for technical applications"
+      ]
+    },
+    {
+      "section_title": "Conclusion",
+      "key_points": [
+        "Summary of key points",
+        "Importance of continued learning about --help",
+        "Final thought or call to action"
+      ],
+      "target_length": "2 paragraphs",
+      "research_references": [
+        "Reinforce main_concepts importance"
+      ]
+    }
+  ],
+  "flow_notes": [
+    "Use transitional phrases between sections to maintain flow",
+    "Gradually increase technical depth as content progresses"
+  ],
+  "confidence": 90,
+  "areas_for_expansion": [
+    "Could expand Applications section if more practical examples needed",
+    "Historical section could be expanded for academic audience"
+  ]
+}

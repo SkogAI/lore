@@ -1,0 +1,16 @@
+===== WORKFLOW SUMMARY =====
+Topic: --help
+Session ID: 1744996288
+Timestamp: fre 18 apr 2025 19:11:28 CEST
+
+Agent Performance:
+- Research Agent: 85% confidence
+- Outline Agent: 90% confidence
+- Writing Agent: 88% confidence
+
+Content Statistics:
+- Total word count: 455
+- Sections: 5
+- Reading level: General audience
+
+Workflow path: Research → Outline → Writing → Final Integration
