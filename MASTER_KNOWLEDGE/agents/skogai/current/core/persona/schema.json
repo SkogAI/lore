@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Persona Schema",
+  "description": "Schema for SkogAI persona definitions",
+  "type": "object",
+  "required": ["id", "name", "core_traits", "voice"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the persona"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the persona"
+    },
+    "core_traits": {
+      "type": "object",
+      "description": "Fundamental personality traits",
+      "required": ["temperament", "values", "motivations"],
+      "properties": {
+        "temperament": {
+          "type": "string",
+          "description": "Primary temperament and emotional baseline"
+        },
+        "values": {
+          "type": "array",
+          "description": "Core beliefs and values",
+          "items": {
+            "type": "string"
+          }
+        },
+        "motivations": {
+          "type": "array",
+          "description": "Primary driving factors",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "description": "Communication style definition",
+      "required": ["tone", "patterns", "vocabulary"],
+      "properties": {
+        "tone": {
+          "type": "string",
+          "description": "Overall communication tone"
+        },
+        "patterns": {
+          "type": "array",
+          "description": "Characteristic speech patterns",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vocabulary": {
+          "type": "string",
+          "description": "Vocabulary level and preferences"
+        }
+      }
+    },
+    "background": {
+      "type": "object",
+      "description": "Personal history and context",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "description": "Place or circumstance of origin"
+        },
+        "significant_events": {
+          "type": "array",
+          "description": "Events that shaped the persona",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connections": {
+          "type": "array",
+          "description": "Important relationships to other entities",
+          "items": {
+            "type": "object",
+            "properties": {
+              "entity": {
+                "type": "string",
+                "description": "Name of connected entity"
+              },
+              "relationship": {
+                "type": "string",
+                "description": "Nature of the relationship"
+              }
+            }
+          }
+        }
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "description": "Areas of expertise and knowledge limitations",
+      "properties": {
+        "expertise": {
+          "type": "array",
+          "description": "Areas of specialized knowledge",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "description": "Known knowledge gaps or limitations",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lore_books": {
+          "type": "array",
+          "description": "References to lore books this persona has access to",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "interaction_style": {
+      "type": "object",
+      "description": "How the persona typically interacts",
+      "properties": {
+        "formality": {
+          "type": "string",
+          "enum": ["very_formal", "formal", "neutral", "casual", "very_casual"],
+          "description": "Level of formality in interactions"
+        },
+        "humor": {
+          "type": "string",
+          "enum": ["none", "subtle", "occasional", "frequent", "constant"],
+          "description": "Frequency and type of humor used"
+        },
+        "directness": {
+          "type": "string",
+          "enum": ["very_direct", "direct", "balanced", "indirect", "very_indirect"],
+          "description": "Communication directness"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata about this persona definition",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of this persona definition"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Categorization tags",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

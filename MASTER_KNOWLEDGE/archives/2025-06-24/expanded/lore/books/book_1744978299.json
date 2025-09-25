@@ -1,0 +1,69 @@
+{
+  "id": "book_1744978299",
+  "title": "Specialized Lore for Agent Dot",
+  "description": "Lore collection specifically created for agent agents: Dot",
+  "entries": [
+    "entry_1744978417",
+    "entry_1744978615",
+    "entry_1744978713",
+    "entry_1744978831",
+    "entry_1744978928",
+    "entry_1744978989",
+    "entry_1744979087",
+    "entry_1744979158",
+    "entry_1744979263",
+    "entry_1744979357"
+  ],
+  "categories": {
+    "character": [
+      "entry_1744978417",
+      "entry_1744978615"
+    ],
+    "place": [
+      "entry_1744978713",
+      "entry_1744978831"
+    ],
+    "object": [
+      "entry_1744978928",
+      "entry_1744978989"
+    ],
+    "event": [
+      "entry_1744979087",
+      "entry_1744979158"
+    ],
+    "concept": [
+      "entry_1744979263",
+      "entry_1744979357"
+    ]
+  },
+  "tags": [
+    "whitespace",
+    "agent",
+    "git"
+  ],
+  "owners": [],
+  "readers": [
+    "persona_1744979385",
+    "persona_1747684987",
+    "persona_1747684741"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-18T12:11:39Z",
+    "updated_at": "2025-04-18T12:29:45Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}
