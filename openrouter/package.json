@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"@kunihiros/claude-code-mcp": "^0.1.2"
+	}
+}
