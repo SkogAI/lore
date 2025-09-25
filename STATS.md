@@ -1,12 +1,12 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-09-25 11:40:56 UTC
+**Generated:** 2025-09-25 11:42:37 UTC
 
 ## File Statistics
 
-- **Total Files:** 10967
+- **Total Files:** 10980
 - **Markdown Files:** 2798
-- **JSON Files:** 7293
+- **JSON Files:** 7306
 - **YAML Files:** 155
 
 ## Agent Directory Counts
@@ -25,13 +25,13 @@
 
 ## Prime Directive Tracking
 
-- **Beach References:** 154
-- **Mojito Mentions:** 1184
-- **Automation References:** 1227
+- **Beach References:** 186
+- **Mojito Mentions:** 1229
+- **Automation References:** 1267
 
 ## Repository Size
 
-- **Total Size:** 67M
+- **Total Size:** 68M
 - **Git History Size:** 3.3M
 
 ## Top 10 Largest Directories
@@ -39,8 +39,8 @@
 ```
 27M	MASTER_KNOWLEDGE_COMPLETE/
 7.0M	MASTER_KNOWLEDGE/
+2.8M	mnt_warez_2025-06-24_skogai-git_BACKUP-skogai/
 2.5M	mnt_warez_skogai/
-2.5M	mnt_warez_2025-06-24_skogai-git_BACKUP-skogai/
 2.5M	mnt_extra_llama_index_data_BACKUP-skogai/
 2.5M	mnt_extra_BACKUP-SKOGAI/
 2.4M	mnt_warez_2025-06-24_local/
