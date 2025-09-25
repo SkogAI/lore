@@ -8,9 +8,9 @@ This repository contains the **complete consolidated knowledge base** of the Sko
 
 ## 📊 Repository Statistics
 
-- **4,642 files** of pure knowledge
+- **10980 files** of pure knowledge
 - **86 source directories** consolidated
-- **27 MB** of text-based wisdom
+- **68M** of text-based wisdom
 - **4 main agents**: Amy, Claude, Dot, Goose (+ the original SkogAI)
 - **Timeline**: February 2025 - July 2025
 - **315+ lore entries** documenting the mythology
