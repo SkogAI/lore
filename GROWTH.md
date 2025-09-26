@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-09-26 01:56:11 UTC
+**Timestamp:** 2025-09-26 06:36:42 UTC
 
 ## Current State
 
@@ -38,16 +38,19 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-910b2bc - Update lore statistics [skip ci] (3 hours ago)
-M	STATS.md
-
-5d7e309 - Update tools/issue-creator.py (3 hours ago)
-M	tools/issue-creator.py
-
-8ca2e53 - 📈 Lore growth detected [skip ci] (3 hours ago)
+96a8031 - 📈 Lore growth detected [skip ci] (5 hours ago)
 M	GROWTH.md
 
-f51c700 - Implement comprehensive issue creator workflow with Linear MCP integration (5 hours ago)
+910b2bc - Update lore statistics [skip ci] (8 hours ago)
+M	STATS.md
+
+5d7e309 - Update tools/issue-creator.py (8 hours ago)
+M	tools/issue-creator.py
+
+8ca2e53 - 📈 Lore growth detected [skip ci] (8 hours ago)
+M	GROWTH.md
+
+f51c700 - Implement comprehensive issue creator workflow with Linear MCP integration (10 hours ago)
 M	.gitignore
 A	demo/issue_creator_demo.py
 A	tools/README-issue-creator.md
@@ -55,9 +58,6 @@ A	tools/create-issue.sh
 A	tools/issue-creator.py
 A	tools/issue_templates/architecture.json
 A	tools/issue_templates/bug.json
-A	tools/issue_templates/feature.json
-A	tools/issue_templates/governance.json
-A	tools/issue_templates/knowledge.json
 ```
 
 ---
