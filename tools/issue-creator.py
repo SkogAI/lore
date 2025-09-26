@@ -32,7 +32,10 @@ class IssueCreator:
     
     def __init__(self):
         """Initialize the issue creator with SkogAI configuration."""
-        self.skogai_team_id = os.environ.get("SKOGAI_TEAM_ID", "ac4c7f2d-98ae-438f-b85a-33374856fd1b")
+        self.skogai_team_id = os.environ.get("SKOGAI_TEAM_ID")
+        if not self.skogai_team_id:
+            logger.error("Environment variable SKOGAI_TEAM_ID must be set. Please set it before running this tool.")
+            sys.exit(1)
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
         self.templates_dir = os.path.join(self.base_dir, "issue_templates")
         self.output_dir = os.path.join(self.base_dir, "issue_outputs")
