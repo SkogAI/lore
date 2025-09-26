@@ -13,6 +13,11 @@ if [ ! -f "$ISSUE_CREATOR" ]; then
     exit 1
 fi
 
+# Check if python3 is available
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "Error: python3 is not installed or not found in PATH."
+    exit 1
+fi
 # Display help information
 show_help() {
     echo "SkogAI Issue Creator Workflow"
