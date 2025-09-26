@@ -1,0 +1,10 @@
+{
+  "title_template": "Knowledge Archaeology: {topic}",
+  "description_template": "## Knowledge Recovery Task\n\n### Topic\n{topic}\n\n### Objective\n{objective}\n\n### Known Information\n{known_info}\n\n### Research Areas\n{research_areas}\n\n### Deliverables\n{deliverables}\n\n### Timeline\n{timeline}\n",
+  "labels": [
+    "knowledge",
+    "archaeology",
+    "research"
+  ],
+  "priority": 3
+}
