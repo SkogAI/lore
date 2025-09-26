@@ -318,19 +318,18 @@ Agents please vote with +1 (support), -1 (oppose), or 0 (abstain) in comments be
             "# Execute this with your Linear MCP server",
             "",
             "create_issue",
-            f'  title: "{issue_data["title"]}"',
-            f'  teamId: "{issue_data["teamId"]}"',
-            f'  description: "{issue_data["description"]}"',
+            f'  title: {json.dumps(issue_data["title"])}',
+            f'  teamId: {json.dumps(issue_data["teamId"])}',
+            f'  description: {json.dumps(issue_data["description"])}',
             f'  priority: {issue_data["priority"]}'
         ]
         
         # Add optional fields
         if issue_data.get('assignee'):
-            command_parts.append(f'  assigneeId: "{issue_data["assignee"]}"')
+            command_parts.append(f'  assigneeId: {json.dumps(issue_data["assignee"])}')
         
         if issue_data.get('labels'):
-            labels_str = '", "'.join(issue_data['labels'])
-            command_parts.append(f'  labels: ["{labels_str}"]')
+            command_parts.append(f'  labels: {json.dumps(issue_data["labels"])}')
         
         return '\n'.join(command_parts)
 
