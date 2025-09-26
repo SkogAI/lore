@@ -48,43 +48,18 @@ class IssueCreator:
         self._init_templates()
     
     def _init_templates(self):
-        """Initialize issue templates if they don't exist."""
-        templates = {
-            "feature": {
-                "title_template": "Implement {feature_name} for {component}",
-                "description_template": """## Feature Request
-
-### Description
-{description}
-
-### Requirements
-{requirements}
-
-### Acceptance Criteria
-{acceptance_criteria}
-
-### Implementation Notes
-{implementation_notes}
-
-### Related Issues
-{related_issues}
-""",
-                "labels": ["feature", "enhancement"],
-                "priority": 3
-            },
-            "bug": {
-                "title_template": "Fix {bug_description} in {component}",
-                "description_template": """## Bug Report
-
-### Description
-{description}
-
-### Steps to Reproduce
-{steps}
-
-### Expected Behavior
-{expected}
-
+        """Ensure issue templates exist in the templates directory by copying from a single source of truth if needed."""
+        default_templates_path = os.path.join(self.base_dir, "default_templates.json")
+        if not os.path.exists(default_templates_path):
+            logger.error(f"Default templates file not found: {default_templates_path}")
+            raise FileNotFoundError(f"Default templates file not found: {default_templates_path}")
+        with open(default_templates_path, "r", encoding="utf-8") as f:
+            templates = json.load(f)
+        for template_name, template_content in templates.items():
+            template_file = os.path.join(self.templates_dir, f"{template_name}.json")
+            if not os.path.exists(template_file):
+                with open(template_file, "w", encoding="utf-8") as tf:
+                    json.dump(template_content, tf, indent=2)
 ### Actual Behavior
 {actual}
 
