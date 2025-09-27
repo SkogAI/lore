@@ -71,6 +71,8 @@
     "cwd": "/home/skogix/lore",
     "hook_event_name": "SessionStart",
     "source": "clear"
+  },
+  {
     "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
     "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
     "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
