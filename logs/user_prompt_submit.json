@@ -181,7 +181,7 @@
     "cwd": "/home/skogix/lore",
     "permission_mode": "default",
     "hook_event_name": "UserPromptSubmit",
-    "prompt": "how about this: `cd $HOME && ast-grep \"oh shit\""
+    "prompt": "how about this: `cd $HOME && ast-grep \"oh shit\"",
     "session_id": "9401bff6-5db5-4b03-b132-91511ddaa5af",
     "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/9401bff6-5db5-4b03-b132-91511ddaa5af.jsonl",
     "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
