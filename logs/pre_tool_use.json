@@ -1859,7 +1859,7 @@
       "path": "/home/skogix",
       "output_mode": "content",
       "-C": 2,
-      "head_limit": 10
+      "head_limit": 10,
       "description": "Check git status in worktree"
     }
   }
