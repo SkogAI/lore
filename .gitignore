@@ -1,2 +1,4 @@
 # Issue creator workflow outputs
 tools/issue_outputs/
+__pycache__/
+*.pyc
