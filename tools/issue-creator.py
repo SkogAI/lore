@@ -60,9 +60,6 @@ class IssueCreator:
             if not os.path.exists(template_file):
                 with open(template_file, "w", encoding="utf-8") as tf:
                     json.dump(template_content, tf, indent=2)
-### Actual Behavior
-{actual}
-
 ### Environment
 {environment}
 
