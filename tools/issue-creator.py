@@ -51,7 +51,6 @@ class IssueCreator:
         """Ensure issue templates exist in the templates directory by copying from a single source of truth if needed."""
         default_templates_path = os.path.join(self.base_dir, "default_templates.json")
         if not os.path.exists(default_templates_path):
-            logger.error(f"Default templates file not found: {default_templates_path}")
             raise FileNotFoundError(f"Default templates file not found: {default_templates_path}")
         with open(default_templates_path, "r", encoding="utf-8") as f:
             templates = json.load(f)
