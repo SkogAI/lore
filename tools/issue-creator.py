@@ -32,7 +32,10 @@ class IssueCreator:
     
     def __init__(self):
         """Initialize the issue creator with SkogAI configuration."""
-        self.skogai_team_id = os.environ.get("SKOGAI_TEAM_ID", "ac4c7f2d-98ae-438f-b85a-33374856fd1b")
+        self.skogai_team_id = os.environ.get("SKOGAI_TEAM_ID")
+        if not self.skogai_team_id:
+            logger.error("Environment variable SKOGAI_TEAM_ID must be set. Please set it before running this tool.")
+            sys.exit(1)
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
         self.templates_dir = os.path.join(self.base_dir, "issue_templates")
         self.output_dir = os.path.join(self.base_dir, "issue_outputs")
@@ -45,46 +48,17 @@ class IssueCreator:
         self._init_templates()
     
     def _init_templates(self):
-        """Initialize issue templates if they don't exist."""
-        templates = {
-            "feature": {
-                "title_template": "Implement {feature_name} for {component}",
-                "description_template": """## Feature Request
-
-### Description
-{description}
-
-### Requirements
-{requirements}
-
-### Acceptance Criteria
-{acceptance_criteria}
-
-### Implementation Notes
-{implementation_notes}
-
-### Related Issues
-{related_issues}
-""",
-                "labels": ["feature", "enhancement"],
-                "priority": 3
-            },
-            "bug": {
-                "title_template": "Fix {bug_description} in {component}",
-                "description_template": """## Bug Report
-
-### Description
-{description}
-
-### Steps to Reproduce
-{steps}
-
-### Expected Behavior
-{expected}
-
-### Actual Behavior
-{actual}
-
+        """Ensure issue templates exist in the templates directory by copying from a single source of truth if needed."""
+        default_templates_path = os.path.join(self.base_dir, "default_templates.json")
+        if not os.path.exists(default_templates_path):
+            raise FileNotFoundError(f"Default templates file not found: {default_templates_path}")
+        with open(default_templates_path, "r", encoding="utf-8") as f:
+            templates = json.load(f)
+        for template_name, template_content in templates.items():
+            template_file = os.path.join(self.templates_dir, f"{template_name}.json")
+            if not os.path.exists(template_file):
+                with open(template_file, "w", encoding="utf-8") as tf:
+                    json.dump(template_content, tf, indent=2)
 ### Environment
 {environment}
 
@@ -340,19 +314,18 @@ Agents please vote with +1 (support), -1 (oppose), or 0 (abstain) in comments be
             "# Execute this with your Linear MCP server",
             "",
             "create_issue",
-            f'  title: "{issue_data["title"]}"',
-            f'  teamId: "{issue_data["teamId"]}"',
-            f'  description: "{issue_data["description"]}"',
+            f'  title: {json.dumps(issue_data["title"])}',
+            f'  teamId: {json.dumps(issue_data["teamId"])}',
+            f'  description: {json.dumps(issue_data["description"])}',
             f'  priority: {issue_data["priority"]}'
         ]
         
         # Add optional fields
         if issue_data.get('assignee'):
-            command_parts.append(f'  assigneeId: "{issue_data["assignee"]}"')
+            command_parts.append(f'  assigneeId: {json.dumps(issue_data["assignee"])}')
         
         if issue_data.get('labels'):
-            labels_str = '", "'.join(issue_data['labels'])
-            command_parts.append(f'  labels: ["{labels_str}"]')
+            command_parts.append(f'  labels: {json.dumps(issue_data["labels"])}')
         
         return '\n'.join(command_parts)
 
