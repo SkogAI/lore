@@ -729,5 +729,23 @@
         }
       ]
     }
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git stash",
+      "description": "Stash remaining changes"
+    },
+    "tool_response": {
+      "stdout": "Saved working directory and index state WIP on develop: 3d150fc Fix GitHub Actions workflows and add lore-keeper bot",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
   }
 ]
