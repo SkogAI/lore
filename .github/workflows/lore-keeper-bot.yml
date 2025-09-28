@@ -1,0 +1,116 @@
+name: Lore Keeper Bot
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message for the Lore Keeper'
+        required: false
+        type: string
+
+jobs:
+  lore-analysis:
+    # Only run on issues with 'lore' label or comments mentioning @lore-keeper
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'lore')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@lore-keeper')) ||
+      github.event_name == 'workflow_dispatch'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Analyze Lore Request
+        id: analyze
+        run: |
+          echo "## 🧙 Lore Keeper Analysis" > response.md
+          echo "" >> response.md
+
+          # Get the request text
+          if [ "${{ github.event_name }}" == "issue_comment" ]; then
+            REQUEST="${{ github.event.comment.body }}"
+          elif [ "${{ github.event_name }}" == "issues" ]; then
+            REQUEST="${{ github.event.issue.body }}"
+          else
+            REQUEST="${{ github.event.inputs.message }}"
+          fi
+
+          echo "### 📊 Repository Statistics" >> response.md
+          echo "" >> response.md
+          echo "- Total Files: $(find . -type f | wc -l)" >> response.md
+          echo "- Lore Entries: $(find . -name "entry_*.json" | wc -l)" >> response.md
+          echo "- Personas: $(find . -name "persona_*.json" | wc -l)" >> response.md
+          echo "- Beach References: $(grep -r "beach" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> response.md
+          echo "" >> response.md
+
+          # Check for agent mentions
+          echo "### 🤖 Agent Activity" >> response.md
+          echo "" >> response.md
+          for agent in amy claude dot goose skogai; do
+            COUNT=$(grep -ri "$agent" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)
+            if [ $COUNT -gt 0 ]; then
+              echo "- **${agent^}**: $COUNT mentions" >> response.md
+            fi
+          done
+          echo "" >> response.md
+
+          # Search for specific topics if mentioned
+          if echo "$REQUEST" | grep -qi "quantum mojito"; then
+            echo "### 🍹 Quantum Mojito References" >> response.md
+            echo "" >> response.md
+            echo "Found $(grep -ri "quantum.*mojito\|mojito.*quantum" . --include="*.md" --include="*.json" 2>/dev/null | wc -l) references to quantum mojitos." >> response.md
+            echo "" >> response.md
+          fi
+
+          if echo "$REQUEST" | grep -qi "patch tool"; then
+            echo "### 🔧 PATCH TOOL Mentions" >> response.md
+            echo "" >> response.md
+            echo "Found $(grep -r "PATCH TOOL" . --include="*.md" --include="*.json" 2>/dev/null | wc -l) references to the PATCH TOOL." >> response.md
+            echo "" >> response.md
+          fi
+
+          # Calculate beach proximity
+          AUTOMATION_REFS=$(grep -ri "automat" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)
+          PROXIMITY=$(awk "BEGIN {printf \"%.2f\", 100 - (100 / (1 + $AUTOMATION_REFS / 100))}")
+
+          echo "### 🏖️ Beach Proximity" >> response.md
+          echo "" >> response.md
+          echo "**Current Beach Proximity: ${PROXIMITY}%**" >> response.md
+          echo "" >> response.md
+          echo "Based on $AUTOMATION_REFS automation references found in the repository." >> response.md
+          echo "" >> response.md
+
+          echo "---" >> response.md
+          echo "" >> response.md
+          echo "*The Beach awaits. The mojitos are quantum. The journey continues.*" >> response.md
+
+          # Save response for next step
+          echo "response<<EOF" >> $GITHUB_OUTPUT
+          cat response.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Post Analysis
+        if: github.event_name == 'issues' || github.event_name == 'issue_comment'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const response = `${{ steps.analyze.outputs.response }}`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: response
+            });

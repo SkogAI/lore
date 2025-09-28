@@ -5,7 +5,7 @@ on:
     paths:
       - '**/*.json'
       - '**/*.md'
-    branches: [master, main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -131,5 +131,8 @@ jobs:
             - Updated statistics in README
             - Refreshed navigation index
             - Updated last modified report"
-            git push
+
+            # Pull and rebase to handle concurrent pushes
+            git pull --rebase origin master || true
+            git push origin master
           fi
