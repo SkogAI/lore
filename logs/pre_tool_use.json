@@ -349,5 +349,41 @@
       "command": "git add logs/*.json .claude/data/sessions/*.json",
       "description": "Stage log and session files"
     }
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git pull origin develop --rebase",
+      "description": "Pull and rebase from remote"
+    }
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status",
+      "description": "Check git status"
+    }
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git add -A && git commit -m \"Add session logs\"",
+      "description": "Commit all changes"
+    }
   }
 ]

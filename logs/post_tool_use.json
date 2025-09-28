@@ -747,5 +747,41 @@
       "interrupted": false,
       "isImage": false
     }
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git stash --include-untracked",
+      "description": "Stash all changes including untracked"
+    },
+    "tool_response": {
+      "stdout": "Saved working directory and index state WIP on develop: 9dbfa20 Update session logs and add session data",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status",
+      "description": "Check git status"
+    },
+    "tool_response": {
+      "stdout": "On branch develop\nYour branch is ahead of 'origin/develop' by 2 commits.\n  (use \"git push\" to publish your local commits)\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   logs/post_tool_use.json\n\tmodified:   logs/pre_tool_use.json\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
   }
 ]
