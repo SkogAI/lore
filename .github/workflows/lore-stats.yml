@@ -2,7 +2,7 @@ name: Lore Statistics Tracker
 
 on:
   push:
-    branches: [master, main]
+    branches: [master]
   schedule:
     - cron: '0 0 * * 0'  # Weekly on Sunday at midnight
   workflow_dispatch:
@@ -89,5 +89,8 @@ jobs:
             echo "No changes to statistics"
           else
             git commit -m "Update lore statistics [skip ci]"
-            git push
+
+            # Pull and rebase to handle concurrent pushes
+            git pull --rebase origin master || true
+            git push origin master
           fi

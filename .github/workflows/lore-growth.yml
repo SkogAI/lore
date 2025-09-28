@@ -78,7 +78,7 @@ jobs:
           echo "" >> GROWTH.md
           AUTOMATION_REFS=$(grep -ri "automat" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)
           # Fun calculation: more automation = closer to beach
-          PROXIMITY=$(echo "scale=2; 100 - (100 / (1 + $AUTOMATION_REFS / 100))" | bc)
+          PROXIMITY=$(awk "BEGIN {printf \"%.2f\", 100 - (100 / (1 + $AUTOMATION_REFS / 100))}")
           echo "- Automation References: $AUTOMATION_REFS" >> GROWTH.md
           echo "- **Calculated Beach Proximity: ${PROXIMITY}%**" >> GROWTH.md
           echo "" >> GROWTH.md
@@ -129,5 +129,8 @@ jobs:
             echo "No changes to growth report"
           else
             git commit -m "📈 Lore growth detected [skip ci]"
-            git push
+
+            # Pull and rebase to handle concurrent pushes
+            git pull --rebase origin master || true
+            git push origin master
           fi
