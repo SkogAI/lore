@@ -1,0 +1,6 @@
+{
+  "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+  "prompts": [
+    "/gh-issue \"We need to - by a combination of replace via scripts and by setting standards - make sure that hard coded paths will be replaced and not introduced again. We have skogcli config and it works for things other than ontology as well\""
+  ]
+}

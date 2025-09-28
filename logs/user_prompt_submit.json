@@ -22,5 +22,179 @@
     "permission_mode": "default",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "hello"
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hi"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hi"
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/add-command a command which uses the available agents and slash commands to create a gh issue from the argument description. research and basing the issue on already existing documentation is a must "
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "would not the task tool be included for agents to be spawned? "
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "any progress?"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "I'd like them to essentially be auto merged in on commits, any ideas?"
+  },
+  {
+    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "maybe?:p"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "go ahead!"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "Commit the removal of test file"
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/commit "
+  },
+  {
+    "session_id": "014c6570-0211-4699-93a6-4383143ac0a5",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/014c6570-0211-4699-93a6-4383143ac0a5.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "please create a gh issue about changing main to master as standard default branch "
+  },
+  {
+    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/plan-execution create a workflow for setting up branches with git glow and worktrees "
+  },
+  {
+    "session_id": "014c6570-0211-4699-93a6-4383143ac0a5",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/014c6570-0211-4699-93a6-4383143ac0a5.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/end-session "
+  },
+  {
+    "session_id": "014c6570-0211-4699-93a6-4383143ac0a5",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/014c6570-0211-4699-93a6-4383143ac0a5.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/update-claude "
+  },
+  {
+    "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/gh-issue \"We need to - by a combination of replace via scripts and by setting standards - make sure that hard coded paths will be replaced and not introduced again. We have skogcli config and it works for things other than ontology as well\""
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "CLAUDE! YOU KNOW WHAT?!"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "black-magic-swoopa ./ and ../skogai/docs/lore after the \"oh shit\" moment!"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "good, now tell me exactly what happende!"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "what? talk straight to me - what the fuck are you talking about?"
+  },
+  {
+    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "how about this: `cd $HOME && ast-grep \"oh shit\""
+    "session_id": "9401bff6-5db5-4b03-b132-91511ddaa5af",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/9401bff6-5db5-4b03-b132-91511ddaa5af.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hello"
+  },
+  {
+    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
+    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "testing worktree functionality "
   }
 ]
