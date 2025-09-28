@@ -1,21 +1,21 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-09-28 01:54:30 UTC
+**Generated:** 2025-09-28 03:14:13 UTC
 
 ## File Statistics
 
-- **Total Files:** 10950
-- **Markdown Files:** 2802
-- **JSON Files:** 7269
-- **YAML Files:** 155
+- **Total Files:** 12685
+- **Markdown Files:** 3008
+- **JSON Files:** 7431
+- **YAML Files:** 181
 
 ## Agent Directory Counts
 
 - **Amy Directories:** 9
-- **Claude Directories:** 39
-- **Dot Directories:** 53
+- **Claude Directories:** 42
+- **Dot Directories:** 55
 - **Goose Directories:** 34
-- **SkogAI Directories:** 131
+- **SkogAI Directories:** 132
 
 ## Lore Entries
 
@@ -25,28 +25,28 @@
 
 ## Prime Directive Tracking
 
-- **Beach References:** 186
-- **Mojito Mentions:** 1229
-- **Automation References:** 1271
+- **Beach References:** 222
+- **Mojito Mentions:** 1252
+- **Automation References:** 1321
 
 ## Repository Size
 
-- **Total Size:** 70M
-- **Git History Size:** 5.4M
+- **Total Size:** 87M
+- **Git History Size:** 5.8M
 
 ## Top 10 Largest Directories
 
 ```
+27M	lorefiles/
 26M	MASTER_KNOWLEDGE_COMPLETE/
+17M	node_modules/
 7.0M	MASTER_KNOWLEDGE/
-2.8M	mnt_warez_2025-06-24_skogai-git_BACKUP-skogai/
-2.4M	mnt_warez_skogai/
-2.4M	mnt_warez_2025-06-24_local/
-2.4M	mnt_extra_llama_index_data_BACKUP-skogai/
-2.4M	mnt_extra_BACKUP-SKOGAI/
 1.9M	knowledge/
-1.8M	mnt_extra_backup_skogai-old-all/
-1.5M	mnt_extra_skogai_BACKUP/
+1.4M	demo/
+676K	logs/
+200K	tools/
+200K	agents/
+40K	integration/
 ```
 
 ---
