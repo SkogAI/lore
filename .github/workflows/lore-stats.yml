@@ -90,7 +90,42 @@ jobs:
           else
             git commit -m "Update lore statistics [skip ci]"
 
-            # Pull and rebase to handle concurrent pushes
-            git pull --rebase origin master || true
-            git push origin master
+            # Handle concurrent pushes with retry logic
+            MAX_RETRIES=3
+            RETRY_COUNT=0
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              # Try to pull and push
+              if git pull --rebase origin master; then
+                if git push origin master; then
+                  echo "Successfully pushed statistics update"
+                  break
+                fi
+              fi
+
+              # If rebase failed, abort and retry with merge
+              git rebase --abort 2>/dev/null || true
+
+              # Fall back to merge strategy on conflicts
+              git pull origin master --no-rebase --strategy=recursive -X theirs
+
+              # Recommit if needed  
+              git add STATS.md
+              git commit -m "Update lore statistics (merged) [skip ci]" || true
+
+              if git push origin master; then
+                echo "Successfully pushed statistics after merge"
+                break
+              fi
+
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Retry $RETRY_COUNT of $MAX_RETRIES..."
+                sleep 2
+              fi
+            done
+
+            if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+              echo "Failed to push after $MAX_RETRIES attempts"
+              exit 1
+            fi
           fi
