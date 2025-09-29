@@ -148,7 +148,7 @@ jobs:
               git rebase --abort 2>/dev/null || true
 
               # Fall back to merge strategy on conflicts
-              git pull origin master --no-rebase --strategy-option=ours
+              git pull origin master --no-rebase --strategy-option=theirs
 
               # Recommit if needed
               git add README.md NAVIGATION.md LAST_MODIFIED.md
