@@ -206,5 +206,61 @@
     "permission_mode": "default",
     "hook_event_name": "Stop",
     "stop_hook_active": false
+  },
+  {
+    "session_id": "5db8ada1-42c4-4660-94d9-8e3a505a39e7",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/5db8ada1-42c4-4660-94d9-8e3a505a39e7.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "528e6ac2-5253-444d-8b7c-4defd675b131",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/528e6ac2-5253-444d-8b7c-4defd675b131.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
+  },
+  {
+    "session_id": "38026d89-a5ea-43d8-9d71-0abf2a3862e2",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/38026d89-a5ea-43d8-9d71-0abf2a3862e2.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
   }
 ]

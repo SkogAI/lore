@@ -6,3 +6,5 @@ __pycache__/
 # Session logs
 logs/*.json
 logs/
+.claude/data/sessions
+logs

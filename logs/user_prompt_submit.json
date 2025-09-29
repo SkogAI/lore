@@ -6,5 +6,53 @@
     "permission_mode": "default",
     "hook_event_name": "UserPromptSubmit",
     "prompt": "/commit "
+  },
+  {
+    "session_id": "528e6ac2-5253-444d-8b7c-4defd675b131",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/528e6ac2-5253-444d-8b7c-4defd675b131.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "oh sorry, gitognore the logs if needed \nread what I am telling you! gitgnore the logs if it bothers you!!"
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "read what I am telling you! gitgnore the logs if it bothers you!!\nmake a branch for it and do a pr"
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "Cloning into '/home/runner/work/claude-backup/claude-backup/.skogai'...\nremote: Repository not found.\nfatal: repository 'https://github.com/skogai/.skogai/' not found\nfatal: clone of 'https://github.com/skogai/.skogai' into submodule path '/home/runner/work/claude-backup/claude-backup/.skogai' failed\nFailed to clone '.skogai'. Retry scheduled\nCloning into '/home/runner/work/claude-backup/claude-backup/.skogai'...\nremote: Repository not found.\nfatal: repository 'https://github.com/skogai/.skogai/' not found\nfatal: clone of 'https://github.com/skogai/.skogai' into submodule path '/home/runner/work/claude-backup/claude-backup/.skogai' failed\nFailed to clone '.skogai' a second time, aborting\nThe process '/usr/bin/git' failed with exit code 1"
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "oh sorry, meant this one : \ufeff2025-09-28T09:46:07.9824992Z ##[group]Run git config --local user.email \"action@github.com\"\ngit config --local user.email \"action@github.com\"\ngit config --local user.name \"GitHub Action\"\ngit add GROWTH.md\nif git diff --staged --quiet; then\n  echo \"No changes to growth report\"\nelse\n  git commit -m \"\ud83d\udcc8 Lore growth detected [skip ci]\"\n\n  # Pull and rebase to handle concurrent pushes\n  git pull --rebase origin master || true\n  git push origin master\nfi\nshell: /usr/bin/bash -e {0}\n[fix/github-actions-workflows 3a86931] \ud83d\udcc8 Lore growth detected [skip ci]\n 1 file changed, 37 insertions(+), 37 deletions(-)\nFrom https://github.com/SkogAI/lore\n * branch            master     -> FETCH_HEAD\nRebasing (1/6)\nRebasing (2/6)\nRebasing (3/6)\nRebasing (4/6)\nRebasing (5/6)\nAuto-merging GROWTH.md\nCONFLICT (content): Merge conflict in GROWTH.md\nRebasing (6/6)\nerror: could not apply 3a86931... \ud83d\udcc8 Lore growth detected [skip ci]\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config set advice.mergeConflict false\"\nCould not apply 3a86931... # \ud83d\udcc8 Lore growth detected [skip ci]\nerror: src refspec master does not match any\nerror: failed to push some refs to 'https://github.com/SkogAI/lore'\nProcess completed with exit code 1."
+  },
+  {
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "/git_status "
+  },
+  {
+    "session_id": "38026d89-a5ea-43d8-9d71-0abf2a3862e2",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/38026d89-a5ea-43d8-9d71-0abf2a3862e2.jsonl",
+    "cwd": "/home/skogix/lore",
+    "permission_mode": "default",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "hello "
   }
 ]

@@ -1,79 +1,22 @@
 [
   {
-    "session_id": "cc43d60a-c612-479e-8c62-5d467a6fc94a",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/cc43d60a-c612-479e-8c62-5d467a6fc94a.jsonl",
+    "session_id": "528e6ac2-5253-444d-8b7c-4defd675b131",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/528e6ac2-5253-444d-8b7c-4defd675b131.jsonl",
     "cwd": "/home/skogix/lore",
     "hook_event_name": "SessionStart",
-    "source": "startup"
+    "source": "resume"
   },
   {
-    "session_id": "d65eeb13-b0af-45a5-a287-6b3b70a0b75d",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/d65eeb13-b0af-45a5-a287-6b3b70a0b75d.jsonl",
+    "session_id": "2daf3bf5-f7a7-4c56-942d-a3f31b76986d",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/2daf3bf5-f7a7-4c56-942d-a3f31b76986d.jsonl",
     "cwd": "/home/skogix/lore",
     "hook_event_name": "SessionStart",
-    "source": "startup"
+    "source": "resume"
   },
   {
-    "session_id": "74957883-265f-4fd6-abe0-591f20078b05",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/74957883-265f-4fd6-abe0-591f20078b05.jsonl",
+    "session_id": "38026d89-a5ea-43d8-9d71-0abf2a3862e2",
+    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/38026d89-a5ea-43d8-9d71-0abf2a3862e2.jsonl",
     "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "c9a738e7-8283-4582-8aaa-3bc3673ede6f",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/c9a738e7-8283-4582-8aaa-3bc3673ede6f.jsonl",
-    "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "b479a6af-b712-428c-b0d2-b0e831837ea1",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/b479a6af-b712-428c-b0d2-b0e831837ea1.jsonl",
-    "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "1b9ed5c6-d834-4b15-a681-7dda7244c3a7",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/1b9ed5c6-d834-4b15-a681-7dda7244c3a7.jsonl",
-    "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "014c6570-0211-4699-93a6-4383143ac0a5",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/014c6570-0211-4699-93a6-4383143ac0a5.jsonl",
-    "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "3c18eab6-decb-4baa-833c-ea74c7c46edd",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/3c18eab6-decb-4baa-833c-ea74c7c46edd.jsonl",
-    "cwd": "/home/skogix/lore",
-    "session_id": "9401bff6-5db5-4b03-b132-91511ddaa5af",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/9401bff6-5db5-4b03-b132-91511ddaa5af.jsonl",
-    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "caa62058-a7fe-4838-b17a-46e5d9339f19",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/caa62058-a7fe-4838-b17a-46e5d9339f19.jsonl",
-    "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "startup"
-  },
-  {
-    "session_id": "335357ae-5abc-4c39-82ad-66fb963c3e04",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore/335357ae-5abc-4c39-82ad-66fb963c3e04.jsonl",
-    "cwd": "/home/skogix/lore",
-    "hook_event_name": "SessionStart",
-    "source": "clear"
-    "session_id": "421ae44e-15e7-4f07-8430-a32a650a9b80",
-    "transcript_path": "/home/skogix/.claude/projects/-home-skogix-lore--dev-worktree-sharp-beacon/421ae44e-15e7-4f07-8430-a32a650a9b80.jsonl",
-    "cwd": "/home/skogix/lore/.dev/worktree/sharp-beacon",
     "hook_event_name": "SessionStart",
     "source": "startup"
   }

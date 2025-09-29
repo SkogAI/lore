@@ -41,3 +41,78 @@ Traceback (most recent call last):
 RuntimeError: Model execution failed: Command '['ollama', 'run', 'llama3', 'You are a research agent.\n\nYour task is to find key information about a topic.\n\nFormat your answer like this:\n\nKEY FACTS:\n* Fact 1\n* Fact 2\n* Fact 3\n\nMAIN CONCEPTS:\n* Concept 1: Brief definition\n* Concept 2: Brief definition\n\nRELATIONSHIPS:\n* How concept 1 relates to concept 2\n* Other important relationships\n\nPOTENTIAL SECTIONS:\n* First section to include\n* Second section to include\n\nInput: test\n\n']' returned non-zero exit status 1.
 tor 25 sep 2025 17:17:27 CEST: Completed request for topic: test
 ----------------------------------------
+sön 28 sep 2025 14:23:33 CEST: Service started with model: llama3
+sön 28 sep 2025 14:23:33 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+sön 28 sep 2025 14:23:34 CEST: Model 'llama3' not found. Attempting to pull it...
+sön 28 sep 2025 14:23:34 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+sön 28 sep 2025 20:34:46 CEST: Service started with model: llama3
+sön 28 sep 2025 20:34:46 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+sön 28 sep 2025 20:34:46 CEST: Model 'llama3' not found. Attempting to pull it...
+sön 28 sep 2025 20:34:46 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+sön 28 sep 2025 22:42:07 CEST: Service started with model: llama3
+sön 28 sep 2025 22:42:07 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+sön 28 sep 2025 22:42:07 CEST: Model 'llama3' not found. Attempting to pull it...
+sön 28 sep 2025 22:42:07 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+sön 28 sep 2025 23:03:34 CEST: Service started with model: llama3
+sön 28 sep 2025 23:03:34 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+sön 28 sep 2025 23:03:34 CEST: Model 'llama3' not found. Attempting to pull it...
+sön 28 sep 2025 23:03:34 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 00:08:24 CEST: Service started with model: llama3
+mån 29 sep 2025 00:08:24 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 00:08:24 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 00:08:24 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 15:39:28 CEST: Service started with model: llama3
+mån 29 sep 2025 15:39:28 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 15:39:28 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 15:39:28 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:32:36 CEST: Service started with model: llama3
+mån 29 sep 2025 18:32:36 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:32:36 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:32:36 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:35:34 CEST: Service started with model: llama3
+mån 29 sep 2025 18:35:34 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:35:34 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:35:34 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:37:03 CEST: Service started with model: llama3
+mån 29 sep 2025 18:37:03 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:37:03 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:37:03 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:51:44 CEST: Service started with model: llama3
+mån 29 sep 2025 18:51:44 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:51:44 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:51:44 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:55:25 CEST: Service started with model: llama3
+mån 29 sep 2025 18:55:25 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:55:25 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:55:25 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:58:53 CEST: Service started with model: llama3
+mån 29 sep 2025 18:58:53 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:58:53 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:58:53 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 18:59:58 CEST: Service started with model: llama3
+mån 29 sep 2025 18:59:58 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 18:59:58 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 18:59:58 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 19:02:17 CEST: Service started with model: llama3
+mån 29 sep 2025 19:02:17 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 19:02:17 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 19:02:17 CEST: Failed to pull model 'llama3'. Service may not function correctly.
+mån 29 sep 2025 20:12:12 CEST: Service started with model: llama3
+mån 29 sep 2025 20:12:12 CEST: Request pipe created at ./pipes/skogai-agent-small-requests
+To submit a request, use: echo "Your topic here" > ./pipes/skogai-agent-small-requests
+mån 29 sep 2025 20:12:12 CEST: Model 'llama3' not found. Attempting to pull it...
+mån 29 sep 2025 20:12:12 CEST: Failed to pull model 'llama3'. Service may not function correctly.
