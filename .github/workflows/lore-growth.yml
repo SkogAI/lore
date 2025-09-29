@@ -146,7 +146,7 @@ jobs:
               git rebase --abort 2>/dev/null || true
 
               # Fall back to merge strategy on conflicts
-              git pull origin master --no-rebase --strategy-option=theirs
+              git pull origin master --no-rebase --strategy=recursive -X theirs
 
               # Recommit if needed
               git add GROWTH.md
