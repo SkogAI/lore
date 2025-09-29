@@ -5,6 +5,6 @@
     "cwd": "/home/skogix/lore",
     "permission_mode": "default",
     "hook_event_name": "UserPromptSubmit",
-    "prompt": "/commit "
+    "prompt": "/commit"
   }
 ]
