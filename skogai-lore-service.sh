@@ -5,7 +5,7 @@
 set -e
 
 SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MODEL_NAME=${1:-"llama3.2"}
+MODEL_NAME=${1:-"llama3.2:latest"}
 PIPE_NAME="skogai-lore-generator"
 PIPE_PATH="/tmp/${PIPE_NAME}"
 GENERATION_INTERVAL=${2:-"600"} # Default: 10 minutes between generations
@@ -202,4 +202,3 @@ while true; do
     sleep 5
   fi
 done
-
