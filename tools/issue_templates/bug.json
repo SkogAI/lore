@@ -1,9 +1,0 @@
-{
-  "title_template": "Fix {bug_description} in {component}",
-  "description_template": "## Bug Report\n\n### Description\n{description}\n\n### Steps to Reproduce\n{steps}\n\n### Expected Behavior\n{expected}\n\n### Actual Behavior\n{actual}\n\n### Environment\n{environment}\n\n### Additional Context\n{context}\n",
-  "labels": [
-    "bug",
-    "urgent"
-  ],
-  "priority": 1
-}

@@ -1,9 +1,0 @@
-{
-  "title_template": "Implement {feature_name} for {component}",
-  "description_template": "## Feature Request\n\n### Description\n{description}\n\n### Requirements\n{requirements}\n\n### Acceptance Criteria\n{acceptance_criteria}\n\n### Implementation Notes\n{implementation_notes}\n\n### Related Issues\n{related_issues}\n",
-  "labels": [
-    "feature",
-    "enhancement"
-  ],
-  "priority": 3
-}
