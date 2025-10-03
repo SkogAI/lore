@@ -8,7 +8,11 @@ import argparse
 from typing import Dict, Any, Optional
 
 # Add the project root to the path
-sys.path.append("/mnt/extra/backup/skogai-old-all/")
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
+# Import configuration system
+from config import paths
 
 # Import the small model agents
 from agents.implementations.small_model_agents import SmallModelAgents
@@ -30,9 +34,9 @@ def run_workflow(
     # Create output directory if needed
     if output_dir is None:
         timestamp = int(time.time())
-        output_dir = f"/home/skogix/skogai/demo/small_model_content_{timestamp}"
+        output_dir = paths.get_demo_output_dir(str(timestamp), "small_model_content")
 
-    os.makedirs(output_dir, exist_ok=True)
+    paths.ensure_dir(output_dir)
 
     print(f"Creating content for topic: {topic}")
     print(f"Using model: {model_name}")

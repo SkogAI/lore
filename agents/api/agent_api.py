@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 import json
 import requests
 from typing import Dict, Any, List, Optional
 import time
 import logging
+
+# Add project root to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+# Import configuration system
+from config import paths
 
 # Configure logging
 logging.basicConfig(
@@ -17,8 +24,16 @@ logger = logging.getLogger("agent_api")
 class AgentAPI:
     """API layer for specialized content creation agents."""
 
-    def __init__(self, config_path: str = "/home/skogix/skogai/config/llm_config.json"):
-        """Initialize the AgentAPI with configuration."""
+    def __init__(self, config_path: Optional[str] = None):
+        """Initialize the AgentAPI with configuration.
+
+        Args:
+            config_path: Optional path to config file. If not provided, uses
+                        paths.get_config_file("llm_config.json")
+        """
+        if config_path is None:
+            config_path = paths.get_config_file("llm_config.json")
+
         try:
             with open(config_path, "r") as f:
                 self.config = json.load(f)
@@ -87,7 +102,7 @@ class AgentAPI:
 
     def retrieve_context(self, session_id: str, phase: str) -> Dict[str, Any]:
         """Retrieve context data for a specific workflow phase."""
-        context_dir = f"/home/skogix/skogai/demo/content_creation_{session_id}"
+        context_dir = paths.get_demo_output_dir(session_id, "content_creation")
         context = {
             "session_id": session_id,
             "current_phase": phase,
@@ -120,10 +135,10 @@ class AgentAPI:
 
     def store_context(self, session_id: str, phase: str, data: Dict[str, Any]) -> bool:
         """Store context data from a workflow phase."""
-        context_dir = f"/home/skogix/skogai/demo/content_creation_{session_id}"
+        context_dir = paths.get_demo_output_dir(session_id, "content_creation")
 
         # Ensure directory exists
-        os.makedirs(context_dir, exist_ok=True)
+        paths.ensure_dir(context_dir)
 
         # Store phase-specific output
         output_file = f"{context_dir}/{phase}_output.json"
@@ -141,9 +156,7 @@ class AgentAPI:
         """Build an appropriate prompt for the specified agent type."""
 
         # Get agent instructions
-        agent_path = (
-            f"/home/skogix/skogai/agents/implementations/content/{agent_type}-agent.md"
-        )
+        agent_path = paths.get_agent_path(f"implementations/content/{agent_type}-agent.md")
         try:
             with open(agent_path, "r") as f:
                 agent_instructions = f.read()
