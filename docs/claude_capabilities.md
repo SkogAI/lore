@@ -27,34 +27,21 @@ This document outlines what Claude Code can and cannot do when working with this
 - **Update comments** on issues and PRs
 - **Create pull requests** (via URL with pre-filled content)
 - **Reference code** with file paths and line numbers
+- **Create and manage issues** via `gh issue` commands
+- **Use GitHub CLI** for repository operations
 
-## ⚠️ What Requires User Approval
+## ⚠️ What Has Limited Capabilities
 
-### GitHub CLI Operations
-- **Creating issues** via `gh issue create` - requires approval
-- **Other gh commands** - require approval for security
-
-These operations need explicit user approval due to security policies. To enable these:
-1. User must approve the command when prompted
-2. Or user can configure `--allowedTools` to include specific gh commands
-
-## ❌ What Claude CANNOT Do
-
-- **Submit formal GitHub PR reviews** (can only provide feedback in comments)
-- **Approve pull requests** (security limitation)
-- **Post multiple comments** (only updates a single comment)
-- **Merge branches** or perform complex git operations
-- **Modify workflow files** in `.github/workflows/` directory
+- **PR reviews** - Can provide feedback in comments, but cannot submit formal GitHub PR reviews
+- **PR approvals** - Cannot approve pull requests (security limitation)
+- **Comments** - Only updates a single comment per execution
+- **Merge operations** - Cannot merge branches or perform complex git operations
+- **Workflow modifications** - Cannot modify files in `.github/workflows/` directory
 
 ## Workflow for Issue Creation
 
-Since `gh` commands require approval, here's the recommended workflow:
+Claude can now create issues directly using the `gh` CLI:
 
-### Option 1: User Approves gh Commands
-When Claude attempts to run `gh issue create`, approve the command prompt.
-
-### Option 2: Manual Issue Creation
-Claude can draft the issue content, and you can create it manually using:
 ```bash
 gh issue create --repo SkogAI/lore --title "Title" --body "$(cat <<'EOF'
 Body content here
@@ -62,12 +49,11 @@ EOF
 )"
 ```
 
-### Option 3: Web Interface
-Use the GitHub web interface at https://github.com/SkogAI/lore/issues/new
+No user approval is required for this docs/lore repository.
 
 ## Example: Creating the OpenRouter Migration Issue
 
-Claude drafted an issue in #63 but couldn't create it. You can create it using:
+Claude can now create issues directly. Here's an example command:
 
 ```bash
 gh issue create --repo SkogAI/lore --title "Migrate OpenRouter scripts after skogcli integration" --body "$(cat <<'EOF'
@@ -165,4 +151,4 @@ EOF
 
 ## Summary
 
-Claude has robust file and git capabilities but requires user approval for GitHub CLI operations. This ensures security while maintaining flexibility for code changes and documentation.
+Claude has full access to file operations, git capabilities, and GitHub CLI commands for this docs/lore repository. Since this is a documentation and knowledge repository (not containing sensitive files), Claude has the same privileges as other agents to facilitate efficient workflow automation.
