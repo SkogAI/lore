@@ -127,7 +127,7 @@ def save_issues_to_files(issues: List[Dict[str, Any]], output_dir: str):
 
 def main():
     """Main execution function."""
-    script_path = '/home/runner/work/lore/lore/create-script-refactor-issues.sh'
+    script_path = os.environ.get('ISSUE_SCRIPT_PATH', './create-script-refactor-issues.sh')
     output_dir = os.environ.get('ISSUES_OUTPUT_DIR', 'issues_to_create')
     repo = 'SkogAI/lore'
     
