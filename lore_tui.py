@@ -126,10 +126,11 @@ class BookDetailScreen(Screen):
                     if entry:
                         self.entries.append(entry)
                         title = entry.get('title', 'Untitled')
-                        summary = entry.get('summary', '')[:50] + '...' if len(entry.get('summary', '')) > 50 else entry.get('summary', '')
+                        summary = entry.get('summary', '')
+                        truncated_summary = summary[:50] + '...' if len(summary) > 50 else summary
 
                         item = ListItem(
-                            Label(f"• {title}\n  {summary}"),
+                            Label(f"• {title}\n  {truncated_summary}"),
                             id=f"entry-{entry_id}"
                         )
                         entries_list.append(item)
