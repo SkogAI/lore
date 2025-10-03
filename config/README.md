@@ -4,12 +4,26 @@ This directory contains the centralized configuration system for the LORE projec
 
 ## Overview
 
-The configuration system:
+The configuration system provides a centralized way to manage paths in the lore repository:
 
 - **Requires SKOGAI_LORE** environment variable (set by `skogcli config`)
-- **Exports lore-specific** directory paths
+- **Exports lore-specific** directory paths relative to `SKOGAI_LORE`
 - **Defers to external systems** for logs (skogai config) and tools (skogcli scripts)
 - **Consistent API** across Python and Shell
+
+### Key Principle
+
+**Only `SKOGAI_LORE` needs to be set externally.** Everything else is derived from it:
+
+```bash
+# This is all you need (managed by skogcli config)
+export SKOGAI_LORE="/home/skogix/skogai/lore"
+
+# These are automatically derived by config/paths.sh and config/paths.py
+SKOGAI_AGENTS_DIR="$SKOGAI_LORE/agents"
+SKOGAI_CONFIG_DIR="$SKOGAI_LORE/config"
+# ... and so on
+```
 
 ## Quick Start
 
@@ -55,28 +69,91 @@ skogai_ensure_dir "$SKOGAI_CONTEXT_DIR"
 
 ## Environment Variables
 
+### Overview of Ownership
+
+The configuration system follows a clear separation of concerns:
+
+1. **`skogcli config` (skogai namespace)** - Manages workspace-level variables
+2. **`config/paths.sh`** - Exports lore-specific paths relative to `SKOGAI_LORE`
+3. **`skogcli` scripts** - Provides tool commands (not environment variables)
+
 ### Required (from skogcli config)
 
-- **`SKOGAI`**: Base workspace directory (`/home/skogix/skogai`)
-- **`SKOGAI_LORE`**: This repository path (e.g., `$SKOGAI/lore`)
+These are set by running `skogcli config export-env --namespace skogai`:
+
+- **`SKOGAI`**: Base workspace directory
+  - **Purpose**: Root directory for all SkogAI projects and data
+  - **Example**: `/home/skogix/skogai`
+  - **Usage**: Parent directory for all repositories and shared resources
+
+- **`SKOGAI_LORE`**: This repository's path
+  - **Purpose**: Path to the lore repository (this repo)
+  - **Example**: `/home/skogix/skogai/lore` or `$SKOGAI/lore`
+  - **Usage**: Base directory for all lore-specific operations
+  - **Note**: This is the PRIMARY variable that everything else depends on
+
+- **`SKOGAI_LOGS_DIR`**: System-level logs directory
+  - **Purpose**: Centralized logs for all SkogAI services and agents
+  - **Example**: `/home/skogix/skogai/logs`
+  - **Usage**: Application logs, service logs, debug output
+  - **Note**: Managed by skogai config, NOT by this repository
 
 ### Exported by config/paths.sh
 
-When you source `config/paths.sh`, these lore-specific variables are automatically exported:
+When you source `config/paths.sh`, these lore-specific variables are automatically exported.
+All paths are relative to `SKOGAI_LORE`:
 
-- `SKOGAI_BASE_DIR` - Base directory (same as `SKOGAI_LORE`)
-- `SKOGAI_AGENTS_DIR` - Agents directory (`$SKOGAI_LORE/agents`)
-- `SKOGAI_CONFIG_DIR` - Config directory (`$SKOGAI_LORE/config`)
-- `SKOGAI_CONTEXT_DIR` - Context directory (`$SKOGAI_LORE/context`)
-- `SKOGAI_DEMO_DIR` - Demo directory (`$SKOGAI_LORE/demo`)
-- `SKOGAI_DOCS_DIR` - Docs directory (`$SKOGAI_LORE/docs`)
-- `SKOGAI_KNOWLEDGE_DIR` - Knowledge directory (`$SKOGAI_LORE/knowledge`)
-- `SKOGAI_LOREFILES_DIR` - Lorefiles directory (`$SKOGAI_LORE/lorefiles`)
+- **`SKOGAI_BASE_DIR`** - Alias for `SKOGAI_LORE`
+  - **Purpose**: Convenience alias for the base directory
+  - **Value**: Same as `$SKOGAI_LORE`
+
+- **`SKOGAI_AGENTS_DIR`** - AI agent implementations
+  - **Purpose**: Agent code, APIs, templates
+  - **Path**: `$SKOGAI_LORE/agents`
+  - **Contains**: Agent implementations, API layer, agent templates
+
+- **`SKOGAI_CONFIG_DIR`** - Configuration files
+  - **Purpose**: Repository configuration and settings
+  - **Path**: `$SKOGAI_LORE/config`
+  - **Contains**: This configuration system, path utilities, settings
+
+- **`SKOGAI_CONTEXT_DIR`** - Context files and session data
+  - **Purpose**: Agent context, conversation state, session management
+  - **Path**: `$SKOGAI_LORE/context`
+  - **Contains**: Session files, context templates, state data
+
+- **`SKOGAI_DEMO_DIR`** - Demo scripts and examples
+  - **Purpose**: Demo applications, workflow examples
+  - **Path**: `$SKOGAI_LORE/demo`
+  - **Contains**: Demo scripts, example workflows, test applications
+
+- **`SKOGAI_DOCS_DIR`** - Documentation
+  - **Purpose**: Repository documentation and guides
+  - **Path**: `$SKOGAI_LORE/docs`
+  - **Contains**: Documentation, handover files, guides
+
+- **`SKOGAI_KNOWLEDGE_DIR`** - Knowledge base
+  - **Purpose**: Current knowledge database
+  - **Path**: `$SKOGAI_LORE/knowledge`
+  - **Contains**: Active knowledge files, searchable data
+
+- **`SKOGAI_LOREFILES_DIR`** - Historical archives
+  - **Purpose**: Historical lore, archived memories, mythology
+  - **Path**: `$SKOGAI_LORE/lorefiles`
+  - **Contains**: Historical archives, agent memories, mythology
 
 ### External (not managed by lore)
 
-- **`SKOGAI_LOGS_DIR`**: Managed by `skogai` config namespace (system-level logs)
-- **Tools**: Managed by `skogcli` scripts (not env vars)
+These are managed by other systems and should NOT be added to this repository:
+
+- **Logs**: Use `$SKOGAI_LOGS_DIR` (from `skogai` config namespace)
+  - **Why**: Logs are system-level, shared across all SkogAI projects
+  - **Management**: Configured in skogai config, not repository-specific
+
+- **Tools**: Use `skogcli` commands directly
+  - **Why**: Tools are executable commands, not paths
+  - **Management**: Provided by skogcli package, not environment variables
+  - **Example**: Use `skogcli tool-name` instead of `$SKOGAI_TOOLS_DIR/tool-name`
 
 ## Python API Reference
 
