@@ -531,17 +531,17 @@ def main():
         with system_preset_cols[0]:
             if st.button("General Assistant"):
                 st.session_state.system_prompt = "You are a helpful, harmless, and honest AI assistant. Answer the user's questions accurately and concisely."
-                st.experimental_rerun()
-        
+                st.rerun()
+
         with system_preset_cols[1]:
             if st.button("Creative"):
                 st.session_state.system_prompt = "You are a creative and imaginative AI assistant. Generate innovative ideas, stories, and content that's engaging and original."
-                st.experimental_rerun()
-                
+                st.rerun()
+
         with system_preset_cols[2]:
             if st.button("Technical"):
                 st.session_state.system_prompt = "You are an expert technical assistant with deep knowledge of software, programming, and computer science. Provide detailed, accurate technical answers with code examples when relevant."
-                st.experimental_rerun()
+                st.rerun()
         
         # SAVE/CLEAR BUTTONS
         st.sidebar.markdown("### Chat Actions")
@@ -559,7 +559,7 @@ def main():
         with save_clear_cols[1]:
             if st.button("Clear Chat"):
                 clear_chat()
-                st.experimental_rerun()
+                st.rerun()
         
         # Main chat interface
         st.header("Chat Interface")
@@ -638,7 +638,7 @@ def main():
                 if save_settings(new_settings):
                     st.success("Settings saved successfully!")
                     time.sleep(1)
-                    st.experimental_rerun()
+                    st.rerun()
     
     elif sidebar_tab == "History":
         st.header("Chat History")
@@ -663,11 +663,11 @@ def main():
                             st.session_state.messages = loaded_history
                             st.success("Chat history loaded!")
                             time.sleep(1)
-                            st.experimental_rerun()
-            
+                            st.rerun()
+
             with col2:
                 if st.button("Refresh List"):
-                    st.experimental_rerun()
+                    st.rerun()
             
             # Preview selected history
             if selected_history:
