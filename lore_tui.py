@@ -196,11 +196,12 @@ class BookBrowserScreen(Screen):
         else:
             for book in self.books:
                 title = book.get('title', 'Untitled')
-                description = book.get('description', '')[:80] + '...' if len(book.get('description', '')) > 80 else book.get('description', '')
+                description = book.get('description', '')
+                truncated_desc = description[:80] + '...' if len(description) > 80 else description
                 entry_count = len(book.get('entries', []))
 
                 item = ListItem(
-                    Label(f"📖 {title}\n   {description}\n   [{entry_count} entries]"),
+                    Label(f"📖 {title}\n   {truncated_desc}\n   [{entry_count} entries]"),
                     id=f"book-{book['id']}"
                 )
                 books_list.append(item)
