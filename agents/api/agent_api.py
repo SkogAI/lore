@@ -4,7 +4,7 @@ import os
 import sys
 import json
 import requests
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 import time
 import logging
 
@@ -24,40 +24,28 @@ logger = logging.getLogger("agent_api")
 class AgentAPI:
     """API layer for specialized content creation agents."""
 
-    def __init__(self, config_path: Optional[str] = None):
-        """Initialize the AgentAPI with configuration.
-
-        Args:
-            config_path: Optional path to config file. If not provided, uses
-                        paths.get_config_file("llm_config.json")
-        """
-        if config_path is None:
-            config_path = paths.get_config_file("llm_config.json")
-
-        try:
-            with open(config_path, "r") as f:
-                self.config = json.load(f)
-        except FileNotFoundError:
-            logger.error(f"Config file not found: {config_path}")
-            # Default configuration
-            self.config = {
-                "api_key": os.environ.get("SKOGAI_LLM_API_KEY", ""),
-                "base_url": os.environ.get(
-                    "SKOGAI_LLM_BASE_URL", "https://api.openai.com/v1"
-                ),
-                "models": {
-                    "research": "gpt-4o",
-                    "outline": "gpt-4o",
-                    "writing": "gpt-4o",
-                },
-                "temperature": {
-                    "research": 0.2,  # Lower temperature for factual accuracy
-                    "outline": 0.4,  # Moderate temperature for structure
-                    "writing": 0.7,  # Higher temperature for creative writing
-                },
-                "timeout": 120,
-                "max_tokens": {"research": 2000, "outline": 2500, "writing": 4000},
-            }
+    def __init__(self):
+        """Initialize the AgentAPI with configuration."""
+        # Default configuration
+        self.config = {
+            "api_key": os.environ.get(
+                "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",
+                "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",
+            ),
+            "base_url": os.environ.get("", "https://openrouter.ai/api/v1"),
+            "models": {
+                "research": "gpt-4o",
+                "outline": "gpt-4o",
+                "writing": "gpt-4o",
+            },
+            "temperature": {
+                "research": 0.2,  # Lower temperature for factual accuracy
+                "outline": 0.4,  # Moderate temperature for structure
+                "writing": 0.7,  # Higher temperature for creative writing
+            },
+            "timeout": 120,
+            "max_tokens": {"research": 2000, "outline": 2500, "writing": 4000},
+        }
 
     def process_agent_request(
         self,
@@ -102,7 +90,7 @@ class AgentAPI:
 
     def retrieve_context(self, session_id: str, phase: str) -> Dict[str, Any]:
         """Retrieve context data for a specific workflow phase."""
-        context_dir = paths.get_demo_output_dir(session_id, "content_creation")
+        context_dir = f"/home/skogix/lore/demo/content_creation_{session_id}"
         context = {
             "session_id": session_id,
             "current_phase": phase,
@@ -135,7 +123,7 @@ class AgentAPI:
 
     def store_context(self, session_id: str, phase: str, data: Dict[str, Any]) -> bool:
         """Store context data from a workflow phase."""
-        context_dir = paths.get_demo_output_dir(session_id, "content_creation")
+        context_dir = f"/home/skogix/lore/demo/content_creation_{session_id}"
 
         # Ensure directory exists
         paths.ensure_dir(context_dir)
@@ -156,7 +144,9 @@ class AgentAPI:
         """Build an appropriate prompt for the specified agent type."""
 
         # Get agent instructions
-        agent_path = paths.get_agent_path(f"implementations/content/{agent_type}-agent.md")
+        agent_path = (
+            f"/home/skogix/lore/agents/implementations/content/{agent_type}-agent.md"
+        )
         try:
             with open(agent_path, "r") as f:
                 agent_instructions = f.read()
@@ -346,8 +336,8 @@ if __name__ == "__main__":
     result = api.process_agent_request(
         "research",
         {
-            "topic": "Quantum Computing and AI Persona",
-            "depth": "intermediate",
+            "topic": "Claude Code in egypt digging up dinosaur bones",
+            "depth": "advanced",
         },
         session_id,
     )

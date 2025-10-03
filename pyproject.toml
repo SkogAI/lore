@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "anthropic>=0.68.0",
+    "gradio>=5.48.0",
+    "numpy>=2.3.3",
     "openai>=1.109.1",
     "pip>=25.2",
     "streamlit>=1.50.0",

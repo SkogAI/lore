@@ -2,69 +2,91 @@
 
 # Script to manage context transitions
 
-# Load path configuration
+set -e
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../config/paths.sh"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+CONTEXT_DIR="${BASE_DIR}/context"
+TEMPLATES_DIR="${CONTEXT_DIR}/templates"
+CURRENT_DIR="${CONTEXT_DIR}/current"
+ARCHIVE_DIR="${CONTEXT_DIR}/archive"
+
+# Ensure directories exist
+mkdir -p "${TEMPLATES_DIR}"
+mkdir -p "${CURRENT_DIR}"
+mkdir -p "${ARCHIVE_DIR}"
 
 function create_context() {
-  template=$1
-  context_type=$2
-  session_id=$(date +%s)
+  local template=$1
+  local context_type=${2:-"base"}
+  local session_id=$(date +%s)
 
-  local context_dir=$(get_context_dir)
-  local template_file="$context_dir/templates/${template}-context.json"
-  local current_file="$context_dir/current/context-${session_id}.json"
+  if [ -z "$template" ]; then
+    echo "Error: template name required"
+    echo "Usage: context-manager.sh create <template> [context_type]"
+    return 1
+  fi
 
-  # Ensure directories exist
-  ensure_dir "$context_dir/current"
+  local template_file="${TEMPLATES_DIR}/${template}-context.json"
+  local context_file="${CURRENT_DIR}/context-${session_id}.json"
 
-  cp "$template_file" "$current_file"
+  if [ ! -f "$template_file" ]; then
+    echo "Error: Template not found: $template_file"
+    return 1
+  fi
 
-  # Update basic fields
-  sed -i "s/\"created\": \"\"/\"created\": \"$(date -Iseconds)\"/" "$current_file"
-  sed -i "s/\"last_updated\": \"\"/\"last_updated\": \"$(date -Iseconds)\"/" "$current_file"
-  sed -i "s/\"session_id\": \"\"/\"session_id\": \"${session_id}\"/" "$current_file"
-  sed -i "s/\"context_type\": \"base\"/\"context_type\": \"${context_type}\"/" "$current_file"
+  cp "$template_file" "$context_file"
+
+  # Update fields using jq
+  local timestamp=$(date -Iseconds)
+  jq ".created = \"$timestamp\" | .last_updated = \"$timestamp\" | .session_id = \"$session_id\" | .context_type = \"$context_type\"" \
+    "$context_file" > "${context_file}.tmp" && mv "${context_file}.tmp" "$context_file"
 
   echo $session_id
 }
 
 function archive_context() {
-  session_id=$1
+  local session_id=$1
 
-  local context_dir=$(get_context_dir)
-  local current_file="$context_dir/current/context-${session_id}.json"
-  local archive_file="$context_dir/archive/context-${session_id}.json"
+  if [ -z "$session_id" ]; then
+    echo "Error: session_id required"
+    echo "Usage: context-manager.sh archive <session_id>"
+    return 1
+  fi
 
-  if [ -f "$current_file" ]; then
-    # Ensure archive directory exists
-    ensure_dir "$context_dir/archive"
+  local context_file="${CURRENT_DIR}/context-${session_id}.json"
+  local archive_file="${ARCHIVE_DIR}/context-${session_id}.json"
 
-    mv "$current_file" "$archive_file"
+  if [ -f "$context_file" ]; then
+    mv "$context_file" "$archive_file"
     echo "Context archived successfully."
   else
-    echo "Error: Context not found."
-    exit 1
+    echo "Error: Context not found: $context_file"
+    return 1
   fi
 }
 
 function update_context() {
-  session_id=$1
-  key=$2
-  value=$3
+  local session_id=$1
+  local key=$2
+  local value=$3
 
-  local context_dir=$(get_context_dir)
-  local current_file="$context_dir/current/context-${session_id}.json"
+  if [ -z "$session_id" ] || [ -z "$key" ] || [ -z "$value" ]; then
+    echo "Error: session_id, key, and value required"
+    echo "Usage: context-manager.sh update <session_id> <key> <value>"
+    return 1
+  fi
 
-  if [ -f "$current_file" ]; then
-    # This is a simplistic approach - for production use a proper JSON tool like jq
-    # For complex nested properties, this would need enhancement
-    sed -i "s/\"${key}\": \".*\"/\"${key}\": \"${value}\"/" "$current_file"
-    sed -i "s/\"last_updated\": \".*\"/\"last_updated\": \"$(date -Iseconds)\"/" "$current_file"
+  local context_file="${CURRENT_DIR}/context-${session_id}.json"
+
+  if [ -f "$context_file" ]; then
+    local timestamp=$(date -Iseconds)
+    jq ".[\"$key\"] = \"$value\" | .last_updated = \"$timestamp\"" \
+      "$context_file" > "${context_file}.tmp" && mv "${context_file}.tmp" "$context_file"
     echo "Context updated successfully."
   else
-    echo "Error: Context not found."
-    exit 1
+    echo "Error: Context not found: $context_file"
+    return 1
   fi
 }
 
