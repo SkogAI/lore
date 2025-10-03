@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Privileges and Permissions
+
+Claude Code has **full repository access** for this docs/lore repository, including:
+- ✅ File operations (create, edit, read, search)
+- ✅ Git operations (commit, push, branch management)
+- ✅ GitHub CLI commands (issue creation, PR management) - **no approval required**
+- ✅ Code analysis and documentation
+
+Since this is a documentation and knowledge repository (not containing sensitive files like SSH keys), Claude has the same privileges as GitHub Copilot to facilitate efficient workflow automation.
+
 ## Available Tools for Claude
 
 You have access to helper scripts that make common tasks easier:
