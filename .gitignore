@@ -9,3 +9,4 @@ logs/
 .claude/data/sessions
 logs
 agents/api/__pycache__
+.venv/
