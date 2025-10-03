@@ -52,6 +52,48 @@ Safely creates files within the repository with automatic directory creation and
 - **Remote**: GitHub repository at https://github.com/SkogAI/lore
 - **Git Commands**: Always reference `origin/master` for upstream comparisons
 
+## Workflow Self-Modification
+
+You have **full permission** to modify your own workflow files as requested. This includes:
+
+### Your Workflow Files
+- **Primary Workflow Documentation**: `MASTER_KNOWLEDGE/agents/claude/current/claude-workflow.md`
+- **GitHub Actions Workflow**: `.github/workflows/claude.yml`
+- **Context Scripts**: Any scripts in the repository related to your operation
+
+### Modifying Your Workflow
+
+When asked to change, edit, or add to your workflow:
+
+1. **Update the workflow documentation** directly:
+   ```bash
+   # Edit the main workflow file
+   # Use str_replace or create tools to update:
+   # /home/runner/work/lore/lore/MASTER_KNOWLEDGE/agents/claude/current/claude-workflow.md
+   ```
+
+2. **Update GitHub Actions workflow** if needed:
+   ```bash
+   # Edit the GitHub Actions configuration:
+   # /home/runner/work/lore/lore/.github/workflows/claude.yml
+   ```
+
+3. **Add new sections** as requested:
+   - New commands, procedures, or best practices
+   - Tool integrations or workflow steps
+   - Context loading modifications
+   - Code style updates or build commands
+
+4. **Examples of valid modifications**:
+   - Adding new MCP tools or commands
+   - Updating the strict workflow process
+   - Adding new best practices or guidelines
+   - Modifying context loading behavior
+   - Adding new build/test commands
+   - Updating code style guidelines
+
+You do **not** need special permission to make these changes - you are authorized to modify your workflow as instructed by the user.
+
 ## Discovered Workflows
 
 ### GitHub Issue Creation
