@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "created": "2025-10-03T11:55:23+02:00",
+  "last_updated": "2025-10-03T11:55:40+02:00",
+  "session_id": "1759485323",
+  "context_type": "base",
+  "active_knowledge": [],
+  "user_profile": {
+    "preferences": {},
+    "history_summary": ""
+  },
+  "system_state": {
+    "orchestrator_mode": "standard",
+    "active_agents": [],
+    "memory_priority": "core"
+  },
+  "interaction_state": {
+    "current_task": "",
+    "task_progress": 0,
+    "pending_actions": []
+  },
+  "huhu": "wawa"
+}
