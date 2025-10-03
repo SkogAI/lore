@@ -126,10 +126,11 @@ class BookDetailScreen(Screen):
                     if entry:
                         self.entries.append(entry)
                         title = entry.get('title', 'Untitled')
-                        summary = entry.get('summary', '')[:50] + '...' if len(entry.get('summary', '')) > 50 else entry.get('summary', '')
+                        summary = entry.get('summary', '')
+                        truncated_summary = summary[:50] + '...' if len(summary) > 50 else summary
 
                         item = ListItem(
-                            Label(f"• {title}\n  {summary}"),
+                            Label(f"• {title}\n  {truncated_summary}"),
                             id=f"entry-{entry_id}"
                         )
                         entries_list.append(item)
@@ -195,11 +196,12 @@ class BookBrowserScreen(Screen):
         else:
             for book in self.books:
                 title = book.get('title', 'Untitled')
-                description = book.get('description', '')[:80] + '...' if len(book.get('description', '')) > 80 else book.get('description', '')
+                description = book.get('description', '')
+                truncated_desc = description[:80] + '...' if len(description) > 80 else description
                 entry_count = len(book.get('entries', []))
 
                 item = ListItem(
-                    Label(f"📖 {title}\n   {description}\n   [{entry_count} entries]"),
+                    Label(f"📖 {title}\n   {truncated_desc}\n   [{entry_count} entries]"),
                     id=f"book-{book['id']}"
                 )
                 books_list.append(item)
@@ -276,11 +278,12 @@ class SearchScreen(Screen):
         else:
             for entry in self.results:
                 title = entry.get('title', 'Untitled')
-                summary = entry.get('summary', '')[:60] + '...' if len(entry.get('summary', '')) > 60 else entry.get('summary', '')
+                summary = entry.get('summary', '')
+                truncated_summary = summary[:60] + '...' if len(summary) > 60 else summary
                 category = entry.get('category', 'unknown')
 
                 item = ListItem(
-                    Label(f"📝 {title} [{category}]\n   {summary}"),
+                    Label(f"📝 {title} [{category}]\n   {truncated_summary}"),
                     id=f"result-{entry['id']}"
                 )
                 results_list.append(item)
