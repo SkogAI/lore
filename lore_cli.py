@@ -543,6 +543,114 @@ def create(
 
 
 @app.command()
+def link(
+    entry_title: str = typer.Argument(..., help="Entry title to link"),
+    book_title: str = typer.Argument(..., help="Book title to link to"),
+):
+    """
+    Link an entry to a book (add entry to book).
+    
+    Examples:
+        lore link "Character Name" "Adventure Log"
+    """
+    api = get_lore_api()
+    
+    # Find entry by title
+    entry = find_entry_by_title(api, entry_title)
+    if not entry:
+        console.print(f"[red]Entry not found: {entry_title}[/red]")
+        raise typer.Exit(1)
+    
+    # Find book by title
+    book = find_book_by_title(api, book_title)
+    if not book:
+        console.print(f"[red]Book not found: {book_title}[/red]")
+        raise typer.Exit(1)
+    
+    # Add entry to book
+    success = api.add_entry_to_book(entry["id"], book["id"])
+    
+    if success:
+        console.print(f"[green]✓[/green] Linked [cyan]{entry['title']}[/cyan] to [cyan]{book['title']}[/cyan]")
+    else:
+        console.print(f"[red]Failed to link entry to book[/red]")
+        raise typer.Exit(1)
+
+
+@app.command()
+def export():
+    """
+    Export lore to various formats.
+    
+    This is a wrapper for existing export tools.
+    """
+    console.print(Panel(
+        "[bold cyan]Lore Export Tools[/bold cyan]\n\n"
+        "**SillyTavern Export:**\n"
+        "  `python st-lore-export.py`\n\n"
+        "**Agent Lore Generation:**\n"
+        "  `python generate-agent-lore.py`\n\n"
+        "These tools provide specialized export functionality.\n"
+        "Run them directly for more options.",
+        title="📤 Export",
+        border_style="cyan"
+    ))
+
+
+@app.command()
+def tools():
+    """
+    Show available lore management tools and how to use them.
+    """
+    tools_text = """[bold cyan]SkogAI Lore Management Tools[/bold cyan]
+
+**Core Tools:**
+
+📚 **Unified CLI** (this tool)
+  • `./lore browse` - Navigate lore like a book
+  • `./lore read "Title"` - Read entries by title
+  • `./lore search "query"` - Search all lore
+  
+🔧 **Classic Interface**
+  • `tools/manage-lore.sh` - Original bash tool
+  • Supports: create-entry, create-book, list-*, show-*, add-to-book
+  • Use when you need direct ID-based access
+
+🖥️ **Terminal UI**
+  • `python lore_tui.py` - Interactive TUI browser
+  • Full-screen interface with keyboard navigation
+
+👤 **Persona Management**
+  • `tools/create-persona.sh` - Create new personas
+
+🤖 **AI-Powered Tools**
+  • `tools/llama-lore-creator.sh` - Generate lore with AI
+  • `tools/llama-lore-integrator.sh` - Import/analyze content
+  • `python generate-agent-lore.py` - Agent-specific lorebooks
+
+📤 **Export Tools**
+  • `python st-lore-export.py` - SillyTavern format export
+
+🔌 **API Layer**
+  • `agents/api/lore_api.py` - Python API for integrations
+
+**When to Use Which Tool:**
+
+• **Daily navigation**: Use `./lore` (this CLI)
+• **Bulk operations**: Use `tools/manage-lore.sh`
+• **Visual browsing**: Use `lore_tui.py`
+• **Integrations**: Use `lore_api.py`
+• **AI generation**: Use `llama-lore-*.sh` tools
+"""
+    
+    console.print(Panel(
+        tools_text,
+        title="🛠️  Tool Reference",
+        border_style="cyan"
+    ))
+
+
+@app.command()
 def info():
     """
     Show information about the lore CLI and available tools.
@@ -565,10 +673,10 @@ This tool provides a book-like interface for browsing and managing lore.
 • `lore search "keyword"` - Search for entries
 • `lore recent` - Show recently viewed items
 
-**Legacy Tools:**
-• `tools/manage-lore.sh` - Original bash interface
-• `lore_tui.py` - Terminal UI browser
-• `agents/api/lore_api.py` - Python API layer
+**More Tools:**
+• `lore tools` - See all available lore tools
+• `lore export` - Export to various formats
+• `lore link` - Link entries to books
 
 For detailed help on any command, use: `lore <command> --help`
 """
