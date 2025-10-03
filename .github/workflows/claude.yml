@@ -24,6 +24,7 @@ jobs:
       issues: write # Allow Claude to create and update issues
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
+      # Note: Claude can modify workflow files through PRs (handled by PR creation)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
