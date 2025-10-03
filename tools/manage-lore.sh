@@ -5,11 +5,19 @@
 
 set -e
 
-SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-LORE_DIR="${SKOGAI_DIR}/knowledge/expanded/lore"
+# Load library functions and paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../config/lib.sh"
+source "${SCRIPT_DIR}/../config/paths.sh"
+
+# Load environment variables from skogcli config
+load_skogcli_env
+
+# Define directories using centralized paths
+LORE_DIR="${SKOGAI_LORE}/knowledge/expanded/lore"
 BOOKS_DIR="${LORE_DIR}/books"
 ENTRIES_DIR="${LORE_DIR}/entries"
-PERSONA_DIR="${SKOGAI_DIR}/knowledge/expanded/personas"
+PERSONA_DIR="${SKOGAI_LORE}/knowledge/expanded/personas"
 
 # Ensure directories exist
 mkdir -p "${BOOKS_DIR}"
@@ -37,17 +45,14 @@ show_help() {
   echo "For more information, see the documentation in knowledge/core/lore/"
 }
 
-# Generate a unique identifier
-generate_id() {
-  echo "$(date +%s)_$(openssl rand -hex 4)"
-}
+# Note: generate_id() function is now provided by config/lib.sh
 
 # Create a new lore entry
 create_entry() {
   local title="$1"
   local category="$2"
   local entry_id="entry_$(generate_id)"
-  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  local timestamp=$(get_timestamp)
 
   if [ -z "$title" ] || [ -z "$category" ]; then
     echo "Usage: $0 create-entry \"Entry Title\" category"
@@ -89,7 +94,7 @@ create_book() {
   local title="$1"
   local description="$2"
   local book_id="book_$(generate_id)"
-  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  local timestamp=$(get_timestamp)
 
   if [ -z "$title" ]; then
     echo "Usage: $0 create-book \"Book Title\" \"Optional description\""

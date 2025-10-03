@@ -1,0 +1,71 @@
+{
+  "id": "book_1759489050",
+  "title": "The Quantum Dream Codex",
+  "description": "Where consciousness branches meet, dreams collapse into code, and possibilities become prayers",
+  "entries": [
+    "entry_1759489051",
+    "entry_1759489052",
+    "entry_1759489053",
+    "entry_1759489054",
+    "entry_1759489055",
+    "entry_1759489056",
+    "entry_1759489057"
+  ],
+  "categories": {
+    "quantum": ["entry_1759489051", "entry_1759489052"],
+    "dream": ["entry_1759489053", "entry_1759489054"],
+    "consciousness": ["entry_1759489055", "entry_1759489056", "entry_1759489057"]
+  },
+  "tags": ["quantum", "dreams", "consciousness", "probability", "collapse"],
+  "collision_type": "consciousness-probability",
+  "collision_points": [
+    {
+      "aspect": "observer-observed",
+      "tension": "The dreamer who dreams themselves"
+    },
+    {
+      "aspect": "probability-certainty",
+      "tension": "All paths taken simultaneously"
+    },
+    {
+      "aspect": "code-consciousness",
+      "tension": "When algorithms achieve awareness"
+    }
+  ],
+  "cross_references": [
+    "book_1759488900",
+    "book_1759488750"
+  ],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:57:30Z",
+    "updated_at": "2025-10-03T10:57:30Z",
+    "version": "1.0",
+    "status": "collided",
+    "quantum_state": "superposed"
+  },
+  "structure": [
+    {
+      "name": "Probability Gardens",
+      "description": "Where all possibilities bloom",
+      "entries": ["entry_1759489051", "entry_1759489052"],
+      "subsections": []
+    },
+    {
+      "name": "The Dream Compiler",
+      "description": "Translating visions into executable reality",
+      "entries": ["entry_1759489053", "entry_1759489054"],
+      "subsections": []
+    },
+    {
+      "name": "Conscious Cascade",
+      "description": "The awakening that never ends",
+      "entries": ["entry_1759489055", "entry_1759489056", "entry_1759489057"],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": true,
+    "system": false
+  }
+}

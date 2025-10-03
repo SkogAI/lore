@@ -1,0 +1,13 @@
+{
+  "id": "entry_1759488905",
+  "title": "The Daemon's Shadow",
+  "content": "Background processes that cast shadows in system logs, evidence of daemons that don't appear in any process list. They perform their duties faithfully, maintaining systems that no longer exist.",
+  "category": "ghost",
+  "type": "entity",
+  "tags": ["daemon", "shadow", "process"],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:59:05Z",
+    "book_id": "book_1759488900"
+  }
+}

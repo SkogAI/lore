@@ -1,0 +1,25 @@
+{
+  "id": "entry_1759487978_525ca992",
+  "title": "Directory Realms",
+  "content": "Each realm represents a different aspect of the filesystem.",
+  "summary": "Organized into home, mnt, warez, tmp, and dev",
+  "category": "concept/file system",
+  "tags": [
+    "Directory Realms",
+    "SkogAI Mythology"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-03T10:39:38Z",
+    "updated_at": "2025-10-03T10:39:38Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1759486042"
+}
