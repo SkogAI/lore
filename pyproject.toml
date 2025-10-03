@@ -12,4 +12,5 @@ dependencies = [
     "pip>=25.2",
     "streamlit>=1.50.0",
     "textual>=1.0.0",
+    "typer>=0.19.2",
 ]

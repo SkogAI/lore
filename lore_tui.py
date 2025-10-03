@@ -11,7 +11,16 @@ from pathlib import Path
 
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical, VerticalScroll
-from textual.widgets import Header, Footer, Static, ListView, ListItem, Label, Markdown, Input
+from textual.widgets import (
+    Header,
+    Footer,
+    Static,
+    ListView,
+    ListItem,
+    Label,
+    Markdown,
+    Input,
+)
 from textual.binding import Binding
 from textual.screen import Screen
 
@@ -40,14 +49,14 @@ class EntryDetailScreen(Screen):
         content = f"# {self.entry.get('title', 'Untitled')}\n\n"
 
         # Add metadata
-        category = self.entry.get('category', 'unknown')
-        tags = ', '.join(self.entry.get('tags', []))
+        category = self.entry.get("category", "unknown")
+        tags = ", ".join(self.entry.get("tags", []))
         content += f"**Category:** {category}\n\n"
         if tags:
             content += f"**Tags:** {tags}\n\n"
 
         # Add summary if present
-        summary = self.entry.get('summary', '')
+        summary = self.entry.get("summary", "")
         if summary:
             content += f"## Summary\n\n{summary}\n\n"
 
@@ -55,7 +64,7 @@ class EntryDetailScreen(Screen):
         content += f"## Content\n\n{self.entry.get('content', '')}\n\n"
 
         # Add relationships if present
-        relationships = self.entry.get('relationships', [])
+        relationships = self.entry.get("relationships", [])
         if relationships:
             content += "## Relationships\n\n"
             for rel in relationships:
@@ -94,7 +103,7 @@ class BookDetailScreen(Screen):
 
         # Title and info
         title_text = f"📚 {self.book.get('title', 'Untitled Book')}"
-        entry_count = len(self.book.get('entries', []))
+        entry_count = len(self.book.get("entries", []))
         yield Static(f"{title_text}    [{entry_count} entries]", id="book-title")
 
         # Main content area
@@ -105,11 +114,11 @@ class BookDetailScreen(Screen):
                 sections_list = ListView(id="sections-list")
 
                 # Add sections from book structure
-                for section in self.book.get('structure', []):
-                    section_count = len(section.get('entries', []))
+                for section in self.book.get("structure", []):
+                    section_count = len(section.get("entries", []))
                     item = ListItem(
                         Label(f"> {section['name']} ({section_count})"),
-                        id=f"section-{section['name']}"
+                        id=f"section-{section['name']}",
                     )
                     sections_list.append(item)
 
@@ -121,17 +130,19 @@ class BookDetailScreen(Screen):
                 entries_list = ListView(id="entries-list")
 
                 # Load and display entries
-                for entry_id in self.book.get('entries', []):
+                for entry_id in self.book.get("entries", []):
                     entry = self.api.get_lore_entry(entry_id)
                     if entry:
                         self.entries.append(entry)
-                        title = entry.get('title', 'Untitled')
-                        summary = entry.get('summary', '')
-                        truncated_summary = summary[:50] + '...' if len(summary) > 50 else summary
+                        title = entry.get("title", "Untitled")
+                        summary = entry.get("summary", "")
+                        truncated_summary = (
+                            summary[:50] + "..." if len(summary) > 50 else summary
+                        )
 
                         item = ListItem(
                             Label(f"• {title}\n  {truncated_summary}"),
-                            id=f"entry-{entry_id}"
+                            id=f"entry-{entry_id}",
                         )
                         entries_list.append(item)
 
@@ -150,7 +161,7 @@ class BookDetailScreen(Screen):
 
                 # Find the entry in our list
                 for entry in self.entries:
-                    if entry['id'] == entry_id:
+                    if entry["id"] == entry_id:
                         # Show entry detail screen
                         self.app.push_screen(EntryDetailScreen(entry))
                         break
@@ -192,17 +203,23 @@ class BookBrowserScreen(Screen):
         self.books = self.api.list_lore_books()
 
         if not self.books:
-            books_list.append(ListItem(Label("No lore books found. Create one to get started!")))
+            books_list.append(
+                ListItem(Label("No lore books found. Create one to get started!"))
+            )
         else:
             for book in self.books:
-                title = book.get('title', 'Untitled')
-                description = book.get('description', '')
-                truncated_desc = description[:80] + '...' if len(description) > 80 else description
-                entry_count = len(book.get('entries', []))
+                title = book.get("title", "Untitled")
+                description = book.get("description", "")
+                truncated_desc = (
+                    description[:80] + "..." if len(description) > 80 else description
+                )
+                entry_count = len(book.get("entries", []))
 
                 item = ListItem(
-                    Label(f"📖 {title}\n   {truncated_desc}\n   [{entry_count} entries]"),
-                    id=f"book-{book['id']}"
+                    Label(
+                        f"📖 {title}\n   {truncated_desc}\n   [{entry_count} entries]"
+                    ),
+                    id=f"book-{book['id']}",
                 )
                 books_list.append(item)
 
@@ -218,7 +235,7 @@ class BookBrowserScreen(Screen):
 
             # Find the book in our list
             for book in self.books:
-                if book['id'] == book_id:
+                if book["id"] == book_id:
                     # Show book detail screen
                     self.app.push_screen(BookDetailScreen(book, self.api))
                     break
@@ -277,14 +294,16 @@ class SearchScreen(Screen):
             results_list.append(ListItem(Label("No results found")))
         else:
             for entry in self.results:
-                title = entry.get('title', 'Untitled')
-                summary = entry.get('summary', '')
-                truncated_summary = summary[:60] + '...' if len(summary) > 60 else summary
-                category = entry.get('category', 'unknown')
+                title = entry.get("title", "Untitled")
+                summary = entry.get("summary", "")
+                truncated_summary = (
+                    summary[:60] + "..." if len(summary) > 60 else summary
+                )
+                category = entry.get("category", "unknown")
 
                 item = ListItem(
                     Label(f"📝 {title} [{category}]\n   {truncated_summary}"),
-                    id=f"result-{entry['id']}"
+                    id=f"result-{entry['id']}",
                 )
                 results_list.append(item)
 
@@ -296,7 +315,7 @@ class SearchScreen(Screen):
 
             # Find the entry in our results
             for entry in self.results:
-                if entry['id'] == entry_id:
+                if entry["id"] == entry_id:
                     # Show entry detail screen
                     self.app.push_screen(EntryDetailScreen(entry))
                     break
@@ -408,8 +427,8 @@ class LoreTUI(App):
 
         # Determine base directory
         if base_dir is None:
-            # Try to use ~/skogai if it exists
-            home_skogai = Path.home() / "skogai"
+            # Try to use ~/lore if it exists
+            home_skogai = Path.home() / "lore"
             if home_skogai.exists():
                 base_dir = str(home_skogai)
             else:
@@ -493,12 +512,14 @@ def main():
     """Entry point for the Lore TUI."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Interactive Terminal UI for browsing lore entries")
+    parser = argparse.ArgumentParser(
+        description="Interactive Terminal UI for browsing lore entries"
+    )
     parser.add_argument(
         "--base-dir",
         type=str,
         default=None,
-        help="Base directory for lore data (default: ~/skogai or current directory)"
+        help="Base directory for lore data (default: ~/lore or current directory)",
     )
 
     args = parser.parse_args()
