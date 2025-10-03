@@ -20,27 +20,46 @@ def parse_shell_script(script_path: str) -> List[Dict[str, Any]]:
     - body: Issue body
     - number: Issue number (1-10)
     """
-    with open(script_path, 'r') as f:
-        content = f.read()
-    
     issues = []
-    
-    # Pattern to match gh issue create commands
-    # Looking for: --title "..." --body "$(cat <<'EOF' ... EOF )"
-    pattern = r'gh issue create --repo "\$REPO" --title "([^"]+)" --body "\$\(cat <<\'EOF\'\n(.*?)\nEOF\n\)"'
-    
-    matches = re.finditer(pattern, content, re.DOTALL)
-    
-    for i, match in enumerate(matches, 1):
-        title = match.group(1)
-        body = match.group(2)
-        
-        issues.append({
-            'number': i,
-            'title': title,
-            'body': body
-        })
-    
+    with open(script_path, 'r') as f:
+        lines = f.readlines()
+
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if "gh issue create" in line:
+            # Extract --title "..."
+            title_match = re.search(r'--title\s+"([^"]+)"', line)
+            title = title_match.group(1) if title_match else ""
+
+            # Find --body "$(cat <<'EOF'"
+            body = ""
+            if '--body "$(' in line and "cat <<'EOF'" in line:
+                # Find heredoc start
+                # The heredoc may start on this line or the next
+                # Find the line with "cat <<'EOF'"
+                while i < len(lines) and "cat <<'EOF'" not in lines[i]:
+                    i += 1
+                i += 1  # Move to first line of body
+                body_lines = []
+                while i < len(lines) and lines[i].strip() != "EOF":
+                    body_lines.append(lines[i].rstrip('\n'))
+                    i += 1
+                body = "\n".join(body_lines)
+                # Move past EOF
+                i += 1
+            else:
+                # If not heredoc, try to extract --body "..."
+                body_match = re.search(r'--body\s+"([^"]+)"', line)
+                body = body_match.group(1) if body_match else ""
+
+            issues.append({
+                'number': len(issues) + 1,
+                'title': title,
+                'body': body
+            })
+        else:
+            i += 1
     return issues
 
 
