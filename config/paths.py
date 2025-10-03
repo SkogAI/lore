@@ -1,198 +1,172 @@
-"""Path resolution utilities for SkogAI
+"""
+Centralized path configuration for LORE project.
 
-Provides centralized path management with environment variable fallbacks.
+This module provides a single source of truth for all file system paths used
+throughout the LORE project. It supports:
+
+- Environment variable overrides (SKOGAI_BASE_DIR)
+- Git-aware path resolution (auto-detects repository root)
+- Backward compatibility (defaults to /home/skogix/skogai)
+- Multiple deployment scenarios
+
+Usage:
+    from config.paths import get_agents_dir, get_logs_dir
+
+    agents_dir = get_agents_dir()
+    log_file = get_path("logs", "agent.log")
 """
 
 import os
+import subprocess
 from pathlib import Path
 from typing import Optional
 
 
-class SkogAIPathResolver:
-    """Centralized path resolution for SkogAI ecosystem."""
+def get_repo_root() -> Path:
+    """
+    Get the repository root directory using git.
 
-    def __init__(self):
-        """Initialize path resolver with environment-based configuration."""
-        # Base directory - defaults to project root or /home/skogix/skogai
-        self._base_dir = self._resolve_base_dir()
+    Returns:
+        Path: Absolute path to the repository root
 
-        # Create commonly used path properties
-        self._agents_dir = None
-        self._context_dir = None
-        self._knowledge_dir = None
-        self._config_dir = None
-        self._demo_dir = None
-        self._tools_dir = None
-        self._metrics_dir = None
-        self._venv_dir = None
-
-    def _resolve_base_dir(self) -> Path:
-        """Resolve the base directory from environment or defaults."""
-        # Priority order:
-        # 1. SKOGAI_BASE_DIR environment variable
-        # 2. Current git repository root
-        # 3. Legacy /home/skogix/skogai (for backward compatibility)
-
-        if base_dir := os.environ.get("SKOGAI_BASE_DIR"):
-            return Path(base_dir)
-
-        # Try to find git repository root
-        current = Path.cwd()
-        while current != current.parent:
-            if (current / ".git").exists():
-                return current
-            current = current.parent
-
-        # Fallback to legacy path
-        return Path("/home/skogix/skogai")
-
-    @property
-    def base_dir(self) -> Path:
-        """Get the base directory for SkogAI."""
-        return self._base_dir
-
-    @property
-    def agents_dir(self) -> Path:
-        """Get the agents directory."""
-        if self._agents_dir is None:
-            self._agents_dir = Path(
-                os.environ.get("SKOGAI_AGENTS_DIR", self._base_dir / "agents")
-            )
-        return self._agents_dir
-
-    @property
-    def context_dir(self) -> Path:
-        """Get the context directory."""
-        if self._context_dir is None:
-            self._context_dir = Path(
-                os.environ.get("SKOGAI_CONTEXT_DIR", self._base_dir / "context")
-            )
-        return self._context_dir
-
-    @property
-    def knowledge_dir(self) -> Path:
-        """Get the knowledge directory."""
-        if self._knowledge_dir is None:
-            self._knowledge_dir = Path(
-                os.environ.get("SKOGAI_KNOWLEDGE_DIR", self._base_dir / "knowledge")
-            )
-        return self._knowledge_dir
-
-    @property
-    def config_dir(self) -> Path:
-        """Get the config directory."""
-        if self._config_dir is None:
-            self._config_dir = Path(
-                os.environ.get("SKOGAI_CONFIG_DIR", self._base_dir / "config")
-            )
-        return self._config_dir
-
-    @property
-    def demo_dir(self) -> Path:
-        """Get the demo directory."""
-        if self._demo_dir is None:
-            self._demo_dir = Path(
-                os.environ.get("SKOGAI_DEMO_DIR", self._base_dir / "demo")
-            )
-        return self._demo_dir
-
-    @property
-    def tools_dir(self) -> Path:
-        """Get the tools directory."""
-        if self._tools_dir is None:
-            self._tools_dir = Path(
-                os.environ.get("SKOGAI_TOOLS_DIR", self._base_dir / "tools")
-            )
-        return self._tools_dir
-
-    @property
-    def metrics_dir(self) -> Path:
-        """Get the metrics directory."""
-        if self._metrics_dir is None:
-            self._metrics_dir = Path(
-                os.environ.get("SKOGAI_METRICS_DIR", self._base_dir / "metrics")
-            )
-        return self._metrics_dir
-
-    @property
-    def venv_dir(self) -> Path:
-        """Get the virtual environment directory."""
-        if self._venv_dir is None:
-            self._venv_dir = Path(
-                os.environ.get("SKOGAI_VENV_DIR", self._base_dir / ".venv")
-            )
-        return self._venv_dir
-
-    def get_agent_path(self, relative_path: str) -> Path:
-        """Get a path within the agents directory.
-
-        Args:
-            relative_path: Path relative to agents directory
-
-        Returns:
-            Full path to the agent resource
-        """
-        return self.agents_dir / relative_path
-
-    def get_context_path(self, relative_path: str) -> Path:
-        """Get a path within the context directory.
-
-        Args:
-            relative_path: Path relative to context directory
-
-        Returns:
-            Full path to the context resource
-        """
-        return self.context_dir / relative_path
-
-    def get_knowledge_path(self, relative_path: str) -> Path:
-        """Get a path within the knowledge directory.
-
-        Args:
-            relative_path: Path relative to knowledge directory
-
-        Returns:
-            Full path to the knowledge resource
-        """
-        return self.knowledge_dir / relative_path
-
-    def get_config_file(self, filename: str) -> Path:
-        """Get a path to a configuration file.
-
-        Args:
-            filename: Configuration filename
-
-        Returns:
-            Full path to the configuration file
-        """
-        return self.config_dir / filename
-
-    def get_demo_output_dir(self, session_id: Optional[str] = None, prefix: str = "output") -> Path:
-        """Get a demo output directory, optionally with a session ID.
-
-        Args:
-            session_id: Optional session identifier
-            prefix: Prefix for the output directory name
-
-        Returns:
-            Full path to the demo output directory
-        """
-        if session_id:
-            return self.demo_dir / f"{prefix}_{session_id}"
-        return self.demo_dir / prefix
-
-    def ensure_dir(self, path: Path) -> Path:
-        """Ensure a directory exists, creating it if necessary.
-
-        Args:
-            path: Path to ensure exists
-
-        Returns:
-            The path that now exists
-        """
-        path.mkdir(parents=True, exist_ok=True)
-        return path
+    Raises:
+        RuntimeError: If not in a git repository
+    """
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        return Path(result.stdout.strip())
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(
+            f"Failed to determine git repository root: {e.stderr}"
+        )
+    except FileNotFoundError:
+        raise RuntimeError("git command not found - is git installed?")
 
 
-# Global singleton instance
-paths = SkogAIPathResolver()
+def get_base_dir() -> Path:
+    """
+    Get the base directory for the LORE project.
+
+    Resolution order:
+    1. SKOGAI_BASE_DIR environment variable
+    2. Git repository root (if available)
+    3. Default: /home/skogix/skogai (for backward compatibility)
+
+    Returns:
+        Path: Absolute path to the base directory
+    """
+    # Check environment variable first
+    env_base = os.getenv("SKOGAI_BASE_DIR")
+    if env_base:
+        return Path(env_base).resolve()
+
+    # Try to use git repository root
+    try:
+        return get_repo_root()
+    except RuntimeError:
+        pass
+
+    # Fall back to default for backward compatibility
+    return Path("/home/skogix/skogai")
+
+
+def get_agents_dir() -> Path:
+    """Get the agents directory path."""
+    return get_base_dir() / "agents"
+
+
+def get_config_dir() -> Path:
+    """Get the config directory path."""
+    return get_base_dir() / "config"
+
+
+def get_demo_dir() -> Path:
+    """Get the demo directory path."""
+    return get_base_dir() / "demo"
+
+
+def get_docs_dir() -> Path:
+    """Get the docs directory path."""
+    return get_base_dir() / "docs"
+
+
+def get_logs_dir() -> Path:
+    """
+    Get the logs directory path.
+
+    Can be overridden with SKOGAI_LOGS_DIR environment variable.
+    """
+    env_logs = os.getenv("SKOGAI_LOGS_DIR")
+    if env_logs:
+        return Path(env_logs).resolve()
+    return get_base_dir() / "logs"
+
+
+def get_lorefiles_dir() -> Path:
+    """Get the lorefiles directory path."""
+    return get_base_dir() / "lorefiles"
+
+
+def get_tools_dir() -> Path:
+    """Get the tools directory path."""
+    return get_base_dir() / "tools"
+
+
+def get_path(*parts: str) -> Path:
+    """
+    Get a path relative to the base directory.
+
+    Args:
+        *parts: Path components to join (e.g., "logs", "agent.log")
+
+    Returns:
+        Path: Absolute path constructed from base_dir + parts
+
+    Example:
+        >>> get_path("logs", "agent.log")
+        PosixPath('/home/skogix/skogai/logs/agent.log')
+
+        >>> get_path("agents", "api", "agent_api.py")
+        PosixPath('/home/skogix/skogai/agents/api/agent_api.py')
+    """
+    return get_base_dir().joinpath(*parts)
+
+
+def ensure_dir(path: Path) -> Path:
+    """
+    Ensure a directory exists, creating it if necessary.
+
+    Args:
+        path: Directory path to ensure exists
+
+    Returns:
+        Path: The same path (for chaining)
+
+    Example:
+        >>> log_file = ensure_dir(get_logs_dir()) / "agent.log"
+    """
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+# Convenience function for logging configuration
+def get_log_file(filename: str) -> Path:
+    """
+    Get a log file path, ensuring the logs directory exists.
+
+    Args:
+        filename: Name of the log file
+
+    Returns:
+        Path: Full path to the log file
+
+    Example:
+        >>> log_file = get_log_file("agent.log")
+    """
+    logs_dir = ensure_dir(get_logs_dir())
+    return logs_dir / filename

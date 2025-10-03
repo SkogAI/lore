@@ -1,297 +1,570 @@
-# SkogAI Configuration System
+# LORE Configuration System
 
-This directory contains the centralized configuration and path management system for the SkogAI ecosystem.
+This directory contains the centralized configuration system for the LORE project, providing a single source of truth for all file system paths.
 
 ## Overview
 
-The configuration system provides:
-- **Centralized path resolution** - No more hardcoded paths
-- **Environment variable support** - Easy customization per deployment
-- **Git-aware defaults** - Automatically detects repository root
-- **Backward compatibility** - Falls back to legacy paths when needed
+The configuration system supports:
+
+- **Environment variable overrides** for flexible deployment
+- **Git-aware path resolution** (auto-detects repository root)
+- **Backward compatibility** (defaults to `/home/skogix/skogai`)
+- **Multiple deployment scenarios** (development, production, testing)
+- **Consistent API** across Python and Shell
 
 ## Quick Start
 
-### Python Usage
+### Python
 
 ```python
-from config import paths, config
+from config.paths import get_agents_dir, get_log_file, get_path
 
 # Get standard directories
-agents_dir = paths.agents_dir
-context_dir = paths.context_dir
-knowledge_dir = paths.knowledge_dir
+agents_dir = get_agents_dir()
+logs_dir = get_logs_dir()
 
-# Build paths relative to standard directories
-agent_file = paths.get_agent_path("implementations/research.py")
-context_file = paths.get_context_path("current/session_123.json")
-config_file = paths.get_config_file("llm_config.json")
-
-# Get demo output directory with session ID
-output_dir = paths.get_demo_output_dir("1234567890", "content_creation")
-
-# Ensure a directory exists
-paths.ensure_dir(output_dir)
+# Get custom paths
+config_file = get_path("config", "settings.json")
+log_file = get_log_file("agent.log")  # Auto-creates logs dir
 ```
 
-### Shell Script Usage
+### Shell/Bash
 
 ```bash
-#!/bin/bash
+# Source the configuration
+source "$(dirname "$0")/config/paths.sh"
 
-# Load path configuration
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../config/paths.sh"
+# Use exported variables
+echo "Agents: $SKOGAI_AGENTS_DIR"
+echo "Logs: $SKOGAI_LOGS_DIR"
 
-# Get standard directories
-base_dir=$(get_base_dir)
-agents_dir=$(get_agents_dir)
-context_dir=$(get_context_dir)
-
-# Build paths
-agent_file=$(get_agent_path "implementations/research.py")
-context_file=$(get_context_path "current/session_123.json")
-
-# Ensure directory exists
-output_dir=$(get_demo_output_dir "1234567890" "content_creation")
-ensure_dir "$output_dir"
+# Use helper functions
+log_file=$(skogai_get_log_file "agent.log")
+custom_path=$(skogai_get_path "demo" "workflow.py")
 ```
 
 ## Environment Variables
 
-Configure paths using environment variables:
+### Primary Configuration
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `SKOGAI_BASE_DIR` | Base directory for SkogAI | Git repo root or `/home/skogix/skogai` |
-| `SKOGAI_AGENTS_DIR` | Agents directory | `$SKOGAI_BASE_DIR/agents` |
-| `SKOGAI_CONTEXT_DIR` | Context directory | `$SKOGAI_BASE_DIR/context` |
-| `SKOGAI_KNOWLEDGE_DIR` | Knowledge directory | `$SKOGAI_BASE_DIR/knowledge` |
-| `SKOGAI_CONFIG_DIR` | Config directory | `$SKOGAI_BASE_DIR/config` |
-| `SKOGAI_DEMO_DIR` | Demo output directory | `$SKOGAI_BASE_DIR/demo` |
-| `SKOGAI_TOOLS_DIR` | Tools directory | `$SKOGAI_BASE_DIR/tools` |
-| `SKOGAI_METRICS_DIR` | Metrics directory | `$SKOGAI_BASE_DIR/metrics` |
-| `SKOGAI_VENV_DIR` | Virtual environment | `$SKOGAI_BASE_DIR/.venv` |
+- **`SKOGAI_BASE_DIR`**: Override the base directory for the entire project
+  - Default: Git repository root, or `/home/skogix/skogai`
+  - Example: `export SKOGAI_BASE_DIR=/opt/lore`
 
-### Example Configuration
+- **`SKOGAI_LOGS_DIR`**: Override the logs directory location
+  - Default: `$SKOGAI_BASE_DIR/logs`
+  - Example: `export SKOGAI_LOGS_DIR=/var/log/lore`
 
-```bash
-# In ~/.bashrc or deployment script
-export SKOGAI_BASE_DIR="/opt/skogai"
-export SKOGAI_KNOWLEDGE_DIR="/mnt/data/knowledge"
-export SKOGAI_CONTEXT_DIR="/var/lib/skogai/context"
-```
+### Exported Variables (Shell)
 
-## Path Resolution Order
+When you source `paths.sh`, these variables are automatically exported:
 
-The system resolves paths in the following priority order:
+- `SKOGAI_BASE_DIR` - Base directory
+- `SKOGAI_AGENTS_DIR` - Agents directory
+- `SKOGAI_CONFIG_DIR` - Config directory
+- `SKOGAI_DEMO_DIR` - Demo directory
+- `SKOGAI_DOCS_DIR` - Docs directory
+- `SKOGAI_LOGS_DIR` - Logs directory
+- `SKOGAI_LOREFILES_DIR` - Lorefiles directory
+- `SKOGAI_TOOLS_DIR` - Tools directory
 
-1. **Environment variable** - Explicit override
-2. **Git repository root** - Auto-detected if in a git repo
-3. **Legacy path** - `/home/skogix/skogai` for backward compatibility
+## Python API Reference
 
-## API Reference
+### Path Resolution Functions
 
-### Python API
+#### `get_repo_root() -> Path`
 
-#### SkogAIPathResolver
+Get the repository root directory using git.
 
 ```python
-from config import paths
+from config.paths import get_repo_root
 
-# Properties
-paths.base_dir        # Base directory (Path)
-paths.agents_dir      # Agents directory (Path)
-paths.context_dir     # Context directory (Path)
-paths.knowledge_dir   # Knowledge directory (Path)
-paths.config_dir      # Config directory (Path)
-paths.demo_dir        # Demo directory (Path)
-paths.tools_dir       # Tools directory (Path)
-paths.metrics_dir     # Metrics directory (Path)
-paths.venv_dir        # Virtual environment (Path)
-
-# Methods
-paths.get_agent_path(relative_path: str) -> Path
-paths.get_context_path(relative_path: str) -> Path
-paths.get_knowledge_path(relative_path: str) -> Path
-paths.get_config_file(filename: str) -> Path
-paths.get_demo_output_dir(session_id: Optional[str], prefix: str) -> Path
-paths.ensure_dir(path: Path) -> Path
+repo_root = get_repo_root()
+# Returns: PosixPath('/path/to/lore')
 ```
 
-#### SkogAIConfig
+**Raises:**
+- `RuntimeError`: If not in a git repository or git is not installed
+
+---
+
+#### `get_base_dir() -> Path`
+
+Get the base directory for the LORE project.
+
+**Resolution order:**
+1. `SKOGAI_BASE_DIR` environment variable
+2. Git repository root (if available)
+3. Default: `/home/skogix/skogai`
 
 ```python
-from config import config
+from config.paths import get_base_dir
 
-# Load configuration
-config.load()  # Load from default location
-config.load(Path("/custom/config.json"))  # Load from specific file
-
-# Get values
-api_key = config.get("llm.api_key", default="", env_var="SKOGAI_LLM_API_KEY")
-model = config.get("llm.model", default="gpt-4")
-
-# Set values
-config.set("llm.api_key", "sk-...")
-config.save()  # Save to file
-
-# Get all config
-all_config = config.all
+base = get_base_dir()
+# Returns: PosixPath('/home/skogix/skogai')
 ```
 
-### Shell API
+---
+
+#### `get_agents_dir() -> Path`
+
+Get the agents directory path.
+
+```python
+from config.paths import get_agents_dir
+
+agents = get_agents_dir()
+# Returns: PosixPath('/home/skogix/skogai/agents')
+```
+
+---
+
+#### `get_config_dir() -> Path`
+
+Get the config directory path.
+
+---
+
+#### `get_demo_dir() -> Path`
+
+Get the demo directory path.
+
+---
+
+#### `get_docs_dir() -> Path`
+
+Get the docs directory path.
+
+---
+
+#### `get_logs_dir() -> Path`
+
+Get the logs directory path. Can be overridden with `SKOGAI_LOGS_DIR`.
+
+```python
+from config.paths import get_logs_dir
+
+logs = get_logs_dir()
+# Returns: PosixPath('/home/skogix/skogai/logs')
+
+# With override:
+import os
+os.environ['SKOGAI_LOGS_DIR'] = '/var/log/lore'
+logs = get_logs_dir()
+# Returns: PosixPath('/var/log/lore')
+```
+
+---
+
+#### `get_lorefiles_dir() -> Path`
+
+Get the lorefiles directory path.
+
+---
+
+#### `get_tools_dir() -> Path`
+
+Get the tools directory path.
+
+---
+
+#### `get_path(*parts: str) -> Path`
+
+Get a path relative to the base directory.
+
+**Args:**
+- `*parts`: Path components to join
+
+**Returns:**
+- Absolute path constructed from `base_dir` + `parts`
+
+```python
+from config.paths import get_path
+
+# Simple path
+log_file = get_path("logs", "agent.log")
+# Returns: PosixPath('/home/skogix/skogai/logs/agent.log')
+
+# Nested path
+api_file = get_path("agents", "api", "agent_api.py")
+# Returns: PosixPath('/home/skogix/skogai/agents/api/agent_api.py')
+```
+
+---
+
+#### `ensure_dir(path: Path) -> Path`
+
+Ensure a directory exists, creating it if necessary.
+
+**Args:**
+- `path`: Directory path to ensure exists
+
+**Returns:**
+- The same path (for chaining)
+
+```python
+from config.paths import ensure_dir, get_logs_dir
+
+# Ensure logs directory exists
+logs_dir = ensure_dir(get_logs_dir())
+
+# Chaining example
+log_file = ensure_dir(get_logs_dir()) / "agent.log"
+```
+
+---
+
+#### `get_log_file(filename: str) -> Path`
+
+Get a log file path, ensuring the logs directory exists.
+
+**Args:**
+- `filename`: Name of the log file
+
+**Returns:**
+- Full path to the log file
+
+```python
+from config.paths import get_log_file
+
+log_file = get_log_file("agent.log")
+# Returns: PosixPath('/home/skogix/skogai/logs/agent.log')
+# Also creates /home/skogix/skogai/logs/ if it doesn't exist
+```
+
+---
+
+## Shell API Reference
+
+### Setup
+
+Source the configuration script at the beginning of your shell script:
 
 ```bash
-# Source the library
-source "$SCRIPT_DIR/../config/paths.sh"
+#!/bin/bash
 
-# Get directories
-get_base_dir
-get_agents_dir
-get_context_dir
-get_knowledge_dir
-get_config_dir
-get_demo_dir
-get_tools_dir
-get_metrics_dir
-get_venv_dir
+# Get the script's directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Build paths
-get_agent_path "relative/path"
-get_context_path "relative/path"
-get_knowledge_path "relative/path"
-get_config_file "filename"
-get_demo_output_dir "session_id" "prefix"
+# Source paths configuration
+source "$SCRIPT_DIR/config/paths.sh"
 
-# Utilities
-ensure_dir "/path/to/directory"
+# Now you can use the configuration
+echo "Working in: $SKOGAI_BASE_DIR"
 ```
 
-## Migration Guide
+### Functions
 
-### Migrating Python Code
+#### `skogai_get_repo_root`
+
+Get the repository root directory using git.
+
+```bash
+repo_root=$(skogai_get_repo_root)
+echo "Repo root: $repo_root"
+```
+
+---
+
+#### `skogai_get_base_dir`
+
+Get the base directory for the LORE project.
+
+**Resolution order:**
+1. `SKOGAI_BASE_DIR` environment variable
+2. Git repository root (if available)
+3. Default: `/home/skogix/skogai`
+
+```bash
+base_dir=$(skogai_get_base_dir)
+echo "Base: $base_dir"
+```
+
+---
+
+#### `skogai_get_path <part1> [part2] [...]`
+
+Get a path relative to the base directory.
+
+```bash
+# Simple path
+log_file=$(skogai_get_path "logs" "agent.log")
+echo "$log_file"
+# Output: /home/skogix/skogai/logs/agent.log
+
+# Nested path
+api_file=$(skogai_get_path "agents" "api" "agent_api.py")
+echo "$api_file"
+# Output: /home/skogix/skogai/agents/api/agent_api.py
+```
+
+---
+
+#### `skogai_ensure_dir <directory>`
+
+Ensure a directory exists, creating it if necessary.
+
+```bash
+skogai_ensure_dir "$SKOGAI_LOGS_DIR"
+skogai_ensure_dir "/tmp/custom/path"
+```
+
+---
+
+#### `skogai_get_log_file <filename>`
+
+Get a log file path, ensuring the logs directory exists.
+
+```bash
+log_file=$(skogai_get_log_file "agent.log")
+echo "Logging to: $log_file"
+# Output: Logging to: /home/skogix/skogai/logs/agent.log
+```
+
+---
+
+#### `skogai_print_config`
+
+Print the current configuration (for debugging).
+
+```bash
+skogai_print_config
+```
+
+**Output:**
+```
+LORE Configuration:
+  Base Directory:      /home/skogix/skogai
+  Agents Directory:    /home/skogix/skogai/agents
+  Config Directory:    /home/skogix/skogai/config
+  Demo Directory:      /home/skogix/skogai/demo
+  Docs Directory:      /home/skogix/skogai/docs
+  Logs Directory:      /home/skogix/skogai/logs
+  Lorefiles Directory: /home/skogix/skogai/lorefiles
+  Tools Directory:     /home/skogix/skogai/tools
+```
+
+You can also print config directly:
+
+```bash
+source config/paths.sh --print
+```
+
+---
+
+## Migration Patterns
+
+### Python Migration
 
 **Before:**
 ```python
-config_path = "/home/skogix/skogai/config/llm_config.json"
-output_dir = f"/home/skogix/skogai/demo/content_creation_{session_id}"
-os.makedirs(output_dir, exist_ok=True)
+import os
+
+BASE_DIR = "/home/skogix/skogai"
+AGENTS_DIR = os.path.join(BASE_DIR, "agents")
+log_file = "/home/skogix/skogai/logs/agent.log"
 ```
 
 **After:**
 ```python
-from config import paths
+from config.paths import get_agents_dir, get_log_file
 
-config_path = paths.get_config_file("llm_config.json")
-output_dir = paths.get_demo_output_dir(session_id, "content_creation")
-paths.ensure_dir(output_dir)
+AGENTS_DIR = str(get_agents_dir())
+log_file = str(get_log_file("agent.log"))
 ```
 
-### Migrating Shell Scripts
+### Shell Migration
 
 **Before:**
 ```bash
-CONTEXT_DIR="/home/skogix/skogai/context"
-mkdir -p "$CONTEXT_DIR/current"
+BASE_DIR="/home/skogix/skogai"
+AGENTS_DIR="$BASE_DIR/agents"
+log_file="/home/skogix/skogai/logs/agent.log"
 ```
 
 **After:**
 ```bash
-source "$SCRIPT_DIR/../config/paths.sh"
+source "$(dirname "$0")/config/paths.sh"
 
-context_dir=$(get_context_dir)
-ensure_dir "$context_dir/current"
+AGENTS_DIR="$SKOGAI_AGENTS_DIR"
+log_file=$(skogai_get_log_file "agent.log")
 ```
 
-## Pre-commit Hooks
+---
 
-Pre-commit hooks are configured to prevent new hardcoded paths:
+## Deployment Scenarios
+
+### Development (Git Repository)
 
 ```bash
-# Install pre-commit
-pip install pre-commit
-
-# Install hooks
-pre-commit install
-
-# Run manually
-pre-commit run --all-files
+# No configuration needed - auto-detects git repo root
+cd /home/dev/lore
+python demo/small_model_workflow.py
 ```
 
-## Testing
-
-Test the configuration system:
-
-```python
-# Test Python API
-python -c "from config import paths; print(f'Base: {paths.base_dir}')"
-
-# Test with custom environment
-SKOGAI_BASE_DIR=/tmp/test python -c "from config import paths; print(f'Base: {paths.base_dir}')"
-```
+### Production (Custom Location)
 
 ```bash
-# Test Shell API
-source config/paths.sh
-echo "Base: $(get_base_dir)"
+# Set base directory via environment variable
+export SKOGAI_BASE_DIR=/opt/lore
+export SKOGAI_LOGS_DIR=/var/log/lore
 
-# Test with custom environment
-SKOGAI_BASE_DIR=/tmp/test bash -c "source config/paths.sh; echo 'Base: $(get_base_dir)'"
+systemctl start lore-service
 ```
 
-## Best Practices
+### Testing (Temporary Directory)
 
-1. **Always use the configuration system** - Never hardcode absolute paths
-2. **Use environment variables for deployment** - Different paths per environment
-3. **Test with different configurations** - Ensure code works in various setups
-4. **Document custom paths** - If adding new path types, update this README
-5. **Run pre-commit hooks** - Catch hardcoded paths before committing
+```bash
+# Use custom directory for testing
+export SKOGAI_BASE_DIR=/tmp/lore-test
+python -m pytest tests/
+```
+
+### Docker Container
+
+```dockerfile
+ENV SKOGAI_BASE_DIR=/app
+ENV SKOGAI_LOGS_DIR=/var/log/lore
+
+WORKDIR /app
+COPY . .
+CMD ["python", "streamlit_chat.py"]
+```
+
+---
+
+## Testing the Configuration
+
+### Test Python API
+
+```bash
+python3 -c "
+from config.paths import get_base_dir, get_agents_dir, get_log_file
+print(f'Base: {get_base_dir()}')
+print(f'Agents: {get_agents_dir()}')
+print(f'Log: {get_log_file(\"test.log\")}')
+"
+```
+
+### Test Shell API
+
+```bash
+source config/paths.sh --print
+```
+
+### Test with Custom Base Directory
+
+```bash
+# Python
+SKOGAI_BASE_DIR=/tmp/test python3 -c "from config.paths import get_base_dir; print(get_base_dir())"
+
+# Shell
+SKOGAI_BASE_DIR=/tmp/test source config/paths.sh --print
+```
+
+---
+
+## Validation Tools
+
+See `config/validate.py` and `config/validate.sh` for validation scripts that:
+
+- Check for hardcoded paths in Python and Shell files
+- Verify all files use the configuration system
+- Report files that need migration
+
+```bash
+# Validate Python files
+python config/validate.py
+
+# Validate Shell files
+./config/validate.sh
+```
+
+---
+
+## Pre-commit Hook
+
+Install the pre-commit hook to prevent hardcoded paths:
+
+```bash
+# Copy hook to .git/hooks/
+cp config/pre-commit-hook.sh .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
+The hook will:
+- Check staged files for hardcoded `/home/skogix/skogai` paths
+- Block commits that introduce hardcoded paths
+- Suggest using the configuration API
+
+---
 
 ## Troubleshooting
 
-### "Module not found" errors in Python
+### Issue: "Failed to determine git repository root"
 
-Make sure to add the project root to `sys.path`:
+**Cause:** Not in a git repository or git is not installed.
 
-```python
-import os
-import sys
+**Solution:**
+- Set `SKOGAI_BASE_DIR` environment variable
+- Or ensure you're in a git repository
+- Or install git
 
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, project_root)
+### Issue: Paths point to wrong directory
 
-from config import paths
-```
+**Cause:** Environment variable override or not in expected location.
 
-### Paths not resolving correctly
-
-Check environment variables:
-
+**Solution:**
 ```bash
-env | grep SKOGAI
+# Check current configuration
+source config/paths.sh --print
+
+# Or in Python
+python3 -c "from config.paths import get_base_dir; print(get_base_dir())"
+
+# Override if needed
+export SKOGAI_BASE_DIR=/correct/path
 ```
 
-### Shell scripts can't find paths.sh
+### Issue: Module not found when importing config.paths
 
-Use absolute path from script location:
+**Cause:** Not running from repository root or Python path issue.
 
+**Solution:**
 ```bash
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../config/paths.sh"
+# Run from repository root
+cd /path/to/lore
+python your_script.py
+
+# Or add to PYTHONPATH
+export PYTHONPATH=/path/to/lore:$PYTHONPATH
 ```
+
+---
+
+## Files in This Directory
+
+- **`__init__.py`** - Python package initialization
+- **`paths.py`** - Python path configuration API
+- **`paths.sh`** - Shell path configuration API
+- **`README.md`** - This documentation
+- **`validate.py`** - Python validation script (to be created)
+- **`validate.sh`** - Shell validation script (to be created)
+- **`pre-commit-hook.sh`** - Git pre-commit hook (to be created)
+
+---
 
 ## Contributing
 
-When adding new path types:
+When adding new directories or paths to the project:
 
-1. Add property to `SkogAIPathResolver` in `paths.py`
-2. Add environment variable to documentation
-3. Add getter function to `paths.sh`
-4. Update this README
-5. Write tests
+1. Add getter functions to `paths.py` and `paths.sh`
+2. Export new variables in `paths.sh`
+3. Update this README with documentation
+4. Update `__init__.py` exports if needed
 
-## See Also
+---
 
-- [CLAUDE.md](../CLAUDE.md) - Repository guidelines
-- [Issue #5](https://github.com/SkogAI/lore/issues/5) - Original issue tracking this work
+## License
+
+Part of the LORE project. See repository LICENSE for details.
