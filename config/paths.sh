@@ -78,6 +78,6 @@ skogai_print_config() {
 }
 
 # If sourced with --print flag, print configuration
-if [ "$1" = "--print" ]; then
+if [ "${1:-}" = "--print" ]; then
     skogai_print_config
 fi

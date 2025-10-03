@@ -30,9 +30,8 @@ class AgentAPI:
         self.config = {
             "api_key": os.environ.get(
                 "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",
-                "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",
             ),
-            "base_url": os.environ.get("", "https://openrouter.ai/api/v1"),
+            "base_url": os.environ.get("https://openrouter.ai/api/v1"),
             "models": {
                 "research": "gpt-4o",
                 "outline": "gpt-4o",
@@ -145,7 +144,7 @@ class AgentAPI:
 
         # Get agent instructions
         agent_path = (
-            f"/home/skogix/lore/agents/implementations/content/{agent_type}-agent.md"
+            f"/home/skogix/lore/knowledge/implementations/content/{agent_type}-agent.md"
         )
         try:
             with open(agent_path, "r") as f:

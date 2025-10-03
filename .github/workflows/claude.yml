@@ -23,7 +23,8 @@ jobs:
       pull-requests: write
       issues: write # Allow Claude to create and update issues
       id-token: write
-      actions: write # Required for Claude to read CI results on PRs
+      actions: read # Required for Claude to read CI results on PRs
+      # Note: Claude can modify workflow files through PRs (handled by PR creation)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,5 +52,6 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.claude.com/en/docs/claude-code/sdk#command-line for available options
-          claude_args: '--model claude-opus-4-1 --allowed-tools Bash(gh:*)'
+          # Enable gh commands without approval for this docs/lore repository
+          claude_args: '--allowed-tools Bash(gh)'
 

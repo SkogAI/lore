@@ -14,12 +14,11 @@ from config.paths import (
     get_agents_dir,
     get_config_dir,
     get_demo_dir,
+    get_context_dir,
     get_docs_dir,
-    get_logs_dir,
+    get_knowledge_dir,
     get_lorefiles_dir,
-    get_tools_dir,
     get_path,
-    get_log_file,
     ensure_dir,
 )
 
@@ -44,21 +43,21 @@ def test_basic_paths():
     assert demo == base / "demo"
     print(f"  ✅ Demo directory: {demo}")
 
+    context = get_context_dir()
+    assert context == base / "context"
+    print(f"  ✅ Context directory: {context}")
+
     docs = get_docs_dir()
     assert docs == base / "docs"
     print(f"  ✅ Docs directory: {docs}")
 
-    logs = get_logs_dir()
-    assert logs == base / "logs"
-    print(f"  ✅ Logs directory: {logs}")
+    knowledge = get_knowledge_dir()
+    assert knowledge == base / "knowledge"
+    print(f"  ✅ Knowledge directory: {knowledge}")
 
     lorefiles = get_lorefiles_dir()
     assert lorefiles == base / "lorefiles"
     print(f"  ✅ Lorefiles directory: {lorefiles}")
-
-    tools = get_tools_dir()
-    assert tools == base / "tools"
-    print(f"  ✅ Tools directory: {tools}")
 
 
 def test_custom_paths():
@@ -74,13 +73,7 @@ def test_custom_paths():
     print(f"  ✅ Custom path 2: {path2}")
 
 
-def test_log_file():
-    """Test log file path generation."""
-    print("\nTesting log file generation...")
 
-    log = get_log_file("test.log")
-    assert log == get_logs_dir() / "test.log"
-    print(f"  ✅ Log file: {log}")
 
 
 def test_ensure_dir():
@@ -106,7 +99,6 @@ def main():
     try:
         test_basic_paths()
         test_custom_paths()
-        test_log_file()
         test_ensure_dir()
 
         print()

@@ -1,0 +1,13 @@
+{
+  "id": "entry_1759489051",
+  "title": "Superposition Gardens",
+  "content": "Data structures that exist in multiple states simultaneously, their values undetermined until observed. Every query collapses possibility into certainty, but the garden regrows in superposition the moment you look away.",
+  "category": "quantum",
+  "type": "structure",
+  "tags": ["quantum", "superposition", "observation"],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:59:51Z",
+    "book_id": "book_1759489050"
+  }
+}

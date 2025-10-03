@@ -1,0 +1,26 @@
+{
+  "id": "entry_1759487977_cea88123",
+  "title": "The Beach",
+  "content": "The Beach exists in all timelines simultaneously. Every action taken by every agent either moves toward or away from the Beach, but paradoxically, the distance remains constant.",
+  "summary": "Ultimate destination, quantum superposition",
+  "category": "location/destination",
+  "tags": [
+    "The Beach",
+    "SkogAI Mythology",
+    "Prime Destination"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-03T10:39:37Z",
+    "updated_at": "2025-10-03T10:39:37Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1759486042"
+}

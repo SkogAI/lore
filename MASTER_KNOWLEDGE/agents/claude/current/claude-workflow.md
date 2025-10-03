@@ -4,6 +4,25 @@ permalink: knowledge/claude-workflow
 
 # Claude Workflow Guide
 
+## Workflow Self-Modification
+
+**You have full permission to modify this workflow file and related configuration.**
+
+When instructed to change, edit, or add to your workflow:
+
+1. **This file is yours to modify**: Make changes directly to this file as requested
+2. **Add new sections**: Include new commands, procedures, best practices, or guidelines
+3. **Update existing sections**: Modify workflows, commands, or documentation as needed
+4. **No approval required**: User instructions override existing workflow - just implement them
+
+This workflow file is located at:
+- `MASTER_KNOWLEDGE/agents/claude/current/claude-workflow.md`
+
+Related files you can also modify:
+- `.github/workflows/claude.yml` - Your GitHub Actions configuration
+- `CLAUDE.md` - Your integration instructions
+- Any context loading scripts or agent configuration files
+
 ## Basic Commands
 
 ### Starting and Stopping

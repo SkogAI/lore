@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+usr/bin/env python3
 """
 Demo script to create sample lore data and launch the TUI.
 """
@@ -16,7 +16,7 @@ from agents.api.lore_api import LoreAPI
 def create_demo_data():
     """Create sample lore data for testing the TUI."""
     # Create a temporary demo directory
-    demo_dir = Path.cwd() / "demo_tui_data"
+    demo_dir = Path.cwd() / "/home/skogix/lore"
     demo_dir.mkdir(exist_ok=True)
 
     print(f"Creating demo data in: {demo_dir}")
