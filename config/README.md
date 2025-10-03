@@ -512,7 +512,180 @@ export PYTHONPATH="$SKOGAI_LORE:$PYTHONPATH"
 - **`__init__.py`** - Python package initialization
 - **`paths.py`** - Python path configuration API
 - **`paths.sh`** - Shell path configuration API
+- **`lib.sh`** - Shell helper library (reusable functions)
+- **`validate.sh`** - Configuration validation
+- **`test_config.sh`** - Configuration tests
+- **`pre-commit-hook.sh`** - Git pre-commit hook
 - **`README.md`** - This documentation
+
+---
+
+## Shell Helper Library (lib.sh)
+
+The `lib.sh` file provides reusable helper functions to promote code reuse and avoid complex sed/awk chains, following the project's simplicity standards.
+
+### Usage
+
+```bash
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../config/lib.sh"
+source "${SCRIPT_DIR}/../config/paths.sh"
+load_skogcli_env
+```
+
+### Helper Functions
+
+#### `jq_array_from_csv(csv)`
+
+Convert comma-separated values to JSON array format.
+
+**Before (complex sed chain):**
+```bash
+echo "$tags" | sed 's/,/","/g' | sed 's/^/"/' | sed 's/$/"/'
+```
+
+**After (simple):**
+```bash
+tags_array=$(jq_array_from_csv "tag1,tag2,tag3")
+# Returns: ["tag1","tag2","tag3"]
+```
+
+---
+
+#### `extract_key_value(text, key)`
+
+Extract value from "KEY: value" formatted text.
+
+**Before:**
+```bash
+VALUE=$(echo "$text" | grep -oP '^KEY: \K.*' | head -n 1)
+```
+
+**After:**
+```bash
+VALUE=$(extract_key_value "$text" "KEY")
+```
+
+---
+
+#### `extract_key_value_i(text, key)`
+
+Case-insensitive version of `extract_key_value`.
+
+```bash
+TRAITS=$(extract_key_value_i "$RESPONSE" "TRAITS")
+# Matches "TRAITS:", "traits:", "Traits:", etc.
+```
+
+---
+
+#### `get_repo_root()`
+
+Get repository root directory (replaces manual path calculation).
+
+**Before:**
+```bash
+SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+```
+
+**After:**
+```bash
+REPO_ROOT=$(get_repo_root)
+```
+
+---
+
+#### `load_skogcli_env()`
+
+Load environment variables from skogcli config.
+
+```bash
+load_skogcli_env
+# Now you can use: $SKOGAI_LORE, $CLAUDE_API_KEY, etc.
+```
+
+---
+
+#### `has_command(cmd)`
+
+Check if a command exists.
+
+```bash
+if has_command jq; then
+    echo "jq is available"
+fi
+```
+
+---
+
+#### `ensure_dir(path)`
+
+Ensure a directory exists (creates if needed).
+
+```bash
+ensure_dir "/path/to/dir"
+```
+
+---
+
+#### `generate_id()`
+
+Generate timestamp-based unique ID.
+
+```bash
+id=$(generate_id)
+# Returns: 1234567890_a1b2c3d4
+```
+
+---
+
+#### `get_timestamp()`
+
+Get ISO 8601 timestamp.
+
+```bash
+timestamp=$(get_timestamp)
+# Returns: 2025-10-03T12:00:00Z
+```
+
+---
+
+#### `log_info(msg)`, `log_error(msg)`, `log_warn(msg)`
+
+Consistent logging functions.
+
+```bash
+log_info "Processing started"
+log_error "Failed to process file"
+log_warn "Using default value"
+```
+
+---
+
+### Simplicity Standards
+
+The helper library follows these standards:
+
+1. **No sed/awk chains with >2 operations**
+2. **Prefer jq for JSON manipulation**
+3. **Use `--arg` and `--argjson` with jq for safe variable substitution**
+4. **Centralize common patterns**
+
+**Example: Safe JSON Manipulation**
+
+**Before (unsafe, complex):**
+```bash
+jq ".content = \"$content\" | .tags = [$(echo "$tags" | sed 's/,/","/g' | sed 's/^/"/' | sed 's/$/"/')] "
+```
+
+**After (safe, simple):**
+```bash
+tags_array=$(jq_array_from_csv "$tags")
+jq --arg content "$content" --argjson tags "$tags_array" '.content = $content | .tags = $tags'
+```
 
 ---
 
