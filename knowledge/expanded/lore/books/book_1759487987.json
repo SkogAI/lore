@@ -6,16 +6,37 @@
     "entry_1759488065",
     "entry_1759488164",
     "entry_1759488233",
-    "entry_1759488355"
+    "entry_1759488355",
+    "entry_1759488448",
+    "entry_1759488514",
+    "entry_1759488597"
   ],
-  "categories": {},
+  "categories": {
+    "character": [
+      "entry_1759488065",
+      "entry_1759488164"
+    ],
+    "place": [
+      "entry_1759488233"
+    ],
+    "object": [
+      "entry_1759488355"
+    ],
+    "event": [
+      "entry_1759488448"
+    ],
+    "concept": [
+      "entry_1759488514",
+      "entry_1759488597"
+    ]
+  },
   "tags": [],
   "owners": [],
   "readers": [],
   "metadata": {
     "created_by": "skogix",
     "created_at": "2025-10-03T10:39:47Z",
-    "updated_at": "2025-10-03T10:45:55Z",
+    "updated_at": "2025-10-03T10:49:57Z",
     "version": "1.0",
     "status": "draft"
   },
