@@ -9,4 +9,5 @@ dependencies = [
     "openai>=1.109.1",
     "pip>=25.2",
     "streamlit>=1.50.0",
+    "textual>=1.0.0",
 ]

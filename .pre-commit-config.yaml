@@ -1,0 +1,20 @@
+# Pre-commit hooks for SkogAI repository
+# Install with: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: local
+    hooks:
+      - id: check-hardcoded-paths
+        name: Check for hardcoded paths
+        entry: python tools/check_hardcoded_paths.py
+        language: python
+        types: [python]
+        pass_filenames: true
+
+      - id: check-hardcoded-paths-shell
+        name: Check for hardcoded paths in shell scripts
+        entry: bash tools/check_hardcoded_paths.sh
+        language: system
+        types: [shell]
+        pass_filenames: true

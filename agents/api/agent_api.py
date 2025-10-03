@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 import json
 import requests
 from typing import Dict, Any, Optional
 import time
 import logging
+
+# Add project root to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+# Import configuration system
+from config import paths
 
 # Configure logging
 logging.basicConfig(
@@ -119,7 +126,7 @@ class AgentAPI:
         context_dir = f"/home/skogix/lore/demo/content_creation_{session_id}"
 
         # Ensure directory exists
-        os.makedirs(context_dir, exist_ok=True)
+        paths.ensure_dir(context_dir)
 
         # Store phase-specific output
         output_file = f"{context_dir}/{phase}_output.json"
