@@ -2,77 +2,41 @@
 Centralized path configuration for LORE project.
 
 This module provides a single source of truth for all file system paths used
-throughout the LORE project. It supports:
+throughout the LORE project.
 
-- Environment variable overrides (SKOGAI_BASE_DIR)
-- Git-aware path resolution (auto-detects repository root)
-- Backward compatibility (defaults to /home/skogix/skogai)
-- Multiple deployment scenarios
+Requirements:
+    SKOGAI_LORE must be set (via skogcli config export-env --namespace skogai)
 
 Usage:
-    from config.paths import get_agents_dir, get_logs_dir
+    from config.paths import get_agents_dir, get_context_dir
 
     agents_dir = get_agents_dir()
-    log_file = get_path("logs", "agent.log")
+    context_file = get_path("context", "session.json")
 """
 
 import os
-import subprocess
 from pathlib import Path
-from typing import Optional
-
-
-def get_repo_root() -> Path:
-    """
-    Get the repository root directory using git.
-
-    Returns:
-        Path: Absolute path to the repository root
-
-    Raises:
-        RuntimeError: If not in a git repository
-    """
-    try:
-        result = subprocess.run(
-            ["git", "rev-parse", "--show-toplevel"],
-            capture_output=True,
-            text=True,
-            check=True
-        )
-        return Path(result.stdout.strip())
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(
-            f"Failed to determine git repository root: {e.stderr}"
-        )
-    except FileNotFoundError:
-        raise RuntimeError("git command not found - is git installed?")
 
 
 def get_base_dir() -> Path:
     """
-    Get the base directory for the LORE project.
+    Get the base directory for the LORE repository.
 
-    Resolution order:
-    1. SKOGAI_BASE_DIR environment variable
-    2. Git repository root (if available)
-    3. Default: /home/skogix/skogai (for backward compatibility)
+    Requires:
+        SKOGAI_LORE environment variable (set by skogcli config)
 
     Returns:
-        Path: Absolute path to the base directory
+        Path: Absolute path to the LORE repository
+
+    Raises:
+        RuntimeError: If SKOGAI_LORE is not set
     """
-    # Check environment variable first
-    env_base = os.getenv("SKOGAI_BASE_DIR")
-    if env_base:
-        return Path(env_base).resolve()
-
-    # Try to use git repository root
-    try:
-        return get_repo_root()
-    except RuntimeError:
-        pass
-
-    # Fall back to default for backward compatibility
-    return Path("/home/skogix/skogai")
+    lore_dir = os.getenv("SKOGAI_LORE")
+    if not lore_dir:
+        raise RuntimeError(
+            "SKOGAI_LORE environment variable not set. Please set this variable to point to the lore repository path."
+        )
+    return Path(lore_dir).resolve()
 
 
 def get_agents_dir() -> Path:
@@ -90,21 +54,19 @@ def get_demo_dir() -> Path:
     return get_base_dir() / "demo"
 
 
+def get_context_dir() -> Path:
+    """Get the context directory path."""
+    return get_base_dir() / "context"
+
+
 def get_docs_dir() -> Path:
     """Get the docs directory path."""
     return get_base_dir() / "docs"
 
 
-def get_logs_dir() -> Path:
-    """
-    Get the logs directory path.
-
-    Can be overridden with SKOGAI_LOGS_DIR environment variable.
-    """
-    env_logs = os.getenv("SKOGAI_LOGS_DIR")
-    if env_logs:
-        return Path(env_logs).resolve()
-    return get_base_dir() / "logs"
+def get_knowledge_dir() -> Path:
+    """Get the knowledge directory path."""
+    return get_base_dir() / "knowledge"
 
 
 def get_lorefiles_dir() -> Path:
@@ -112,9 +74,8 @@ def get_lorefiles_dir() -> Path:
     return get_base_dir() / "lorefiles"
 
 
-def get_tools_dir() -> Path:
-    """Get the tools directory path."""
-    return get_base_dir() / "tools"
+# Note: get_logs_dir() removed - logs managed by skogai config (SKOGAI_LOGS_DIR)
+# Note: get_tools_dir() removed - tools managed by skogcli scripts
 
 
 def get_path(*parts: str) -> Path:
@@ -148,25 +109,7 @@ def ensure_dir(path: Path) -> Path:
         Path: The same path (for chaining)
 
     Example:
-        >>> log_file = ensure_dir(get_logs_dir()) / "agent.log"
+        >>> context_file = ensure_dir(get_context_dir()) / "session.json"
     """
     path.mkdir(parents=True, exist_ok=True)
     return path
-
-
-# Convenience function for logging configuration
-def get_log_file(filename: str) -> Path:
-    """
-    Get a log file path, ensuring the logs directory exists.
-
-    Args:
-        filename: Name of the log file
-
-    Returns:
-        Path: Full path to the log file
-
-    Example:
-        >>> log_file = get_log_file("agent.log")
-    """
-    logs_dir = ensure_dir(get_logs_dir())
-    return logs_dir / filename

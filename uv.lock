@@ -1200,6 +1200,7 @@ dependencies = [
     { name = "pip" },
     { name = "streamlit" },
     { name = "textual" },
+    { name = "typer" },
 ]
 
 [package.metadata]
@@ -1211,6 +1212,7 @@ requires-dist = [
     { name = "pip", specifier = ">=25.2" },
     { name = "streamlit", specifier = ">=1.50.0" },
     { name = "textual", specifier = ">=1.0.0" },
+    { name = "typer", specifier = ">=0.19.2" },
 ]
 
 [[package]]

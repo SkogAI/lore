@@ -3,62 +3,47 @@
 # Centralized path configuration for LORE project (Shell/Bash)
 #
 # This script provides a single source of truth for all file system paths used
-# throughout the LORE project shell scripts. It supports:
+# throughout the LORE project shell scripts.
 #
-# - Environment variable overrides (SKOGAI_BASE_DIR)
-# - Git-aware path resolution (auto-detects repository root)
-# - Backward compatibility (defaults to /home/skogix/skogai)
-# - Multiple deployment scenarios
+# Requirements:
+# - SKOGAI_LORE must be set (via skogcli config export-env --namespace skogai)
 #
 # Usage:
 #     source "$(dirname "$0")/config/paths.sh"
 #     echo "Agents dir: $SKOGAI_AGENTS_DIR"
-#     log_file="$(skogai_get_path "logs" "agent.log")"
+#     custom_path="$(skogai_get_path "demo" "workflow.py")"
 #
 
-# Get the repository root using git
-skogai_get_repo_root() {
-    if command -v git >/dev/null 2>&1; then
-        git rev-parse --show-toplevel 2>/dev/null
-    fi
-}
-
-# Get the base directory for the LORE project
-# Resolution order:
-# 1. SKOGAI_BASE_DIR environment variable
-# 2. Git repository root (if available)
-# 3. Default: /home/skogix/skogai (for backward compatibility)
-skogai_get_base_dir() {
-    if [ -n "$SKOGAI_BASE_DIR" ]; then
-        echo "$SKOGAI_BASE_DIR"
+# Verify SKOGAI_LORE is set
+if [ -z "$SKOGAI_LORE" ]; then
+    echo "ERROR: SKOGAI_LORE environment variable not set" >&2
+    echo "Please ensure 'skogcli config export-env --namespace skogai' is sourced" >&2
+    if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+        exit 1
     else
-        local repo_root
-        repo_root=$(skogai_get_repo_root)
-        if [ -n "$repo_root" ]; then
-            echo "$repo_root"
-        else
-            echo "/home/skogix/skogai"
-        fi
+        return 1
     fi
-}
+fi
 
-# Initialize base directory
-SKOGAI_BASE_DIR="${SKOGAI_BASE_DIR:-$(skogai_get_base_dir)}"
+# Export base directory (SKOGAI_LORE)
+export SKOGAI_BASE_DIR="$SKOGAI_LORE"
 
-# Export standard directory paths
-export SKOGAI_BASE_DIR
-export SKOGAI_AGENTS_DIR="${SKOGAI_BASE_DIR}/agents"
-export SKOGAI_CONFIG_DIR="${SKOGAI_BASE_DIR}/config"
-export SKOGAI_DEMO_DIR="${SKOGAI_BASE_DIR}/demo"
-export SKOGAI_DOCS_DIR="${SKOGAI_BASE_DIR}/docs"
-export SKOGAI_LOGS_DIR="${SKOGAI_LOGS_DIR:-${SKOGAI_BASE_DIR}/logs}"
-export SKOGAI_LOREFILES_DIR="${SKOGAI_BASE_DIR}/lorefiles"
-export SKOGAI_TOOLS_DIR="${SKOGAI_BASE_DIR}/tools"
+# Export lore-specific directory paths
+export SKOGAI_AGENTS_DIR="${SKOGAI_LORE}/agents"
+export SKOGAI_CONFIG_DIR="${SKOGAI_LORE}/config"
+export SKOGAI_CONTEXT_DIR="${SKOGAI_LORE}/context"
+export SKOGAI_DEMO_DIR="${SKOGAI_LORE}/demo"
+export SKOGAI_DOCS_DIR="${SKOGAI_LORE}/docs"
+export SKOGAI_KNOWLEDGE_DIR="${SKOGAI_LORE}/knowledge"
+export SKOGAI_LOREFILES_DIR="${SKOGAI_LORE}/lorefiles"
+
+# Note: SKOGAI_LOGS_DIR is managed by skogai config (not lore-specific)
+# Note: SKOGAI_TOOLS_DIR is managed by skogcli scripts (not lore-specific)
 
 # Get a path relative to the base directory
-# Usage: skogai_get_path "logs" "agent.log"
+# Usage: skogai_get_path "demo" "workflow.py"
 skogai_get_path() {
-    local path="$SKOGAI_BASE_DIR"
+    local path="$SKOGAI_LORE"
     for part in "$@"; do
         path="$path/$part"
     done
@@ -66,7 +51,7 @@ skogai_get_path() {
 }
 
 # Ensure a directory exists
-# Usage: skogai_ensure_dir "$SKOGAI_LOGS_DIR"
+# Usage: skogai_ensure_dir "$SKOGAI_AGENTS_DIR"
 skogai_ensure_dir() {
     local dir="$1"
     if [ ! -d "$dir" ]; then
@@ -75,25 +60,21 @@ skogai_ensure_dir() {
     echo "$dir"
 }
 
-# Get a log file path, ensuring the logs directory exists
-# Usage: log_file=$(skogai_get_log_file "agent.log")
-skogai_get_log_file() {
-    local filename="$1"
-    skogai_ensure_dir "$SKOGAI_LOGS_DIR" >/dev/null
-    echo "$SKOGAI_LOGS_DIR/$filename"
-}
-
 # Print configuration (for debugging)
 skogai_print_config() {
     echo "LORE Configuration:"
-    echo "  Base Directory:      $SKOGAI_BASE_DIR"
-    echo "  Agents Directory:    $SKOGAI_AGENTS_DIR"
-    echo "  Config Directory:    $SKOGAI_CONFIG_DIR"
-    echo "  Demo Directory:      $SKOGAI_DEMO_DIR"
-    echo "  Docs Directory:      $SKOGAI_DOCS_DIR"
-    echo "  Logs Directory:      $SKOGAI_LOGS_DIR"
-    echo "  Lorefiles Directory: $SKOGAI_LOREFILES_DIR"
-    echo "  Tools Directory:     $SKOGAI_TOOLS_DIR"
+    echo "  Base Directory (LORE): $SKOGAI_LORE"
+    echo "  Agents Directory:      $SKOGAI_AGENTS_DIR"
+    echo "  Config Directory:      $SKOGAI_CONFIG_DIR"
+    echo "  Context Directory:     $SKOGAI_CONTEXT_DIR"
+    echo "  Demo Directory:        $SKOGAI_DEMO_DIR"
+    echo "  Docs Directory:        $SKOGAI_DOCS_DIR"
+    echo "  Knowledge Directory:   $SKOGAI_KNOWLEDGE_DIR"
+    echo "  Lorefiles Directory:   $SKOGAI_LOREFILES_DIR"
+    echo ""
+    echo "External (managed by skogai/skogcli):"
+    echo "  Logs Directory:        \${SKOGAI_LOGS_DIR} (from skogai config)"
+    echo "  Tools:                 via skogcli scripts"
 }
 
 # If sourced with --print flag, print configuration
