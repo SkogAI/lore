@@ -34,8 +34,7 @@ def get_base_dir() -> Path:
     lore_dir = os.getenv("SKOGAI_LORE")
     if not lore_dir:
         raise RuntimeError(
-            "SKOGAI_LORE environment variable not set. "
-            "Please ensure 'skogcli config export-env --namespace skogai' is sourced"
+            "SKOGAI_LORE environment variable not set. Please set this variable to point to the lore repository path."
         )
     return Path(lore_dir).resolve()
 
