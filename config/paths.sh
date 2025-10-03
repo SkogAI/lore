@@ -18,7 +18,11 @@
 if [ -z "$SKOGAI_LORE" ]; then
     echo "ERROR: SKOGAI_LORE environment variable not set" >&2
     echo "Please ensure 'skogcli config export-env --namespace skogai' is sourced" >&2
-    return 1 2>/dev/null || exit 1
+    if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+        exit 1
+    else
+        return 1
+    fi
 fi
 
 # Export base directory (SKOGAI_LORE)
