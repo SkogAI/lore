@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Interactive lore browser launcher
 
 # Activate virtual environment if it exists
