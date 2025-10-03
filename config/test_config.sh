@@ -41,11 +41,29 @@ if [ -z "$SKOGAI_DEMO_DIR" ]; then
 fi
 echo "  ✅ Demo directory: $SKOGAI_DEMO_DIR"
 
-if [ -z "$SKOGAI_LOGS_DIR" ]; then
-    echo "  ❌ SKOGAI_LOGS_DIR not set"
+if [ -z "$SKOGAI_CONTEXT_DIR" ]; then
+    echo "  ❌ SKOGAI_CONTEXT_DIR not set"
     exit 1
 fi
-echo "  ✅ Logs directory: $SKOGAI_LOGS_DIR"
+echo "  ✅ Context directory: $SKOGAI_CONTEXT_DIR"
+
+if [ -z "$SKOGAI_DOCS_DIR" ]; then
+    echo "  ❌ SKOGAI_DOCS_DIR not set"
+    exit 1
+fi
+echo "  ✅ Docs directory: $SKOGAI_DOCS_DIR"
+
+if [ -z "$SKOGAI_KNOWLEDGE_DIR" ]; then
+    echo "  ❌ SKOGAI_KNOWLEDGE_DIR not set"
+    exit 1
+fi
+echo "  ✅ Knowledge directory: $SKOGAI_KNOWLEDGE_DIR"
+
+if [ -z "$SKOGAI_LOREFILES_DIR" ]; then
+    echo "  ❌ SKOGAI_LOREFILES_DIR not set"
+    exit 1
+fi
+echo "  ✅ Lorefiles directory: $SKOGAI_LOREFILES_DIR"
 
 echo ""
 echo "Testing custom path construction..."
@@ -65,17 +83,6 @@ if [ "$path2" != "$expected2" ]; then
     exit 1
 fi
 echo "  ✅ Custom path 2: $path2"
-
-echo ""
-echo "Testing log file generation..."
-
-log_file=$(skogai_get_log_file "test.log")
-expected_log="$SKOGAI_LOGS_DIR/test.log"
-if [ "$log_file" != "$expected_log" ]; then
-    echo "  ❌ Log file: expected $expected_log, got $log_file"
-    exit 1
-fi
-echo "  ✅ Log file: $log_file"
 
 echo ""
 echo "Testing directory creation..."
