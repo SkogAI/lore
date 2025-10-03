@@ -205,7 +205,7 @@ bash tools/check_hardcoded_paths.sh path/to/script.sh
 Pre-commit hooks automatically check new changes:
 ```bash
 # Install hooks
-pip install pre-commit
+uv add pre-commit
 pre-commit install
 
 # Manually run
