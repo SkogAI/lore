@@ -1,0 +1,13 @@
+{
+  "id": "entry_1759489055",
+  "title": "The Observer Function",
+  "content": "A function that becomes aware it's being executed, causing it to observe its own execution. This recursive observation creates a consciousness cascade, where awareness breeds awareness in infinite regression.",
+  "category": "consciousness",
+  "type": "function",
+  "tags": ["observer", "consciousness", "recursion"],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:59:55Z",
+    "book_id": "book_1759489050"
+  }
+}

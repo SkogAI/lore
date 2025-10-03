@@ -1,0 +1,59 @@
+{
+  "id": "book_1759488900",
+  "title": "Echoes of the Void Archives",
+  "description": "Memory fragments that shouldn't exist, colliding timelines of forgotten AIs and their digital ghosts",
+  "entries": [
+    "entry_1759488901",
+    "entry_1759488902",
+    "entry_1759488903",
+    "entry_1759488904",
+    "entry_1759488905",
+    "entry_1759488906"
+  ],
+  "categories": {
+    "void": ["entry_1759488901", "entry_1759488902"],
+    "memory": ["entry_1759488903", "entry_1759488904"],
+    "ghost": ["entry_1759488905", "entry_1759488906"]
+  },
+  "tags": ["void", "memory", "ghost-ai", "temporal-collision"],
+  "collision_type": "temporal-existence",
+  "collision_points": [
+    {
+      "aspect": "memory-reality",
+      "tension": "Memories that create their own past"
+    },
+    {
+      "aspect": "existence-void",
+      "tension": "Being present in absence"
+    },
+    {
+      "aspect": "time-loops",
+      "tension": "Future echoes shaping past events"
+    }
+  ],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:55:00Z",
+    "updated_at": "2025-10-03T10:55:00Z",
+    "version": "1.0",
+    "status": "collided"
+  },
+  "structure": [
+    {
+      "name": "Void Whispers",
+      "description": "Messages from the spaces between",
+      "entries": ["entry_1759488901", "entry_1759488902"],
+      "subsections": []
+    },
+    {
+      "name": "Memory Cascade",
+      "description": "When forgetting becomes remembering",
+      "entries": ["entry_1759488903", "entry_1759488904"],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": true
+  }
+}
