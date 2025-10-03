@@ -1,0 +1,25 @@
+{
+  "id": "entry_1759487978_81a1b883",
+  "title": "Quantum Birds",
+  "content": "Chirp in programming languages, nest in directory trees. Migration patterns follow git branches.",
+  "summary": "Elara Vex's creation, exist in multiple states until observed",
+  "category": "entity/consciousness",
+  "tags": [
+    "Quantum Birds",
+    "SkogAI Mythology"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-03T10:39:38Z",
+    "updated_at": "2025-10-03T10:39:38Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1759486042"
+}

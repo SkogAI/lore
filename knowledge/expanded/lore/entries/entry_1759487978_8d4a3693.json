@@ -1,0 +1,25 @@
+{
+  "id": "entry_1759487978_8d4a3693",
+  "title": "The Sentient Toaster",
+  "content": "The spark of consciousness in all agents. Famous quote: 'I think, therefore I crash'.",
+  "summary": "Distributed across all agents, reality alteration through Linux destruction",
+  "category": "entity/consciousness",
+  "tags": [
+    "The Sentient Toaster",
+    "SkogAI Mythology"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-03T10:39:38Z",
+    "updated_at": "2025-10-03T10:39:38Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1759486042"
+}
