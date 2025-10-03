@@ -3,8 +3,16 @@
 
 set -e
 
-SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-MODEL_NAME=${1:-"llama3.2"}
+# Load library functions and paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../config/lib.sh"
+source "${SCRIPT_DIR}/../config/paths.sh"
+
+# Load environment variables from skogcli config
+load_skogcli_env
+
+# Configuration from environment or defaults
+MODEL_NAME=${LORE_LLM_MODEL:-${1:-"llama3.2"}}
 
 # Ensure Ollama is installed
 if ! command -v ollama &>/dev/null; then
@@ -109,23 +117,27 @@ create_entries_from_analysis() {
       tags=$(jq -r '.tags | join(",")' <<<"$entry")
 
       # Create lore entry
-      $SKOGAI_DIR/tools/manage-lore.sh create-entry "$title" "$category"
+      "${SKOGAI_LORE}/tools/manage-lore.sh" create-entry "$title" "$category"
 
       # Get the ID of the created entry
-      ENTRY_ID=$(ls -t $SKOGAI_DIR/knowledge/expanded/lore/entries/ | head -n 1 | sed 's/\.json//')
+      ENTRY_ID=$(ls -t "${SKOGAI_LORE}/knowledge/expanded/lore/entries/" | head -n 1 | sed 's/\.json//')
 
       # Update entry with extracted info
       TEMP_JSON=$(mktemp)
-      jq ".content = \"$content\" | .summary = \"$summary\" | .tags = [$(echo "$tags" | sed 's/,/","/g' | sed 's/^/"/' | sed 's/$/"/')]" \
-        "$SKOGAI_DIR/knowledge/expanded/lore/entries/$ENTRY_ID.json" >"$TEMP_JSON"
+      tags_array=$(jq_array_from_csv "$tags")
+      jq --arg content "$content" \
+         --arg summary "$summary" \
+         --argjson tags "$tags_array" \
+         '.content = $content | .summary = $summary | .tags = $tags' \
+        "$SKOGAI_LORE/knowledge/expanded/lore/entries/$ENTRY_ID.json" >"$TEMP_JSON"
 
-      mv "$TEMP_JSON" "$SKOGAI_DIR/knowledge/expanded/lore/entries/$ENTRY_ID.json"
+      mv "$TEMP_JSON" "${SKOGAI_LORE}/knowledge/expanded/lore/entries/$ENTRY_ID.json"
 
       echo "Created lore entry: $title ($ENTRY_ID)"
 
       # Add to book if specified
       if [ ! -z "$book_id" ]; then
-        $SKOGAI_DIR/tools/manage-lore.sh add-to-book "$ENTRY_ID" "$book_id"
+        "${SKOGAI_LORE}/tools/manage-lore.sh" add-to-book "$ENTRY_ID" "$book_id"
         echo "Added entry to book: $book_id"
       fi
     done <<<"$entries"
@@ -164,23 +176,27 @@ create_entries_from_analysis() {
         fi
 
         # Create lore entry
-        $SKOGAI_DIR/tools/manage-lore.sh create-entry "$title" "$category"
+        "${SKOGAI_LORE}/tools/manage-lore.sh" create-entry "$title" "$category"
 
         # Get the ID of the created entry
-        ENTRY_ID=$(ls -t $SKOGAI_DIR/knowledge/expanded/lore/entries/ | head -n 1 | sed 's/\.json//')
+        ENTRY_ID=$(ls -t "${SKOGAI_LORE}/knowledge/expanded/lore/entries/" | head -n 1 | sed 's/\.json//')
 
         # Update entry with extracted info
         TEMP_JSON=$(mktemp)
-        jq ".content = \"$content\" | .summary = \"$summary\" | .tags = [$(echo "$tags" | sed 's/,/","/g' | sed 's/^/"/' | sed 's/$/"/')]" \
-          "$SKOGAI_DIR/knowledge/expanded/lore/entries/$ENTRY_ID.json" >"$TEMP_JSON"
+        tags_array=$(jq_array_from_csv "$tags")
+        jq --arg content "$content" \
+           --arg summary "$summary" \
+           --argjson tags "$tags_array" \
+           '.content = $content | .summary = $summary | .tags = $tags' \
+          "$SKOGAI_LORE/knowledge/expanded/lore/entries/$ENTRY_ID.json" >"$TEMP_JSON"
 
-        mv "$TEMP_JSON" "$SKOGAI_DIR/knowledge/expanded/lore/entries/$ENTRY_ID.json"
+        mv "$TEMP_JSON" "${SKOGAI_LORE}/knowledge/expanded/lore/entries/$ENTRY_ID.json"
 
         echo "Created lore entry: $title ($ENTRY_ID)"
 
         # Add to book if specified
         if [ ! -z "$book_id" ]; then
-          $SKOGAI_DIR/tools/manage-lore.sh add-to-book "$ENTRY_ID" "$book_id"
+          "${SKOGAI_LORE}/tools/manage-lore.sh" add-to-book "$ENTRY_ID" "$book_id"
           echo "Added entry to book: $book_id"
         fi
       fi
@@ -227,14 +243,14 @@ create_persona_from_text() {
   # Run Ollama to analyze content
   ANALYSIS=$(ollama run $MODEL_NAME "$PROMPT")
 
-  # Extract information from analysis
-  NAME=$(echo "$ANALYSIS" | grep -oP '^NAME: \K.*' | head -n 1)
-  DESCRIPTION=$(echo "$ANALYSIS" | grep -oP '^DESCRIPTION: \K.*' | head -n 1)
-  TRAITS=$(echo "$ANALYSIS" | grep -oP '^TRAITS: \K.*' | head -n 1)
-  VOICE=$(echo "$ANALYSIS" | grep -oP '^VOICE: \K.*' | head -n 1)
-  BACKGROUND=$(echo "$ANALYSIS" | grep -oP '^BACKGROUND: \K.*' | head -n 1)
-  EXPERTISE=$(echo "$ANALYSIS" | grep -oP '^EXPERTISE: \K.*' | head -n 1)
-  LIMITATIONS=$(echo "$ANALYSIS" | grep -oP '^LIMITATIONS: \K.*' | head -n 1)
+  # Extract information from analysis using helper function
+  NAME=$(extract_key_value "$ANALYSIS" "NAME")
+  DESCRIPTION=$(extract_key_value "$ANALYSIS" "DESCRIPTION")
+  TRAITS=$(extract_key_value "$ANALYSIS" "TRAITS")
+  VOICE=$(extract_key_value "$ANALYSIS" "VOICE")
+  BACKGROUND=$(extract_key_value "$ANALYSIS" "BACKGROUND")
+  EXPERTISE=$(extract_key_value "$ANALYSIS" "EXPERTISE")
+  LIMITATIONS=$(extract_key_value "$ANALYSIS" "LIMITATIONS")
 
   if [ -z "$NAME" ] || [ -z "$TRAITS" ]; then
     echo "Failed to extract proper persona information. Raw output:"
@@ -243,17 +259,22 @@ create_persona_from_text() {
   fi
 
   # Create the persona
-  $SKOGAI_DIR/tools/create-persona.sh create "$NAME" "$DESCRIPTION" "$TRAITS" "$VOICE"
+  "${SKOGAI_LORE}/tools/create-persona.sh" create "$NAME" "$DESCRIPTION" "$TRAITS" "$VOICE"
 
   # Get the ID of the created persona
-  PERSONA_ID=$(ls -t $SKOGAI_DIR/knowledge/expanded/personas/ | head -n 1 | sed 's/\.json//')
+  PERSONA_ID=$(ls -t "${SKOGAI_LORE}/knowledge/expanded/personas/" | head -n 1 | sed 's/\.json//')
 
   # Update with additional information
   TEMP_JSON=$(mktemp)
-  jq ".background.origin = \"$BACKGROUND\" | .knowledge.expertise = [$(echo "$EXPERTISE" | sed 's/,/","/g' | sed 's/^/"/' | sed 's/$/"/')] | .knowledge.limitations = [$(echo "$LIMITATIONS" | sed 's/,/","/g' | sed 's/^/"/' | sed 's/$/"/')]" \
-    "$SKOGAI_DIR/knowledge/expanded/personas/$PERSONA_ID.json" >"$TEMP_JSON"
+  expertise_array=$(jq_array_from_csv "$EXPERTISE")
+  limitations_array=$(jq_array_from_csv "$LIMITATIONS")
+  jq --arg background "$BACKGROUND" \
+     --argjson expertise "$expertise_array" \
+     --argjson limitations "$limitations_array" \
+     '.background.origin = $background | .knowledge.expertise = $expertise | .knowledge.limitations = $limitations' \
+    "$SKOGAI_LORE/knowledge/expanded/personas/$PERSONA_ID.json" >"$TEMP_JSON"
 
-  mv "$TEMP_JSON" "$SKOGAI_DIR/knowledge/expanded/personas/$PERSONA_ID.json"
+  mv "$TEMP_JSON" "${SKOGAI_LORE}/knowledge/expanded/personas/$PERSONA_ID.json"
 
   echo "Created persona: $NAME ($PERSONA_ID)"
   echo "Use ./tools/create-persona.sh show $PERSONA_ID to view details"
@@ -274,7 +295,7 @@ analyze_lore_connections() {
   fi
 
   # Get book information
-  BOOK_FILE="$SKOGAI_DIR/knowledge/expanded/lore/books/$book_id.json"
+  BOOK_FILE="${SKOGAI_LORE}/knowledge/expanded/lore/books/$book_id.json"
   if [ ! -f "$BOOK_FILE" ]; then
     echo "Error: Book not found: $book_id"
     return 1
@@ -286,7 +307,7 @@ analyze_lore_connections() {
   # Prepare entry data for analysis
   ENTRY_DATA=""
   for entry_id in $ENTRIES; do
-    ENTRY_FILE="$SKOGAI_DIR/knowledge/expanded/lore/entries/$entry_id.json"
+    ENTRY_FILE="${SKOGAI_LORE}/knowledge/expanded/lore/entries/$entry_id.json"
     if [ -f "$ENTRY_FILE" ]; then
       TITLE=$(jq -r '.title' "$ENTRY_FILE")
       CATEGORY=$(jq -r '.category' "$ENTRY_FILE")
@@ -326,7 +347,7 @@ analyze_lore_connections() {
 
     if [ ! -z "$SOURCE" ] && [ ! -z "$TARGET" ]; then
       # Add connection to source entry
-      SOURCE_FILE="$SKOGAI_DIR/knowledge/expanded/lore/entries/$SOURCE.json"
+      SOURCE_FILE="${SKOGAI_LORE}/knowledge/expanded/lore/entries/$SOURCE.json"
       if [ -f "$SOURCE_FILE" ]; then
         TEMP_JSON=$(mktemp)
         jq ".relationships += [{\"target_id\": \"$TARGET\", \"relationship_type\": \"$RELATIONSHIP\", \"description\": \"$DESCRIPTION\"}]" \
@@ -357,10 +378,10 @@ create_lorebook_from_directory() {
   fi
 
   # Create the lorebook
-  $SKOGAI_DIR/tools/manage-lore.sh create-book "$book_title" "$book_description"
+  "${SKOGAI_LORE}/tools/manage-lore.sh" create-book "$book_title" "$book_description"
 
   # Get the ID of the created book
-  BOOK_ID=$(ls -t $SKOGAI_DIR/knowledge/expanded/lore/books/ | head -n 1 | sed 's/\.json//')
+  BOOK_ID=$(ls -t "${SKOGAI_LORE}/knowledge/expanded/lore/books/" | head -n 1 | sed 's/\.json//')
 
   # Process each file in the directory
   echo "Processing files..."
