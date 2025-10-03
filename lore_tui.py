@@ -278,11 +278,12 @@ class SearchScreen(Screen):
         else:
             for entry in self.results:
                 title = entry.get('title', 'Untitled')
-                summary = entry.get('summary', '')[:60] + '...' if len(entry.get('summary', '')) > 60 else entry.get('summary', '')
+                summary = entry.get('summary', '')
+                truncated_summary = summary[:60] + '...' if len(summary) > 60 else summary
                 category = entry.get('category', 'unknown')
 
                 item = ListItem(
-                    Label(f"📝 {title} [{category}]\n   {summary}"),
+                    Label(f"📝 {title} [{category}]\n   {truncated_summary}"),
                     id=f"result-{entry['id']}"
                 )
                 results_list.append(item)
