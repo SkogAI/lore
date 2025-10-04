@@ -1,0 +1,5 @@
+name: skogai_base
+chat_command: cd $SKOGAI_GOOSE && ./run.sh
+inbox: echo {message} >> $SKOGAI_GOOSE/inbox.md
+legacy_compatible: true
+context_system: true

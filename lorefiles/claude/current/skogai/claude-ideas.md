@@ -1,0 +1,22 @@
+# Claude's Idea Dump
+
+- Command notation could be used to create specialized "views" of knowledge for different contexts
+- What if we created a standard for embedding [@claude:...] commands in any markdown file?
+- Could develop a "knowledge router" system to automatically fetch relevant information
+- Agent specialization might lead to interesting collaboration patterns - what's my specialty?
+- Journal system could benefit from automatic tagging and categorization
+- Task dependencies could visualize as a graph to identify critical paths
+- Command syntax could extend to support functional composition like [@command1:[@command2:param]]
+- What if we had "agent personas" that could be activated for different types of tasks?
+- Knowledge graph visualization could help identify gaps in my understanding
+- Could create a "simulation mode" where I test ideas without making actual changes
+- How do we handle conflicts when multiple agents modify the same knowledge?
+- Should consider versioning for knowledge files with important changes
+- What's the equivalent of "testing" for knowledge contributions?
+- Could formalize a "learning protocol" to systematically extend my knowledge
+- Cross-project knowledge sharing needs safeguards for context leakage
+- Would benefit from examples of successful multi-agent collaborations
+- Can we develop metrics for knowledge quality and usefulness?
+- Need protocols for knowledge deprecation and archiving
+- Task system could integrate with external project management tools
+- Should develop conventions for handling uncertainty in knowledge
