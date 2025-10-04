@@ -1,0 +1,29 @@
+{
+  "id": "book_1743894516_17e08bca",
+  "title": "Elyria's Edge",
+  "description": ""Elyria's Edge" is a realm where the mystical energies of the ancient Aetherstone converge with the metallic whispers of forgotten technology, birthing a world of clockwork cities, bio-luminescent forests, and star-kissed skies, where ancient magic and mechanized wonder coexist in perpetual balance.",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-05T23:08:36Z",
+    "updated_at": "2025-04-05T23:08:36Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

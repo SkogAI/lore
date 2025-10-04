@@ -1,0 +1,35 @@
+{
+  "id": "book_1743776245_24a7e068",
+  "title": "SkogAI",
+  "description": "All the documentation you could ever need",
+  "entries": [
+    "entry_1743776324_77835ea8",
+    "entry_1743776402_7eb4075c",
+    "entry_1743776402_e45fd9d9",
+    "entry_1743776402_ee33945b",
+    "entry_1743776402_6bce19a0"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T14:17:25Z",
+    "updated_at": "2025-04-04T14:20:02Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}
