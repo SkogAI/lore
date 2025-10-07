@@ -111,44 +111,45 @@ class BookDetailScreen(Screen):
             # Left panel - Sections
             with Vertical(id="sections-panel"):
                 yield Label("Sections:", classes="panel-header")
-                sections_list = ListView(id="sections-list")
-
-                # Add sections from book structure
-                for section in self.book.get("structure", []):
-                    section_count = len(section.get("entries", []))
-                    item = ListItem(
-                        Label(f"> {section['name']} ({section_count})"),
-                        id=f"section-{section['name']}",
-                    )
-                    sections_list.append(item)
-
-                yield sections_list
+                yield ListView(id="sections-list")
 
             # Right panel - Entries
             with Vertical(id="entries-panel"):
                 yield Label("Entries:", classes="panel-header")
-                entries_list = ListView(id="entries-list")
-
-                # Load and display entries
-                for entry_id in self.book.get("entries", []):
-                    entry = self.api.get_lore_entry(entry_id)
-                    if entry:
-                        self.entries.append(entry)
-                        title = entry.get("title", "Untitled")
-                        summary = entry.get("summary", "")
-                        truncated_summary = (
-                            summary[:50] + "..." if len(summary) > 50 else summary
-                        )
-
-                        item = ListItem(
-                            Label(f"• {title}\n  {truncated_summary}"),
-                            id=f"entry-{entry_id}",
-                        )
-                        entries_list.append(item)
-
-                yield entries_list
+                yield ListView(id="entries-list")
 
         yield Footer()
+
+    def on_mount(self) -> None:
+        """Populate the lists when the screen is mounted."""
+        sections_list = self.query_one("#sections-list", ListView)
+        entries_list = self.query_one("#entries-list", ListView)
+
+        # Add sections from book structure
+        for section in self.book.get("structure", []):
+            section_count = len(section.get("entries", []))
+            item = ListItem(
+                Label(f"> {section['name']} ({section_count})"),
+                id=f"section-{section['name']}",
+            )
+            sections_list.append(item)
+
+        # Load and display entries
+        for entry_id in self.book.get("entries", []):
+            entry = self.api.get_lore_entry(entry_id)
+            if entry:
+                self.entries.append(entry)
+                title = entry.get("title", "Untitled")
+                summary = entry.get("summary", "")
+                truncated_summary = (
+                    summary[:50] + "..." if len(summary) > 50 else summary
+                )
+
+                item = ListItem(
+                    Label(f"• {title}\n  {truncated_summary}"),
+                    id=f"entry-{entry_id}",
+                )
+                entries_list.append(item)
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         """Handle entry selection."""
