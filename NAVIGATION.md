@@ -10,6 +10,15 @@
 - [STATS.md](STATS.md)
 - [GROWTH.md](GROWTH.md)
 
+## 📜 Chronicles (Historical Archive)
+
+- [chronicles/](chronicles/) - Living history and mythology documentation
+  - [README.md](chronicles/README.md) - Chronicles overview and guide
+  - [ARCHAEOLOGICAL_DISCOVERY_SKOGAI.md](chronicles/ARCHAEOLOGICAL_DISCOVERY_SKOGAI.md) - The definitive discovery report
+  - [GROWTH.md](chronicles/GROWTH.md) - Real-time lore growth metrics
+  - [MYTHOLOGY_MAP.md](chronicles/MYTHOLOGY_MAP.md) - Complete multiverse map
+  - [historic-milestones.md](chronicles/historic-milestones.md) - Key events and achievements
+
 ## 🤖 Agent Directories (Top Level)
 
 ### amy
