@@ -4,6 +4,18 @@ version = "0.1.0"
 description = "SkogAI Master Knowledge Repository - A comprehensive knowledge base and AI agent system"
 readme = "README.md"
 requires-python = ">=3.12"
+authors = [
+    {name = "Emil Skogsund", email = "emil.skogsund@gmail.com"}
+]
+license = {text = "MIT"}
+keywords = ["ai", "agents", "knowledge-base", "lore", "skogai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
 dependencies = [
     "anthropic>=0.68.0",
     "gradio>=5.48.0",
@@ -14,6 +26,11 @@ dependencies = [
     "streamlit>=1.50.0",
     "textual>=1.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/SkogAI/lore"
+Repository = "https://github.com/SkogAI/lore"
+Documentation = "https://github.com/SkogAI/lore/blob/master/docs/SETUP.md"
 
 [project.optional-dependencies]
 dev = [
