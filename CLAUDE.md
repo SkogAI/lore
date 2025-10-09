@@ -28,12 +28,67 @@ Creates GitHub issues in the SkogAI/lore repository. Requires `gh` CLI authentic
 ```
 Safely creates files within the repository with automatic directory creation and overwrite protection.
 
+## Environment Setup
+
+### Initial Setup
+```bash
+# Run the automated setup script (recommended)
+./setup.sh
+
+# Or manually create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+### Activating Virtual Environment
+```bash
+# Always activate before running commands
+source .venv/bin/activate
+
+# Verify activation
+which python  # Should show .venv/bin/python
+```
+
 ## Build & Test Commands
-- Start chat UI: `./start-chat-ui.sh` or `streamlit run streamlit_chat.py`
-- Run small model workflow: `python demo/small_model_workflow.py`
-- Run UI demo: `python demo/chat_ui_demo.py`
-- Test agent API functionality: `python agents/api/agent_api.py`
-- Tests: Manual verification (no formal test framework)
+
+### Starting Applications
+```bash
+# Main chat UI (Streamlit)
+./start-chat-ui.sh
+# Or manually:
+streamlit run streamlit_chat.py --server.port=8501 --server.address=0.0.0.0
+
+# Gradio chat interface
+python skogai-chat.py
+
+# Terminal UI for lore browsing
+python lore_tui.py
+
+# Generate agent lore
+python generate-agent-lore.py
+```
+
+### Testing
+- Manual verification (no formal test framework)
+- Test agent API: `python agents/api/agent_api.py` (requires external API access)
+- Tests may fail in sandboxed environments without network access
+
+### Dependency Management
+```bash
+# Add new dependency (with uv)
+uv add package-name && uv lock && uv sync
+
+# Add new dependency (with pip)
+pip install package-name
+# Then update pyproject.toml manually
+
+# Update all dependencies
+uv lock --upgrade && uv sync  # with uv
+pip install --upgrade -e .     # with pip
+```
+
+For detailed setup instructions, see [docs/SETUP.md](docs/SETUP.md).
 
 ## Code Style Guidelines
 - **Imports**: Standard Python order (stdlib → third-party → local)
