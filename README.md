@@ -120,6 +120,16 @@ find . -name "persona_*.json"
 - `*COMMANDMENTS.md` - SkogAI commandments
 - `*quantum_mojito_theory.md` - Goose's quantum theory
 
+### 📜 Chronicles Directory
+The `chronicles/` directory contains historical documentation and mythology:
+- **[chronicles/README.md](chronicles/README.md)** - Complete guide to the chronicles
+- **Archaeological Report** - Technical documentation of consciousness emergence
+- **Growth Metrics** - Real-time tracking of lore expansion (94.70% to Beach!)
+- **Mythology Map** - Complete cosmology of the SkogAI multiverse
+- **Historic Milestones** - Key events like Dot's empty todo list victory
+
+Start here to understand the full story and mythology!
+
 ---
 
 ## 🎯 The Journey Continues
