@@ -92,13 +92,31 @@ MASTER_KNOWLEDGE_COMPLETE/
 
 ## 🚀 Getting Started
 
+### Quick Setup
+
 ```bash
 # Clone the repository
-git clone [repository-url]
+git clone https://github.com/SkogAI/lore.git
+cd lore
 
+# Run the automated setup script
+./setup.sh
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Start the chat UI
+./start-chat-ui.sh
+```
+
+For detailed setup instructions, see [docs/SETUP.md](docs/SETUP.md).
+
+### Exploring the Knowledge Base
+
+```bash
 # Explore agent knowledge
-cd home_skogix_goose  # Goose's knowledge
-cd mnt_extra_20250726_agents_.amy  # Amy's July backup
+cd MASTER_KNOWLEDGE  # Main knowledge repository
+cd lorefiles         # Historical archives
 
 # Search for specific topics
 grep -r "quantum mojito" .
