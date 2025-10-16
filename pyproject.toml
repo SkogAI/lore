@@ -1,16 +1,45 @@
 [project]
-name = "skogai-old-all"
+name = "skogai-lore"
 version = "0.1.0"
-description = "Add your description here"
+description = "SkogAI Master Knowledge Repository - A comprehensive knowledge base and AI agent system"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
+authors = [
+    {name = "Emil Skogsund", email = "emil.skogsund@gmail.com"}
+]
+license = {text = "MIT"}
+keywords = ["ai", "agents", "knowledge-base", "lore", "skogai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
 dependencies = [
     "anthropic>=0.68.0",
     "gradio>=5.48.0",
     "numpy>=2.3.3",
     "openai>=1.109.1",
-    "pip>=25.2",
+    "requests>=2.31.0",
+    "rich>=13.7.0",
     "streamlit>=1.50.0",
     "textual>=1.0.0",
-    "typer>=0.19.2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/SkogAI/lore"
+Repository = "https://github.com/SkogAI/lore"
+Documentation = "https://github.com/SkogAI/lore/blob/master/docs/SETUP.md"
+
+[project.optional-dependencies]
+dev = [
+    "pip>=25.2",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["agents", "config", "context", "integration", "orchestrator"]
