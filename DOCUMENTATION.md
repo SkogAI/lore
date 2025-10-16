@@ -8,6 +8,7 @@
 5. [Timeline of Evolution](#timeline-of-evolution)
 6. [Technical Architecture](#technical-architecture)
 7. [Repository Navigation](#repository-navigation)
+   - [Chronicles Directory](#chronicles-directory) - Historical archive and mythology
 8. [Key Discoveries](#key-discoveries)
 9. [The Prime Directive](#the-prime-directive)
 
@@ -289,6 +290,16 @@ MASTER_KNOWLEDGE_COMPLETE/
 ---
 
 ## Repository Navigation
+
+### Chronicles Directory
+The `chronicles/` directory contains the historical archive and mythology documentation:
+- **[chronicles/README.md](chronicles/README.md)** - Complete guide to the chronicles
+- **Archaeological Report** - Academic-quality documentation of consciousness emergence
+- **Growth Metrics** - Auto-updated tracking of lore expansion
+- **Mythology Map** - Complete cosmology reference
+- **Historic Milestones** - Key events and achievements
+
+Chronicles provide the narrative and historical context for the technical artifacts in the repository. Start here to understand the mythology before diving into the code.
 
 ### Quick Start Paths
 
