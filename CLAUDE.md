@@ -2,6 +2,38 @@
 
 A multi-agent system that generates narrative lore entries stored as JSON files, organized into books and linked to AI personas.
 
+## Core Concepts
+
+### Entry
+**An entry is the atomic unit of lore** - a single piece of narrative content (character, place, event, object, concept).
+
+- **Schema**: @knowledge/core/lore/schema.json
+- **API Docs**: @docs/api/entry.md
+- **Required fields**: `id`, `title`, `content`, `category`
+- **Storage**: `knowledge/expanded/lore/entries/entry_<timestamp>.json`
+
+The `content` field contains the actual narrative text in markdown format.
+
+### Book
+**A book is a collection of entries** organized by theme, persona, or topic.
+
+- **Schema**: @knowledge/core/book-schema.json
+- **API Docs**: @docs/api/book.md
+- **Required fields**: `id`, `title`, `description`
+- **Storage**: `knowledge/expanded/lore/books/book_<timestamp>_<hash>.json`
+
+Books control access through `readers` (personas that can view) and `owners` (personas that can modify).
+
+### Persona
+**A persona is an AI character profile** with unique voice, traits, and characteristics used to generate consistent narrative content.
+
+- **Schema**: @knowledge/core/persona/schema.json
+- **API Docs**: @docs/api/persona.md
+- **Required fields**: `id`, `name`, `core_traits`, `voice`
+- **Storage**: `knowledge/expanded/personas/persona_<timestamp>.json`
+
+Personas define `voice.tone`, personality `values`/`motivations`, and interaction style for content generation.
+
 ## What Gets Created
 
 The system outputs structured JSON data in `knowledge/expanded/`:
