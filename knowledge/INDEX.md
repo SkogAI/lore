@@ -1,11 +1,11 @@
 # SkogAI Knowledge Index
 
-Generated: Sat Dec  6 07:10:52 AM CET 2025
+Generated: Sat Dec  6 07:20:00 AM CET 2025
 
 ## Core Knowledge (00-09)
-- [0001]  SkogAI System Principles (principles, architecture, foundation  )
+- [0001  ] SkogAI System Principles (principles, architecture, foundation  )
 
 ## Expanded Knowledge (10-89)
-- [2001]  Content Creation Workflow (content-creation, workflow, orchestration  )
+- [2001  ] Content Creation Workflow (content-creation, workflow, orchestration  )
 
 ## Implementation Knowledge (90-99)

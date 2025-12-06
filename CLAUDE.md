@@ -319,11 +319,30 @@ session_id=$(./tools/context-manager.sh create base)
 
 @tools/
   context-manager.sh - Create/update/archive session contexts
+  index-knowledge.sh - Generate searchable index of numbered knowledge files
 
 @context/            - Session state management
   templates/         - Context templates
   current/           - Active session contexts
   archive/           - Completed session contexts
+
+@knowledge/          - Numbered knowledge files (ID-based system)
+  core/              - Core knowledge files
+  expanded/          - Expanded knowledge files
+  implementation/    - Implementation knowledge files
+  INDEX.md           - Generated index of all knowledge files
+
+### Numbered Knowledge System
+```
+00-09   Core/Emergency     → Load FIRST
+10-19   Navigation
+20-29   Identity
+30-99   Operational
+100-199 Standards
+200-299 Project-specific
+300-399 Tools/Docs
+1000+   Frameworks
+```
 
 @orchestrator/       - Coordinates agents and knowledge
 @integration/        - Automation workflows
