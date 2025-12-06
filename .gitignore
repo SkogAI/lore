@@ -87,3 +87,4 @@ knowledge/expanded/personas/*.json
 # OS
 Thumbs.db
 .DS_Store
+.aider*
