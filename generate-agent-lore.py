@@ -41,21 +41,28 @@ def run_llm(model: str, prompt: str, provider: str = "ollama") -> str:
             return ""
 
     elif provider == "claude":
-        # Use Claude CLI binary
+        # Use Claude CLI binary with system prompt
         try:
+            system_prompt_file = os.path.expandvars("$SKOGAI_DOCS/prompts/lore-writer.md")
+            with open(system_prompt_file, 'r') as f:
+                system_prompt = f.read()
+
             result = subprocess.run(
-                ["claude", "-p", prompt],
+                ["claude", "-p", "--system-prompt", system_prompt, prompt],
                 capture_output=True,
                 text=True,
                 check=True
             )
             return result.stdout.strip()
+        except FileNotFoundError as e:
+            if "lore-writer.md" in str(e):
+                logger.error(f"Lore writer prompt not found: {system_prompt_file}")
+            else:
+                logger.error("Claude CLI not found. Install with: npm install -g @anthropic-ai/claude-code")
+            return ""
         except subprocess.CalledProcessError as e:
             logger.error(f"Error running Claude CLI: {e}")
             logger.error(f"Stderr: {e.stderr}")
-            return ""
-        except FileNotFoundError:
-            logger.error("Claude CLI not found. Install with: npm install -g @anthropic-ai/claude-code")
             return ""
 
     elif provider == "openai":
@@ -125,7 +132,7 @@ For each category (character, place, object, event, concept), suggest 0-3 specif
 Only include categories that are relevant to this agent type."""
 
     result = run_llm(model, prompt, provider)
-    
+
     try:
         # Extract JSON from the response (in case there's any preamble/postamble)
         json_start = result.find('{')
@@ -162,41 +169,41 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
 
     # Determine what types of lore this agent needs
     lore_needs = determine_agent_needs(agent_type, agent_description, model, provider)
-    
+
     if not lore_needs:
         return {"success": False, "error": "Failed to determine agent lore needs"}
-    
+
     # Create the lorebook
     timestamp = int(time.time())
     book = api.create_lore_book(
         title=f"Specialized Lore for {agent_type.title()} Agent",
         description=f"Lore collection specifically created for {agent_type} agents: {agent_description}"
     )
-    
+
     # Track entries by category
     entries_by_category = {}
-    
+
     # Process each category
     for category, entries in lore_needs.items():
         if not entries:
             continue
-            
+
         entries_by_category[category] = []
-        
+
         for entry_data in entries:
             title = entry_data.get("title", f"Untitled {category.title()}")
             reason = entry_data.get("reason", "")
-            
+
             # Generate content for this entry
             content = generate_lore_entry(title, category, agent_type, model, provider)
-            
+
             if not content:
                 logger.warning(f"Failed to generate content for {title}")
                 continue
-                
+
             # Create summary from the reason
             summary = f"Purpose: {reason}" if reason else f"Lore for {agent_type} agent"
-            
+
             # Create the entry
             entry = api.create_lore_entry(
                 title=title,
@@ -205,23 +212,23 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
                 tags=[agent_type, category],
                 summary=summary
             )
-            
+
             # Add to book
             api.add_entry_to_book(entry["id"], book["id"])
             entries_by_category[category].append(entry["id"])
-            
+
             logger.info(f"Created lore entry: {title} ({category})")
-    
+
     # Update book categories
     book = api.get_lore_book(book["id"])
     if book:
         book["categories"] = entries_by_category
-        
+
         # Update book file
         book_path = os.path.join(api.lore_books_dir, f"{book['id']}.json")
         with open(book_path, 'w') as f:
             json.dump(book, f, indent=2)
-    
+
     return {
         "success": True,
         "book_id": book["id"],
@@ -232,7 +239,7 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
 def link_to_existing_persona(api: LoreAPI, book_id: str, persona_id: str) -> Dict[str, Any]:
     """Link the specialized lorebook to an existing persona."""
     success = api.link_book_to_persona(book_id, persona_id)
-    
+
     if success:
         return {
             "success": True,
@@ -258,13 +265,13 @@ TRAITS: [4-6 personality traits, comma-separated]
 VOICE: [description of voice and speaking style]"""
 
     result = run_llm(model, prompt, provider)
-    
+
     # Parse the response
     name = "Agent"
     description = f"A specialized {agent_type} agent"
     traits = ["professional", "knowledgeable", "helpful", "focused"]
     voice = "Clear and informative"
-    
+
     for line in result.split('\n'):
         if line.startswith("NAME:"):
             name = line.replace("NAME:", "").strip()
@@ -275,7 +282,7 @@ VOICE: [description of voice and speaking style]"""
             traits = [t.strip() for t in traits_str.split(',')]
         elif line.startswith("VOICE:"):
             voice = line.replace("VOICE:", "").strip()
-    
+
     # Create the persona
     persona = api.create_persona(
         name=name,
@@ -283,15 +290,15 @@ VOICE: [description of voice and speaking style]"""
         personality_traits=traits,
         voice_tone=voice
     )
-    
+
     logger.info(f"Created persona: {persona['id']} - {name}")
-    
+
     # Link to the specialized lorebook if provided
     if book_id:
         link_result = link_to_existing_persona(api, book_id, persona["id"])
         if not link_result.get("success", False):
             logger.warning(f"Failed to link book {book_id} to persona {persona['id']}")
-    
+
     return {
         "success": True,
         "persona_id": persona["id"],
@@ -318,14 +325,14 @@ def main():
     # Create the specialized lorebook
     description = args.description or f"A {args.agent_type} agent that helps with {args.agent_type} tasks"
     result = create_specialized_lorebook(api, args.agent_type, description, args.model, args.provider)
-    
+
     if not result.get("success", False):
         print(f"Failed to create lorebook: {result.get('error', 'Unknown error')}")
         return
-    
+
     print(f"Created specialized lorebook: {result['book_id']}")
     print(f"Added {result['entry_count']} lore entries across {len(result['categories'])} categories")
-    
+
     # Link to existing persona if specified
     if args.persona:
         link_result = link_to_existing_persona(api, result["book_id"], args.persona)
@@ -333,27 +340,27 @@ def main():
             print(f"Linked lorebook to persona: {args.persona}")
         else:
             print(f"Failed to link to persona: {link_result.get('error', 'Unknown error')}")
-    
+
     # Create a new persona if requested
     if args.create_persona:
         persona_result = create_persona_with_lore(api, args.agent_type, args.model, result["book_id"], args.provider)
         if persona_result.get("success", False):
             print(f"Created new persona: {persona_result['persona_id']} - {persona_result['name']}")
-            
+
             # If export is requested, export the persona's lore to SillyTavern format
             if args.export:
                 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
                 from st_lore_export import export_persona_lore
-                
+
                 export_dir = args.export
                 if not os.path.isdir(export_dir):
                     os.makedirs(export_dir, exist_ok=True)
-                
+
                 export_result = export_persona_lore(
                     api, persona_result["persona_id"], export_dir,
                     persona_result["name"], "{{user}}"
                 )
-                
+
                 if export_result.get("success", False):
                     print(f"Exported lorebooks to {export_dir}")
                     for book in export_result.get("exported_books", []):
@@ -362,21 +369,21 @@ def main():
                     print(f"Failed to export: {export_result.get('error', 'Unknown error')}")
         else:
             print(f"Failed to create persona: {persona_result.get('error', 'Unknown error')}")
-    
+
     # Export directly if requested without creating a persona
     elif args.export and result.get("book_id"):
         sys.path.append(os.path.dirname(os.path.abspath(__file__)))
         from st_lore_export import export_to_sillytavern
-        
+
         export_path = args.export
         if os.path.isdir(export_path):
             export_path = os.path.join(export_path, f"{result['book_id']}_st.json")
-        
+
         export_result = export_to_sillytavern(
             api, result["book_id"], export_path,
             "{{char}}", "{{user}}", True
         )
-        
+
         if export_result.get("success", False):
             print(f"Exported lorebook to {export_path}")
         else:
