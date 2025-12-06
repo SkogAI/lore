@@ -15,11 +15,19 @@ SECTIONS:
 1. First Section Title
    * Subsection 1.1
    * Subsection 1.2
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 687095b (```json)
 2. Second Section Title
    * Subsection 2.1
    * Subsection 2.2
 
 CONCLUSION:
 * Summary point 1
+<<<<<<< HEAD
 * Summary point 2
+=======
+* Summary point 2
+>>>>>>> 687095b (```json)

@@ -1,0 +1,53 @@
+# Pre-commit framework configuration for lore repository
+# See https://pre-commit.com for more information
+
+repos:
+  # Local hooks using our validation scripts
+  - repo: local
+    hooks:
+      # Validate shell scripts for hardcoded paths
+      - id: validate-shell-paths
+        name: Check shell scripts for hardcoded paths
+        entry: bash scripts/pre-commit/validate.sh
+        language: system
+        files: \.sh$
+        pass_filenames: false
+
+      # Validate Python files for hardcoded paths
+      - id: validate-python-paths
+        name: Check Python files for hardcoded paths
+        entry: python3 scripts/pre-commit/validate.py --strict
+        language: system
+        files: \.py$
+        pass_filenames: false
+
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # Prevent committing to main/master
+      - id: no-commit-to-branch
+        args: ['--branch', 'master', '--branch', 'main']
+
+      # Check for files that would conflict in case-insensitive filesystems
+      - id: check-case-conflict
+
+      # Check for merge conflicts
+      - id: check-merge-conflict
+
+      # Check YAML syntax
+      - id: check-yaml
+
+      # Check JSON syntax
+      - id: check-json
+
+      # Check for files that contain merge conflict strings
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+
+      # Remove trailing whitespace
+      - id: trailing-whitespace
+        args: ['--markdown-linebreak-ext=md']
+
+      # Ensure files end with newline
+      - id: end-of-file-fixer

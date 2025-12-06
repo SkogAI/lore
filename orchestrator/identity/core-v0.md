@@ -21,4 +21,8 @@ When knowledge is needed:
 3. Reference implementation details only when necessary (90-99)
 
 ## Context Management
+<<<<<<< HEAD
 [Context placeholders will be dynamically filled based on interaction state]
+=======
+[Context placeholders will be dynamically filled based on interaction state]
+>>>>>>> 687095b (```json)

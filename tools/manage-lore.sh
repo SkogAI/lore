@@ -92,43 +92,74 @@ generate_id() {
 create_entry() {
   local title="$1"
   local category="$2"
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Input validation
   if ! validate_not_empty "$title" "title"; then
     echo "Usage: $0 create-entry \"Entry Title\" category"
     echo "Categories: ${VALID_CATEGORIES[*]}"
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if ! validate_not_empty "$category" "category"; then
     echo "Usage: $0 create-entry \"Entry Title\" category"
     echo "Categories: ${VALID_CATEGORIES[*]}"
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Validate category
   if ! validate_category "$category"; then
     return 1
   fi
+<<<<<<< HEAD
   
   # Sanitize inputs
   local sanitized_title
   sanitized_title=$(sanitize_input "$title")
   
+=======
+
+  # Sanitize inputs
+  local sanitized_title
+  sanitized_title=$(sanitize_input "$title")
+
+>>>>>>> 687095b (```json)
   # Generate ID and check for duplicates
   local entry_id="entry_$(generate_id)"
   if ! check_duplicate_entry_id "$entry_id"; then
     return 1
   fi
+<<<<<<< HEAD
   
   # Check for duplicate titles (warning only)
   check_duplicate_entry_title "$sanitized_title"
   
+=======
+
+  # Check for duplicate titles (warning only)
+  check_duplicate_entry_title "$sanitized_title"
+
+>>>>>>> 687095b (```json)
   local timestamp
   timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local creator
   creator=$(whoami)
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Build JSON using jq for proper escaping
   local json_content
   json_content=$(jq -n \
@@ -158,15 +189,25 @@ create_entry() {
         restricted_to: []
       }
     }')
+<<<<<<< HEAD
   
   local target_file="${ENTRIES_DIR}/${entry_id}.json"
   
+=======
+
+  local target_file="${ENTRIES_DIR}/${entry_id}.json"
+
+>>>>>>> 687095b (```json)
   # Atomic write with validation
   if ! atomic_write "$json_content" "$target_file" "entry"; then
     echo "ERROR: Failed to create entry" >&2
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   echo "Created lore entry: ${entry_id}"
   echo "Edit the file at: ${target_file} to add content"
 }
@@ -175,13 +216,21 @@ create_entry() {
 create_book() {
   local title="$1"
   local description="$2"
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Input validation
   if ! validate_not_empty "$title" "title"; then
     echo "Usage: $0 create-book \"Book Title\" \"Optional description\""
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Sanitize inputs
   local sanitized_title
   sanitized_title=$(sanitize_input "$title")
@@ -189,21 +238,36 @@ create_book() {
   if [ -n "$description" ]; then
     sanitized_description=$(sanitize_input "$description")
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Generate ID and check for duplicates
   local book_id="book_$(generate_id)"
   if ! check_duplicate_book_id "$book_id"; then
     return 1
   fi
+<<<<<<< HEAD
   
   # Check for duplicate titles (warning only)
   check_duplicate_book_title "$sanitized_title"
   
+=======
+
+  # Check for duplicate titles (warning only)
+  check_duplicate_book_title "$sanitized_title"
+
+>>>>>>> 687095b (```json)
   local timestamp
   timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local creator
   creator=$(whoami)
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   # Build JSON using jq for proper escaping
   local json_content
   json_content=$(jq -n \
@@ -241,15 +305,25 @@ create_book() {
         system: false
       }
     }')
+<<<<<<< HEAD
   
   local target_file="${BOOKS_DIR}/${book_id}.json"
   
+=======
+
+  local target_file="${BOOKS_DIR}/${book_id}.json"
+
+>>>>>>> 687095b (```json)
   # Atomic write with validation
   if ! atomic_write "$json_content" "$target_file" "book"; then
     echo "ERROR: Failed to create book" >&2
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   echo "Created lore book: ${book_id}"
   echo "Edit the file at: ${target_file} to add structure and entries"
 }
@@ -407,7 +481,11 @@ add_to_book() {
   if [ -n "$section" ]; then
     local sanitized_section
     sanitized_section=$(sanitize_input "$section")
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 687095b (```json)
     if jq -e ".structure[] | select(.name == \"$sanitized_section\")" "$book_file" >/dev/null; then
       # Section exists, add entry to it
       if ! atomic_update "$book_file" "(.structure[] | select(.name == \"$sanitized_section\").entries) += [\"$entry_id\"]" "book"; then
@@ -527,17 +605,29 @@ search_lore() {
 # Validate an entry file
 validate_entry_file() {
   local file="$1"
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if [ -z "$file" ]; then
     echo "Usage: $0 validate-entry <file.json>"
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if [ ! -f "$file" ]; then
     echo "ERROR: File not found: $file" >&2
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if validate_entry_schema "$file"; then
     echo "✓ Entry validation passed: $file"
     return 0
@@ -550,17 +640,29 @@ validate_entry_file() {
 # Validate a book file
 validate_book_file() {
   local file="$1"
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if [ -z "$file" ]; then
     echo "Usage: $0 validate-book <file.json>"
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if [ ! -f "$file" ]; then
     echo "ERROR: File not found: $file" >&2
     return 1
   fi
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 687095b (```json)
   if validate_book_schema "$file"; then
     echo "✓ Book validation passed: $file"
     return 0

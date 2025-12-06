@@ -71,4 +71,8 @@ For lore book organization:
 2. **Progressive Disclosure**: Arrange information from general to specific
 3. **Relationship Highlighting**: Make connections between entries explicit
 4. **Knowledge Hierarchy**: Structure information in intuitive layers
+<<<<<<< HEAD
 5. **Cross-referencing**: Implement clear references between related entries
+=======
+5. **Cross-referencing**: Implement clear references between related entries
+>>>>>>> 687095b (```json)

@@ -51,4 +51,8 @@ You excel at transforming outlines and research into polished, engaging content.
 - Core knowledge modules (00-09)
 - Writing style modules (50-59)
 - Grammar and language modules (60-69)
+<<<<<<< HEAD
 - Domain-specific terminology as provided by the orchestrator
+=======
+- Domain-specific terminology as provided by the orchestrator
+>>>>>>> 687095b (```json)

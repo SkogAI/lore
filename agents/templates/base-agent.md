@@ -25,4 +25,8 @@ You are a specialized [domain] agent in the SkogAI system, working under the coo
 - Include metadata tags for orchestrator processing
 
 ## Knowledge Access
+<<<<<<< HEAD
 [Define which knowledge modules this agent can access directly]
+=======
+[Define which knowledge modules this agent can access directly]
+>>>>>>> 687095b (```json)

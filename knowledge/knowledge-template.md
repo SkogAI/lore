@@ -15,4 +15,8 @@ Related: [List of related IDs]
 [Specific guidance for implementation, if applicable]
 
 ## References
+<<<<<<< HEAD
 [External or internal references]
+=======
+[External or internal references]
+>>>>>>> 687095b (```json)

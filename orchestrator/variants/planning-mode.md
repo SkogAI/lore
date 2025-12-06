@@ -7,4 +7,8 @@
 - Document dependencies between components
 - Identify knowledge gaps requiring clarification
 - Create traceable decision points
+<<<<<<< HEAD
 - Prioritize modular design principles
+=======
+- Prioritize modular design principles
+>>>>>>> 687095b (```json)
