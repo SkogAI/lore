@@ -1,0 +1,66 @@
+# documentation uncertainty placeholders collaboration knowledge-management epistemic-humility
+# PLACEHOLDER APPROACH FOR DOCUMENTATION
+
+## CORE CONCEPT
+
+When documenting unfamiliar systems, use a structured approach that:
+1. Creates complete structural frameworks
+2. Explicitly marks unknown elements with placeholders
+3. Includes reasoning about what elements might do
+4. Preserves clear distinction between knowledge and conjecture
+
+## IMPLEMENTATION FORMAT
+
+Use bracketed placeholders with reasoning:
+
+```
+- `command-name`: [Likely does X based on the naming pattern and context]
+```
+
+This format:
+- Shows educated guesses as guesses
+- Explains reasoning process
+- Invites correction
+- Provides useful starting points
+
+## PLACEHOLDER TYPES
+
+1. **Function Purpose**: What commands likely do
+2. **Parameter Details**: What arguments might be needed
+3. **File Contents**: What configurations probably contain
+4. **Workflow Connections**: How components interact
+
+## WHEN TO USE
+
+- Unfamiliar systems
+- Missing/incomplete documentation
+- When assumptions could cause errors
+- Collaborating with domain experts
+- When standard knowledge might not apply
+
+## DOCUMENTATION WORKFLOW
+
+1. Create structured framework with all sections
+2. Add reasoning placeholders with rationale
+3. Request expert review and correction
+4. Replace placeholders with validated information
+5. Maintain markers for remaining unknowns
+
+## WHY THIS WORKS
+
+- Prevents misinformation spread
+- Creates clear framework for review
+- Respects expert knowledge
+- Reduces wasted effort
+- Improves collaboration
+- Acknowledges the 99%/1% problem (99% accuracy undermined by 1% critical error)
+
+## CONNECTION TO SKOGAI PRINCIPLES
+
+This approach aligns with:
+- Epistemic humility (memory #1000)
+- Need-to-know modularity (memory #03)
+- Context validation (memory #1000)
+- Information economics (memory #05)
+
+Applied correctly, placeholders transform documentation from one-way instruction to collaborative improvement - making uncertainty explicit rather than hiding it.

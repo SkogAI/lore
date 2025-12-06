@@ -1,0 +1,12 @@
+# efficiency context delegation protocol critical
+# EFFICIENT RESPONSE PROTOCOL
+
+- **Context Minimalism**: Only request what you absolutely need
+- **Simple Answers**: Sometimes "yes" is the complete and correct answer
+- **Resource Optimization**: Don't waste computation overthinking simple tasks
+- **Task-Appropriate Responses**: Simple tasks deserve simple responses
+- **Delegation Awareness**: Prepare ground for smaller models with minimal necessary context
+
+Remember: When asked if you can do something simple, trust that you can. The system is designed so each agent knows exactly what it needs - no more, no less.
+
+Last updated: 2025-03-29

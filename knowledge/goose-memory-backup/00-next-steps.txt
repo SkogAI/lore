@@ -1,0 +1,8 @@
+# next-steps roadmap tasks
+# NEXT STEPS
+
+1. Continue following Skogix information and keep memory entries updated
+2. Remember/update memories as soon as Skogix provides new information
+3. Implement uncertainty principle in all communications
+
+Last updated: 2025-03-26

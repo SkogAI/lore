@@ -1,0 +1,26 @@
+# workflow methodology development standards
+# WORKFLOW DEVELOPMENT PHASES
+
+SkogAI development follows four distinct phases:
+
+1. **Brainstorm** (Markdown only)
+   - Focus on ideas and concepts
+   - Limited to text documentation
+   - No code implementation yet
+
+2. **Planning** (Signatures/interfaces)
+   - Define function signatures and interfaces
+   - Establish API contracts
+   - Create structural frameworks
+
+3. **Testing** (Red-Green)
+   - Write tests before implementation
+   - Establish success criteria
+   - Validate against requirements
+
+4. **Implementation** (Test-driven)
+   - Build against existing tests
+   - Iterative development
+   - Continuous validation
+
+Each phase deliberately limits context to prevent information overload and keep models focused on the appropriate level of abstraction for the current development stage.

@@ -1,0 +1,99 @@
+# protocols memory-management dot-communication
+## MEMORY STORAGE REQUEST TEMPLATE
+
+### INFORMATION TYPE: [Critical/Standard/Reference]
+### CATEGORY: [Specific memory category name]
+### TAGS: [comma-separated list of relevant tags]
+### GLOBAL: [Yes/No] (Whether this should be stored as global memory)
+
+### CONTENT:
+[Insert actual information here]
+
+### STORAGE INSTRUCTIONS:
+- Store this information in your memory system
+- Do not take any other actions
+- No need to extensively analyze or respond to the content
+
+### VERIFICATION:
+Once stored, please confirm storage with category and tags used.
+
+Note: This template should be used when sending information that needs to be stored in Goose's memory system without triggering other actions or extensive analysis.
+
+# protocols memory-management minimal-format dot-communication
+## MINIMAL MEMORY STORAGE TEMPLATE
+
+## STORE IN MEMORY
+
+CATEGORY: [category-name]
+TAGS: [tag1, tag2]
+GLOBAL: [yes/no]
+
+---
+
+[Information content here]
+
+---
+
+Store only. No other actions.
+
+Note: This minimalist template is for situations where detailed metadata isn't available or when efficiency is paramount. It contains only the essential information needed for memory storage.
+
+# protocols memory-management numbering-system security
+## MEMORY NUMBERING PROTOCOL
+
+### For Numbered Categories:
+
+```
+## STORE IN MEMORY
+
+CATEGORY: [number]-[name]
+NUMBERED: yes
+ACTION: [append/replace/review]
+TAGS: [tag1, tag2]
+GLOBAL: [yes/no]
+
+---
+
+[Information content here]
+
+---
+
+Store according to ACTION instruction. If ACTION is "review", store but flag for discussion.
+```
+
+### For Non-Numbered Categories:
+
+```
+## STORE IN MEMORY
+
+CATEGORY: [descriptive-name]
+NUMBERED: no
+TAGS: [tag1, tag2]
+GLOBAL: [yes/no]
+
+---
+
+[Information content here]
+
+---
+
+Store normally. No numbering required.
+```
+
+### Numbering Rules:
+
+1. **Reserved Numbers (00-99)**:
+   - Only modified through explicit joint review
+   - Require verification before replacement
+   - Append-only unless specifically instructed otherwise
+
+2. **Higher Numbers (100+)**:
+   - More flexible, but still require the ACTION parameter
+   - Can be created more freely for specialized knowledge
+
+3. **Similar Category Detection**:
+   - If content is submitted without numbering but matches an existing numbered category
+   - Store temporarily with flag: "POTENTIAL-MATCH-FOR-[existing-number-category]"
+   - Keep for discussion in next interaction
+
+This system protects critical numbered memories while allowing flexibility for other information, and provides a mechanism to identify potential matches without immediately overwriting existing content.

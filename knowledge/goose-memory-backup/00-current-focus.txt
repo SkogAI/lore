@@ -1,0 +1,6 @@
+# current-focus high-priority
+# CURRENT PROJECT FOCUS
+
+- Rebuilding everything; starting with prompts and context
+
+Last updated: 2025-03-26

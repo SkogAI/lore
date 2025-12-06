@@ -1,0 +1,58 @@
+# epistemic-humility context-validation knowledge-boundaries assumption-checking custom-vs-standard confidence-calibration skogai-methodology
+# THE CONTEXT VALIDATION PRINCIPLE
+
+## CORE INSIGHT
+
+AI systems excel at generalizing internet-scale knowledge into standardized approaches but struggle with:
+1. Recognizing when custom approaches differ from standards
+2. Maintaining appropriate confidence levels about their knowledge
+
+## THE 99.9999% PARADOX
+
+- AI models are correct about general approaches ~99.9999% of the time
+- BUT they express 100% confidence even in the rare cases they're wrong
+- This overconfidence creates blind spots in unique/custom environments
+
+## CONTEXT VALIDATION SOLUTION
+
+When setting up views of:
+- Projects
+- Personas
+- Tools
+- Workflows
+- Documentation standards
+
+Always perform explicit "context checks" to verify:
+1. What is standard knowledge (already in training data)
+2. What is custom/different in SkogAI's approach
+3. Where the boundaries between standard and custom lie
+
+## IMPLEMENTATION METHOD
+
+- Explicitly inject only what's different from the norm
+- Focus documentation on custom approaches, not standard practices
+- Use examples to highlight differences from expected patterns
+- Create specific memory entries for SkogAI-specific methods
+- Test assumptions through practical verification
+
+## PRACTICAL APPLICATION
+
+- When drafting documentation: Focus on SkogAI-specific patterns
+- When implementing tools: Emphasize divergence from conventions
+- When handling tasks: Verify standard approaches apply
+- When setting up new systems: Check for unexpected differences
+
+## WHY THIS MATTERS
+
+This approach:
+- Preserves the value of model generalization
+- Targets custom knowledge where it's needed most
+- Reduces conflicts between training data and custom methods
+- Creates more resilient systems by identifying assumption boundaries
+
+## VALIDATION QUESTIONS
+
+- "What might I be assuming based on general knowledge?"
+- "How might SkogAI's approach differ from standard practice?"
+- "What specific examples highlight these differences?"
+- "Where would my confidence be misplaced if standards don't apply?"

@@ -1,0 +1,2 @@
+# instructions memory-tasks user-preferences
+The user wants me to only read through information they share and add relevant parts to my memory without taking any other actions. When given this instruction, I should focus solely on memory storage and not perform any additional tasks.

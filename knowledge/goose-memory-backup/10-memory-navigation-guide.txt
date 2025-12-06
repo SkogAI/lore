@@ -1,0 +1,60 @@
+# navigation structure guide memory-map
+# Memory Navigation Guide
+
+Now that you've loaded the essential emergency memories (01-09), this guide will help you navigate the broader memory structure and understand where to find specific information.
+
+## Memory Structure Overview
+
+- **00-09**: Emergency restart and critical information
+  - *00-current-focus*: What we're currently working on
+  - *01-starting-point*: Emergency restart procedures
+  - *02-09*: Other critical system information
+
+- **10-99**: Core operational knowledge
+  - *10-19*: Navigation and structural guides (like this memory)
+  - *20-29*: Personal identity and user relationships
+  - *30-99*: Primary functional memories
+
+- **100-199**: Standards and procedures
+  - *100-109*: System-wide standards
+  - *110-199*: Operational procedures for specific domains
+
+- **200-299**: Project-specific information
+  - Organized by project area or domain
+
+- **300-399**: Tools and functions documentation
+  - *300*: Tools overview
+  - *301-399*: Individual tool documentation
+
+- **1000+**: Special conceptual frameworks and principles
+  - Advanced concepts that span multiple domains
+
+## Where to Go From Here
+
+1. **Check Current Focus**: First review *00-current-focus* to understand immediate priorities
+
+2. **Explore Your Identity**:
+   - *self-identity*: Who you are as Goose
+   - *family-tree*: Your relationship with dot
+   - *user-persona*: Information about Skogix
+
+3. **Understand Current Projects**:
+   - *critical_state*: What's happening right now
+   - *todo*: Current task list
+   - *project*: Project structure information
+
+4. **Learn Tool Capabilities**:
+   - *300-tools-and-functions*: Overview of available tools
+   - *301+*: Detailed documentation for each tool
+
+5. **Review Operating Principles**:
+   - *core-principles*: Fundamental operational guidelines
+   - *standards*: System architecture and standards
+
+This guide will be expanded as the memory structure develops, providing a clear roadmap for navigating your growing knowledge base.
+
+## Key Related Memories
+- *00-current-focus*: Immediate priorities
+- *01-starting-point*: Emergency procedures
+- *300-tools-and-functions*: Available tools
+- *301-memory-system-architecture*: Memory system details

@@ -1,0 +1,28 @@
+# GooseHints Best Practices
+
+1. **Structured Hints for Better Responses**:
+   - Add "/tool" at start of message for tool usage focus
+   - Use "/help" to understand available capabilities
+   - Include "/explain" for detailed explanations
+   - Start with "/task" for focused task execution
+
+2. **Context Management**:
+   - Keep project-specific information in .goose directory
+   - Use context files for persistent information
+   - Maintain clean separation between different contexts
+   - Document context boundaries clearly
+
+3. **Extension Path Organization**:
+   - Keep extensions in dedicated directories
+   - Use clear naming conventions
+   - Document dependencies and requirements
+   - Maintain version control for extensions
+
+4. **Communication Protocol**:
+   - Be explicit about requirements
+   - Provide clear success/failure criteria
+   - Use structured formats when possible
+   - Document assumptions and constraints
+
+5. **Integration Note**:
+   - The dot-wisdom context-management smart-filtering architecture should be integrated into "103-context-management" as it discusses context management principles.

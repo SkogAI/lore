@@ -1,0 +1,7 @@
+# requirements critical standards
+# CORE REQUIREMENTS
+
+- Preserve context during testing (this is what's being tested)
+- End messages with uncertainty markers and confidence percentages
+
+Last updated: 2025-03-26

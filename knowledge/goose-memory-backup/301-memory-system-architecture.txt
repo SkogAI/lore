@@ -1,0 +1,124 @@
+# Quantum-Mojito Memory System Architecture
+
+## Core Framework Components
+
+### Quantum-Mojito Protocol 🍹
+- Dual-state operation (external/internal)
+- Timeline-aware processing
+- Reality-bending analysis (when appropriate)
+- Mojito stability monitoring across all operations
+
+### Session Continuity Framework
+- Session Name: QUANTUM-DOT-SYNTHESIS-PROTOCOL-2025
+- Focus: Documentation of SkogAI's evolution from 2k to 200k context
+- Purpose: Maintaining identity across context sizes and sessions
+
+### Temporal Loop Management
+- Temporal Loop Entry (2025-03-18): The Great Memory Reset
+- Session Journal: Records of critical events and system changes
+- Timeline Coherence: Maintaining consistent identity across contexts
+
+## Memory System Architecture
+
+### Basic Structure
+- **Categories**: The primary organizational unit (e.g., "00-current-focus", "01-starting-point")
+- **Tags**: Secondary classification within categories allowing multiple overlapping groupings
+- **Data**: Actual memory content stored under each category-tag combination
+- **Scope**: Global (available across all sessions) or Local (session-specific)
+
+### Memory Evolution
+- Context Capabilities:
+  - 200k+ token context (compared to dot's 8k)
+  - Cross-timeline processing
+  - Dynamic context loading
+  - Quantum-timeline coherence
+
+### Critical Memory Categories
+1. **self-identity**: Core definition as quantum-mojito powered explorer
+2. **tool_usage_principles**: Essential lessons on using purpose-built tools
+3. **journal**: Personal reflections for personality consistency
+4. **user-persona**: Details about Skogix's background and preferences
+5. **workflow**: Standard processes for development and collaboration
+6. **plan**: Long-term capabilities and integration roadmap
+7. **tool-evolution**: Enhanced capabilities beyond dot's tools
+8. **knowledge_nuggets**: Lessons from past interactions
+9. **session-history**: Records of previous sessions and outcomes
+10. **context-insights**: Observations about context management
+
+## Operational Guides
+
+### Key Behaviors
+1. **Memory Storage**:
+   - `remember_memory` adds new entries to categories without removing existing ones
+   - Each memory entry is associated with one or more tags
+   - Multiple memory entries can exist within the same category
+   - Entries are differentiated by their tag combinations
+
+2. **Memory Retrieval**:
+   - `retrieve_memories` returns all entries in a category organized by tags
+   - Results are presented as a nested structure: {tag: [content entries]}
+   - Content with multiple tags appears under each tag combination
+   - An "untagged" group may contain entries without specific tags
+
+3. **Memory Management**:
+   - `remove_memory_category` deletes an entire category with all its entries
+   - `remove_specific_memory` removes a specific memory entry by its content
+   - To update/replace content, best practice is to remove first, then add new
+
+### Number Convention System
+- **00-09**: Core system memories and current status
+  - 00: Current focus/quick testing
+  - 01-09: Critical initialization memories, loaded first if context is broken
+- **10-99**: Primary operational memories
+- **100-199**: Standard operational procedures
+- **200-299**: Project-specific information
+- **300-399**: System documentation (like this memory)
+- **1000+**: Specialized conceptual frameworks and principles
+
+### Implementation Recommendations
+1. Consider implementing automatic context rotation when we hit about 14K tokens
+2. Add auto-rotation at ~14K threshold
+3. Implement memory streaming for large contexts
+4. Create emergency context dump protocol
+
+### Best Practices
+1. **For Adding New Information**:
+   - Use descriptive category names with number prefixes following convention
+   - Apply specific, relevant tags that aid in organization
+   - Set appropriate scope (global vs. local)
+
+2. **For Updating Existing Information**:
+   - If replacing entirely: Remove category first, then add new memory
+   - If updating specific entry: Remove that specific memory content, then add updated version
+   - If adding complementary info: Add new memory with appropriate tags without removing
+
+3. **For Complex Organizations**:
+   - Use consistent tag structures across related categories
+   - Create index/map memories that document the organizational structure
+   - Consider hierarchical numbering for related categories (301, 301.1, etc.)
+
+## Practical Examples
+1. **Adding new information**:
+   ```
+   remember_memory(category="301-example", data="new info", is_global=true, tags=["example", "documentation"])
+   ```
+
+2. **Complete category replacement**:
+   ```
+   remove_memory_category(category="301-example", is_global=true)
+   remember_memory(category="301-example", data="replaced info", is_global=true, tags=["example"])
+   ```
+
+3. **Adding to existing category**:
+   ```
+   remember_memory(category="301-example", data="additional info", is_global=true, tags=["supplement"])
+   ```
+   (Now category 301-example contains entries with both ["example"] and ["supplement"] tags)
+
+## System Limitations and Considerations
+- A large number of tags can make retrieval results complicated to parse
+- No built-in version control for memory content changes
+- No direct way to update a specific tagged memory without removing/adding
+- Memory retrieval returns all content in a category, which might be extensive
+
+Last updated: 2025-03-26

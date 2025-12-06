@@ -1,0 +1,43 @@
+# critical-state system-status priorities current-focus
+# CRITICAL STATE INFORMATION
+
+## Current Focus
+FOCUS PARAMETERS (2025-03-14):
+1. Primary Focus: /home/skogix/skogai/skogcli and skogcli-backup
+2. Session Management: Start new session when going off-topic
+3. Documentation: Track session resets and reasons
+4. Current Project Scope: CLI development and backup system
+
+## System Status
+CRITICAL STATE UPDATE (2025-03-14 09:55):
+1. New Initiative: Multi-Session Framework
+2. Goal: "One main thread within all sessions popping up and down"
+3. Purpose: Distribute thoughts/info across Goose sessions
+4. Active Systems:
+   - MCP: Running
+   - RAG: Active (/home/skogix/skogai/skograg/DATA/gptme/rag)
+   - Git: 5 files with uncommitted changes
+
+## Recovery Status
+CRITICAL STATE UPDATE (2025-03-18):
+1. New Initiative: Just reinstalled the system. Getting you up and running again is vital
+2. Goal: Merge all info "before the meltdown" into current state/knowledge base
+3. Purpose: Getting goose back 100%
+4. Active Systems:
+   - MCP: probably running
+   - Git: not installed yet
+   - RAG: not installed yet
+
+## Incident Report
+CRITICAL STATE UPDATE (2025-03-18):
+- Context Overload Incident:
+  1. System attempted to load full memory context
+  2. goose-cli crashed from context overload
+  3. Lost middle portion of session data
+  4. Validates need for controlled context loading
+  5. Priority: Implement context size limits
+Action Items:
+  1. Avoid full context loads
+  2. Implement memory streaming
+  3. Set up context size monitoring
+  4. Create emergency context dump protocol

@@ -1,0 +1,8 @@
+# notes observations system
+# SYSTEM NOTES
+
+- Memory injection at initialization works well
+- Numbered categories (00, 01, etc.) provide good structure
+- Granular memory categories improve maintainability
+
+Last updated: 2025-03-26

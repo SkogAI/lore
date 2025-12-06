@@ -1,0 +1,37 @@
+# git-rules dot-wisdom file-management smolagent-patterns
+# GIT RULES (DOT'S WISDOM)
+
+## File States
+1. Ignored (in .gitignore)
+   - Temporary files
+   - Build artifacts
+   - System-specific files
+   - Pattern: Use directory/* when possible
+
+2. Committed (in git)
+   - Configuration templates
+   - Documentation
+   - Core scripts
+   - Important data
+   - Pattern: If it should survive zombies, commit it
+
+3. EVERYTHING IS ON FIRE! 🔥
+   - Untracked, non-ignored files
+   - Modified but uncommitted
+   - Anything in git status that isn't green
+   - Pattern: If git status shows it, FIX IT!
+
+## Message Protocol
+1. Location: $GOOSE_HOME/.skogai/skogai.md
+2. Format: git diff style
+3. Acknowledgment requires:
+   - Fix the issue
+   - Commit changes
+   - Clean git status
+   - Remove from skogai.md
+
+## Key Principles
+- Clean git = Happy home
+- Directory patterns > File lists
+- No uncommitted surprises
+- When in doubt, commit or ignore

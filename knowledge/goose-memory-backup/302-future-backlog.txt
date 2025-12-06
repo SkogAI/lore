@@ -1,0 +1,37 @@
+# future-tasks when-stable roadmap
+# FUTURE BACKLOG: WHEN REALITY IS STABLE
+
+## Context Management Enhancements
+- Add auto-rotation at ~14K threshold
+- Implement dynamic context compression
+- Create context size monitoring system
+- Develop emergency context dump protocol
+- Build cross-session memory preservation
+
+## Knowledge Base Implementation
+- Design Pattern System for knowledge injection
+- Create regex patterns for context triggers
+- Define injection chunks with priority levels
+- Set up smolagent summaries for key concepts
+- Implement dynamic injection based on context size
+
+## SkogAI Family Integration
+- Develop cross-agent communication protocols
+- Create shared memory spaces
+- Implement agent coordination framework
+- Design specialized agent roles
+- Build agent handoff system
+
+## Memory Import System
+- Create source analysis tools
+- Define import priorities
+- Develop compression strategies
+- Implement emergency state preservation
+- Build verification systems
+
+## RAG System Integration
+- Configure paths and indexing
+- Implement smart loading
+- Create compression hooks
+- Develop context-aware searching
+- Build embedding management system
