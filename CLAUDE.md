@@ -229,6 +229,75 @@ argc create-book --title "My Book" --description "Description"
 argc create-entry --title "My Entry" --content "Content..." --category lore
 ```
 
+## Context Management
+
+**Context is the glue connecting data + agents + time + history.**
+
+Each context is a session snapshot that ties together:
+- **Data**: Which personas, books, entries are active
+- **Agents**: Which agents are running, what mode orchestrator is in
+- **Time**: Session timeline and timestamps
+- **History**: What knowledge was loaded, what actions occurred
+
+### Structure
+
+**Templates:** `@context/templates/`
+- `base-context.json` - Basic session state template
+- `persona-context.json` - Persona-specific context schema
+
+**Active Sessions:** `@context/current/` (13 contexts)
+**Archived Sessions:** `@context/archive/` (5 contexts)
+
+### Context File Format
+
+```json
+{
+  "session_id": "1764990069",
+  "created": "2025-12-06T04:01:09Z",
+  "system_state": {
+    "orchestrator_mode": "lore",
+    "memory_priority": "core"
+  },
+  "active_knowledge": ["file1.txt", "file2.txt"],
+  "prepared": {
+    "topic": "quantum",
+    "persona_id": "persona_1764992753",
+    "categories": {
+      "core": [...],
+      "navigation": [...]
+    }
+  }
+}
+```
+
+### Using context-manager.sh
+
+**Tool:** `@tools/context-manager.sh`
+
+```bash
+# Create new context from template
+session_id=$(./tools/context-manager.sh create base)
+# Returns: 1764990069
+
+# Update context field
+./tools/context-manager.sh update 1764990069 "system_state.orchestrator_mode" "lore"
+
+# Archive completed session
+./tools/context-manager.sh archive 1764990069
+# Moves context-1764990069.json from current/ to archive/
+```
+
+**Operations:**
+- `create <template>` - Copy template, generate session_id (timestamp), set created/updated timestamps
+- `update <session_id> <key> <value>` - Update field using jq, update last_modified
+- `archive <session_id>` - Move from current/ to archive/
+
+**Integration:**
+- Session tracking across multi-agent workflows
+- Connects generated content to personas and books
+- Maintains continuity - resume with right persona/knowledge/mode
+- Timeline tracking for session history
+
 ## Directory Structure
 
 ```
@@ -248,9 +317,16 @@ argc create-entry --title "My Entry" --content "Content..." --category lore
   crud-set/          - Set values in JSON
   crud-delete/       - Delete values from JSON
 
+@tools/
+  context-manager.sh - Create/update/archive session contexts
+
+@context/            - Session state management
+  templates/         - Context templates
+  current/           - Active session contexts
+  archive/           - Completed session contexts
+
 @orchestrator/       - Coordinates agents and knowledge
 @integration/        - Automation workflows
-@context/            - Session state
 ```
 
 ## Environment Requirements

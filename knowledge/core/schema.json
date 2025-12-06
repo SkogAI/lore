@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lore Entry Schema",
+  "description": "Schema for individual lore entries in the SkogAI knowledge base",
+  "type": "object",
+  "required": ["id", "title", "content", "category"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this lore entry"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the lore entry"
+    },
+    "content": {
+      "type": "string",
+      "description": "Main content of the lore entry in markdown format"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief synopsis of the entry content"
+    },
+    "category": {
+      "type": "string",
+      "description": "Primary classification of this entry",
+      "enum": ["character", "place", "event", "object", "concept", "custom"]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Searchable tags for categorization",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Connections to other lore entries",
+      "items": {
+        "type": "object",
+        "required": ["target_id", "relationship_type"],
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "description": "ID of the related lore entry"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "Nature of the relationship"
+          },
+          "description": {
+            "type": "string",
+            "description": "Additional context about the relationship"
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Category-specific structured data",
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Information about the entry itself",
+      "properties": {
+        "created_by": {
+          "type": "string",
+          "description": "Creator of this entry"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of this entry"
+        },
+        "canonical": {
+          "type": "boolean",
+          "description": "Whether this entry is considered canonical",
+          "default": true
+        }
+      }
+    },
+    "visibility": {
+      "type": "object",
+      "description": "Controls which personas can access this lore",
+      "properties": {
+        "public": {
+          "type": "boolean",
+          "description": "Whether this entry is available to all personas",
+          "default": true
+        },
+        "restricted_to": {
+          "type": "array",
+          "description": "If not public, list of persona IDs with access",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "book_id": {
+      "type": "string",
+      "description": "ID of the lore book this entry belongs to"
+    },
+    "references": {
+      "type": "array",
+      "description": "External source references",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of reference (URL, book, etc.)"
+          },
+          "value": {
+            "type": "string",
+            "description": "Reference value"
+          },
+          "description": {
+            "type": "string",
+            "description": "Context about this reference"
+          }
+        }
+      }
+    }
+  }
+}
