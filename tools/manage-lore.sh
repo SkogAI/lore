@@ -110,20 +110,11 @@ create_entry() {
   if ! validate_category "$category"; then
     return 1
   fi
-
-  # Sanitize inputs
-  local sanitized_title
-  sanitized_title=$(sanitize_input "$title")
-
   # Generate ID and check for duplicates
   local entry_id="entry_$(generate_id)"
   if ! check_duplicate_entry_id "$entry_id"; then
     return 1
   fi
-
-  # Check for duplicate titles (warning only)
-  check_duplicate_entry_title "$sanitized_title"
-
   local timestamp
   timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local creator
@@ -195,10 +186,6 @@ create_book() {
   if ! check_duplicate_book_id "$book_id"; then
     return 1
   fi
-
-  # Check for duplicate titles (warning only)
-  check_duplicate_book_title "$sanitized_title"
-
   local timestamp
   timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local creator

@@ -2,6 +2,7 @@
 """
 Validation script to check for hardcoded paths in Python files.
 
+=======
 This script scans Python files for hardcoded /home/skogix/skogai paths
 and reports files that need migration to the configuration system.
 
@@ -135,6 +136,7 @@ def main():
     print()
 
     if files_with_violations > 0:
+=======
         print("Migration needed! Use the config.paths module:")
         print()
         print("  from config.paths import get_base_dir, get_path")
