@@ -19,8 +19,4 @@ RELATIONSHIPS:
 
 POTENTIAL SECTIONS:
 * First section to include
-<<<<<<< HEAD
 * Second section to include
-=======
-* Second section to include
->>>>>>> 687095b (```json)

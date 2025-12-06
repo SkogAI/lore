@@ -108,8 +108,4 @@ case $command in
     echo "Usage: context-manager.sh [create|archive|update] [options]"
     exit 1
     ;;
-<<<<<<< HEAD
 esac
-=======
-esac
->>>>>>> 687095b (```json)

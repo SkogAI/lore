@@ -11,8 +11,4 @@
     "agents": ["planner", "implementation"],
     "knowledge_modules": ["core"]
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 687095b (```json)

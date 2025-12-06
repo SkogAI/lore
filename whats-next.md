@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # ⚠️ THIS IS A SESSION HANDOFF - READ BEFORE DOING ANYTHING ⚠️
 
 **DO NOT start working immediately. This document tells you where the previous session left off.**
@@ -8,13 +6,11 @@
 
 ---
 
->>>>>>> 687095b (```json)
 # Session Handoff - 2025-12-06
 
 ## Current State
 
 **Branch:** develop
-<<<<<<< HEAD
 **Status:** Clean - documentation updates completed
 **Recent Work:**
 - Documented orchestrator and integration layer architecture
@@ -176,7 +172,6 @@ git commit -m "feat: quantum superposition"
 - @integration/persona-mapping.conf - Git author → persona config
 
 **Architecture is now fully documented!** The system is ready for testing and automation.
-=======
 **Status:** Clean
 **Recent Commits:**
 - 4437641 feat: enhance lore system with API, templates, and documentation
@@ -323,4 +318,3 @@ The suggested next step is exploring orchestrator/integration, but the user migh
 - @orchestrator/ - **NOT YET EXPLORED**
 - @integration/ - **NOT YET EXPLORED**
 - @context/templates/persona-context.json - Template mappings **NOT YET UNDERSTOOD**
->>>>>>> 687095b (```json)

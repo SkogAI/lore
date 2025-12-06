@@ -58,8 +58,4 @@ You excel at converting high-level requirements into structured, actionable plan
 ## Knowledge Access
 - Core knowledge modules (00-09)
 - Project management knowledge (20-29)
-<<<<<<< HEAD
 - Domain-specific modules as provided by the orchestrator
-=======
-- Domain-specific modules as provided by the orchestrator
->>>>>>> 687095b (```json)

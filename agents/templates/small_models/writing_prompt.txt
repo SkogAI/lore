@@ -7,8 +7,4 @@ Use simple language.
 Include all major sections from the outline.
 Use paragraph breaks for readability.
 
-<<<<<<< HEAD
 Start with a title and introduction, then cover each section in order.
-=======
-Start with a title and introduction, then cover each section in order.
->>>>>>> 687095b (```json)

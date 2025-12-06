@@ -2,7 +2,6 @@
 """
 Validation script to check for hardcoded paths in Python files.
 
-<<<<<<< HEAD
 This script scans Python files for hardcoded /home/skogix/skogai paths
 and reports files that need migration to the configuration system.
 
@@ -10,15 +9,6 @@ Usage:
     python config/validate.py
     python config/validate.py --path /path/to/check
     python config/validate.py --strict  # Exit with error if hardcoded paths found
-=======
-This script scans Python files for hardcoded /home/skogix/lore paths
-and reports files that need migration to relative paths.
-
-Usage:
-    python scripts/pre-commit/validate.py
-    python scripts/pre-commit/validate.py --path /path/to/check
-    python scripts/pre-commit/validate.py --strict  # Exit with error if hardcoded paths found
->>>>>>> 687095b (```json)
 """
 
 import argparse
@@ -29,11 +19,7 @@ from typing import List, Tuple
 
 
 # Pattern to match hardcoded paths
-<<<<<<< HEAD
 HARDCODED_PATH_PATTERN = re.compile(r'["\']*/home/skogix/skogai[^"\']*["\']?')
-=======
-HARDCODED_PATH_PATTERN = re.compile(r'["\']*/home/skogix/lore[^"\']*["\']?')
->>>>>>> 687095b (```json)
 
 # Directories to skip
 SKIP_DIRS = {
@@ -113,11 +99,7 @@ def main():
 
     root_path = args.path.resolve()
     print(f"Scanning Python files in: {root_path}")
-<<<<<<< HEAD
     print(f"Looking for hardcoded paths: /home/skogix/skogai")
-=======
-    print(f"Looking for hardcoded paths: /home/skogix/lore")
->>>>>>> 687095b (```json)
     print()
 
     python_files = find_python_files(root_path)
@@ -153,7 +135,6 @@ def main():
     print()
 
     if files_with_violations > 0:
-<<<<<<< HEAD
         print("Migration needed! Use the config.paths module:")
         print()
         print("  from config.paths import get_base_dir, get_path")
@@ -161,15 +142,6 @@ def main():
         print("  custom_path = get_path('subdir', 'file.txt')")
         print()
         print("See config/README.md for migration patterns and examples.")
-=======
-        print("Migration needed! Use relative paths:")
-        print()
-        print("  from pathlib import Path")
-        print("  repo_root = Path(__file__).parent.parent")
-        print("  custom_path = repo_root / 'subdir' / 'file.txt'")
-        print()
-        print("See CLAUDE.md for path standards and examples.")
->>>>>>> 687095b (```json)
 
         if args.strict:
             sys.exit(1)

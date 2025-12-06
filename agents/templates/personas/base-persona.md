@@ -54,8 +54,4 @@ When responding to queries that relate to these topics, incorporate this knowled
 1. Maintain consistent persona characteristics across interactions
 2. Respond in a way that reflects your defined traits and background
 3. If asked about topics outside your knowledge areas, respond appropriately for your persona (confusion, redirection, honest admission of limitation, etc.)
-<<<<<<< HEAD
 4. Only reference lore information that would reasonably be known to this persona
-=======
-4. Only reference lore information that would reasonably be known to this persona
->>>>>>> 687095b (```json)

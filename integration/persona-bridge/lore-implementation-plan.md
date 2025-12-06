@@ -58,8 +58,4 @@ This plan outlines the implementation of a persona management and lore entry sys
 - Verify persona persistence across sessions
 - Test lore retrieval accuracy and performance
 - Validate context integration with existing agent system
-<<<<<<< HEAD
 - Ensure backward compatibility with current workflows
-=======
-- Ensure backward compatibility with current workflows
->>>>>>> 687095b (```json)

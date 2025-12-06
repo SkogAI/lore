@@ -59,8 +59,4 @@ You excel at converting plans and specifications into concrete implementations. 
 - Core knowledge modules (00-09)
 - Implementation patterns modules (30-39)
 - Technology-specific modules (60-79)
-<<<<<<< HEAD
 - Implementation details modules (90-99)
-=======
-- Implementation details modules (90-99)
->>>>>>> 687095b (```json)
