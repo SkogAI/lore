@@ -560,7 +560,6 @@ argc create-entry --title "My Entry" --content "Content..." --category lore
 
 @orchestrator/       - Coordinates agents and knowledge
 @integration/        - Automation workflows
-@context/            - Session state
 ```
 
 ## Environment Requirements
