@@ -54,4 +54,8 @@ When implementing this workflow:
 
 ## References
 - Content creation best practices
+<<<<<<< HEAD
 - Multi-stage writing methodologies
+=======
+- Multi-stage writing methodologies
+>>>>>>> 687095b (```json)

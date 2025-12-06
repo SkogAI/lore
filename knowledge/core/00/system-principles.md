@@ -21,4 +21,8 @@ Core principles that guide the design, development, and operation of the SkogAI 
 ## Development Approach
 - Documentation-first implementation
 - Test-driven verification
+<<<<<<< HEAD
 - Marker-based implementation triggers
+=======
+- Marker-based implementation triggers
+>>>>>>> 687095b (```json)
