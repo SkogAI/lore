@@ -169,41 +169,16 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
 
     # Determine what types of lore this agent needs
     lore_needs = determine_agent_needs(agent_type, agent_description, model, provider)
-
-    if not lore_needs:
-        return {"success": False, "error": "Failed to determine agent lore needs"}
-
     # Create the lorebook
     timestamp = int(time.time())
     book = api.create_lore_book(
         title=f"Specialized Lore for {agent_type.title()} Agent",
         description=f"Lore collection specifically created for {agent_type} agents: {agent_description}"
     )
-
-    # Track entries by category
-    entries_by_category = {}
-
     # Process each category
     for category, entries in lore_needs.items():
         if not entries:
             continue
-
-        entries_by_category[category] = []
-
-        for entry_data in entries:
-            title = entry_data.get("title", f"Untitled {category.title()}")
-            reason = entry_data.get("reason", "")
-
-            # Generate content for this entry
-            content = generate_lore_entry(title, category, agent_type, model, provider)
-
-            if not content:
-                logger.warning(f"Failed to generate content for {title}")
-                continue
-
-            # Create summary from the reason
-            summary = f"Purpose: {reason}" if reason else f"Lore for {agent_type} agent"
-
             # Create the entry
             entry = api.create_lore_entry(
                 title=title,
@@ -212,13 +187,6 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
                 tags=[agent_type, category],
                 summary=summary
             )
-
-            # Add to book
-            api.add_entry_to_book(entry["id"], book["id"])
-            entries_by_category[category].append(entry["id"])
-
-            logger.info(f"Created lore entry: {title} ({category})")
-
     # Update book categories
     book = api.get_lore_book(book["id"])
     if book:
@@ -325,14 +293,6 @@ def main():
     # Create the specialized lorebook
     description = args.description or f"A {args.agent_type} agent that helps with {args.agent_type} tasks"
     result = create_specialized_lorebook(api, args.agent_type, description, args.model, args.provider)
-
-    if not result.get("success", False):
-        print(f"Failed to create lorebook: {result.get('error', 'Unknown error')}")
-        return
-
-    print(f"Created specialized lorebook: {result['book_id']}")
-    print(f"Added {result['entry_count']} lore entries across {len(result['categories'])} categories")
-
     # Link to existing persona if specified
     if args.persona:
         link_result = link_to_existing_persona(api, result["book_id"], args.persona)
@@ -351,11 +311,6 @@ def main():
             if args.export:
                 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
                 from st_lore_export import export_persona_lore
-
-                export_dir = args.export
-                if not os.path.isdir(export_dir):
-                    os.makedirs(export_dir, exist_ok=True)
-
                 export_result = export_persona_lore(
                     api, persona_result["persona_id"], export_dir,
                     persona_result["name"], "{{user}}"
@@ -374,11 +329,6 @@ def main():
     elif args.export and result.get("book_id"):
         sys.path.append(os.path.dirname(os.path.abspath(__file__)))
         from st_lore_export import export_to_sillytavern
-
-        export_path = args.export
-        if os.path.isdir(export_path):
-            export_path = os.path.join(export_path, f"{result['book_id']}_st.json")
-
         export_result = export_to_sillytavern(
             api, result["book_id"], export_path,
             "{{char}}", "{{user}}", True

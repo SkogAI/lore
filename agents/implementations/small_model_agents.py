@@ -38,11 +38,6 @@ class SmallModelAgents:
 
         # Ensure template directory exists
         os.makedirs(self.prompt_dir, exist_ok=True)
-
-    def run_agent(self, agent_type: str, input_text: str,
-                  context: Optional[Dict[str, Any]] = None) -> str:
-        """Run a specialized agent using a small local model.
-
         Args:
             agent_type: "research", "outline", or "writing"
             input_text: Simple text input for the agent
@@ -54,10 +49,6 @@ class SmallModelAgents:
         # Validate agent type
         if agent_type not in ["research", "outline", "writing"]:
             raise ValueError(f"Unsupported agent type: {agent_type}")
-
-        # Load the appropriate prompt template
-        prompt_template = self._get_agent_prompt(agent_type)
-
         # Create a simplified prompt with context if provided
         if context:
             context_str = self._format_context(agent_type, context)
@@ -82,20 +73,10 @@ class SmallModelAgents:
             logger.error(f"Error running small model: {str(e)}")
             logger.error(f"Error output: {e.stderr}")
             raise RuntimeError(f"Model execution failed: {str(e)}")
-
-    def _get_agent_prompt(self, agent_type: str) -> str:
-        """Get the prompt template for the specified agent type."""
-        prompt_path = f"{self.prompt_dir}/{agent_type}_prompt.txt"
-
         # Check if the prompt file exists
         if not os.path.exists(prompt_path):
             # Create default prompt template if it doesn't exist
             self._create_default_prompt(agent_type, prompt_path)
-
-        # Load the prompt template
-        with open(prompt_path, 'r') as f:
-            return f.read().strip()
-
     def _create_default_prompt(self, agent_type: str, prompt_path: str) -> None:
         """Create a default prompt template for the specified agent type."""
         if agent_type == "research":
@@ -166,51 +147,11 @@ Start with a title and introduction, then cover each section in order.
 
         # Ensure the directory exists
         os.makedirs(os.path.dirname(prompt_path), exist_ok=True)
-
-        # Save the default prompt
-        with open(prompt_path, 'w') as f:
-            f.write(prompt)
-
-        logger.info(f"Created default prompt template for {agent_type} agent")
-
     def _format_context(self, agent_type: str, context: Dict[str, Any]) -> str:
         """Format context information for inclusion in the prompt."""
         if agent_type == "outline" and "research_output" in context:
             # Format research output for the outline agent
             research = context["research_output"]
-
-            if isinstance(research, str):
-                # Already formatted string
-                return f"Research Results:\n{research}"
-
-            # Try to format as structured data
-            try:
-                formatted = []
-
-                if "key_facts" in research and research["key_facts"]:
-                    facts = "\n".join([f"* {fact}" for fact in research["key_facts"]])
-                    formatted.append(f"KEY FACTS:\n{facts}")
-
-                if "main_concepts" in research and research["main_concepts"]:
-                    concepts = "\n".join([f"* {c['name']}: {c['definition']}"
-                                     if isinstance(c, dict) and "name" in c and "definition" in c
-                                     else f"* {c}" for c in research["main_concepts"]])
-                    formatted.append(f"MAIN CONCEPTS:\n{concepts}")
-
-                return "\n\n".join(formatted)
-
-            except Exception:
-                # Fall back to simple string representation
-                return f"Research Results: {str(research)}"
-
-        elif agent_type == "writing" and "outline_output" in context:
-            # Format outline for the writing agent
-            outline = context["outline_output"]
-
-            if isinstance(outline, str):
-                # Already formatted string
-                return f"Outline:\n{outline}"
-
             # Try to format structured data
             try:
                 if "structure" in outline and isinstance(outline["structure"], list):
@@ -225,26 +166,6 @@ Start with a title and introduction, then cover each section in order.
                             sections.append(f"{i}. {section_title}{subsections}")
                         else:
                             sections.append(f"{i}. {str(section)}")
-
-                    return "OUTLINE:\n" + "\n".join(sections)
-                else:
-                    return f"Outline: {str(outline)}"
-
-            except Exception:
-                # Fall back to simple string representation
-                return f"Outline: {str(outline)}"
-
-        # Default formatting for other cases
-        return str(context)
-
-    # Parsing functions for extracting structured data from text responses
-
-    def extract_research_facts(self, research_text: str) -> Dict[str, Any]:
-        """Extract structured data from research agent output.
-
-        Args:
-            research_text: Raw text output from the research agent
-
         Returns:
             Dict containing extracted key facts, concepts, etc.
         """
@@ -304,11 +225,6 @@ Start with a title and introduction, then cover each section in order.
             ("RELATIONSHIPS:", "relationships"),
             ("POTENTIAL SECTIONS:", "potential_sections")
         ]
-
-        for marker, key in sections_to_extract:
-            if marker in research_text:
-                section = research_text.split(marker)[1]
-
                 # Find next section marker to limit extraction
                 for next_marker, _ in sections_to_extract:
                     if next_marker in section and next_marker != marker:
@@ -320,17 +236,6 @@ Start with a title and introduction, then cover each section in order.
                     line = line.strip()
                     if line.startswith(('*', '-', '•')):
                         items.append(line.lstrip('*-• ').strip())
-
-                result[key] = items
-
-        return result
-
-    def extract_outline_structure(self, outline_text: str) -> Dict[str, Any]:
-        """Extract structured data from outline agent output.
-
-        Args:
-            outline_text: Raw text output from the outline agent
-
         Returns:
             Dict containing extracted title, introduction, sections, etc.
         """
@@ -366,62 +271,24 @@ Start with a title and introduction, then cover each section in order.
             sections_text = outline_text.split("SECTIONS:")[1]
             if "CONCLUSION:" in sections_text:
                 sections_text = sections_text.split("CONCLUSION:")[0]
-
-            # Regex to identify section numbers (1., 2., etc.)
-            section_pattern = re.compile(r"^\s*(\d+)\.\s+(.*?)$")
-
-            sections = []
-            current_section = None
-
             for line in sections_text.strip().split('\n'):
                 line = line.strip()
                 if not line:
                     continue
-
-                # Check for new section
-                section_match = section_pattern.match(line)
-
                 if section_match:
                     # If we were working on a previous section, add it to the list
                     if current_section:
                         sections.append(current_section)
-
-                    # Start a new section
-                    section_title = section_match.group(2).strip()
-                    current_section = {"title": section_title, "subsections": []}
-
                 # Check for subsection (assuming they're indented with * or -)
                 elif line.startswith(('*', '-', '•')) and current_section is not None:
                     subsection = line.lstrip('*-• ').strip()
                     current_section["subsections"].append(subsection)
-
-            # Add the last section if it exists
-            if current_section:
-                sections.append(current_section)
-
-            result["structure"] = sections
-
-        # Extract conclusion
-        if "CONCLUSION:" in outline_text:
-            conclusion_section = outline_text.split("CONCLUSION:")[1]
-
             # Find bullet points
             conclusion_points = []
             for line in conclusion_section.strip().split('\n'):
                 line = line.strip()
                 if line.startswith(('*', '-', '•')):
                     conclusion_points.append(line.lstrip('*-• ').strip())
-
-            result["conclusion"] = conclusion_points
-
-        return result
-
-    def extract_written_content(self, writing_text: str) -> Dict[str, Any]:
-        """Extract written content from writing agent output.
-
-        Args:
-            writing_text: Raw text output from the writing agent
-
         Returns:
             Dict containing extracted title and content sections
         """
@@ -447,27 +314,11 @@ Start with a title and introduction, then cover each section in order.
         # 1. Lines ending with colon (Section:)
         # 2. Lines in all caps (SECTION NAME)
         # 3. Lines with markdown headings (## Section)
-
-        section_pattern = re.compile(r"^(?:\d+\.\s+)?(?:#+\s+)?([A-Z][^:]+):?$|^([A-Z][A-Z\s]+)$", re.MULTILINE)
-
-        # Find all potential section headings
-        section_matches = list(section_pattern.finditer(content))
-        sections = []
-
-        if section_matches:
-            for i in range(len(section_matches)):
-                start_idx = section_matches[i].start()
-
                 # Determine where this section ends
                 if i < len(section_matches) - 1:
                     end_idx = section_matches[i+1].start()
                 else:
                     end_idx = len(content)
-
-                # Get the section header and content
-                section_header = section_matches[i].group(1) or section_matches[i].group(2)
-                section_text = content[start_idx:end_idx].strip()
-
                 # Remove the header from the section text
                 section_content = section_text[len(section_header):].strip()
                 if section_content.startswith(':'):
@@ -486,23 +337,12 @@ Start with a title and introduction, then cover each section in order.
 
         result["content_sections"] = sections
         return result
-    print("Research Response:\n", research_response)
-
-    # Extract structured data from the research output
-    research_data = agent_manager.extract_research_facts(research_response)
-
     # Use the research data for an outline request
     outline_response = agent_manager.run_agent(
         "outline",
         "Create an outline for an introductory article on quantum computing",
         {"research_output": research_data}
     )
-
-    print("\nOutline Response:\n", outline_response)
-
-    # Extract structured outline
-    outline_data = agent_manager.extract_outline_structure(outline_response)
-
     # Use the outline for writing
     writing_response = agent_manager.run_agent(
         "writing",

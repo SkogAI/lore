@@ -110,6 +110,7 @@ create_entry() {
   if ! validate_category "$category"; then
     return 1
   fi
+=======
   
   # Sanitize inputs
   local sanitized_title
@@ -120,6 +121,7 @@ create_entry() {
   if ! check_duplicate_entry_id "$entry_id"; then
     return 1
   fi
+=======
   
   # Check for duplicate titles (warning only)
   check_duplicate_entry_title "$sanitized_title"
@@ -195,6 +197,7 @@ create_book() {
   if ! check_duplicate_book_id "$book_id"; then
     return 1
   fi
+=======
   
   # Check for duplicate titles (warning only)
   check_duplicate_book_title "$sanitized_title"
