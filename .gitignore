@@ -88,3 +88,4 @@ knowledge/expanded/personas/*.json
 Thumbs.db
 .DS_Store
 .aider*
+.claude/tsc-cache/*
