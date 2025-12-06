@@ -928,3 +928,4 @@ done
 ```
 
 **Key insight:** Each layer is independent and uses existing tools. The integration layer is pure orchestration - it doesn't reinvent, it coordinates.
+- this is the representation of our current understanding of the lore project - it should be updated when ending a session to know where we stand: @docs/CURRENT_UNDERSTANDING.md

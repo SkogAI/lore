@@ -555,4 +555,3 @@ if __name__ == "__main__":
         # Get full context for the persona
         context = api.get_persona_lore_context(persona["id"])
         print(f"Persona has access to {len(context['lore_entries'])} lore entries")
-

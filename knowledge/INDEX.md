@@ -1,6 +1,6 @@
 # SkogAI Knowledge Index
 
-Generated: Sat Dec  6 07:20:00 AM CET 2025
+Generated: Sat Nov 22 11:46:46 AM CET 2025
 
 ## Core Knowledge (00-09)
 - [0001  ] SkogAI System Principles (principles, architecture, foundation  )
