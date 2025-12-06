@@ -15,7 +15,7 @@ SECTIONS:
 1. First Section Title
    * Subsection 1.1
    * Subsection 1.2
-   
+
 2. Second Section Title
    * Subsection 2.1
    * Subsection 2.2
