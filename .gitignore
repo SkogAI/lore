@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+*.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+config/secrets.json
+
+# API Keys (extra protection)
+*api_key*
+*API_KEY*
+*token*
+*TOKEN*
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Context & Session Data
+context/current/*.json
+context/archive/*.json
+demo/content_creation_*/
+
+# Build Artifacts
+*.whl
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Project-specific
+knowledge/expanded/lore/entries/*.json
+knowledge/expanded/lore/books/*.json
+knowledge/expanded/personas/*.json
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# OS
+Thumbs.db
+.DS_Store
