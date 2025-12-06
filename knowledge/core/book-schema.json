@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lore Book Schema",
+  "description": "Schema for organizing collections of lore entries in the SkogAI knowledge base",
+  "type": "object",
+  "required": ["id", "title", "description"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this lore book"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the lore book"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the lore book's purpose and contents"
+    },
+    "entries": {
+      "type": "array",
+      "description": "Lore entries contained in this book",
+      "items": {
+        "type": "string",
+        "description": "ID of a lore entry"
+      }
+    },
+    "categories": {
+      "type": "object",
+      "description": "Organization of entries by category",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "description": "ID of a lore entry"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Classification tags for this lore book",
+      "items": {
+        "type": "string"
+      }
+    },
+    "owners": {
+      "type": "array",
+      "description": "Personas that can modify this lore book",
+      "items": {
+        "type": "string",
+        "description": "ID of a persona"
+      }
+    },
+    "readers": {
+      "type": "array",
+      "description": "Personas that can read but not modify this lore book",
+      "items": {
+        "type": "string",
+        "description": "ID of a persona"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Information about the lore book itself",
+      "properties": {
+        "created_by": {
+          "type": "string",
+          "description": "Creator of this lore book"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of this lore book"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of this lore book",
+          "enum": ["draft", "active", "archived", "deprecated"]
+        }
+      }
+    },
+    "structure": {
+      "type": "array",
+      "description": "Organizational structure of the lore book",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of this section"
+          },
+          "description": {
+            "type": "string",
+            "description": "Purpose of this section"
+          },
+          "entries": {
+            "type": "array",
+            "description": "Entries in this section",
+            "items": {
+              "type": "string",
+              "description": "ID of a lore entry"
+            }
+          },
+          "subsections": {
+            "type": "array",
+            "description": "Nested subsections",
+            "items": {
+              "$ref": "#/properties/structure/items"
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Connections to other lore books",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "description": "ID of the related lore book"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "Nature of the relationship",
+            "enum": ["sequel", "prequel", "expansion", "contradiction", "reference", "custom"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Additional context about the relationship"
+          }
+        }
+      }
+    },
+    "visibility": {
+      "type": "object",
+      "description": "Global visibility settings for this lore book",
+      "properties": {
+        "public": {
+          "type": "boolean",
+          "description": "Whether this lore book is generally available",
+          "default": false
+        },
+        "system": {
+          "type": "boolean",
+          "description": "Whether this is a system-level lore book",
+          "default": false
+        }
+      }
+    }
+  }
+}
