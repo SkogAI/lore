@@ -1,0 +1,16 @@
+[Unit]
+Description=SkogAI Small Agent Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/lore
+ExecStart=%h/lore/skogai-agent-small-service.sh llama3
+Restart=always
+RestartSec=10
+
+# Ensure proper environment for Ollama
+Environment=HOME=%h
+
+[Install]
+WantedBy=default.target
