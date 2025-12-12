@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-12-12 08:32:54 UTC
+**Timestamp:** 2025-12-12 12:34:17 UTC
 
 ## Current State
 
@@ -21,7 +21,7 @@
 - Amy mentions: 162
 - Claude mentions: 237
 - Dot mentions: 222
-- Goose mentions: 275
+- Goose mentions: 274
 
 ## Mythology Expansion
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-e617da4 - refactor: update knowledge index generation and lore management scripts (38 seconds ago)
+0427c3e - Merge branch 'master' of https://github.com/SkogAI/lore (4 hours ago)
+e7f12b0 - Update lore statistics [skip ci] (4 hours ago)
+M	STATS.md
+
+94b3105 - Merge branch 'master' of https://github.com/SkogAI/lore (4 hours ago)
+6e69883 - 📚 Auto-update documentation [skip ci] (4 hours ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+
+2d10aee - Merge branch 'master' of https://github.com/SkogAI/lore (4 hours ago)
+d1bdf7b - Update lore statistics [skip ci] (4 hours ago)
+M	STATS.md
+
+29b99fa - 📈 Lore growth detected [skip ci] (4 hours ago)
+M	GROWTH.md
+
+2631ac9 - Merge branch 'develop' (4 hours ago)
+ec3ed14 - refactor: update knowledge index generation and lore management scripts (4 hours ago)
 M	knowledge/INDEX.md
 M	knowledge/expanded/lore/entries/entry_1765004260.json
-A	knowledge/expanded/lore/entries/entry_1765527808_b47d4a1b.json
-A	knowledge/expanded/lore/entries/entry_1765527862_1e2e0a0e.json
-A	knowledge/expanded/lore/entries/entry_1765527956_4d46ce5f.json
-A	knowledge/expanded/personas/persona_1765521367.json
-A	knowledge/expanded/personas/persona_1765521515.json
-A	scripts/jq/CLAUDE.md
-A	scripts/jq/IMPLEMENTATION_SPEC.md
-A	scripts/jq/README.md
-A	scripts/jq/USAGE_EXAMPLES.md
-A	scripts/jq/add-field/schema.json
-A	scripts/jq/add-field/test-input-1.json
-A	scripts/jq/add-field/test-input-10.json
-A	scripts/jq/add-field/test-input-11.json
-A	scripts/jq/add-field/test-input-12.json
-A	scripts/jq/add-field/test-input-2.json
-A	scripts/jq/add-field/test-input-3.json
-A	scripts/jq/add-field/test-input-4.json
 ```
 
 ---
