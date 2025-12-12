@@ -131,7 +131,7 @@ create_entry() {
     }')
 
   local target_file="${ENTRIES_DIR}/${entry_id}.json"
-
+  echo $json_content >$target_file
   echo "Created lore entry: ${entry_id}"
   echo "Edit the file at: ${target_file} to add content"
 }
@@ -188,6 +188,7 @@ create_book() {
 
   local target_file="${BOOKS_DIR}/${book_id}.json"
 
+  echo $json_content >$target_file
   echo "Created lore book: ${book_id}"
   echo "Edit the file at: ${target_file} to add structure and entries"
 }
