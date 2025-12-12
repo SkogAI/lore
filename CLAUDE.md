@@ -1145,55 +1145,47 @@ Delete a persona.
 
 ---
 
-### Tool Status (tested 2025-11-23)
+### Tool Status (tested 2025-12-12)
 
 **Working (no LLM required):**
 - `./tools/manage-lore.sh` - All commands work ✓
-- `./tools/create-persona.sh` - All commands work ✓
+  - Fixed: Now properly writes entry and book JSON files
 - `python orchestrator/orchestrator.py init [content|lore|research]` ✓
 - `python agents/api/lore_api.py` ✓
 
-**Working with LLM (tested with claude provider):**
+**Working with LLM - All Providers Tested:**
 
-✓ `python generate-agent-lore.py --provider claude --agent-type TYPE`
-- Creates lorebook with 4-10 entries, content saves correctly
-- **This is the recommended tool for creating lore**
+**Shell Script Tools (Working):**
+- ✓ `LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Title" "category"`
+- ✓ `LLM_PROVIDER=openai ./tools/llama-lore-creator.sh gpt-4 entry "Title" "category"`
+- ✓ `LLM_PROVIDER=ollama ./tools/llama-lore-creator.sh llama3 entry "Title" "category"`
+- ✓ `LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - persona "Name" "Description"`
+- ✓ `LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - extract-lore file.txt [json|lore]`
 
-**Python tool versions (added 2025-11-23):**
+**Python Tools:**
+- ✓ `python generate-agent-lore.py --provider claude --agent-type TYPE`
+  - Creates lorebook with 4-10 entries (has known bug - see below)
 
-? `python tools/llama-lore-creator.py entry "Title" "category"`
-- Python version - should be more reliable than shell script
+**Integration Pipeline:**
+- ✓ `./integration/lore-flow.sh manual "content"` - Runs all 5 steps
+- ✓ `./integration/lore-flow.sh git-diff HEAD` - Extracts from commits
 
-? `python tools/llama-lore-creator.py lorebook "Title" "description" [count]`
-- Creates lorebook with generated entries
+**Provider Status:**
+- ✅ **Claude** - Tested and working via OpenRouter API
+- ✅ **OpenAI** - Tested and working via OpenRouter API
+- ✅ **Ollama** - Tested and working with local models
 
-✓ `python tools/llama-lore-integrator.py --provider claude extract-lore file.txt [json|lore]`
-- Extracts entities from text, tested with CONCEPT.md
+**Known Issues (GitHub Issues):**
 
-✓ `python tools/llama-lore-integrator.py --provider claude analyze-connections book_id`
-- Finds and creates relationships between entries in a book
+⚠️ [Issue #5](https://github.com/SkogAI/lore/issues/5): LLM generates meta-commentary instead of lore content
+- **Impact:** Generated content includes "I need your approval..." instead of direct narrative
+- **Workaround:** Manually edit entries or fix prompt in `llama-lore-creator.sh`
+- **Status:** Needs prompt engineering fix
 
-✓ `python tools/llama-lore-integrator.py --provider claude import-directory dir/ "Title" "desc"`
-- Creates lorebook from directory, extracts lore from each file
-
-? `python tools/llama-lore-integrator.py --provider claude create-persona file.txt`
-- Creates persona from character description (needs character-focused file)
-
-**Shell script versions (legacy - prefer Python):**
-
-✗ `llama-lore-creator.sh entry` - jq escaping breaks content save
-✗ `llama-lore-creator.sh persona` - xargs unmatched quote error
-✗ `llama-lore-creator.sh lorebook` - grep regex fails, creates empty book
-✗ `llama-lore-integrator.sh import-directory` - markdown parsing broken, only extracts category
-✗ `llama-lore-integrator.sh analyze-connections` - connections not saved to entries
-
-**Not available:**
-- Ollama (not installed) - use `LLM_PROVIDER=claude` instead
-
-**Known issues:**
-- Some JSON files have parse errors (corrupted entries/books/personas)
-- Multiple shell script parsing bugs in llama-lore-*.sh tools
-- **Workaround:** Use Python versions (`tools/*.py`) or `generate-agent-lore.py`
+⚠️ [Issue #6](https://github.com/SkogAI/lore/issues/6): Pipeline creates entries with empty content
+- **Impact:** `lore-flow.sh` creates entry files but `content` field is empty
+- **Workaround:** Use `llama-lore-creator.sh` directly instead of pipeline
+- **Status:** Needs investigation in pipeline timing/paths
 
 **Agent APIs** (`agents/api/`):
 - `agent_api.py` - Core agent communication with LLM providers
