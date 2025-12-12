@@ -17,11 +17,11 @@
 set -e
 
 SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-LORE_DIR="${SKOGAI_DIR}/knowledge/expanded/lore"
+LORE_DIR="${SKOGAI_LORE}/knowledge/expanded/lore"
 BOOKS_DIR="${LORE_DIR}/books"
 ENTRIES_DIR="${LORE_DIR}/entries"
-PERSONA_DIR="${SKOGAI_DIR}/knowledge/expanded/personas"
-SCHEMA_DIR="${SKOGAI_DIR}/knowledge/core/lore"
+PERSONA_DIR="${SKOGAI_LORE}/knowledge/expanded/personas"
+SCHEMA_DIR="${SKOGAI_LORE}/knowledge/core/lore"
 ENTRY_SCHEMA="${SCHEMA_DIR}/schema.json"
 BOOK_SCHEMA="${SCHEMA_DIR}/book-schema.json"
 
@@ -34,16 +34,16 @@ mkdir -p "${ENTRIES_DIR}"
 mkdir -p "${PERSONA_DIR}"
 
 # Show deprecation warning (can be suppressed with LORE_NO_DEPRECATION_WARNING=1)
-show_deprecation_warning() {
-  if [ "${LORE_NO_DEPRECATION_WARNING}" != "1" ]; then
-    echo "⚠️  DEPRECATION WARNING" >&2
-    echo "   This bash tool is deprecated in favor of the Python API." >&2
-    echo "   Use: from agents.api.lore_api import LoreAPI" >&2
-    echo "   See: docs/guides/migration/MIGRATION_GUIDE.md" >&2
-    echo "   Set LORE_NO_DEPRECATION_WARNING=1 to suppress this warning." >&2
-    echo "" >&2
-  fi
-}
+# show_deprecation_warning() {
+#   if [ "${LORE_NO_DEPRECATION_WARNING}" != "1" ]; then
+#     echo "⚠️  DEPRECATION WARNING" >&2
+#     echo "   This bash tool is deprecated in favor of the Python API." >&2
+#     echo "   Use: from agents.api.lore_api import LoreAPI" >&2
+#     echo "   See: docs/guides/migration/MIGRATION_GUIDE.md" >&2
+#     echo "   Set LORE_NO_DEPRECATION_WARNING=1 to suppress this warning." >&2
+#     echo "" >&2
+#   fi
+# }
 
 # Display help information
 show_help() {
@@ -92,48 +92,19 @@ generate_id() {
 create_entry() {
   local title="$1"
   local category="$2"
-  
-  # Input validation
-  if ! validate_not_empty "$title" "title"; then
-    echo "Usage: $0 create-entry \"Entry Title\" category"
-    echo "Categories: ${VALID_CATEGORIES[*]}"
-    return 1
-  fi
-  
-  if ! validate_not_empty "$category" "category"; then
-    echo "Usage: $0 create-entry \"Entry Title\" category"
-    echo "Categories: ${VALID_CATEGORIES[*]}"
-    return 1
-  fi
-  
-  # Validate category
-  if ! validate_category "$category"; then
-    return 1
-  fi
-  
-  # Sanitize inputs
-  local sanitized_title
-  sanitized_title=$(sanitize_input "$title")
-  
+
   # Generate ID and check for duplicates
   local entry_id="entry_$(generate_id)"
-  if ! check_duplicate_entry_id "$entry_id"; then
-    return 1
-  fi
-  
-  # Check for duplicate titles (warning only)
-  check_duplicate_entry_title "$sanitized_title"
-  
   local timestamp
   timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local creator
   creator=$(whoami)
-  
+
   # Build JSON using jq for proper escaping
   local json_content
   json_content=$(jq -n \
     --arg id "$entry_id" \
-    --arg title "$sanitized_title" \
+    --arg title "$title" \
     --arg category "$category" \
     --arg creator "$creator" \
     --arg timestamp "$timestamp" \
@@ -158,15 +129,9 @@ create_entry() {
         restricted_to: []
       }
     }')
-  
+
   local target_file="${ENTRIES_DIR}/${entry_id}.json"
-  
-  # Atomic write with validation
-  if ! atomic_write "$json_content" "$target_file" "entry"; then
-    echo "ERROR: Failed to create entry" >&2
-    return 1
-  fi
-  
+
   echo "Created lore entry: ${entry_id}"
   echo "Edit the file at: ${target_file} to add content"
 }
@@ -175,41 +140,20 @@ create_entry() {
 create_book() {
   local title="$1"
   local description="$2"
-  
-  # Input validation
-  if ! validate_not_empty "$title" "title"; then
-    echo "Usage: $0 create-book \"Book Title\" \"Optional description\""
-    return 1
-  fi
-  
-  # Sanitize inputs
-  local sanitized_title
-  sanitized_title=$(sanitize_input "$title")
-  local sanitized_description=""
-  if [ -n "$description" ]; then
-    sanitized_description=$(sanitize_input "$description")
-  fi
-  
+
   # Generate ID and check for duplicates
   local book_id="book_$(generate_id)"
-  if ! check_duplicate_book_id "$book_id"; then
-    return 1
-  fi
-  
-  # Check for duplicate titles (warning only)
-  check_duplicate_book_title "$sanitized_title"
-  
   local timestamp
   timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local creator
   creator=$(whoami)
-  
+
   # Build JSON using jq for proper escaping
   local json_content
   json_content=$(jq -n \
     --arg id "$book_id" \
-    --arg title "$sanitized_title" \
-    --arg description "$sanitized_description" \
+    --arg title "$title" \
+    --arg description "$description" \
     --arg creator "$creator" \
     --arg timestamp "$timestamp" \
     '{
@@ -241,15 +185,9 @@ create_book() {
         system: false
       }
     }')
-  
+
   local target_file="${BOOKS_DIR}/${book_id}.json"
-  
-  # Atomic write with validation
-  if ! atomic_write "$json_content" "$target_file" "book"; then
-    echo "ERROR: Failed to create book" >&2
-    return 1
-  fi
-  
+
   echo "Created lore book: ${book_id}"
   echo "Edit the file at: ${target_file} to add structure and entries"
 }
@@ -405,12 +343,9 @@ add_to_book() {
 
   # If section is specified, add to that section
   if [ -n "$section" ]; then
-    local sanitized_section
-    sanitized_section=$(sanitize_input "$section")
-    
-    if jq -e ".structure[] | select(.name == \"$sanitized_section\")" "$book_file" >/dev/null; then
+    if jq -e ".structure[] | select(.name == \"$section\")" "$book_file" >/dev/null; then
       # Section exists, add entry to it
-      if ! atomic_update "$book_file" "(.structure[] | select(.name == \"$sanitized_section\").entries) += [\"$entry_id\"]" "book"; then
+      if ! atomic_update "$book_file" "(.structure[] | select(.name == \"$section\").entries) += [\"$entry_id\"]" "book"; then
         echo "ERROR: Failed to add entry to section" >&2
         return 1
       fi
@@ -527,17 +462,17 @@ search_lore() {
 # Validate an entry file
 validate_entry_file() {
   local file="$1"
-  
+
   if [ -z "$file" ]; then
     echo "Usage: $0 validate-entry <file.json>"
     return 1
   fi
-  
+
   if [ ! -f "$file" ]; then
     echo "ERROR: File not found: $file" >&2
     return 1
   fi
-  
+
   if validate_entry_schema "$file"; then
     echo "✓ Entry validation passed: $file"
     return 0
@@ -550,17 +485,17 @@ validate_entry_file() {
 # Validate a book file
 validate_book_file() {
   local file="$1"
-  
+
   if [ -z "$file" ]; then
     echo "Usage: $0 validate-book <file.json>"
     return 1
   fi
-  
+
   if [ ! -f "$file" ]; then
     echo "ERROR: File not found: $file" >&2
     return 1
   fi
-  
+
   if validate_book_schema "$file"; then
     echo "✓ Book validation passed: $file"
     return 0
@@ -576,39 +511,30 @@ validate_book_file() {
 
 case "$1" in
 create-entry)
-  show_deprecation_warning
   create_entry "$2" "$3"
   ;;
 create-book)
-  show_deprecation_warning
   create_book "$2" "$3"
   ;;
 list-entries)
-  show_deprecation_warning
   list_entries "$2"
   ;;
 list-books)
-  show_deprecation_warning
   list_books
   ;;
 show-entry)
-  show_deprecation_warning
   show_entry "$2"
   ;;
 show-book)
-  show_deprecation_warning
   show_book "$2"
   ;;
 add-to-book)
-  show_deprecation_warning
   add_to_book "$2" "$3" "$4"
   ;;
 link-to-persona)
-  show_deprecation_warning
   link_to_persona "$2" "$3"
   ;;
 search)
-  show_deprecation_warning
   search_lore "$2"
   ;;
 validate-entry)

@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/skogix/skogai
-ExecStart=/home/skogix/skogai/skogai-lore-service.sh llama3 300
+WorkingDirectory=/home/skogix/lore
+ExecStart=/home/skogix/lore/integration/services/skogai-lore-service.sh llama3 300
 Restart=on-failure
 RestartSec=10
 StandardOutput=journal
