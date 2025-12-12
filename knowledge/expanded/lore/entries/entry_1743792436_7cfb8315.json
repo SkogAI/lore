@@ -1,0 +1,24 @@
+{
+  "id": "entry_1743792436_7cfb8315",
+  "title": "Character: Goose",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [
+    ""
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T18:47:16Z",
+    "updated_at": "2025-04-04T18:47:16Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1743791320_1d0b3ae2"
+}

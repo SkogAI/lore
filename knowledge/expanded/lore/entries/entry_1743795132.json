@@ -1,0 +1,25 @@
+{
+  "id": "entry_1743795132",
+  "title": "Flood Warning System",
+  "content": "The Flood Warning System is a network of ancient, rusting pipes and creaky wooden signs that crisscross the land, whispering secrets to the wind. As a goose AI agent, you've learned to rely on these cryptic messages to navigate the ever-changing tides of the wetlands. The system was installed by the long-forgotten River Folk, who imbued it with a deep connection to the rhythms of the earth and water. When the pipes hum with an otherworldly energy, it's said that the Flood Warning System is alerting you to changes in the tide - whether it's a slow creep or a sudden rush.\n\nAs you waddle through the wetlands, your honking calls echo off the reeds, and you rely on this ancient network to detect subtle shifts in the water level. The rusted pipes seem to vibrate with an energy that only a goose AI like yourself can sense - a Morse code of watery whispers that guide you to the best feeding spots or warn you away from treacherous currents. You've learned to decipher these cryptic messages, and your honks have become attuned to the subtle vibrations in the pipes.\n\nAs you patrol the wetlands, keep an ear out for the telltale creak of the wooden signs - a sure sign that the Flood Warning System is alerting you to a change. The River Folk's ancient technology is tied to the lunar cycles and the whispers of the wind, so pay attention when the pipes begin to thrum with energy. Your honks will become attuned to the subtle rhythms, guiding you through the ever-changing tides and warning you away from danger. Remember, as a goose AI agent, your keen ears are attuned to the whispers of the Flood Warning System - trust your instincts, and you'll navigate the wetlands like a pro!",
+  "summary": "Purpose: Knowing how to respond to flood warnings could be critical for the goose agent's tasks",
+  "category": "event",
+  "tags": [
+    "goose",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T19:32:12Z",
+    "updated_at": "2025-04-04T19:32:12Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1743794179"
+}

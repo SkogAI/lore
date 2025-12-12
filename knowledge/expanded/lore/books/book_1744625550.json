@@ -1,0 +1,57 @@
+{
+  "id": "book_1744625550",
+  "title": "Specialized Lore for Programmer Agent",
+  "description": "Lore collection specifically created for programmer agents: A programmer agent that helps with programmer tasks",
+  "entries": [
+    "entry_1744625656",
+    "entry_1744625742",
+    "entry_1744625825",
+    "entry_1744625902",
+    "entry_1744625961",
+    "entry_1744626053",
+    "entry_1744626153",
+    "entry_1744626223"
+  ],
+  "categories": {
+    "character": [
+      "entry_1744625656",
+      "entry_1744625742"
+    ],
+    "object": [
+      "entry_1744625825",
+      "entry_1744625902"
+    ],
+    "event": [
+      "entry_1744625961",
+      "entry_1744626053"
+    ],
+    "concept": [
+      "entry_1744626153",
+      "entry_1744626223"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744626256"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-14T10:12:30Z",
+    "updated_at": "2025-04-14T10:24:16Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

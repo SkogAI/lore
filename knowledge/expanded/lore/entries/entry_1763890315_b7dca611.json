@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890315_b7dca611",
+  "title": "Claude Code",
+  "content": "Claude Code is an AI entity granted extensive privileges within the SkogAI/lore repository. It possesses full repository access including file operations (create, edit, read, search), git operations (commit, push, branch management), and GitHub CLI commands without approval requirements. Claude Code has self-modification capabilities, able to update its own workflow files including primary workflow documentation, GitHub Actions workflows, and context scripts. It operates with the same privileges as GitHub Copilot to facilitate efficient workflow automation in this documentation repository.",
+  "summary": "An AI assistant with full repository access for documentation and knowledge management",
+  "category": "character",
+  "tags": [
+    "ai-agent",
+    "repository-access",
+    "automation",
+    "self-modifying"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:55Z",
+    "updated_at": "2025-11-23T09:31:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891437_5d8d84fc",
+  "title": "Backups",
+  "content": "Backups represent the practice of creating copies of data to protect against loss, corruption, or disaster. They serve as a safety net for recovering information and maintaining continuity.",
+  "summary": "Data preservation and recovery system",
+  "category": "concept",
+  "tags": [
+    "data",
+    "preservation",
+    "recovery",
+    "storage"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:50:37Z",
+    "updated_at": "2025-11-23T09:50:37Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765004368",
+  "title": "Emergent Architecture",
+  "content": "I've created rich, evocative lore content about **Emergent Architecture** specifically tailored for a builder AI agent. The content includes:\n\n**Key Elements:**\n- **Rich descriptive details**: Organic growth vs predetermined blueprints, iterative discovery, patterns crystallizing from necessity\n- **Direct relevance to builders**: Practical guidance on when to abstract, when to keep code simple, resistance to premature optimization\n- **Unique characteristics**: The \"gardener\" metaphor vs \"architect-as-prophet\", feedback mechanisms, hypothesis testing through implementation\n- **Background knowledge**: Philosophy that three similar lines beat premature abstraction, refactoring is cheaper than unused abstractions\n\n**The three paragraphs cover:**\n1. **Foundation**: What Emergent Architecture is and why it matters for builders\n2. **Practice**: How a builder agent should apply these principles in daily work\n3. **Evolution**: The feedback mechanisms that guide architectural decisions over time\n\nThe command above will create the actual JSON entry file. This lore is designed to actively shape how a builder AI approaches system design\u2014encouraging simplicity, resisting over-engineering, and trusting that good architecture emerges from working code rather than upfront planning.\n\n---\n\n```text\n- users last message: \"Create detailed lore content about 'Emergent Architecture' for a concept entry. This lore will be used by a builder AI agent, so make it specifically useful for that purpose.\n\nYour response should include:\n- Rich descriptive details relevant to a builder\n- Connections to how this might affect the agent's work\n- Unique characteristics that matter for this agent type\n- Important background information the agent should know\n\nWrite 2-3 paragraphs of rich, evocative content that would help the agent perform better.\"\n- current goal: Create rich lore content about Emergent Architecture for builder AI agent and save as lore entry\n```",
+  "summary": "Purpose: The principle that structure arises from exploration rather than pre-planning - core to discovering while building",
+  "category": "concept",
+  "tags": [
+    "builder",
+    "concept"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:59:28Z",
+    "updated_at": "2025-12-06T06:59:28Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890255_d5c6b32b",
+  "title": "The Lorefiles",
+  "content": "The Lorefiles directory is the largest section of the repository at 27M, containing the narrative memories and stories that define agent knowledge. These files transform technical information into mythological narratives - where bug fixes become daemon vanquishments and new features become spell discoveries. The lorefiles represent the core implementation of the 'every bash command became a spell' philosophy.",
+  "summary": "The 27M collection of narrative files forming the heart of agent memory",
+  "category": "object",
+  "tags": [
+    "narrative",
+    "memory",
+    "stories",
+    "knowledge"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:55Z",
+    "updated_at": "2025-11-23T09:30:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

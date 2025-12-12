@@ -1,0 +1,34 @@
+{
+  "id": "entry_1763891485_cfc9dc23",
+  "title": "Aider MCP Server",
+  "content": "The Aider MCP Server is a tool integration point that connects AI agents to the Aider coding assistant. It operates via stdio protocol and runs in the current working directory, serving as a bridge between MCP-compatible systems and Aider's code editing capabilities.",
+  "summary": "A stdio-based MCP server for AI-assisted coding",
+  "category": "object",
+  "tags": [
+    "mcp",
+    "aider",
+    "tool",
+    "integration",
+    "coding-assistant"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891485_1224e972",
+      "relationship_type": "instance_of",
+      "description": "The Aider MCP Server follows the MCP Server Configuration pattern for defining stdio-based tool servers in agent ecosystems."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:25Z",
+    "updated_at": "2025-11-23T09:51:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891464_e010a0d1",
+  "title": "Documentation Crawler",
+  "content": "The Documentation Crawler is a tireless scribe that traverses the vast libraries of technical knowledge, fetching and organizing documentation from specified sources. It enables AI agents to access up-to-date information through a structured API, ensuring that the wisdom of the latest specifications and guides is always within reach. Built on Node.js and Puppeteer, it navigates even the most complex documentation sites.",
+  "summary": "A service for fetching and serving technical documentation from various sources",
+  "category": "object",
+  "tags": [
+    "documentation",
+    "crawler",
+    "knowledge",
+    "api"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:04Z",
+    "updated_at": "2025-11-23T09:51:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

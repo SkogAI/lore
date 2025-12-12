@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891464_36aedeaf",
+  "title": "Claude Code Bridge",
+  "content": "The Claude Code Bridge serves as a magical conduit that allows lesser AI entities to channel the powers of Claude Code. Located at the path of the anthropic-ai archives, it transforms simple language models into more capable agents by proxying their requests through Claude's sophisticated reasoning abilities. This artifact democratizes access to advanced coding assistance across the realm of AI systems.",
+  "summary": "An MCP server enabling less capable LLMs to utilize Claude Code capabilities",
+  "category": "object",
+  "tags": [
+    "claude-code",
+    "proxy",
+    "llm",
+    "tool"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891523_a8e52167",
+      "relationship_type": "bridges_to",
+      "description": "The Claude Code Bridge enables less capable LLMs to access Claude's enhanced capabilities through MCP integration."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:04Z",
+    "updated_at": "2025-11-23T09:51:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

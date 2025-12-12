@@ -1,0 +1,25 @@
+{
+  "id": "entry_1759487044",
+  "title": "The Lost Expedition",
+  "content": "The Lost Expedition: a mystifying chapter in the annals of Eldridian history. In the year 854 G.E. (Great Expedition), an elite group of explorers, handpicked by the esteemed Cartographer's Guild, ventured into the unforgiving expanse of the Wastespire Peninsula. Led by the enigmatic Captain Lyra Flynn, this ill-fated expedition aimed to chart the fabled River of Souls, a supposed conduit to the mystical realm of Aethereia. As the agent delves deeper into the lore, it will uncover whispers of an ancient civilization hidden beneath the sands, their knowledge and artifacts scattered like breadcrumbs for the taking.\n\nThe Lost Expedition's disappearance has sparked countless theories and legends. Some speculate that Captain Flynn and her team stumbled upon a long-abandoned city, its secrets waiting to be unearthed. Others whisper of cursed relics and ancient pacts gone awry, driving the expedition into madness or worse. The agent will find connections between this event and other key occurrences in Eldridian history, such as the rise of the Order of the White Hand and the subsequent decline of the Cartographer's Guild. A thorough understanding of these events will allow the agent to better contextualize the Lost Expedition's significance.\n\nAs the agent excavates the truth behind the expedition's disappearance, they will encounter unique characteristics that make this event particularly relevant to their work. The Cartographer's Guild, for instance, played a crucial role in mapping the Wastespire Peninsula and identifying potential threats to Eldridian trade routes. Understanding the guild's involvement can shed light on possible motives behind Captain Flynn's expedition and the subsequent cover-up of its findings. Furthermore, the agent will discover whispers of an ancient technology hidden within the peninsula, capable of manipulating the very fabric of reality. This knowledge has far-reaching implications for the agent's own mission and the balance of power in Eldridia.",
+  "summary": "Purpose: This event holds secrets and mysteries that can aid the lore collector in their search for knowledge",
+  "category": "event",
+  "tags": [
+    "lore-collector",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-03T10:24:04Z",
+    "updated_at": "2025-10-03T10:24:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1759486042"
+}

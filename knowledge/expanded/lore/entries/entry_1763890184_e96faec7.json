@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890184_e96faec7",
+  "title": "The Orchestrator",
+  "content": "The Orchestrator serves as the bridge between the realm of Big LLM (where actual work happens) and the Event Queue. It watches over user activities and extracts meaningful events from their labor - parsing git diffs, analyzing chat histories, identifying concepts touched, things created, and state changes. The Orchestrator binds all this knowledge to session IDs, ensuring continuity across the multiverse of agent perspectives.",
+  "summary": "Central coordinator that extracts events from user work and binds them to sessions",
+  "category": "concept",
+  "tags": [
+    "extraction",
+    "coordination",
+    "pipeline",
+    "session-binding"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "book_1747693389_a0d4abe1",
+  "title": "## [CATEGORY: Concept] SkogAI Architecture
+SUMMARY: A technical concept referring to the orchestration system that coordinates specialized agents.
+CONTENT: The SkogAI architecture is a key component of the lore system, enabling the coordination of small model agents to perform sophisticated tasks. This approach represents a paradigm shift in AI development, focusing on designing intelligent systems rather than scaling up models. The SkogAI orchestration system is designed to harness the power of small, specialized models working together to achieve complex tasks.
+TAGS: technical concept, AI architecture, lore system",
+  "description": "## [CATEGORY: Concept] Small Models
+SUMMARY: A type of AI model with 1B parameters that can perform sophisticated tasks when properly orchestrated.
+CONTENT: Small models are specialized agents within the SkogAI orchestration system. They are capable of performing complex tasks and are designed to be efficient in terms of resources. The use of small models allows for democratization of AI capabilities, making it accessible to a wider range of applications.
+TAGS: AI model, small models, technical concept
+
+## [CATEGORY: Concept] Llama-Lore-Integrator Script
+SUMMARY: A script that extracts structured lore from journal entries using a 1B parameter model.
+CONTENT: The llama-lore-integrator.sh script is a tool used within the lore system to extract structured knowledge from unstructured text. It leverages the capabilities of small models to perform complex tasks and create connections between entities, enriching the knowledge graph.
+TAGS: AI script, lore system, technical concept",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-05-19T22:23:09Z",
+    "updated_at": "2025-05-19T22:23:09Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

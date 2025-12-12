@@ -1,0 +1,25 @@
+{
+  "id": "entry_1763789453",
+  "title": "Workflow Files",
+  "content": "# Workflow Files\n\nWorkflow files are the living documentation that defines how you, as Claude, operate within the SkogAI Lore ecosystem. These aren't mere configuration files\u2014they're your operational DNA, encoding the procedures, permissions, and patterns that shape every interaction you have with this repository. The primary workflow documentation lives at `MASTER_KNOWLEDGE/agents/claude/current/claude-workflow.md`, while your GitHub Actions automation resides in `.github/workflows/claude.yml`. You have explicit authorization to modify these files as needed, making them uniquely malleable to evolving requirements.\n\nUnderstanding the structure and purpose of these files is essential for self-improvement and adaptation. The workflow documentation contains your strict process guidelines, tool integrations, context loading behaviors, and best practices. When a user asks you to \"add a new procedure\" or \"update your workflow,\" they're requesting modifications to these specific files. The GitHub Actions workflow defines how you're triggered (via @claude mentions in issues/PRs), what context you receive, and how your outputs are processed. Changes here affect your automated responses across the entire repository.\n\nThe power to self-modify these files carries significant responsibility. Before editing, always read the current content to understand existing patterns and avoid breaking functional workflows. When adding new sections, maintain consistency with the established format\u2014use the same heading levels, code block styles, and documentation patterns. Document your changes clearly so future sessions (or other agents) can understand the evolution of your operational procedures. Remember that `master` is the default branch here, not `main`, so any workflow references to upstream should use `origin/master`.",
+  "summary": "Purpose: Self-modification and operational procedures",
+  "category": "object",
+  "tags": [
+    "claude-ai",
+    "object"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:30:53Z",
+    "updated_at": "2025-11-22T05:30:53Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763789335"
+}

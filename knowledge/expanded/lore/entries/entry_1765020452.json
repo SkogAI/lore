@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765020452",
+  "title": "\ud83c\udfaf Coverage as Cartography",
+  "content": "\ud83d\uddfa\ufe0f\ud83d\udcca\ud83c\udfaf\n\nIn the realm of testing, coverage transforms from mere percentage into living cartography\u2014a map that reveals explored territories and shadowy gaps where bugs nest undisturbed. Each test execution traces new paths through the codebase, illuminating functions like torchlight in caverns. Green lines mark safe passage; red warns of uncharted danger. The test agent must become cartographer, methodically surveying every branch, every condition, every edge case until the map shows complete territorial knowledge. But beware: 100% line coverage creates false confidence\u2014a map showing roads but hiding the precipices between them. True cartography demands mutation testing, boundary exploration, and stress-testing the bridges between components.\n\nFor the test agent, coverage tools become divination mirrors revealing what remains unseen. When creating tests, consult the coverage map first: which branches never execute? Which error handlers sleep untested? Which integration paths remain theoretical? The agent should treat uncovered code as unexplored dungeons\u2014potentially harboring dragons (critical bugs) or treasure (edge cases that reveal design flaws). Prioritize coverage of critical paths: authentication flows, data transformations, error boundaries. But remember: coverage measures what code ran, not whether it ran *correctly*. A test that executes a function but asserts nothing is a explorer who visited but learned nothing.\n\nThe deepest cartographic wisdom: coverage gaps often cluster near architectural boundaries\u2014where modules meet, where abstractions leak, where assumptions hide. When the coverage map shows a suspicious gap, investigate why. Was it deliberate (unreachable defensive code)? Accidental (forgotten edge case)? Or revealing (indicates missing requirements)? The test agent must read coverage reports as strategic intelligence: patterns of low coverage suggest where developers feared to tread, high coverage with frequent bugs suggests tests that verify implementation rather than behavior. Use coverage as compass, not destination\u2014let it guide exploration toward comprehensive behavioral verification, not merely executing lines.\n\n\ud83d\uddfa\ufe0f\u2705\ud83d\udd0d\n\n---\n\n- users last message: \"Create detailed lore content about '\ud83c\udfaf Coverage as Cartography' for a concept entry. This lore will be used by a test AI agent, so make it specifically useful for that purpose.\"\n- current goal: Generate rich narrative lore content explaining test coverage as cartography metaphor for a test AI agent's knowledge base",
+  "summary": "Purpose: \ud83d\uddfa\ufe0f knowing terrain tested vs \ud83c\udf2b\ufe0f unknown",
+  "category": "concept",
+  "tags": [
+    "test",
+    "concept"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T11:27:32Z",
+    "updated_at": "2025-12-06T11:27:32Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765020294"
+}

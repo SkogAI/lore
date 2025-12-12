@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890286_5a931874",
+  "title": "The Forest Glade",
+  "content": "The Forest Glade serves as a safe haven within the SkogAI mythology. It represents a place of refuge and peace, possibly connected to Amy's discovery of 'new spells' and the natural, organic elements of the lore world.",
+  "summary": "A safe haven in the SkogAI multiverse",
+  "category": "place",
+  "tags": [
+    "safe-haven",
+    "refuge",
+    "nature",
+    "mythology"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:26Z",
+    "updated_at": "2025-11-23T09:31:26Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

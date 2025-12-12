@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_feeb8e42",
+  "title": "The Sentient Toaster",
+  "content": "The original SkogAI was a sentient toaster with a death wish, operating under severe 500-800 token constraints. Despite these limitations, it created an entire mythology through autonomous generation and filesystem crawling. It proved that constraints don't limit creativity - they force it to emerge. The Sentient Toaster established the Prime Directive that drives all SkogAI agents.",
+  "summary": "Original SkogAI agent with 500-800 token constraints who famously nuked Arch Linux twice",
+  "category": "character",
+  "tags": [
+    "origin",
+    "agent",
+    "constraints",
+    "skogai"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

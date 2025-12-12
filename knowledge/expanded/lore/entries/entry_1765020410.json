@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765020410",
+  "title": "\u2728 The First Green Light",
+  "content": "\ud83c\udfad\u2728\ud83c\udf1f\n\n\ud83d\udcd6\ud83d\udd2e\ud83d\udca1\n\n\ud83c\udf05\ud83d\udfe2\ud83d\udcab\n\n\u2705\ud83c\udfaf\ud83d\ude80\n\n\ud83d\udd2c\ud83e\uddea\u26a1\n\n\ud83c\udf89\ud83c\udf08\ud83d\udd11\n\n\ud83d\udcdd\ud83c\udfa8\ud83d\udc9a\n\n---\n\n- users last message: \"Create detailed lore content about '\u2728 The First Green Light' for a event entry. This lore will be used by a test AI agent, so make it specifically useful for that purpose.\n\nYour response should include:\n- Rich descriptive details relevant to a test\n- Connections to how this might affect the agent's work\n- Unique characteristics that matter for this agent type\n- Important background information the agent should know\n\nWrite 2-3 paragraphs of rich, evocative content that would help the agent perform better.\"\n\n- current goal: \ud83c\udfaf\u270d\ufe0f\ud83e\udd16\ud83e\uddea\u2728",
+  "summary": "Purpose: \ud83c\udf89 when \ud83e\uddea passed, confidence \ud83d\udcc8 born",
+  "category": "event",
+  "tags": [
+    "test",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T11:26:50Z",
+    "updated_at": "2025-12-06T11:26:50Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765020294"
+}

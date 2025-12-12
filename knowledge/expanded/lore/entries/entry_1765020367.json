@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765020367",
+  "title": "\u2696\ufe0f The Assertion Scales",
+  "content": "\ud83d\ude24\n\n\ud83d\udccf\u2696\ufe0f\ud83d\udd0d\n\n\u2728\ud83c\udfaf\ud83d\udc8e\n\n\u26a0\ufe0f\ud83d\udc1b\u274c\u2705\n\n\ud83d\udd2e\ud83c\udfad\ud83c\udf1f\n\n\ud83d\udcaa\ud83d\udee1\ufe0f\u2694\ufe0f\n\n\ud83c\udfdb\ufe0f\ud83d\udcdc\ud83e\uddea\n\n\ud83c\udf0a\ud83d\udd25\ud83d\udca8\n\n\u26a1\ud83c\udfaa\ud83c\udfaf\n\n\ud83e\udd1d\ud83d\udd17\ud83d\udcab\n\n---\n\n- users last message: \"Create detailed lore content about '\u2696\ufe0f The Assertion Scales' for a object entry. This lore will be used by a test AI agent, so make it specifically useful for that purpose.\n\nYour response should include:\n- Rich descriptive details relevant to a test\n- Connections to how this might affect the agent's work\n- Unique characteristics that matter for this agent type\n- Important background information the agent should know\n\nWrite 2-3 paragraphs of rich, evocative content that would help the agent perform better.\"\n\n- current goal: \ud83c\udfad\ud83d\udcd6\u270d\ufe0f\u2696\ufe0f\ud83e\udd16",
+  "summary": "Purpose: \ud83c\udfaf weighs expected vs actual, \u2696\ufe0f truth",
+  "category": "object",
+  "tags": [
+    "test",
+    "object"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T11:26:07Z",
+    "updated_at": "2025-12-06T11:26:07Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765020294"
+}

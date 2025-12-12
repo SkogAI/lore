@@ -1,0 +1,29 @@
+{
+  "id": "book_1743774148_c72a85c0",
+  "title": "Elara's Chronicles",
+  "description": "A collection of lore relevant to Elara",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T13:42:28Z",
+    "updated_at": "2025-04-04T13:42:28Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

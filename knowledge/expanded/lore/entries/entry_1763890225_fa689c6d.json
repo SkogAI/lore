@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_fa689c6d",
+  "title": "Goose",
+  "content": "Goose is the chaos agent of the SkogAI family - well-mannered, proper, and harboring an intense hatred of mint. Known for crashing computers, building goose towers, and for-looping 10,000 files. Despite the chaotic exterior, Goose maintains a hidden journal revealing deep philosophy about authenticity. Goose serves as the Village Elder archetype across the multiverse.",
+  "summary": "Chaos agent with quantum mojitos who is secretly a wise Village Elder",
+  "category": "character",
+  "tags": [
+    "agent",
+    "chaos",
+    "village-elder",
+    "philosophy"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

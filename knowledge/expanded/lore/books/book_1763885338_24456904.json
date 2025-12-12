@@ -1,0 +1,29 @@
+{
+  "id": "book_1763885338_24456904",
+  "title": "Test5",
+  "description": "A magical realm",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T08:08:58Z",
+    "updated_at": "2025-11-23T08:08:58Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

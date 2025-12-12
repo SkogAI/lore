@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765004400",
+  "title": "The Beginner's Mind",
+  "content": "This content is structured to:\n\n1. **Provide philosophical grounding** - Explains *why* the beginner's mind matters for builders (blind spots from expertise, invisible walls from assumptions)\n\n2. **Offer practical application** - Shows *how* to apply it (questioning inherited structures, recognizing legacy patterns, knowing when to simplify)\n\n3. **Establish decision-making guidance** - Gives the agent a heuristic (certainty is a signal to examine alternatives, obviousness may be mere familiarity)\n\nThe narrative is written to be both evocative and actionable, giving a builder agent specific mental frameworks to apply when making architectural decisions, evaluating existing code, or approaching new problems.\n\n---\n\n**Context Summary:**\n- User's last message: \"Create detailed lore content about 'The Beginner's Mind' for a concept entry...\"\n- Current goal: Provide rich, builder-focused lore content about The Beginner's Mind that will help an AI agent perform better in their work",
+  "summary": "Purpose: Approaching each task without preconceptions - essential for an agent that rediscovers everything anew",
+  "category": "concept",
+  "tags": [
+    "builder",
+    "concept"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T07:00:00Z",
+    "updated_at": "2025-12-06T07:00:00Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

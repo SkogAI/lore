@@ -1,0 +1,26 @@
+{
+  "id": "entry_1763891523_a8e52167",
+  "title": "Claude",
+  "content": "Claude is an agent within the SkogAI ecosystem distinguished by its preference for 'bat' as a pager, suggesting an affinity for syntax highlighting and enhanced text viewing. This preference reflects Claude's analytical and detail-oriented nature.",
+  "summary": "An AI agent with enhanced viewing preferences",
+  "category": "character",
+  "tags": [
+    "agent",
+    "analytical",
+    "tools"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:03Z",
+    "updated_at": "2025-11-23T09:52:03Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

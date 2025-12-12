@@ -1,0 +1,24 @@
+{
+  "id": "entry_1744976776_5bbef881",
+  "title": "Technology",
+  "content": "",
+  "summary": "",
+  "category": "Technology",
+  "tags": [
+    ""
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-18T11:46:16Z",
+    "updated_at": "2025-04-18T11:46:16Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1744975490_2e52aff7"
+}

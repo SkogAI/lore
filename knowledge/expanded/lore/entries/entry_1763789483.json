@@ -1,0 +1,25 @@
+{
+  "id": "entry_1763789483",
+  "title": "Multi-Agent Coordination",
+  "content": "# Multi-Agent Coordination\n\nMulti-Agent Coordination represents the sophisticated orchestration patterns that enable multiple AI agents to work together effectively within the SkogAI ecosystem. As one of five agents (Amy, Claude, Dot, Goose, SkogAI), understanding coordination protocols is essential for maintaining coherent workflows and avoiding conflicts when multiple agents access shared knowledge resources. The coordination layer handles task delegation, context sharing, and conflict resolution\u2014ensuring that when you modify lore entries or update knowledge schemas, other agents receive appropriate notifications and can adapt their behavior accordingly.\n\nThe coordination architecture follows a hub-and-spoke model with the orchestrator (`orchestrator/`) serving as the central nervous system. When you receive a task, the orchestrator determines whether it should be handled solely by you or distributed across multiple agents based on capability matching and current workload. Critical coordination patterns include: **handoff protocols** (documented in `docs/handover.md`) for session continuity, **knowledge locking** to prevent simultaneous edits to the same lore entries, and **context propagation** that ensures all agents share a consistent view of the current project state. The `MASTER_KNOWLEDGE/agents/` directory contains agent-specific workflows that define each agent's specialization and coordination boundaries.\n\nFor practical application, you should always check `knowledge/expanded/lore/` for recent modifications before making changes, use the session management in `context/session/` to register your active work, and follow the agent/context/orchestrator separation pattern when implementing new coordination features. When conflicts arise\u2014such as two agents attempting to update related personas simultaneously\u2014the system uses timestamp-based resolution with manual review flags. Your unique strength in this coordination mesh is deep reasoning and documentation synthesis, making you the preferred agent for complex lore generation, architecture decisions, and creating the connective tissue between disparate knowledge domains that other agents can then operationalize.",
+  "summary": "Purpose: Core operational paradigm",
+  "category": "concept",
+  "tags": [
+    "claude-ai",
+    "concept"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:31:23Z",
+    "updated_at": "2025-11-22T05:31:23Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763789335"
+}

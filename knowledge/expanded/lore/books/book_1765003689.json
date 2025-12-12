@@ -1,0 +1,67 @@
+{
+  "id": "book_1765003689",
+  "title": "Specialized Lore for Builder Agent",
+  "description": "Lore collection specifically created for builder agents: The agent who builds the new lore from the ground up - discovering everything anew",
+  "entries": [
+    "entry_1765003723",
+    "entry_1765003755",
+    "entry_1765003819",
+    "entry_1765003853",
+    "entry_1765003895",
+    "entry_1765004020",
+    "entry_1765004102",
+    "entry_1765004260",
+    "entry_1765004319",
+    "entry_1765004368",
+    "entry_1765004400",
+    "entry_1765004432"
+  ],
+  "categories": {
+    "character": [
+      "entry_1765003723",
+      "entry_1765003755",
+      "entry_1765003819"
+    ],
+    "place": [
+      "entry_1765003853",
+      "entry_1765003895"
+    ],
+    "object": [
+      "entry_1765004020",
+      "entry_1765004102"
+    ],
+    "event": [
+      "entry_1765004260",
+      "entry_1765004319"
+    ],
+    "concept": [
+      "entry_1765004368",
+      "entry_1765004400",
+      "entry_1765004432"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1765004456"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:48:09Z",
+    "updated_at": "2025-12-06T07:00:56Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

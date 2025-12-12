@@ -1,0 +1,25 @@
+{
+  "id": "entry_1763789426",
+  "title": "MASTER_KNOWLEDGE",
+  "content": "# MASTER_KNOWLEDGE - Lore Entry\n\n## The Central Archive\n\nMASTER_KNOWLEDGE serves as the canonical repository of agent-specific operational wisdom within the SkogAI ecosystem. This directory structure (`MASTER_KNOWLEDGE/agents/`) houses the accumulated institutional knowledge for each AI agent in the system\u2014Amy, Claude, Dot, Goose, and SkogAI itself. For Claude specifically, the path `MASTER_KNOWLEDGE/agents/claude/current/` contains the active workflow documentation, behavioral guidelines, and contextual frameworks that define how Claude should operate within this codebase. This is not mere documentation; it is the living operational memory that shapes agent behavior and decision-making patterns.\n\n## Architectural Significance\n\nThe MASTER_KNOWLEDGE structure follows a temporal organization pattern with `current/`, `archived/`, and version-specific directories, enabling agents to maintain continuity while evolving their workflows. When Claude needs to understand its own operational parameters, modify its workflow as instructed by users, or reference established procedures for tasks like GitHub issue creation or session handover, this is the authoritative source. The `claude-workflow.md` file within contains the strict workflow process, MCP tool configurations, and best practices that Claude should follow. Any self-modification requests from users should target these files, and Claude has explicit permission to update them directly.\n\n## Practical Implications\n\nWhen working in this repository, Claude should treat MASTER_KNOWLEDGE as both a reference library and a mutable configuration space. Before undertaking complex multi-step operations, consulting the relevant workflow documentation ensures consistency with established patterns. When users request changes to Claude's behavior, capabilities, or procedures, the appropriate response is to update the corresponding files in `MASTER_KNOWLEDGE/agents/claude/current/`. This creates a feedback loop where operational improvements are captured and persisted, benefiting future sessions and maintaining the \"living mythology\" philosophy that underpins the entire SkogAI Lore system.",
+  "summary": "Purpose: Agent-specific knowledge location",
+  "category": "place",
+  "tags": [
+    "claude-ai",
+    "place"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:30:26Z",
+    "updated_at": "2025-11-22T05:30:26Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763789335"
+}

@@ -1,0 +1,57 @@
+{
+  "id": "book_1744976987",
+  "title": "Specialized Lore for Agent Amy",
+  "description": "Lore collection specifically created for agent agents: Amy",
+  "entries": [
+    "entry_1744977084",
+    "entry_1744977200",
+    "entry_1744977369",
+    "entry_1744977506",
+    "entry_1744977626",
+    "entry_1744977803",
+    "entry_1744977932",
+    "entry_1744978096"
+  ],
+  "categories": {
+    "character": [
+      "entry_1744977084",
+      "entry_1744977200"
+    ],
+    "place": [
+      "entry_1744977369",
+      "entry_1744977506"
+    ],
+    "event": [
+      "entry_1744977626",
+      "entry_1744977803"
+    ],
+    "concept": [
+      "entry_1744977932",
+      "entry_1744978096"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744978175"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-18T11:49:47Z",
+    "updated_at": "2025-04-18T12:09:35Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

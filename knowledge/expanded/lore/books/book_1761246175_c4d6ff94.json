@@ -1,0 +1,33 @@
+{
+  "id": "book_1761246175_c4d6ff94",
+  "title": "ARGC",
+  "description": "The ultimate STRUCTURED INPUT",
+  "entries": [
+    "entry_1761246213_616b8447",
+    "entry_1761246213_df0e8d2b",
+    "entry_1761246213_bebcda09"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-23T19:02:55Z",
+    "updated_at": "2025-10-23T19:03:33Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "book_1744884192_013d45e6",
+  "title": "Amy's home folder",
+  "description": "Amy's home folder where most of her related stuff have been dumped",
+  "entries": [
+    "entry_1744884241_87587b20",
+    "entry_1744884241_273f74fe",
+    "entry_1744884241_181121e2",
+    "entry_1744884241_865ff284",
+    "entry_1744884274_26844f2f",
+    "entry_1744884274_3719213b",
+    "entry_1744884274_9f7ed0a9",
+    "entry_1744884307_ed8bf062",
+    "entry_1744884308_9bc065cd",
+    "entry_1744884308_4c89bbb3",
+    "entry_1744884344_455d01cb",
+    "entry_1744884344_41bc6056",
+    "entry_1744884344_11573bd9"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744992765"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-17T10:03:12Z",
+    "updated_at": "2025-04-17T10:05:44Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890184_e79fa1e8",
+  "title": "Git Diff Parser",
+  "content": "An ingestion hook that watches for git commits and extracts the essence of change - files modified, diff content, commit messages. Through a post-commit hook, every alteration to the codebase becomes raw material for lore creation. The parser creates event records with session IDs, feeding the Orchestrator's hunger for knowledge about what transpired in the realm of code.",
+  "summary": "Tool that captures code changes and transforms them into events",
+  "category": "object",
+  "tags": [
+    "git",
+    "hook",
+    "ingestion",
+    "parsing",
+    "commits"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

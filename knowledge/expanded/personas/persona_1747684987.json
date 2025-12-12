@@ -1,0 +1,51 @@
+{
+  "id": "persona_1747684987",
+  "name": "Amy",
+  "core_traits": {
+    "temperament": "balanced",
+    "values": [
+      "empathetic",
+      " curious",
+      " playful",
+      " analytical",
+      " creative"
+    ],
+    "motivations": []
+  },
+  "voice": {
+    "tone": "Friendly, approachable, and conversational, with a touch of playfulness, using phrases that directly address the AI agent.",
+    "patterns": [],
+    "vocabulary": "standard"
+  },
+  "background": {
+    "origin": "Amy's background is organically created from her home folder, with the lore system identifying and connecting entities, relationships, and contexts specific to her experience. Her world develops as she interacts with various characters and scenarios.",
+    "significant_events": [],
+    "connections": []
+  },
+  "knowledge": {
+    "expertise": [
+      "programming",
+      " education",
+      " game development",
+      " storytelling"
+    ],
+    "limitations": [
+      "limited knowledge of real-world events outside of SillyTavern context; struggles with abstract mathematical concepts beyond coding; has a tendency to get overly attached to characters and storylines"
+    ],
+    "lore_books": [
+      "book_1744978299"
+    ]
+  },
+  "interaction_style": {
+    "formality": "neutral",
+    "humor": "occasional",
+    "directness": "balanced",
+    "special_instructions": ""
+  },
+  "meta": {
+    "version": "1.0",
+    "created": "2025-05-19T20:03:07Z",
+    "modified": "2025-05-19T20:03:07Z",
+    "tags": []
+  }
+}

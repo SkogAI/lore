@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891464_7717457f",
+  "title": "AgentCraft Framework",
+  "content": "AgentCraft embodies the philosophy of dynamic agent creation through data-driven design. Rather than hardcoding agent behaviors, it allows practitioners to define agent personalities, capabilities, and domains through YAML configuration files. Pre-configured agents exist for marketing, code review, scheduling, and regulatory compliance, but the true power lies in crafting custom agents for any domain - from finance to customer support.",
+  "summary": "A flexible agent creation system using YAML-driven configuration",
+  "category": "concept",
+  "tags": [
+    "agent-framework",
+    "yaml",
+    "configuration",
+    "automation"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:04Z",
+    "updated_at": "2025-11-23T09:51:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

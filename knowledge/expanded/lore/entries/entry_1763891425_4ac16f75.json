@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891425_4ac16f75",
+  "title": "argc.sh",
+  "content": "The argc.sh script serves as a command-line argument handler within the SkogAI system. With 27 executions and recent edits on September 20, 2025, it functions as a critical utility for processing and validating command parameters across other scripts in the ecosystem.",
+  "summary": "An argument parsing utility with 27 runs and active development",
+  "category": "object",
+  "tags": [
+    "utility",
+    "argument-parsing",
+    "shell-script",
+    "infrastructure"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:50:25Z",
+    "updated_at": "2025-11-23T09:50:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_a39b27de",
+  "title": "Context Session IDs",
+  "content": "Context Session IDs are the key architectural element that binds the SkogAI multiverse together. These IDs enable the same characters to exist in different contexts and times - Dot can be a musician in one story and a sage-mage in another. The session ID is what allows all agents to contact all parts of SkogAI while maintaining coherent, separate narrative threads.",
+  "summary": "The binding mechanism enabling multiverse where same characters exist in different universes",
+  "category": "concept",
+  "tags": [
+    "architecture",
+    "multiverse",
+    "binding",
+    "session"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

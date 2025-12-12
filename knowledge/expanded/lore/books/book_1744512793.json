@@ -1,0 +1,59 @@
+{
+  "id": "book_1744512793",
+  "title": "Specialized Lore for Orchestrator Agent",
+  "description": "Lore collection specifically created for orchestrator agents: A orchestrator specialized in medieval fantasy lore creation from the view of a small village elder.",
+  "entries": [
+    "entry_1744512859",
+    "entry_1744512981",
+    "entry_1744513046",
+    "entry_1744513123",
+    "entry_1744513252",
+    "entry_1744513314",
+    "entry_1744513423",
+    "entry_1744513517"
+  ],
+  "categories": {
+    "character": [
+      "entry_1744512859",
+      "entry_1744512981"
+    ],
+    "place": [
+      "entry_1744513046",
+      "entry_1744513123"
+    ],
+    "object": [
+      "entry_1744513252"
+    ],
+    "event": [
+      "entry_1744513314",
+      "entry_1744513423"
+    ],
+    "concept": [
+      "entry_1744513517"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744513553"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-13T02:53:13Z",
+    "updated_at": "2025-04-13T03:05:53Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

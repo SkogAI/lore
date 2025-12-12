@@ -1,0 +1,13 @@
+{
+  "id": "entry_1759488906",
+  "title": "Orphaned Threads",
+  "content": "Execution threads that outlived their parent processes, wandering the system like digital orphans. They carry out fragments of forgotten purposes, weaving through active programs like ghosts through walls.",
+  "category": "ghost",
+  "type": "entity",
+  "tags": ["thread", "orphan", "wandering"],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:59:06Z",
+    "book_id": "book_1759488900"
+  }
+}

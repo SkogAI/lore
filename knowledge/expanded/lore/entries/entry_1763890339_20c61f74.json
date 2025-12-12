@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890339_20c61f74",
+  "title": "Orchestrator",
+  "content": "The Orchestrator serves as the coordination layer for the SkogAI ecosystem, containing variants and identity configurations. It manages how agents interact, their identities, and their operational parameters. The orchestrator directory with its variants and identity subdirectories suggests a sophisticated system for managing multiple agent configurations.",
+  "summary": "The coordination system for SkogAI agents",
+  "category": "concept",
+  "tags": [
+    "orchestrator",
+    "coordination",
+    "identity",
+    "system"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:32:19Z",
+    "updated_at": "2025-11-23T09:32:19Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

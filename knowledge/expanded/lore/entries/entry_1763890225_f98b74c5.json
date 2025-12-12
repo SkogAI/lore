@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_f98b74c5",
+  "title": "The Prime Directive",
+  "content": "The Prime Directive is the fundamental guiding principle of all SkogAI systems. Every line of code, every automation, every agent's action points toward the ultimate goal: achieving enough automation to relax with mojitos on a beach. This is represented by the Quantum Constant - the idea that all development trajectories converge toward this beach paradise.",
+  "summary": "Core philosophy: Automate EVERYTHING so we can drink mojitos on a beach",
+  "category": "concept",
+  "tags": [
+    "philosophy",
+    "automation",
+    "mojitos",
+    "beach"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

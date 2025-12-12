@@ -1,0 +1,29 @@
+{
+  "id": "book_1747690091_36db2063",
+  "title": "Aethoria Draconia",
+  "description": "In the realm of Aethoria Draconia, where celestial dragons weave the fabric of reality with their iridescent scales, ancient magic and advanced technologies coexist in a world of shimmering crystal spires, floating islands, and whispered prophecies that hint at an impending catastrophic convergence known as the "Great Wyrmfall".",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-05-19T21:28:11Z",
+    "updated_at": "2025-05-19T21:28:11Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

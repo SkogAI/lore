@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891425_d09cb476",
+  "title": "SkogAI Script Registry",
+  "content": "The Script Registry is a JSON-based ledger that tracks all shell scripts in the SkogAI realm. It records run counts, timestamps of last execution, creation dates, and modification times. This artifact serves as the memory of all automated tasks, preserving the history of every spell (script) cast within the system.",
+  "summary": "A tracking system that monitors script execution within the SkogAI ecosystem",
+  "category": "object",
+  "tags": [
+    "automation",
+    "tracking",
+    "metadata",
+    "skogai"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891425_77f9bb5b",
+      "relationship_type": "documented_during",
+      "description": "The Script Registry tracked all executions during the September 2025 Development Sprint, recording the intensive testing period."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:50:25Z",
+    "updated_at": "2025-11-23T09:50:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

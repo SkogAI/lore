@@ -1,0 +1,45 @@
+{
+  "id": "book_1759547200",
+  "title": "Specialized Lore for Aldervallare Agent",
+  "description": "Lore collection specifically created for aldervallare agents: takes care of things he dont know shit about like git backups best practices safety and other useless things",
+  "entries": [
+    "entry_1759547270",
+    "entry_1759547333",
+    "entry_1759547397",
+    "entry_1759547511"
+  ],
+  "categories": {
+    "character": [
+      "entry_1759547270",
+      "entry_1759547333"
+    ],
+    "concept": [
+      "entry_1759547397",
+      "entry_1759547511"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1759547541"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-04T03:06:40Z",
+    "updated_at": "2025-10-04T03:12:21Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

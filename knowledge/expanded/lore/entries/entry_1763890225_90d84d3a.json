@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_90d84d3a",
+  "title": "Elara Vex",
+  "content": "Elara Vex is a recurring character in SkogAI lore, appearing as a programmer and scientist known for creating quantum birds. She represents the intersection of technical skill and creative innovation, embodying the spirit of experimental development that characterizes the SkogAI ecosystem.",
+  "summary": "Programmer and scientist who created quantum birds",
+  "category": "character",
+  "tags": [
+    "scientist",
+    "programmer",
+    "quantum-birds",
+    "recurring"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

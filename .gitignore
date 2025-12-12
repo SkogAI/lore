@@ -74,11 +74,6 @@ htmlcov/
 .tox/
 .nox/
 
-# Project-specific
-knowledge/expanded/lore/entries/*.json
-knowledge/expanded/lore/books/*.json
-knowledge/expanded/personas/*.json
-
 # Temporary files
 *.tmp
 *.temp

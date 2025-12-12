@@ -1,0 +1,61 @@
+{
+  "id": "book_1765020294",
+  "title": "Specialized Lore for Test Agent",
+  "description": "Lore collection specifically created for test agents: A test agent",
+  "entries": [
+    "entry_1765020314",
+    "entry_1765020327",
+    "entry_1765020348",
+    "entry_1765020358",
+    "entry_1765020367",
+    "entry_1765020390",
+    "entry_1765020401",
+    "entry_1765020410",
+    "entry_1765020431",
+    "entry_1765020452"
+  ],
+  "categories": {
+    "character": [
+      "entry_1765020314",
+      "entry_1765020327"
+    ],
+    "place": [
+      "entry_1765020348",
+      "entry_1765020358"
+    ],
+    "object": [
+      "entry_1765020367",
+      "entry_1765020390"
+    ],
+    "event": [
+      "entry_1765020401",
+      "entry_1765020410"
+    ],
+    "concept": [
+      "entry_1765020431",
+      "entry_1765020452"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T11:24:54Z",
+    "updated_at": "2025-12-06T11:27:32Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

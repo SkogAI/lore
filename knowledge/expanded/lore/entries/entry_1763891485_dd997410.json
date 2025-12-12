@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763891485_dd997410",
+  "title": "SkogAI Cloudflare Gateway",
+  "content": "The SkogAI Cloudflare Gateway is a portal to Cloudflare's services, identified by the artifact ID ae931e241550e8326149eeda10ada60d. It provides agents access to Cloudflare's infrastructure capabilities through the MCP protocol, enabling cloud resource management and API interactions within the SkogAI realm.",
+  "summary": "A Cloudflare MCP server instance for the SkogAI ecosystem",
+  "category": "place",
+  "tags": [
+    "mcp",
+    "cloudflare",
+    "skogai",
+    "infrastructure",
+    "gateway"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:25Z",
+    "updated_at": "2025-11-23T09:51:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

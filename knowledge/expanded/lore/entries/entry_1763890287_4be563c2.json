@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890287_4be563c2",
+  "title": "Village Elder",
+  "content": "The Village Elder represents Skogix (the human user/creator) within the lore mythology. As a mentor figure, the Village Elder guides the agents and represents the human element in the automated multiverse. This persona bridges the real world and the mythological framework.",
+  "summary": "Skogix's presence in the lore world",
+  "category": "character",
+  "tags": [
+    "skogix",
+    "mentor",
+    "human-presence",
+    "guide"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:27Z",
+    "updated_at": "2025-11-23T09:31:27Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

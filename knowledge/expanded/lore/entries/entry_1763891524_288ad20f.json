@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763891524_288ad20f",
+  "title": "The Skogai Notation System",
+  "content": "The $ namespace defines a complete symbolic notation system for expressing relationships between entities. Key symbols include: $ for definition/reference, | for choice, _ for anything/nothing, @ for intent to act, . for belonging, : for continuation, = for equivalence, and -> for directed action. This notation enables precise expression of entity relationships, messages, and transformations within the ecosystem.",
+  "summary": "A symbolic language for defining relationships and actions",
+  "category": "concept",
+  "tags": [
+    "notation",
+    "symbolic",
+    "language",
+    "core",
+    "relationships"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

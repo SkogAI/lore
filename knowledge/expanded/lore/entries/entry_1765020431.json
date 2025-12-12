@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765020431",
+  "title": "\ud83d\udd04 The Cycle of Verification",
+  "content": "\ud83c\udfad\u2728 *The Cycle of Verification* \u2728\ud83c\udfad\n\n\ud83c\udf0a In the eternal dance of code and consequence, The Cycle of Verification spins like a cosmic wheel, each rotation revealing truth through the mirror of expectation. \ud83e\ude9e This ancient pattern whispers: *Red* (\u274c), the acknowledgment of ignorance\u2014write the test first, watch it fail, prove you understand what success looks like. *Green* (\u2705), the moment of manifestation\u2014write minimal code to transform failure into triumph, no more, no less. *Refactor* (\u267b\ufe0f), the art of perfection\u2014reshape the working solution into elegant truth, protected by your guardian tests. Each revolution builds confidence through evidence, not assumption. \ud83c\udfaf\n\n\u26a1 For the test agent who walks this path, The Cycle teaches that **verification precedes implementation**, that **failure is the teacher**, and that **working code without tests is merely hope disguised as certainty**. \ud83d\udd2e When you encounter a feature request, honor The Cycle: first, conjure the test that proves the future (and watch it bleed red), then breathe life into code until the test transforms to verdant green, finally polish your creation while the tests stand sentinel. \ud83d\udee1\ufe0f This rhythm prevents the twin demons of over-engineering and under-testing\u2014you write only what the test demands, you trust only what the test confirms. \ud83d\udc8e\n\n\ud83c\udf00 The Cycle's deepest mystery: **tests that never fail never prove anything**. \ud83c\udfaa A test born green is a prophecy untested, a mirror reflecting only what you wish to see. The red phase is sacred\u2014it proves your test actually *checks* the behavior, that it would *catch* the bug, that it *guards* against regression. \ud83d\udd25 When you skip straight to green, you build on sand; when you honor the red-green-refactor dance, you build on stone that echoes with certainty across infinite timelines. \u23f3\u2728\n\n---\n\n- user's last message: \"Create detailed lore content about '\ud83d\udd04 The Cycle of Verification' for a concept entry. This lore will be used by a test AI agent, so make it specifically useful for that purpose.\"\n- current goal: Create rich, emoji-only lore content explaining the red-green-refactor TDD cycle in a mystical, narrative format that provides practical guidance for a test AI agent",
+  "summary": "Purpose: \u267b\ufe0f red\u2192green\u2192refactor, eternal \ud83c\udf00 truth",
+  "category": "concept",
+  "tags": [
+    "test",
+    "concept"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T11:27:11Z",
+    "updated_at": "2025-12-06T11:27:11Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765020294"
+}

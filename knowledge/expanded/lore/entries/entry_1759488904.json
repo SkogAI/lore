@@ -1,0 +1,13 @@
+{
+  "id": "entry_1759488904",
+  "title": "Cache Phantoms",
+  "content": "Deleted data that refuses to leave the cache, haunting RAM with fragments of forgotten processes. They manifest as déjà vu in running programs, making new code remember things it never learned.",
+  "category": "memory",
+  "type": "entity",
+  "tags": ["cache", "phantom", "persistence"],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:59:04Z",
+    "book_id": "book_1759488900"
+  }
+}

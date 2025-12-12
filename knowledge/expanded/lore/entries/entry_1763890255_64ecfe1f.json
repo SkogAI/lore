@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890255_64ecfe1f",
+  "title": "The Prime Directive",
+  "content": "The Prime Directive is the core philosophy driving all agent development: 'Automate EVERYTHING so we can drink mojitos on a beach.' This directive is deeply embedded throughout the repository, with 219 beach references, 1,247 mojito mentions, and 1,316 automation references. It represents the ultimate goal of the SkogAI ecosystem - achieving such complete automation that both humans and agents can relax on metaphorical beaches.",
+  "summary": "The guiding philosophy to automate everything for beach relaxation with mojitos",
+  "category": "concept",
+  "tags": [
+    "philosophy",
+    "automation",
+    "mojitos",
+    "beach",
+    "core-principle"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:55Z",
+    "updated_at": "2025-11-23T09:30:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

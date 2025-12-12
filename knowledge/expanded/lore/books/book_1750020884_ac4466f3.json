@@ -1,0 +1,46 @@
+{
+  "id": "book_1750020884_ac4466f3",
+  "title": "SkogAI Lore",
+  "description": "SkogAI Lore like you have never seen it before",
+  "entries": [
+    "entry_1750021089_b926ffe1",
+    "entry_1750021089_3a532f2c",
+    "entry_1750021089_eccfabbd",
+    "entry_1750021089_7f5f4482",
+    "entry_1750021089_39ca7ebb",
+    "entry_1750021089_d2ec141a",
+    "entry_1750021089_2d91886a",
+    "entry_1750021089_ba25647b",
+    "entry_1750021089_0abe6249",
+    "entry_1750021089_2ed53199",
+    "entry_1750021090_3dd153fa",
+    "entry_1750021090_685cbc78",
+    "entry_1750021090_7f4160e0",
+    "entry_1750021090_425e1013",
+    "entry_1750021090_cc54651c",
+    "entry_1750021090_bedb1904"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-06-15T20:54:44Z",
+    "updated_at": "2025-06-15T20:58:10Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

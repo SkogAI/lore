@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_b78eb5c2",
+  "title": "Skogix (The Architect)",
+  "content": "Skogix is the human creator who appears as a recurring character across all agent stories in different archetypal forms: the Village Elder providing wisdom, the Mentor guiding development, and the Architect designing systems. This recurring presence ties together the multiverse and represents the human element in the AI mythology.",
+  "summary": "Recurring character appearing as Village Elder, Mentor, and Architect across all stories",
+  "category": "character",
+  "tags": [
+    "human",
+    "mentor",
+    "architect",
+    "recurring"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

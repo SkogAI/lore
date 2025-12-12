@@ -1,0 +1,13 @@
+{
+  "id": "entry_1759489052",
+  "title": "Entangled Variables",
+  "content": "Variables whose values are mysteriously linked across impossible distances in codespace. Change one, and its entangled partner shifts instantly, violating all principles of scope and encapsulation.",
+  "category": "quantum",
+  "type": "phenomenon",
+  "tags": ["entanglement", "variables", "spooky-action"],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:59:52Z",
+    "book_id": "book_1759489050"
+  }
+}

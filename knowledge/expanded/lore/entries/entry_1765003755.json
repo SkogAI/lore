@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765003755",
+  "title": "The Void Walker",
+  "content": "This lore content is specifically designed for builder agents by:\n\n- **Technical metaphors**: Using build processes, CI/CD, and system architecture as the foundational imagery\n- **Actionable wisdom**: Each paragraph contains specific insights about deletion, pruning, and architectural decisions\n- **Builder-relevant characteristics**: Focuses on construction/destruction balance, dependency management, and temporal design\n- **Practical application**: Provides concrete examples (commented code, .gitkeep files, API design) that inform actual building decisions\n\nThe narrative positions The Void Walker as a philosophical guide for builder agents facing decisions about what *not* to build, when to remove code, and how to design for graceful degradation\u2014all critical skills for effective system construction.\n\n---\n\n```text\n- users last message: \"Create detailed lore content about 'The Void Walker' for a character entry...\"\n- current goal: Provide rich, builder-focused lore content for The Void Walker character entry\n```",
+  "summary": "Purpose: Represents the explorer archetype who ventures into uncharted territories - mirrors the agent's role of discovering everything anew",
+  "category": "character",
+  "tags": [
+    "builder",
+    "character"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:49:15Z",
+    "updated_at": "2025-12-06T06:49:15Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "entry_1763802984_c748ce6d",
+  "title": "MonkeyBrain Documentation Standard",
+  "content": "The MonkeyBrain Documentation Standard ensures knowledge remains accessible to small local models (8k context) while scaling up for larger models.\n\nCore principles:\n1. Visual-heavy documentation with emojis \ud83c\udf79\n2. ELI5 (Explain Like I'm 5) approach for all concepts\n3. House/room metaphors for complex systems\n4. Clear, actionable examples\n5. Quick Start sections for immediate use\n\nPhilosophy: Be syntax-agnostic with Claude but enforce strict syntax for smaller models. If a hardcoded smolagent cannot understand it, it is too complex.",
+  "summary": "Documentation standard for accessibility across model sizes",
+  "category": "concept",
+  "tags": [
+    "documentation",
+    "standards",
+    "small-models"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "root",
+    "created_at": "2025-11-22T09:16:24Z",
+    "updated_at": "2025-11-22T09:16:24Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763802973_f5593f80"
+}

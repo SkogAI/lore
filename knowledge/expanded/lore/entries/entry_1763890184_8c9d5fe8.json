@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890184_8c9d5fe8",
+  "title": "The Event Queue",
+  "content": "A liminal space where events wait to be transformed into narrative lore. Located in context/queue/, each event rests as a JSON artifact containing raw data, extracted concepts, target agents, and pending status. Events flow in from the Orchestrator and flow out to the Worker daemon, each carrying the session ID that links it to its origin in the world of actual work.",
+  "summary": "Repository of pending transformations awaiting the Local LLM Worker",
+  "category": "place",
+  "tags": [
+    "queue",
+    "storage",
+    "pending",
+    "transformation"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

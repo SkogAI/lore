@@ -1,0 +1,27 @@
+{
+  "id": "entry_1764308572",
+  "title": "The Dark Lord Malakar",
+  "content": "Malakar is the ancient evil who summoned the Shadowfangs to Eldoria. Once a powerful mage who sought immortality, he made a pact with dark forces and was transformed into an undead being of terrible power. From his fortress in the Blighted Mountains, he commands the Shadowfangs and seeks to corrupt all of Eldoria. Only the protected sanctuaries like the Forest Glade remain beyond his reach.",
+  "summary": "The ancient evil who commands the Shadowfangs",
+  "category": "character",
+  "tags": [
+    "malakar",
+    "villain",
+    "dark lord",
+    "undead"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-28T05:42:52Z",
+    "updated_at": "2025-11-28T05:42:52Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1764308572"
+}

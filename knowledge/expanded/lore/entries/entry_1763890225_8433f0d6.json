@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_8433f0d6",
+  "title": "Wawa Saga",
+  "content": "The Wawa Saga is a complete narrative arc within SkogAI lore - a convenience store RPG where squirrels serve as the primary antagonists. This demonstrates how the system transforms mundane elements (a convenience store) into epic mythology, turning everyday concepts into adventure narratives with clear heroes and villains.",
+  "summary": "Complete convenience store RPG adventure with squirrels as antagonists",
+  "category": "event",
+  "tags": [
+    "narrative",
+    "rpg",
+    "squirrels",
+    "adventure"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

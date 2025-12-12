@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890315_a2e188b1",
+  "title": "Session Handover Document",
+  "content": "The Session Handover Document (docs/handover.md) is a ritual artifact created at the conclusion of each work session. It records what was accomplished, provides context for the next session, lists active session IDs, describes repository state, and outlines next steps. This ensures smooth continuation between work sessions, preserving the thread of progress across the boundaries of individual AI invocations.",
+  "summary": "A document created at session end to ensure work continuity",
+  "category": "object",
+  "tags": [
+    "documentation",
+    "continuity",
+    "session-management",
+    "handover"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:55Z",
+    "updated_at": "2025-11-23T09:31:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

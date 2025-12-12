@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891382_542b9f3d",
+  "title": "MCP Server Configuration",
+  "content": "The configuration schema for connecting to MCP (Model Context Protocol) servers in the SkogAI ecosystem. Supports two connection types: HTTP-based remote servers (like the memory server) and stdio-based local processes (like the Cloudflare server). Each server entry specifies its type, connection details, and optional environment variables.",
+  "summary": "Configuration pattern for Model Context Protocol servers",
+  "category": "concept",
+  "tags": [
+    "configuration",
+    "mcp",
+    "protocol",
+    "architecture"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:49:42Z",
+    "updated_at": "2025-11-23T09:49:42Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

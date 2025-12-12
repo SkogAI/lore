@@ -1,0 +1,63 @@
+{
+  "id": "book_1761246708",
+  "title": "Specialized Lore for Argc-Lore-Master Agent",
+  "description": "Lore collection specifically created for argc-lore-master agents: The one who makes sure the input is structured. ALWAYS",
+  "entries": [
+    "entry_1761246832",
+    "entry_1761246901",
+    "entry_1761246968",
+    "entry_1761247072",
+    "entry_1761247175",
+    "entry_1761247279",
+    "entry_1761247408",
+    "entry_1761247476",
+    "entry_1761247546",
+    "entry_1761247636"
+  ],
+  "categories": {
+    "character": [
+      "entry_1761246832",
+      "entry_1761246901"
+    ],
+    "place": [
+      "entry_1761246968",
+      "entry_1761247072"
+    ],
+    "object": [
+      "entry_1761247175",
+      "entry_1761247279"
+    ],
+    "event": [
+      "entry_1761247408",
+      "entry_1761247476"
+    ],
+    "concept": [
+      "entry_1761247546",
+      "entry_1761247636"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1761247660"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-23T19:11:48Z",
+    "updated_at": "2025-10-23T19:27:40Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

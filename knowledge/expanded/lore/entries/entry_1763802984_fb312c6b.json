@@ -1,0 +1,26 @@
+{
+  "id": "entry_1763802984_fb312c6b",
+  "title": "Context Management System",
+  "content": "The Context Management System is the core architecture enabling SkogAI agents to operate with task-specific focus rather than capacity limitations.\n\nKey principles:\n- Context is TASK-SPECIFIC, not capacity-limited\n- 8k token limit enforces focused context\n- File visibility dynamically filtered by current task\n- Must scale from 0.2k to 200k+ tokens\n\nThe hierarchical structure uses:\n- active/: Current working context (symlinked)\n- project-specific/: Isolated project contexts\n- shared/: Cross-project knowledge\n- global/: System-wide settings",
+  "summary": "Core architecture for task-specific context filtering across all agents",
+  "category": "concept",
+  "tags": [
+    "architecture",
+    "context",
+    "core"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "root",
+    "created_at": "2025-11-22T09:16:24Z",
+    "updated_at": "2025-11-22T09:16:24Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763802973_f5593f80"
+}
