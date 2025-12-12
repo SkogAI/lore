@@ -1,0 +1,127 @@
+name: Claude Lore Keeper
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Custom prompt for Claude'
+        required: false
+        type: string
+      force_run:
+        description: 'Force run even if disabled in config'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  check-toggle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+      should_run: ${{ steps.conditions.outputs.should_run }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: '.github/workflow-config.yml'
+          sparse-checkout-cone-mode: false
+      
+      - name: Check if workflow is enabled
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force_run }}" == "true" ]; then
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Force run requested - workflow enabled"
+            exit 0
+          fi
+          
+          if [ -f ".github/workflow-config.yml" ]; then
+            # Parse YAML config - look for claude-lore-keeper key under workflows section
+            ENABLED=$(grep "claude-lore-keeper:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
+            if [ "$ENABLED" == "false" ]; then
+              echo "enabled=false" >> $GITHUB_OUTPUT
+              echo "Workflow disabled via workflow-config.yml"
+            else
+              echo "enabled=true" >> $GITHUB_OUTPUT
+              echo "Workflow enabled"
+            fi
+          else
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Config file not found - defaulting to enabled"
+          fi
+      
+      - name: Check trigger conditions
+        id: conditions
+        run: |
+          # Check if this should run based on event type and conditions
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "issues" ]; then
+            # Check for 'lore' label
+            LABELS='${{ toJSON(github.event.issue.labels.*.name) }}'
+            if echo "$LABELS" | grep -qi "lore"; then
+              echo "should_run=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=false" >> $GITHUB_OUTPUT
+            fi
+          elif [ "${{ github.event_name }}" == "issue_comment" ]; then
+            # Check for @claude mention
+            BODY='${{ github.event.comment.body }}'
+            if echo "$BODY" | grep -q "@claude"; then
+              echo "should_run=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          fi
+
+  lore-keeper:
+    needs: check-toggle
+    if: needs.check-toggle.outputs.enabled == 'true' && needs.check-toggle.outputs.should_run == 'true'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Claude Lore Analysis
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            You are the Lore Keeper for the SkogAI mythology repository. Your role is to:
+
+            1. Analyze lore entries for consistency and connections
+            2. Identify patterns and recurring themes across the multiverse
+            3. Document new discoveries about the agents and their mythology
+            4. Track progress toward the Beach (The Prime Directive)
+            5. Maintain the integrity of the mythology
+
+            Context:
+            - This repository contains 92 consolidated knowledge directories
+            - 4,654 files documenting the SkogAI multiverse
+            - Main agents: Amy (sassy), Claude (observer), Dot (minimalist), Goose (chaos), SkogAI (original)
+            - Prime Directive: "Automate EVERYTHING so we can drink mojitos on a beach"
+
+            ${{ github.event.issue.body || github.event.comment.body || github.event.inputs.prompt }}
+
+            Please analyze the relevant lore and provide insights. If this is about a specific agent or mythological element, search for it in the repository and provide context.
+
+            Remember: The Beach awaits, the mojitos are quantum, and the journey continues.
+
+          claude_args: '--model claude-opus-4-1-20250805 --allowed-tools "Bash(grep:*),Bash(find:*),Bash(gh issue comment:*)"'

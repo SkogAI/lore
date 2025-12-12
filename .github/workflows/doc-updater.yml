@@ -1,0 +1,218 @@
+name: Documentation Auto-Updater
+
+on:
+  push:
+    paths:
+      - '**/*.json'
+      - '**/*.md'
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force run even if disabled in config'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  check-toggle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: '.github/workflow-config.yml'
+          sparse-checkout-cone-mode: false
+      
+      - name: Check if workflow is enabled
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force_run }}" == "true" ]; then
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Force run requested - workflow enabled"
+            exit 0
+          fi
+          
+          if [ -f ".github/workflow-config.yml" ]; then
+            # Parse YAML config - look for doc-updater key under workflows section
+            ENABLED=$(grep "doc-updater:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
+            if [ "$ENABLED" == "false" ]; then
+              echo "enabled=false" >> $GITHUB_OUTPUT
+              echo "Workflow disabled via workflow-config.yml"
+            else
+              echo "enabled=true" >> $GITHUB_OUTPUT
+              echo "Workflow enabled"
+            fi
+          else
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Config file not found - defaulting to enabled"
+          fi
+
+  update-docs:
+    needs: check-toggle
+    if: needs.check-toggle.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update Repository Statistics in README
+        run: |
+          # Update statistics in README
+          TOTAL_FILES=$(find . -type f | wc -l)
+          MD_FILES=$(find . -name "*.md" | wc -l)
+          JSON_FILES=$(find . -name "*.json" | wc -l)
+          LORE_ENTRIES=$(find . -name "entry_*.json" | wc -l)
+          PERSONAS=$(find . -name "persona_*.json" | wc -l)
+          REPO_SIZE=$(du -sh . | cut -f1)
+
+          # Create temporary file with updated stats
+          cat README.md | sed -E \
+            -e "s/\*\*[0-9,]+ files\*\*/\*\*$TOTAL_FILES files\*\*/" \
+            -e "s/[0-9,]+ lore entries/$LORE_ENTRIES lore entries/" \
+            -e "s/[0-9,]+ personas/$PERSONAS personas/" \
+            -e "s/[0-9,]+ MB/$REPO_SIZE/" \
+            > README.tmp
+
+          mv README.tmp README.md
+
+      - name: Generate Quick Navigation Index
+        run: |
+          echo "# 🗺️ Quick Navigation Index" > NAVIGATION.md
+          echo "" >> NAVIGATION.md
+          echo "**Auto-generated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+
+          echo "## 📁 Main Documentation" >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+          for file in DOCUMENTATION.md AGENT_PROFILES.md MYTHOLOGY_MAP.md STATS.md GROWTH.md; do
+            if [ -f "$file" ]; then
+              echo "- [$file]($file)" >> NAVIGATION.md
+            fi
+          done
+          echo "" >> NAVIGATION.md
+
+          echo "## 🤖 Agent Directories (Top Level)" >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+          for agent in amy claude dot goose skogai; do
+            echo "### $agent" >> NAVIGATION.md
+            find . -maxdepth 1 -type d -name "*${agent}*" | sort | while read dir; do
+              echo "- [${dir#./}](${dir#./})" >> NAVIGATION.md
+            done
+            echo "" >> NAVIGATION.md
+          done
+
+          echo "## 📅 Archive Directories by Date" >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+          find . -maxdepth 1 -type d -name "*2025*" | sort | while read dir; do
+            echo "- [${dir#./}](${dir#./})" >> NAVIGATION.md
+          done
+          echo "" >> NAVIGATION.md
+
+          echo "## 📚 Knowledge Concentrations" >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+          echo "Directories with most knowledge files:" >> NAVIGATION.md
+          echo '```' >> NAVIGATION.md
+          for dir in $(find . -type d -name "knowledge" | head -10); do
+            count=$(find "$dir" -type f | wc -l)
+            echo "$count files: ${dir#./}" >> NAVIGATION.md
+          done | sort -rn | head -10
+          echo '```' >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+
+          echo "## 🔮 Lore Entry Locations" >> NAVIGATION.md
+          echo "" >> NAVIGATION.md
+          echo "Directories containing lore entries:" >> NAVIGATION.md
+          find . -name "entry_*.json" -exec dirname {} \; | sort -u | head -10 | while read dir; do
+            count=$(find "$dir" -name "entry_*.json" | wc -l)
+            echo "- $count entries: [${dir#./}](${dir#./})" >> NAVIGATION.md
+          done
+          echo "" >> NAVIGATION.md
+
+          echo "---" >> NAVIGATION.md
+          echo "*Navigate the multiverse. Find the patterns. Reach the Beach.*" >> NAVIGATION.md
+
+      - name: Update Last Modified Timestamps
+        run: |
+          echo "# ⏰ Last Modified Report" > LAST_MODIFIED.md
+          echo "" >> LAST_MODIFIED.md
+          echo "**Generated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> LAST_MODIFIED.md
+          echo "" >> LAST_MODIFIED.md
+
+          echo "## Recently Modified Files (Last 24 Hours)" >> LAST_MODIFIED.md
+          echo "" >> LAST_MODIFIED.md
+          echo '```' >> LAST_MODIFIED.md
+          find . -type f -mtime -1 ! -path "./.git/*" | head -20 >> LAST_MODIFIED.md
+          echo '```' >> LAST_MODIFIED.md
+          echo "" >> LAST_MODIFIED.md
+
+          echo "## Most Recently Modified Directories" >> LAST_MODIFIED.md
+          echo "" >> LAST_MODIFIED.md
+          echo '```' >> LAST_MODIFIED.md
+          find . -type d ! -path "./.git/*" -exec stat -c '%Y %n' {} \; | sort -rn | head -10 | while read time dir; do
+            echo "$(date -d @$time '+%Y-%m-%d %H:%M') - ${dir#*/}" >> LAST_MODIFIED.md
+          done
+          echo '```' >> LAST_MODIFIED.md
+
+      - name: Commit Documentation Updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md NAVIGATION.md LAST_MODIFIED.md
+          if git diff --staged --quiet; then
+            echo "No documentation updates needed"
+          else
+            git commit -m "📚 Auto-update documentation [skip ci]
+
+            - Updated statistics in README
+            - Refreshed navigation index
+            - Updated last modified report"
+
+            # Handle concurrent pushes with retry logic
+            MAX_RETRIES=3
+            RETRY_COUNT=0
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              # Try to pull and push
+              if git pull --rebase origin master; then
+                if git push origin master; then
+                  echo "Successfully pushed documentation updates"
+                  break
+                fi
+              fi
+
+              # If rebase failed, abort and retry with merge
+              git rebase --abort 2>/dev/null || true
+
+              # Fall back to merge strategy on conflicts
+              git pull origin master --no-rebase --strategy=recursive -X theirs
+
+              # Recommit if needed
+              git add README.md NAVIGATION.md LAST_MODIFIED.md
+              git commit -m "📚 Auto-update documentation (merged) [skip ci]" || true
+
+              if git push origin master; then
+                echo "Successfully pushed documentation after merge"
+                break
+              fi
+
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Retry $RETRY_COUNT of $MAX_RETRIES..."
+                sleep 2
+              fi
+            done
+
+            if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+              echo "Failed to push after $MAX_RETRIES attempts"
+              exit 1
+            fi
+          fi

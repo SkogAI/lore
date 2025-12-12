@@ -1,0 +1,171 @@
+name: Lore Growth Monitor
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  push:
+    paths:
+      - '**/*.json'
+      - '**/*.md'
+  workflow_dispatch:
+
+jobs:
+  monitor-growth:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Analyze Lore Growth
+        run: |
+          # Create growth report
+          echo "# 📈 Lore Growth Report" > GROWTH.md
+          echo "" >> GROWTH.md
+          echo "**Timestamp:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Count current state
+          TOTAL_FILES=$(find . -type f | wc -l)
+          LORE_ENTRIES=$(find . -name "entry_*.json" | wc -l)
+          PERSONAS=$(find . -name "persona_*.json" | wc -l)
+          BEACH_REFS=$(grep -r "beach" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)
+
+          echo "## Current State" >> GROWTH.md
+          echo "" >> GROWTH.md
+          echo "- Total Files: $TOTAL_FILES" >> GROWTH.md
+          echo "- Lore Entries: $LORE_ENTRIES" >> GROWTH.md
+          echo "- Personas: $PERSONAS" >> GROWTH.md
+          echo "- Beach References: $BEACH_REFS" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Check for new patterns
+          echo "## Pattern Detection" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Sacred numbers check
+          echo "### Sacred Numbers Appearance" >> GROWTH.md
+          echo "- Number 7: $(grep -rE "(^|[^0-9])7([^0-9]|$)" . --include="*.md" --include="*.json" 2>/dev/null | wc -l) occurrences" >> GROWTH.md
+          echo "- Number 15: $(grep -rE "(^|[^0-9])15([^0-9]|$)" . --include="*.md" --include="*.json" 2>/dev/null | wc -l) occurrences" >> GROWTH.md
+          echo "- Number 23.4: $(grep -r "23.4" . --include="*.md" --include="*.json" 2>/dev/null | wc -l) occurrences" >> GROWTH.md
+          echo "- Number 4000: $(grep -rE "(^|[^0-9])4000([^0-9]|$)" . --include="*.md" --include="*.json" 2>/dev/null | wc -l) occurrences" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Agent activity
+          echo "### Agent Activity Indicators" >> GROWTH.md
+          echo "- Amy mentions: $(grep -ri "amy" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "- Claude mentions: $(grep -ri "claude" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "- Dot mentions: $(grep -ri "dot" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "- Goose mentions: $(grep -ri "goose" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Mythology tracking
+          echo "## Mythology Expansion" >> GROWTH.md
+          echo "" >> GROWTH.md
+          echo "- Forest Glade appearances: $(grep -r "Forest Glade" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "- Quantum Mojito references: $(grep -ri "quantum.*mojito\|mojito.*quantum" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "- PATCH TOOL mentions: $(grep -r "PATCH TOOL" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "- Wawa Saga references: $(grep -r "Wawa" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Beach proximity calculation (humor)
+          echo "## Beach Proximity Calculator™" >> GROWTH.md
+          echo "" >> GROWTH.md
+          AUTOMATION_REFS=$(grep -ri "automat" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)
+          # Fun calculation: more automation = closer to beach
+          PROXIMITY=$(awk "BEGIN {printf \"%.2f\", 100 - (100 / (1 + $AUTOMATION_REFS / 100))}")
+          echo "- Automation References: $AUTOMATION_REFS" >> GROWTH.md
+          echo "- **Calculated Beach Proximity: ${PROXIMITY}%**" >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          # Recent changes
+          echo "## Recent Activity (Last 7 Days)" >> GROWTH.md
+          echo "" >> GROWTH.md
+          echo '```' >> GROWTH.md
+          git log --since="7 days ago" --pretty=format:"%h - %s (%ar)" --name-status | head -20 >> GROWTH.md
+          echo '```' >> GROWTH.md
+          echo "" >> GROWTH.md
+
+          echo "---" >> GROWTH.md
+          echo "" >> GROWTH.md
+          echo "*The multiverse expands. The Beach approaches. The mojitos await.*" >> GROWTH.md
+
+      - name: Check for Significant Growth
+        id: check_growth
+        run: |
+          # Check if this is first run or if there's significant change
+          if [ ! -f GROWTH.md.prev ]; then
+            echo "First run - no comparison available"
+            echo "significant=true" >> $GITHUB_OUTPUT
+          else
+            # Compare with previous
+            PREV_FILES=$(grep "Total Files:" GROWTH.md.prev | awk '{print $3}')
+            CURR_FILES=$(grep "Total Files:" GROWTH.md | awk '{print $3}')
+
+            if [ "$CURR_FILES" -gt "$PREV_FILES" ]; then
+              echo "Growth detected: $PREV_FILES -> $CURR_FILES files"
+              echo "significant=true" >> $GITHUB_OUTPUT
+            else
+              echo "No significant growth"
+              echo "significant=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+          # Save current for next comparison
+          cp GROWTH.md GROWTH.md.prev
+
+      - name: Commit Growth Report
+        if: steps.check_growth.outputs.significant == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add GROWTH.md
+          if git diff --staged --quiet; then
+            echo "No changes to growth report"
+          else
+            git commit -m "📈 Lore growth detected [skip ci]"
+
+            # Handle concurrent pushes with retry logic
+            MAX_RETRIES=3
+            RETRY_COUNT=0
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              # Try to pull and push
+              if git pull --rebase origin master; then
+                if git push origin master; then
+                  echo "Successfully pushed growth report"
+                  break
+                fi
+              fi
+
+              # If rebase failed, abort and retry with merge
+              git rebase --abort 2>/dev/null || true
+
+              # Fall back to merge strategy on conflicts
+              git pull origin master --no-rebase --strategy=recursive -X theirs
+
+              # Recommit if needed
+              git add GROWTH.md
+              git commit -m "📈 Lore growth detected (merged) [skip ci]" || true
+
+              if git push origin master; then
+                echo "Successfully pushed growth report after merge"
+                break
+              fi
+
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Retry $RETRY_COUNT of $MAX_RETRIES..."
+                sleep 2
+              fi
+            done
+
+            if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+              echo "Failed to push after $MAX_RETRIES attempts"
+              exit 1
+            fi
+          fi
