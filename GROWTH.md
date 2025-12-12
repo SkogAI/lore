@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-12-12 06:35:08 UTC
+**Timestamp:** 2025-12-12 08:29:08 UTC
 
 ## Current State
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-c348acf - Merge branch 'develop' (17 seconds ago)
-2a9cd63 - (no commit message provided) (71 seconds ago)
-A	demo/content_creation_1764975075/research_output.json
-A	demo/content_creation_1764982814/research_output.json
-
-7b07c2b - 📚 Auto-update documentation [skip ci] (2 minutes ago)
+ca555db - 📚 Auto-update documentation [skip ci] (23 seconds ago)
 M	LAST_MODIFIED.md
 M	NAVIGATION.md
 
-144d759 - (no commit message provided) (8 minutes ago)
-M	.gitignore
-A	context/archive/context-1759485323.json
-A	context/archive/context-1764309043.json
-A	context/archive/context-1764309181.json
-A	context/archive/context-1764314846.json
-A	context/archive/context-1764314875.json
-A	context/current/context-1759437600.json
-A	context/current/context-1763801845.json
-A	context/current/context-1763802331.json
-A	context/current/context-1763802337.json
+deeb7c0 - Update lore statistics [skip ci] (57 minutes ago)
+M	STATS.md
+
+feff9f6 - Merge pull request #3 from SkogAI/copilot/update-workflows-to-claude-code (57 minutes ago)
+a83ea1e - 📚 Auto-update documentation [skip ci] (2 hours ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+
+b15a279 - Merge branch 'master' of https://github.com/SkogAI/lore (2 hours ago)
+ce7c43e - Convert claude-code-review.yml from Anthropic API to Claude Code OAuth (2 hours ago)
+M	.github/workflows/claude-code-review.yml
+
+b7c233c - Update lore statistics [skip ci] (2 hours ago)
+M	STATS.md
+
+bebb66a - 📈 Lore growth detected [skip ci] (2 hours ago)
 ```
 
 ---
