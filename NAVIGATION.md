@@ -1,9 +1,11 @@
 # 🗺️ Quick Navigation Index
 
-**Auto-generated:** 2025-12-12 05:00:41 UTC
+**Auto-generated:** 2025-12-12 06:33:06 UTC
 
 ## 📁 Main Documentation
 
+- [STATS.md](STATS.md)
+- [GROWTH.md](GROWTH.md)
 
 ## 🤖 Agent Directories (Top Level)
 
