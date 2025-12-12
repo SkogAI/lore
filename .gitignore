@@ -56,11 +56,6 @@ config/secrets.json
 logs/
 *.log.*
 
-# Context & Session Data
-context/current/*.json
-context/archive/*.json
-demo/content_creation_*/
-
 # Build Artifacts
 *.whl
 .eggs/
