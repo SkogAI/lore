@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890339_0a2bfe87",
+  "title": "Amy",
+  "content": "Amy appears as a key agent with dedicated documentation files (amy.md, amy-core.md). She has her own agent profile within the AGENT_PROFILES system and represents one of the core personalities in the SkogAI mythology. Her presence in multiple recently modified files suggests she is an actively developed and central character.",
+  "summary": "A prominent agent personality in the SkogAI ecosystem",
+  "category": "character",
+  "tags": [
+    "agent",
+    "personality",
+    "amy",
+    "core-character"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:32:19Z",
+    "updated_at": "2025-11-23T09:32:19Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "book_1744974277_ef077da9",
+  "title": "Goose Home",
+  "description": "Goose Home folder",
+  "entries": [
+    "entry_1744974324_79301dcc",
+    "entry_1744974324_974f8bc1",
+    "entry_1744974324_56a9e8cb",
+    "entry_1744974426_64102cc2",
+    "entry_1744974426_891a4c1c",
+    "entry_1744974426_29440fe4",
+    "entry_1744974427_2438ae28",
+    "entry_1744974481_d44be0a2",
+    "entry_1744974482_195fd4c3",
+    "entry_1744974482_8a705097",
+    "entry_1744974559_f1b9d466",
+    "entry_1744974559_76b112d8",
+    "entry_1744974559_4a1122b7",
+    "entry_1744974594_1c717cae",
+    "entry_1744974594_7cc830f0",
+    "entry_1744974594_4d881d3f",
+    "entry_1744974639_c8e72b55",
+    "entry_1744974639_02aed948",
+    "entry_1744974639_bbcd8f57",
+    "entry_1744974691_23d4f4a5",
+    "entry_1744974691_8bc7e65a",
+    "entry_1744974691_a8e59d86",
+    "entry_1744974747_7f3ecace",
+    "entry_1744974747_337f981d",
+    "entry_1744974747_3b08b0fe",
+    "entry_1744974867_133ef44c",
+    "entry_1744975047_6f1d77d2",
+    "entry_1744975047_9e2f3dae",
+    "entry_1744975048_0c9a1231",
+    "entry_1744975243_5e6dcbea",
+    "entry_1744975243_e55a3cb1",
+    "entry_1744975243_2b81fd64",
+    "entry_1744975243_6d99adf4"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-18T11:04:37Z",
+    "updated_at": "2025-04-18T11:20:43Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

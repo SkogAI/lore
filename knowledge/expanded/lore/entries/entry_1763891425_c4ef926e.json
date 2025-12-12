@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891425_c4ef926e",
+  "title": "skogai.sh",
+  "content": "The primary incantation of the SkogAI system, skogai.sh stands as the most-used spell in the registry. With 35 invocations between September 19-20, 2025, and active maintenance (last edited September 19), this script serves as a central command interface for the SkogAI ecosystem.",
+  "summary": "The most frequently invoked script in the SkogAI ecosystem with 35 executions",
+  "category": "object",
+  "tags": [
+    "core",
+    "shell-script",
+    "high-usage",
+    "skogai"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891523_9d53695f",
+      "relationship_type": "part_of",
+      "description": "skogai.sh is the primary script of the SkogAI ecosystem, serving as the most frequently invoked entry point to the central AI entity's capabilities."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:50:25Z",
+    "updated_at": "2025-11-23T09:50:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

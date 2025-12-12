@@ -138,7 +138,12 @@ _choice_personas() {
 }
 
 _choice_categories() {
-  echo "character place event object concept custom"
+  echo "character"
+  echo "place"
+  echo "event"
+  echo "object" "concept" "custom"
+  echo "concept"
+  echo "custom"
 }
 
 # 📖 Chronicle inscriptions

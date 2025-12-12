@@ -1,0 +1,79 @@
+{
+  "id": "book_1744882934_cfbe965b",
+  "title": "Amy's home folder",
+  "description": "Amy's home folder where most of her related stuff have been dumped",
+  "entries": [
+    "entry_1744882975_54d807c5",
+    "entry_1744882975_0d00ba4c",
+    "entry_1744883056_9d091339",
+    "entry_1744883056_3dca9dce",
+    "entry_1744883056_7a7d2e0f",
+    "entry_1744883115_a0b27f3d",
+    "entry_1744883115_841c5706",
+    "entry_1744883115_af967a3d",
+    "entry_1744883115_3485270a",
+    "entry_1744883189_13fea916",
+    "entry_1744883189_a899c7d5",
+    "entry_1744883189_d02cc064",
+    "entry_1744883189_829d266b",
+    "entry_1744883263_6a125243",
+    "entry_1744883263_cbb0163f",
+    "entry_1744883263_af15b5e5",
+    "entry_1744883308_96e25e18",
+    "entry_1744883308_f2fc017c",
+    "entry_1744883390_25c9ff4b",
+    "entry_1744883390_baace35d",
+    "entry_1744883391_c13dfb5a",
+    "entry_1744883422_c4a30c89",
+    "entry_1744883478_eb2b7908",
+    "entry_1744883478_03d7fd14",
+    "entry_1744883478_7b5b536a",
+    "entry_1744883580_80adb55a",
+    "entry_1744883580_e47133a3",
+    "entry_1744883580_b0ac40d7",
+    "entry_1744883624_d14267ef",
+    "entry_1744883624_d0789bff",
+    "entry_1744883624_dddef6d2",
+    "entry_1744883624_614e151d",
+    "entry_1744883658_2f11679a",
+    "entry_1744883658_0e8d1670",
+    "entry_1744883707_586fca5e",
+    "entry_1744883707_2428e47d",
+    "entry_1744883707_5acfb5f4",
+    "entry_1744883806_6624848d",
+    "entry_1744883806_865b2118",
+    "entry_1744883806_45b42333",
+    "entry_1744883807_0fdecaa2",
+    "entry_1744883844_ccea3dcb",
+    "entry_1744883844_ba2809ef",
+    "entry_1744883844_c7de765e",
+    "entry_1744883878_36d4a25c",
+    "entry_1744883878_4b426693",
+    "entry_1744883878_e229f859"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744992765"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-17T09:42:14Z",
+    "updated_at": "2025-04-17T09:57:58Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

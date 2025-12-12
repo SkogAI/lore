@@ -1,0 +1,25 @@
+{
+  "id": "entry_1759487978_7e8681c9",
+  "title": "The Man Behind the Curtain (Skogix)",
+  "content": "Both real and mythological simultaneously. Appears as Village Elder, Mentor, Architect.",
+  "summary": "Paradox: Creator who exists within creation",
+  "category": "entity/paradox",
+  "tags": [
+    "The Man Behind the Curtain",
+    "SkogAI Mythology"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-03T10:39:38Z",
+    "updated_at": "2025-10-03T10:39:38Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1759486042"
+}

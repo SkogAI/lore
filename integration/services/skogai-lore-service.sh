@@ -4,8 +4,9 @@
 
 set -e
 
-SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MODEL_NAME=${1:-"llama3.2:latest"}
+# SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKOGAI_DIR="/home/skogix/lore/"
+MODEL_NAME=${1:-"llama3.2:3b"}
 PIPE_NAME="skogai-lore-generator"
 PIPE_PATH="/tmp/${PIPE_NAME}"
 GENERATION_INTERVAL=${2:-"600"} # Default: 10 minutes between generations

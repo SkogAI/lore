@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891425_acac1160",
+  "title": "type.sh",
+  "content": "A rapidly iterated spell created on September 20, 2025, type.sh achieved 66 executions within hours of its creation. This intense usage pattern suggests active development and testing, representing a burst of creative energy in the system. The script was edited multiple times during its execution period.",
+  "summary": "The most intensively used script with 66 executions in a single day",
+  "category": "object",
+  "tags": [
+    "development",
+    "shell-script",
+    "intensive-testing",
+    "iteration"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:50:25Z",
+    "updated_at": "2025-11-23T09:50:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

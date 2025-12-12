@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765509009",
+  "title": "Testing Python API",
+  "content": "This is a test to verify the Python LoreAPI works correctly. If you are reading this, the API is functional!",
+  "summary": "",
+  "category": "event",
+  "tags": [
+    "test",
+    "api-validation"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-12T03:10:09Z",
+    "updated_at": "2025-12-12T03:10:09Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765509076"
+}

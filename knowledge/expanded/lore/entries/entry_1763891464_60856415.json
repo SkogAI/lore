@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891464_60856415",
+  "title": "MCP Server Configuration",
+  "content": "The MCP Server Configuration represents a unified system for connecting AI agents to various services and capabilities. It defines how Claude and other AI systems can interface with external tools ranging from web scraping to documentation management, code assistance, and cloud infrastructure control. Each server entry specifies command execution parameters, environment variables, and descriptions of capabilities, creating a modular ecosystem where AI agents can be enhanced with specialized functions.",
+  "summary": "A collection of Model Context Protocol server configurations for AI agent integration",
+  "category": "concept",
+  "tags": [
+    "configuration",
+    "mcp",
+    "ai-tools",
+    "integration"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:04Z",
+    "updated_at": "2025-11-23T09:51:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

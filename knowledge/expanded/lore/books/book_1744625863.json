@@ -1,0 +1,41 @@
+{
+  "id": "book_1744625863",
+  "title": "Eldoria: Land of Magic and Shadow",
+  "description": "A magical realm where light and darkness battle for dominance",
+  "entries": [
+    "entry_1744625863"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744625863"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-14T10:17:43Z",
+    "updated_at": "2025-04-14T10:17:43Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    },
+    {
+      "name": "World Information",
+      "description": "Core world information",
+      "entries": [
+        "entry_1744625863"
+      ],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

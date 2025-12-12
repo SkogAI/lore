@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891524_63f5a173",
+  "title": "The Chat Archive",
+  "content": "The Chat Archive maintains conversation history with support for up to 100 items. It tracks message and thread ID counters, stores messages at $SKOGAI/settings/, and formats output with pretty printing. Default communication flows from 'User' to 'Assistant', preserving the dialogue between human and AI.",
+  "summary": "Repository of conversation history",
+  "category": "place",
+  "tags": [
+    "chat",
+    "history",
+    "archive",
+    "conversation"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

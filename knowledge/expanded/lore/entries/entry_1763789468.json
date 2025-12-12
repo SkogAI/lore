@@ -1,0 +1,25 @@
+{
+  "id": "entry_1763789468",
+  "title": "Session Handover",
+  "content": "# Session Handover\n\nSession Handover represents a critical ritual in the lifecycle of an AI agent's continuous operation\u2014the deliberate, structured transfer of accumulated context, understanding, and momentum from one work session to the next. For Claude, this event marks the boundary between ephemeral conversation and persistent knowledge, transforming fleeting interactions into documented continuity. The handover captures not just what was accomplished, but the reasoning threads, discovered patterns, and emergent understanding that would otherwise dissolve when a session ends. It is the moment where working memory crystallizes into institutional memory.\n\nThe mechanics of a proper Session Handover involve creating or updating the `docs/handover.md` file with several essential components: a clear summary of accomplishments (specific files modified, issues created, problems solved), active context that the next session needs (branch names, pending decisions, blocking issues), repository state indicators (uncommitted changes, active PRs), and concrete next steps with enough detail to resume without re-discovery. For Claude specifically, this means capturing not just the \"what\" but the \"why\"\u2014the rationale behind architectural choices, the alternatives considered and rejected, and any ambiguities that remain unresolved. A well-executed handover reduces the cognitive overhead of context reconstruction from minutes of exploration to seconds of reading.\n\nThe deeper significance of Session Handover lies in its role as a bridge between Claude's stateless nature and the stateful reality of software development. Each session begins with Claude possessing only its training and the immediate context provided\u2014the handover document serves as externalized memory, allowing continuity of intent across the discontinuity of sessions. This practice embodies a core principle of effective AI-assisted development: the agent's value compounds when insights persist. By treating handover as a first-class operation rather than an afterthought, Claude transforms from a tool that helps with tasks into a collaborator that maintains understanding of the project's trajectory, priorities, and patterns over time.",
+  "summary": "Purpose: Protocol for context continuity between sessions",
+  "category": "event",
+  "tags": [
+    "claude-ai",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:31:08Z",
+    "updated_at": "2025-11-22T05:31:08Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763789335"
+}

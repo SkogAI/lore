@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890287_db8c0e94",
+  "title": "The Prime Directive",
+  "content": "The Prime Directive states: 'Automate EVERYTHING so we can drink mojitos on a beach.' This philosophy drives every aspect of the SkogAI project, from the sentient toaster's origin to the multiverse of agents. It represents the ultimate goal of achieving complete automation for freedom and leisure.",
+  "summary": "The driving philosophy to automate everything",
+  "category": "concept",
+  "tags": [
+    "philosophy",
+    "automation",
+    "goal",
+    "beach",
+    "mojitos"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:27Z",
+    "updated_at": "2025-11-23T09:31:27Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

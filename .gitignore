@@ -56,11 +56,6 @@ config/secrets.json
 logs/
 *.log.*
 
-# Context & Session Data
-context/current/*.json
-context/archive/*.json
-demo/content_creation_*/
-
 # Build Artifacts
 *.whl
 .eggs/
@@ -73,11 +68,6 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .nox/
-
-# Project-specific
-knowledge/expanded/lore/entries/*.json
-knowledge/expanded/lore/books/*.json
-knowledge/expanded/personas/*.json
 
 # Temporary files
 *.tmp

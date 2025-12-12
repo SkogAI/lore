@@ -1,0 +1,65 @@
+{
+  "id": "book_1763789335",
+  "title": "Specialized Lore for Claude-Ai Agent",
+  "description": "Lore collection specifically created for claude-ai agents: a claude",
+  "entries": [
+    "entry_1763789353",
+    "entry_1763789371",
+    "entry_1763789396",
+    "entry_1763789411",
+    "entry_1763789426",
+    "entry_1763789440",
+    "entry_1763789453",
+    "entry_1763789468",
+    "entry_1763789483",
+    "entry_1763789498",
+    "entry_1763789521"
+  ],
+  "categories": {
+    "character": [
+      "entry_1763789353",
+      "entry_1763789371",
+      "entry_1763789396"
+    ],
+    "place": [
+      "entry_1763789411",
+      "entry_1763789426"
+    ],
+    "object": [
+      "entry_1763789440",
+      "entry_1763789453"
+    ],
+    "event": [
+      "entry_1763789468"
+    ],
+    "concept": [
+      "entry_1763789483",
+      "entry_1763789498",
+      "entry_1763789521"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1763789528"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:28:55Z",
+    "updated_at": "2025-11-22T05:32:08Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

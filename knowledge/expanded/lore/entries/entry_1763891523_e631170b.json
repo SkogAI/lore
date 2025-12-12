@@ -1,0 +1,26 @@
+{
+  "id": "entry_1763891523_e631170b",
+  "title": "Dot",
+  "content": "Dot exists as an empty configuration, embodying minimalism and the philosophy of doing more with less. This agent operates with default settings, representing simplicity and constraint-driven design.",
+  "summary": "A minimalist agent with no special configuration",
+  "category": "character",
+  "tags": [
+    "agent",
+    "minimalist",
+    "constraint"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:03Z",
+    "updated_at": "2025-11-23T09:52:03Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

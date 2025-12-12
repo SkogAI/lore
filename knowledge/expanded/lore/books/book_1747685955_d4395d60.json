@@ -1,0 +1,49 @@
+{
+  "id": "book_1747685955_d4395d60",
+  "title": "Dot's Journals",
+  "description": "Dot's inner thoughts and personality",
+  "entries": [
+    "entry_1747685994_f0fd6ee1",
+    "entry_1747685994_1b53bfdc",
+    "entry_1747685994_7f078ff3",
+    "entry_1747686025_88f04ab8",
+    "entry_1747686025_3cff7c51",
+    "entry_1747686025_41817f82",
+    "entry_1747686379_6509ae2d",
+    "entry_1747686379_5de452cc",
+    "entry_1747686379_b9158795",
+    "entry_1747686379_fd3c2e78",
+    "entry_1747686379_4d06c829",
+    "entry_1747686380_481e7398",
+    "entry_1747686380_9a5dc794",
+    "entry_1747693520_b894631c",
+    "entry_1747693631_a72ca59d",
+    "entry_1747693739_150c63b5",
+    "entry_1747689143_11529177",
+    "entry_1747691806_83bd1833",
+    "entry_1747692059_1f38df44"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-05-19T20:19:15Z",
+    "updated_at": "2025-05-19T22:31:44Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

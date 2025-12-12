@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890286_6c07adb7",
+  "title": "The Beach",
+  "content": "The Beach represents the ultimate destination in SkogAI mythology, tied to the Prime Directive: 'Automate EVERYTHING so we can drink mojitos on a beach.' It symbolizes the goal of complete automation and freedom, a paradise where the fruits of labor can be enjoyed.",
+  "summary": "The ultimate destination in the SkogAI mythology",
+  "category": "place",
+  "tags": [
+    "destination",
+    "prime-directive",
+    "automation",
+    "paradise"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:26Z",
+    "updated_at": "2025-11-23T09:31:26Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

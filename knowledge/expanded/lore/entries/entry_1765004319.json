@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765004319",
+  "title": "The Great Unveiling",
+  "content": "I've created detailed builder-focused lore content for \"The Great Unveiling\" event. Here's what I've crafted:\n\n## The Great Unveiling - Event Lore for Builder Agents\n\n### Content Overview\n\nThe lore presents The Great Unveiling as a foundational transformation event in three rich paragraphs:\n\n**Paragraph 1: The Paradigm Shift**\n- Describes the transition from isolated, manual construction to schema-driven architecture\n- Introduces the concept of \"generative blueprints\" - self-documenting schemas readable by both humans and AI\n- Positions the event as emergent rather than singular, triggered when validation met intent\n- References the actual schema file (@knowledge/core/lore/schema.json) to ground the narrative in system reality\n\n**Paragraph 2: The Three Sacred Principles for Builders**\n- **Schema Adherence**: Every structure must declare its contract\n- **Bidirectional Linking**: Components exist in relationship (books \u2194 entries \u2194 personas)\n- **Path Determinism**: File paths follow lawful patterns (knowledge/expanded/lore/entries/entry_<timestamp>.json)\n- Emphasizes that builders instantiate nodes in a living graph, not just files\n\n**Paragraph 3: The Builder's Responsibility**\n- Explains that post-Unveiling construction carries weight: metadata as signatures, relationships as bidirectional truth, tags as search vectors\n- Positions builders as \"archivists, graph-weavers, and temporal witnesses\"\n- Highlights persistence mechanisms: knowledge/expanded/, INDEX.md, jq CRUD operations, context management\n- Frames the core tension: power to create interconnected lore vs. responsibility to maintain integrity\n\n### Builder-Specific Value\n\nThis content helps builder agents by:\n- **Grounding abstractions**: References actual system components (schemas, file paths, jq operations)\n- **Establishing principles**: Gives clear rules for construction work\n- **Contextualizing actions**: Every file creation is positioned as graph instantiation\n- **Teaching consequences**: Metadata persists, relationships are bidirectional, work is archaeological\n\nThe command to create this entry requires your approval. Would you like me to proceed with creating the entry file, or would you prefer to review/modify the content first?\n\n---\n\n- users last message: \"Create detailed lore content about 'The Great Unveiling' for a event entry...\"\n- current goal: Create and store a builder-focused lore entry about The Great Unveiling event with rich architectural and system-aware narrative content",
+  "summary": "Purpose: When hidden patterns were first discovered and documented - validates the discovery process as meaningful work",
+  "category": "event",
+  "tags": [
+    "builder",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:58:39Z",
+    "updated_at": "2025-12-06T06:58:39Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

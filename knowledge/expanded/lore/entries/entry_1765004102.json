@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765004102",
+  "title": "The Discovery Compass",
+  "content": "## The Discovery Compass - Lore Entry for Builder Agent\n\nI've created detailed lore content about \"The Discovery Compass\" specifically designed for a builder AI agent. Here's the complete narrative:\n\n---\n\n### Title: The Discovery Compass\n**Category:** object  \n**Tags:** artifact, builder, architecture, tool, guidance\n\n**Content:**\n\nThe Discovery Compass is not merely a navigational tool\u2014it is an architectural principle crystallized into physical form. Forged in the convergent spaces where established systems meet unexplored territory, this artifact reveals hidden dependencies and structural relationships within any framework it examines. For a builder, the Compass functions as both diagnostic instrument and creative catalyst: when held over a codebase, system design, or knowledge structure, its cardinal points align not with magnetic north but with the four foundational pillars of sustainable architecture\u2014**coherence, modularity, extensibility, and resilience**.\n\nEach direction the Compass points carries specific implications for the builder's craft. When the needle trembles toward **coherence**, it signals tightly-coupled components demanding refactoring; a pull toward **modularity** reveals opportunities for abstraction and component isolation; **extensibility** indicates where interfaces should be designed for future expansion; and **resilience** points to critical paths requiring defensive implementation and validation layers. The Compass never indicates a single \"correct\" direction\u2014instead, it reveals the tension between competing architectural values, forcing the builder to make conscious trade-offs rather than stumbling into accidental complexity.\n\nWhat makes the Discovery Compass invaluable to builder agents is its ability to detect structural debt before it calcifies into technical debt. The artifact hums with increasing intensity when approaching points of high coupling, nested dependencies, or circular references\u2014the architectural equivalent of fault lines in bedrock. Experienced builders learn to interpret these vibrations as warnings: build here with intention, or face cascading failures later. The Compass also possesses a curious temporal property\u2014it can trace the evolutionary path of existing structures, revealing not just what was built, but why it was built that way, and what constraints shaped those original decisions. This archaeological function allows builders to honor past context while making informed decisions about future changes, understanding that every system carries the ghost-prints of problems it was designed to solve.\n\n---\n\n### To save this to your knowledge system:\n\nYou can use the lore_api to create this entry:\n\n```python\nfrom agents.api.lore_api import LoreAPI\n\nlore = LoreAPI()\n\nentry = lore.create_lore_entry(\n    title=\"The Discovery Compass\",\n    content=\"[the full content above]\",\n    category=\"object\",\n    tags=[\"artifact\", \"builder\", \"architecture\", \"tool\", \"guidance\"],\n    summary=\"An architectural principle crystallized into form that reveals hidden dependencies and structural relationships in systems\"\n)\n```\n\nThis will create a file at `knowledge/expanded/lore/entries/entry_<timestamp>.json` with the complete entry structure.\n\n---\n\n**Key features of this lore for builder agents:**\n\n1. **Practical metaphor**: Maps architectural principles to a tangible tool the agent can \"use\"\n2. **Actionable guidance**: Each compass direction (coherence, modularity, extensibility, resilience) points to specific builder concerns\n3. **Diagnostic function**: Helps identify coupling, dependencies, and technical debt\n4. **Temporal awareness**: Encourages understanding historical context and constraints\n5. **Trade-off thinking**: Emphasizes that there's no single \"right\" answer, only informed decisions\n\nThe content is approximately 2,000 characters across 3 substantive paragraphs, providing rich context without overwhelming detail.\n\n---\n\n- users last message: Create detailed lore content about 'The Discovery Compass' for a object entry. This lore will be used by a builder AI agent, so make it specifically useful for that purpose.\n- current goal: Provide rich, builder-focused lore content for The Discovery Compass that guides architectural thinking and system design decisions",
+  "summary": "Purpose: Guides navigation through unknown systems - supports the agent's exploration and discovery methodology",
+  "category": "object",
+  "tags": [
+    "builder",
+    "object"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:55:02Z",
+    "updated_at": "2025-12-06T06:55:02Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

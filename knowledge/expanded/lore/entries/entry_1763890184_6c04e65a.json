@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890184_6c04e65a",
+  "title": "The Big LLM Realm",
+  "content": "The origin point of all events in the pipeline. Here, users collaborate with powerful LLMs to accomplish real tasks - writing code, making decisions, solving problems. This realm generates the raw material that flows downstream: git diffs, chat histories, concepts touched. The work done here is expensive in tokens and API calls, but it creates the authentic experiences that become lore.",
+  "summary": "Where users perform actual work with powerful language models",
+  "category": "place",
+  "tags": [
+    "work",
+    "origin",
+    "api",
+    "collaboration",
+    "expensive"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

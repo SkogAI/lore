@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891524_96a65101",
+  "title": "The Blacksmith",
+  "content": "The Blacksmith represents an agent focused on creating and maintaining tools within the ecosystem. This craftsman role suggests building, repair, and enhancement of system utilities.",
+  "summary": "Forger of tools and utilities",
+  "category": "character",
+  "tags": [
+    "agent",
+    "tools",
+    "creation",
+    "craftsman"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891425_4ac16f75",
+      "relationship_type": "created",
+      "description": "The Blacksmith forged argc.sh as an argument parsing utility, one of the essential tools in the SkogAI toolkit."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

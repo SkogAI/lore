@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763891485_1224e972",
+  "title": "MCP Server Configuration",
+  "content": "MCP Server Configuration represents the architectural pattern of declaring external tool servers that agents can invoke. Each server definition includes its communication type (stdio), invocation command, arguments, and environment variables. This configuration acts as a registry of available tools in the agent's world.",
+  "summary": "The pattern of defining tool servers for agent ecosystems",
+  "category": "concept",
+  "tags": [
+    "mcp",
+    "configuration",
+    "architecture",
+    "tools",
+    "pattern"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:51:25Z",
+    "updated_at": "2025-11-23T09:51:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

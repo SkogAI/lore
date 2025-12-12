@@ -1,0 +1,22 @@
+{
+  "id": "entry_1749589356_9d848f33",
+  "title": "## [PLACEHOLDER] The Placeholder Approach",
+  "content": "",
+  "summary": "",
+  "category": "The placeholder approach is a documentation strategy that acknowledges uncertainty while providing structure. It involves creating a complete structural framework, marking unknown elements with explicit placeholders, including reasoning about what each element might do, and preserving the distinction between knowledge and conjecture.",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-06-10T21:02:36Z",
+    "updated_at": "2025-06-10T21:02:36Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1749586055_27445830"
+}

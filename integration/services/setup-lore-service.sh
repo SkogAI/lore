@@ -3,7 +3,8 @@
 
 set -e
 
-SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SKOGAI_DIR=$SKOGAI_LORE/integration/services
 SERVICE_NAME="skogai-lore-service"
 MODEL=${1:-"llama3.2"}
 INTERVAL=${2:-"600"}

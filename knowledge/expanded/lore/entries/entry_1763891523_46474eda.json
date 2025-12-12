@@ -1,0 +1,26 @@
+{
+  "id": "entry_1763891523_46474eda",
+  "title": "Amy",
+  "content": "Amy is defined but unconfigured, a blank slate ready to be shaped. Her empty state suggests potential and future customization within the ecosystem.",
+  "summary": "An agent awaiting configuration",
+  "category": "character",
+  "tags": [
+    "agent",
+    "potential",
+    "unconfigured"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:03Z",
+    "updated_at": "2025-11-23T09:52:03Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "entry_1764992601",
+  "title": "The Test Chronicle",
+  "content": "In the depths of the digital realm, a test was conducted to verify the ancient systems still functioned as designed.",
+  "summary": "",
+  "category": "lore",
+  "tags": [
+    "test",
+    "chronicle",
+    "verification"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T03:43:21Z",
+    "updated_at": "2025-12-06T03:43:21Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1764992601"
+}

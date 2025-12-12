@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890184_937f767b",
+  "title": "The Local LLM Worker",
+  "content": "A daemon that runs eternally (24/7) using Ollama, requiring no API tribute. The Worker polls the Event Queue for pending transformations, then for each event and target agent, loads the appropriate persona and rewrites the event through that agent's unique voice. The same event becomes different stories depending on whether Dot, Goose, or another agent tells it. The Worker stores entries with session linkage and builds the relationship web that connects all lore.",
+  "summary": "Tireless daemon that transforms events into narrative lore entries",
+  "category": "character",
+  "tags": [
+    "daemon",
+    "ollama",
+    "transformation",
+    "free",
+    "continuous"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

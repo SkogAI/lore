@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891524_75cc1617",
+  "title": "The Librarian",
+  "content": "The Librarian is an agent role dedicated to organizing, storing, and retrieving information within the ecosystem. Though currently unconfigured, this role suggests archival and knowledge management responsibilities.",
+  "summary": "Keeper of knowledge and records",
+  "category": "character",
+  "tags": [
+    "agent",
+    "knowledge",
+    "archive",
+    "organization"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891524_63f5a173",
+      "relationship_type": "manages",
+      "description": "The Librarian maintains and organizes the Chat Archive, preserving conversation history for the ecosystem."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

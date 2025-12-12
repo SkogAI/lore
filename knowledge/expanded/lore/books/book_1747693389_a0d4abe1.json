@@ -1,0 +1,29 @@
+{
+  "id": "book_1747693389_a0d4abe1",
+  "title": "SkogAI Architecture Concepts",
+  "description": "Collection of concepts related to SkogAI architecture, small models, and lore integration tools",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-05-19T22:23:09Z",
+    "updated_at": "2025-05-19T22:23:09Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

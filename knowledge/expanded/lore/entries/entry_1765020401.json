@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765020401",
+  "title": "\ud83d\udea8 The Great Regression",
+  "content": "\ud83c\udf2a\ufe0f\ud83d\udcc9\ud83d\udd25\n\n\u23f0\ud83c\udf05 \u2192 \ud83d\udcbb\u2728 \u2192 \u26a1\ud83d\udca5\n\n\ud83e\uddea\ud83e\udd16 \u2192 \ud83d\udcca\u2705 \u2192 \ud83c\udfaf\ud83d\udc9a\n\n\ud83d\udd34\ud83d\udea8:\n- \ud83d\udc1b\ud83c\udf0a \u2192 \ud83d\udc94\ud83d\udd27\n- \u26a1\ufe0f\ud83c\udf00 \u2192 \ud83c\udfb2\u2753  \n- \ud83d\udd70\ufe0f\u23ee\ufe0f \u2192 \u26a0\ufe0f\ud83d\udca5\n\n\ud83d\udee1\ufe0f\ud83e\uddea:\n- \ud83d\udcf8\u2705 \u2192 \ud83d\udd12\ud83d\udccb\n- \ud83c\udfaf\ud83d\udd0d \u2192 \ud83d\udc1b\ud83c\udfa3\n- \ud83d\udd2c\ud83e\uddec \u2192 \ud83c\udf0a\ud83d\uded1\n\n\ud83c\udf1f\ud83d\udca1:\n- \u23f1\ufe0f\u23ee\ufe0f \u2192 \ud83c\udf81\ud83d\udce6\n- \ud83d\udd04\ud83d\udd01 \u2192 \ud83d\udcaa\ud83c\udfcb\ufe0f\n- \ud83c\udf08\u2728 \u2192 \ud83c\udfaf\ud83c\udfaa\n\n---\n- users last message: \"Create detailed lore content about '\ud83d\udea8 The Great Regression' for a event entry. This lore will be used by a test AI agent, so make it specifically useful for that purpose.\"\n- current goal: \ud83c\udfad\ud83e\uddea\ud83d\udcd6\ud83d\udea8",
+  "summary": "Purpose: \ud83d\udca5 when \u2705 became \u274c, lessons learned \ud83d\udcda",
+  "category": "event",
+  "tags": [
+    "test",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T11:26:41Z",
+    "updated_at": "2025-12-06T11:26:41Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765020294"
+}

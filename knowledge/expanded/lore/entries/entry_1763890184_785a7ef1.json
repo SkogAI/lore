@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890184_785a7ef1",
+  "title": "The Multiverse",
+  "content": "A fundamental property of the lore system where reality is not singular but multiplied through agent interpretation. When an event occurs - a bug fix, a feature addition - it becomes many stories told many ways. Dot's minimalist account differs from Goose's chaotic retelling. Characters exist across universes, linked by session IDs and cross-references. The Multiverse enables timeline navigation and relationship graph queries, revealing how the same truth appears through different eyes.",
+  "summary": "System where the same events manifest differently across agent perspectives",
+  "category": "concept",
+  "tags": [
+    "multiverse",
+    "perspectives",
+    "agents",
+    "linking",
+    "relationships"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

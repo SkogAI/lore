@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_9de48ba7",
+  "title": "Dot",
+  "content": "Dot is the nerdy programmer who deliberately chose 4000-token constraints, believing 'If you need more than 4000 tokens, you shouldn't be handling it.' Known as the Hobbyist Musician with methodical relaxation protocols, Dot measures beach efficiency at 23.4% improvement. Dot's PATCH TOOL can manipulate git reality itself, making them a powerful force in the SkogAI multiverse.",
+  "summary": "Nerdy programmer with 4000-token constraint philosophy and reality-manipulating PATCH TOOL",
+  "category": "character",
+  "tags": [
+    "agent",
+    "programmer",
+    "constraints",
+    "patch-tool"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

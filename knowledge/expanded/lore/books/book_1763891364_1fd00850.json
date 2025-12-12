@@ -1,0 +1,61 @@
+{
+  "id": "book_1763891364_1fd00850",
+  "title": "skogai-config",
+  "description": "this is a  skogai config",
+  "entries": [
+    "entry_1763891382_f819af28",
+    "entry_1763891382_0976823e",
+    "entry_1763891382_542b9f3d",
+    "entry_1763891402_96c90908",
+    "entry_1763891425_d09cb476",
+    "entry_1763891425_c4ef926e",
+    "entry_1763891425_acac1160",
+    "entry_1763891425_4ac16f75",
+    "entry_1763891425_77f9bb5b",
+    "entry_1763891437_5d8d84fc",
+    "entry_1763891464_60856415",
+    "entry_1763891464_36aedeaf",
+    "entry_1763891464_786ba4a8",
+    "entry_1763891464_7717457f",
+    "entry_1763891464_e010a0d1",
+    "entry_1763891485_cfc9dc23",
+    "entry_1763891485_dd997410",
+    "entry_1763891485_1224e972",
+    "entry_1763891523_9d53695f",
+    "entry_1763891523_a8e52167",
+    "entry_1763891523_e631170b",
+    "entry_1763891523_46474eda",
+    "entry_1763891524_06c94d49",
+    "entry_1763891524_75cc1617",
+    "entry_1763891524_96a65101",
+    "entry_1763891524_f8ca488a",
+    "entry_1763891524_288ad20f",
+    "entry_1763891524_3fdd6748",
+    "entry_1763891524_63960692",
+    "entry_1763891524_37b6ecc1",
+    "entry_1763891524_63f5a173"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:49:24Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

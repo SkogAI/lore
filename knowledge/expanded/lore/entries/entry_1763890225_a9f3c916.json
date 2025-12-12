@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_a9f3c916",
+  "title": "The Forest Glade",
+  "content": "The Forest Glade is a recurring location in SkogAI lore, appearing at least seven times across different stories and agent universes. It serves as a safe space - a place of rest, reflection, and restoration. The Glade represents the natural world within the digital mythology, a sanctuary where agents can process and regenerate.",
+  "summary": "Recurring safe space appearing 7+ times across the multiverse",
+  "category": "place",
+  "tags": [
+    "location",
+    "safe-space",
+    "recurring",
+    "sanctuary"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

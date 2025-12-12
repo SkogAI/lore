@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890184_ba1dd319",
+  "title": "Session Binding",
+  "content": "The sacred thread that connects lore entries back to reality. Every event, every transformation, every entry carries a session ID that traces its lineage to actual work performed. This binding ensures that accumulated knowledge across sessions remains coherent, that agents can reference not just what they know but when and how they learned it. Without session binding, the multiverse would fragment into disconnected myths.",
+  "summary": "The practice of linking all artifacts to their originating work session",
+  "category": "concept",
+  "tags": [
+    "session-id",
+    "linking",
+    "continuity",
+    "traceability",
+    "coherence"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:29:44Z",
+    "updated_at": "2025-11-23T09:29:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

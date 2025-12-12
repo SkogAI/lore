@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890315_d4ec227d",
+  "title": "Code Style Guidelines",
+  "content": "A comprehensive set of coding standards including: imports ordered as stdlib → third-party → local; type annotations using typing hints (Dict, List, Optional, Any); error handling with specific exceptions and informative logging; snake_case for functions/variables and PascalCase for classes; docstrings for all classes/functions; configured logger usage; configuration loaded from files with environment variable fallbacks; proper JSON error handling with sensible defaults; and maintenance of separation between implementations and templates.",
+  "summary": "The canonical rules governing code written in the repository",
+  "category": "concept",
+  "tags": [
+    "code-style",
+    "standards",
+    "python",
+    "best-practices"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:55Z",
+    "updated_at": "2025-11-23T09:31:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

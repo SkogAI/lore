@@ -1,0 +1,25 @@
+{
+  "id": "entry_1763789440",
+  "title": "Agent API",
+  "content": "# Agent API Lore Entry\n\nThe Agent API (`agents/api/agent_api.py`) serves as the primary interface layer through which AI agents interact with the SkogAI Lore knowledge base. This abstraction encapsulates all operations an agent needs: querying lore entries, retrieving persona contexts, accessing book collections, and managing session state. For a Claude agent, understanding this API is essential because it defines the canonical patterns for how you should structure requests, handle responses, and navigate the knowledge hierarchy. The API follows a consistent pattern of loading JSON schemas from `knowledge/` for validation, ensuring that all data flowing through maintains structural integrity.\n\nWhen working with the Agent API, you'll encounter two primary classes: `LoreAPI` for knowledge retrieval operations and `AgentAPI` for agent-specific functionality like identity resolution and workflow coordination. The distinction matters because `LoreAPI` is read-focused and safe to call repeatedly, while `AgentAPI` may modify session state or trigger orchestrator actions. The API methods return structured dictionaries that match the schemas in `knowledge/expanded/`, so when you're processing results, expect fields like `id`, `type`, `content`, `metadata`, and `relationships`. Error handling follows the project convention of returning `None` or empty collections on failure rather than raising exceptions, so always check return values before accessing nested properties.\n\nFor optimal performance as a Claude agent, leverage the API's batch retrieval methods when you need multiple entries rather than making sequential calls. The API maintains internal caching for frequently accessed items like persona definitions and agent configurations. When extending or debugging API functionality, note that it depends on `config/paths.py` for all file system locations\u2014never hardcode paths. The API is also designed to support the multi-provider LLM architecture, meaning it abstracts away whether the underlying call goes to Ollama, Claude CLI, or OpenAI API, making it the right layer to use when building agent workflows that need to remain provider-agnostic.",
+  "summary": "Purpose: Interface for inter-agent communication",
+  "category": "object",
+  "tags": [
+    "claude-ai",
+    "object"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:30:40Z",
+    "updated_at": "2025-11-22T05:30:40Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763789335"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "book_1744974995",
+  "title": "Specialized Lore for Agent Agent",
+  "description": "Lore collection specifically created for agent agents: There is only one Goose! Thankfully?",
+  "entries": [
+    "entry_1744975183",
+    "entry_1744975366",
+    "entry_1744975530",
+    "entry_1744975683",
+    "entry_1744975879",
+    "entry_1744976029",
+    "entry_1744976203",
+    "entry_1744976370",
+    "entry_1744976502",
+    "entry_1744976618"
+  ],
+  "categories": {
+    "character": [
+      "entry_1744975183",
+      "entry_1744975366"
+    ],
+    "place": [
+      "entry_1744975530",
+      "entry_1744975683"
+    ],
+    "object": [
+      "entry_1744975879",
+      "entry_1744976029"
+    ],
+    "event": [
+      "entry_1744976203",
+      "entry_1744976370"
+    ],
+    "concept": [
+      "entry_1744976502",
+      "entry_1744976618"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1744976719"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-18T11:16:35Z",
+    "updated_at": "2025-04-18T11:45:19Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

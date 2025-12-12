@@ -1,0 +1,60 @@
+{
+  "session_id": "1763807871",
+  "created": "2025-11-22T10:37:51Z",
+  "system_state": {
+    "orchestrator_mode": "lore",
+    "memory_priority": "core"
+  },
+  "active_knowledge": [
+    "00-core-requirements.txt",
+    "00-current-focus.txt",
+    "00-current-tools.txt",
+    "00-next-steps.txt",
+    "00-system-notes.txt",
+    "00-uncertainty-principle.txt",
+    "10-memory-navigation-guide.txt",
+    "1000-context-validation-principle.txt",
+    "101-workflow-development-phases.txt",
+    "102-goosehints.txt",
+    "103-context-management.txt",
+    "104-core-principles.txt",
+    "105-critical-state.txt",
+    "300-tools-and-functions.txt",
+    "3000-test-something.txt",
+    "3001-model-inference-tests.txt",
+    "303-knowledge-base.txt"
+  ],
+  "prepared": {
+    "topic": "Agent Coordination",
+    "persona_id": "persona_1763789528",
+    "categories": {
+      "core": [
+        "00-core-requirements.txt",
+        "00-current-focus.txt",
+        "00-current-tools.txt",
+        "00-next-steps.txt",
+        "00-system-notes.txt",
+        "00-uncertainty-principle.txt"
+      ],
+      "navigation": [
+        "10-memory-navigation-guide.txt"
+      ],
+      "standards": [
+        "101-workflow-development-phases.txt",
+        "102-goosehints.txt",
+        "103-context-management.txt",
+        "104-core-principles.txt",
+        "105-critical-state.txt"
+      ],
+      "tools": [
+        "300-tools-and-functions.txt",
+        "303-knowledge-base.txt"
+      ],
+      "frameworks": [
+        "1000-context-validation-principle.txt",
+        "3000-test-something.txt",
+        "3001-model-inference-tests.txt"
+      ]
+    }
+  }
+}

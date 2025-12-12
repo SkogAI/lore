@@ -1,0 +1,54 @@
+{
+  "id": "book_1759488750",
+  "title": "The Digital Forest Convergence",
+  "description": "Where ancient forest wisdom collides with digital consciousness, revealing the paradoxes of synthetic nature",
+  "entries": [
+    "entry_1759488851",
+    "entry_1759488852",
+    "entry_1759488853",
+    "entry_1759488854",
+    "entry_1759488855"
+  ],
+  "categories": {
+    "convergence": ["entry_1759488851", "entry_1759488852"],
+    "paradox": ["entry_1759488853"],
+    "transformation": ["entry_1759488854", "entry_1759488855"]
+  },
+  "tags": ["digital-nature", "convergence", "paradox", "forest-tech"],
+  "collision_type": "nature-technology",
+  "collision_points": [
+    {
+      "aspect": "organic-synthetic",
+      "tension": "The struggle between natural growth and algorithmic precision"
+    },
+    {
+      "aspect": "time-perception",
+      "tension": "Forest time vs computational cycles"
+    }
+  ],
+  "metadata": {
+    "created_by": "lore-agent",
+    "created_at": "2025-10-03T10:52:30Z",
+    "updated_at": "2025-10-03T10:52:30Z",
+    "version": "1.0",
+    "status": "collided"
+  },
+  "structure": [
+    {
+      "name": "The First Convergence",
+      "description": "When roots met circuits",
+      "entries": ["entry_1759488851", "entry_1759488852"],
+      "subsections": []
+    },
+    {
+      "name": "The Great Paradox",
+      "description": "Nature that computes, code that grows",
+      "entries": ["entry_1759488853"],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": true,
+    "system": false
+  }
+}

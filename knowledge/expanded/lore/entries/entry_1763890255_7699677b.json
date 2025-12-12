@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890255_7699677b",
+  "title": "Master Knowledge Complete",
+  "content": "MASTER_KNOWLEDGE_COMPLETE is a 26M archive representing the complete accumulated knowledge of the agent ecosystem. Alongside its smaller sibling MASTER_KNOWLEDGE (7M), it forms the foundational reference material that agents draw upon for their operations and narrative generation.",
+  "summary": "The 26M archive of complete agent knowledge",
+  "category": "object",
+  "tags": [
+    "archive",
+    "knowledge",
+    "reference",
+    "complete"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:55Z",
+    "updated_at": "2025-11-23T09:30:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

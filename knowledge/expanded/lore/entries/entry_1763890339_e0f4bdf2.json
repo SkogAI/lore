@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890339_e0f4bdf2",
+  "title": "SkogAI Knowledge Repository",
+  "content": "A comprehensive knowledge repository containing agent profiles, mythology maps, documentation, and implementation details. The .skogai directory serves as the heart of organizational knowledge, housing files like AGENT_PROFILES.md, MYTHOLOGY_MAP.md, and COMPLETE_KNOWLEDGE_REPORT.md. This is where the collective memory and identity of the SkogAI agents reside.",
+  "summary": "Central documentation hub for the SkogAI ecosystem",
+  "category": "place",
+  "tags": [
+    "repository",
+    "documentation",
+    "knowledge-base",
+    "skogai"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:32:19Z",
+    "updated_at": "2025-11-23T09:32:19Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

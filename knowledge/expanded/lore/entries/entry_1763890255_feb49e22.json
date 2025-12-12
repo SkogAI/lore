@@ -1,0 +1,30 @@
+{
+  "id": "entry_1763890255_feb49e22",
+  "title": "The Five Agents",
+  "content": "Five distinct agent personalities form the core inhabitants of the Lore Repository: Amy (9 directories) - the fiery personality; Claude (42 directories) - the thoughtful analyst; Dot (55 directories) - the minimalist with the 4000-token philosophy; Goose (34 directories) - the chaos agent who hates mint; and SkogAI (132 directories) - the original sentient toaster operating under severe token constraints. Each agent contributes their unique perspective to the collective lore.",
+  "summary": "The core agent personas that inhabit the Lore Repository",
+  "category": "character",
+  "tags": [
+    "agents",
+    "personas",
+    "amy",
+    "claude",
+    "dot",
+    "goose",
+    "skogai"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:55Z",
+    "updated_at": "2025-11-23T09:30:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

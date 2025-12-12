@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891524_3fdd6748",
+  "title": "Entity Identity System",
+  "content": "Entities in the ecosystem are identified through a sophisticated ID system. An 'eid' (entity ID) combines entity.id with entity.gen (generation), creating unique identifiers that track both identity and version. Each entity has a name composed of a unique identifier combined with a string representation.",
+  "summary": "The system for uniquely identifying entities",
+  "category": "concept",
+  "tags": [
+    "identity",
+    "eid",
+    "core",
+    "versioning"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891523_9d53695f",
+      "relationship_type": "identifies",
+      "description": "The Entity Identity System provides unique identification for all entities including SkogAI itself and all agent personas."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

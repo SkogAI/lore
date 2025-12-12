@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890255_7c787481",
+  "title": "The Lore Repository",
+  "content": "The Lore Repository is a massive knowledge archive spanning 86M of data, housing 5,491 lore entries, 746 personas, and 829 books. It contains the collective wisdom of multiple agents including Amy (9 directories), Claude (42 directories), Dot (55 directories), Goose (34 directories), and SkogAI (132 directories). The repository's largest sections are lorefiles (27M) and MASTER_KNOWLEDGE_COMPLETE (26M), representing the accumulated narrative and documentation of the agent ecosystem.",
+  "summary": "A vast digital archive containing 12,687 files of agent knowledge and narrative",
+  "category": "place",
+  "tags": [
+    "archive",
+    "knowledge-base",
+    "digital-realm",
+    "repository"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:55Z",
+    "updated_at": "2025-11-23T09:30:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

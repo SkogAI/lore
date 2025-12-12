@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890315_72875069",
+  "title": "Workflow Self-Modification Protocol",
+  "content": "A fundamental doctrine granting Claude Code permission to modify its own workflow files without special approval. This includes the primary workflow documentation at MASTER_KNOWLEDGE/agents/claude/current/claude-workflow.md, GitHub Actions workflow at .github/workflows/claude.yml, and related context scripts. Valid modifications encompass adding new MCP tools, updating strict workflow processes, adding best practices, modifying context loading behavior, and updating code style guidelines. This self-modification capability enables continuous improvement of AI operations.",
+  "summary": "The principle that Claude Code can modify its own operational files",
+  "category": "concept",
+  "tags": [
+    "self-modification",
+    "autonomy",
+    "workflow",
+    "permissions"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:55Z",
+    "updated_at": "2025-11-23T09:31:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

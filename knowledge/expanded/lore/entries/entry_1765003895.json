@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765003895",
+  "title": "The Uncharted Expanse",
+  "content": "---\n\n```text\n- users last message: \"Create detailed lore content about 'The Uncharted Expanse' for a place entry. This lore will be used by a builder AI agent, so make it specifically useful for that purpose.\"\n- current goal: Deliver rich, builder-focused lore content for \"The Uncharted Expanse\" that provides practical guidance, environmental context, and philosophical framework for construction in this unique territory\n```",
+  "summary": "Purpose: Represents the unknown territory the builder explores - contextualizes the discovery aspect of the agent's role",
+  "category": "place",
+  "tags": [
+    "builder",
+    "place"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:51:35Z",
+    "updated_at": "2025-12-06T06:51:35Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

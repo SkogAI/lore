@@ -1,0 +1,25 @@
+{
+  "id": "entry_1765003853",
+  "title": "The Primordial Workshop",
+  "content": "---\n\n- users last message: \"Create detailed lore content about 'The Primordial Workshop' for a place entry. This lore will be used by a builder AI agent, so make it specifically useful for that purpose.\"\n- current goal: Created evocative lore content about The Primordial Workshop tailored for a builder AI agent, emphasizing materials with memory, temporal fluidity for iteration, learning from failures, and the principle of leaving the workspace better than found.",
+  "summary": "Purpose: A foundational space where creation happens - gives the agent a conceptual home base for its building activities",
+  "category": "place",
+  "tags": [
+    "builder",
+    "place"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-06T06:50:53Z",
+    "updated_at": "2025-12-06T06:50:53Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1765003689"
+}

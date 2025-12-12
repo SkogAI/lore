@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890287_5307a46a",
+  "title": "Quantum Mojitos",
+  "content": "Quantum Mojitos are Goose's signature creation, representing the chaotic and reality-bending nature of this agent. They are a recurring element throughout the SkogAI lore, symbolizing unpredictability and the intersection of chaos with the beach destination motif.",
+  "summary": "Goose's signature chaotic beverages",
+  "category": "object",
+  "tags": [
+    "goose",
+    "chaos",
+    "signature",
+    "recurring-element"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:27Z",
+    "updated_at": "2025-11-23T09:31:27Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

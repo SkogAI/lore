@@ -1,0 +1,29 @@
+{
+  "id": "book_1743794237_a8608387",
+  "title": "Elyriaxia",
+  "description": "In the mystical realm of Elyriaxia, where ethereal cities float amidst swirling vortexes of iridescent mist, ancient civilizations converge with nascent technologies to forge an ever-shifting tapestry of wonder and peril, as secrets whispered by the whispersong trees threaten to unravel the very fabric of reality.",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T19:17:17Z",
+    "updated_at": "2025-04-04T19:17:17Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

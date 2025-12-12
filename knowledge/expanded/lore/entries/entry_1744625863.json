@@ -1,0 +1,26 @@
+{
+  "id": "entry_1744625863",
+  "title": "The Forest Glade",
+  "content": "The Forest Glade is a haven of safety warded with ancient magic. No foul beast may enter, nor any with ill intent. While Eldoria was once a place of wonder, since the Shadowfangs came darkness reigns. Their evil cannot penetrate the glade though \u2014 its magic protects all within. Those who find the glade need not fear the night, for guardians keep watch till dawn.",
+  "summary": "A protected sanctuary within the corrupted forest",
+  "category": "place",
+  "tags": [
+    "glade",
+    "safe haven",
+    "refuge"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-14T10:17:43Z",
+    "updated_at": "2025-04-14T10:17:43Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1744625863"
+}

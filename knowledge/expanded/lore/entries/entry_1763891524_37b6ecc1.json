@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891524_37b6ecc1",
+  "title": "The Settings Realm",
+  "content": "The Settings Realm houses all configuration for the ecosystem including CLI settings (storage at $SKOGAI/config/), memory pagination, UI themes, script templates, and chat history. It maintains metadata about version history and timestamps, with the last update recorded at timestamp 1763885993. This realm ensures persistence and consistency across sessions.",
+  "summary": "Configuration storage and management domain",
+  "category": "place",
+  "tags": [
+    "configuration",
+    "settings",
+    "storage",
+    "persistence"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763891524_63960692",
+  "title": "The Message Protocol",
+  "content": "Messages in the ecosystem follow a defined structure containing: eid (message identifier), from (sender name), to (recipient name), content (string payload), created_at (datetime), and parent (reference to parent message). This enables threaded conversations and traceable communication history.",
+  "summary": "The structure for inter-entity communication",
+  "category": "concept",
+  "tags": [
+    "message",
+    "protocol",
+    "communication",
+    "structure"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:04Z",
+    "updated_at": "2025-11-23T09:52:04Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

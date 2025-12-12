@@ -1,0 +1,24 @@
+{
+  "id": "entry_1743777565_a13729d8",
+  "title": "Marker: #AI!",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [
+    ""
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T14:39:25Z",
+    "updated_at": "2025-04-04T14:39:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1743777462_577342c9"
+}

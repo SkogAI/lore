@@ -1,0 +1,34 @@
+{
+  "id": "entry_1763891382_f819af28",
+  "title": "SkogAI Memory Server",
+  "content": "A memory server hosted at memory.skogai.se that provides persistent memory capabilities to agents through the MCP (Model Context Protocol). This HTTP-based service allows agents to store and retrieve memories across sessions, serving as the central memory infrastructure for the SkogAI ecosystem.",
+  "summary": "Remote memory system accessible via HTTP MCP protocol",
+  "category": "object",
+  "tags": [
+    "infrastructure",
+    "memory",
+    "mcp",
+    "http",
+    "skogai"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891382_542b9f3d",
+      "relationship_type": "instance_of",
+      "description": "The SkogAI Memory Server is an instance of the MCP Server Configuration pattern, implementing HTTP MCP protocol for remote memory access."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:49:42Z",
+    "updated_at": "2025-11-23T09:49:42Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}

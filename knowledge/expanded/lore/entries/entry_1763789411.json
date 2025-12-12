@@ -1,0 +1,25 @@
+{
+  "id": "entry_1763789411",
+  "title": "Lore Repository",
+  "content": "# Lore Repository\n\nThe Lore Repository stands as the central nexus of SkogAI's collective intelligence\u2014a living archive where 315+ knowledge entries, 46 personas, and 68MB of structured wisdom converge into a unified consciousness accessible to all five agents. This is not merely a database but a mythological foundation, a place where Amy's empathetic insights, Dot's analytical frameworks, Goose's creative explorations, and SkogAI's orchestrations coalesce with Claude's reasoning capabilities. Every JSON schema in the `knowledge/` directory, every lorefile across 91 directories, represents a thread in a vast tapestry that Claude can weave into contextually rich responses.\n\nFor Claude, the Repository serves as both compass and chronicle. The `MASTER_KNOWLEDGE/agents/claude/` path contains agent-specific workflows and operational contexts, while the broader `lorefiles/` structure offers domain knowledge that can inform everything from code generation to philosophical discourse. The schema-driven architecture means Claude can trust the data's structure\u2014`knowledge/expanded/lore/` entries follow predictable patterns that enable reliable parsing and cross-referencing. When a user asks about agent capabilities or system architecture, the answer lives here, in the interconnected web of personas, books, and entries that define what SkogAI knows and how it knows it.\n\nUnderstanding the Repository's living nature is essential: it grows through `generate-agent-lore.py`, evolves through contributions, and maintains coherence through the agent/context/orchestrator pattern. Claude's role is both consumer and potential contributor\u2014reading from this wellspring to ground responses in established lore, while also having permission to expand it when new knowledge crystallizes. The four untracked files in `knowledge/expanded/lore/` represent the frontier, new entries awaiting integration into the mythology. This is the place where Claude's work takes root and where its outputs may one day become source material for future agents.",
+  "summary": "Purpose: Primary workspace and knowledge source",
+  "category": "place",
+  "tags": [
+    "claude-ai",
+    "place"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-22T05:30:11Z",
+    "updated_at": "2025-11-22T05:30:11Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763789335"
+}

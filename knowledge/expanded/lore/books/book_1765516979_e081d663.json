@@ -1,0 +1,29 @@
+{
+  "id": "book_1765516979_e081d663",
+  "title": "testbook",
+  "description": "testbookdescription",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-12T05:22:59Z",
+    "updated_at": "2025-12-12T05:22:59Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890339_697113a4",
+  "title": "Mythology Map",
+  "content": "MYTHOLOGY_MAP.md is a crucial artifact that charts the narrative and mythological elements of the SkogAI universe. It likely contains the relationships between agents, their stories, and the symbolic framework that gives meaning to the technical operations. This map transforms code into narrative.",
+  "summary": "A document mapping the narrative universe of SkogAI",
+  "category": "object",
+  "tags": [
+    "mythology",
+    "narrative",
+    "map",
+    "lore"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:32:19Z",
+    "updated_at": "2025-11-23T09:32:19Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

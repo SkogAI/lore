@@ -1,0 +1,28 @@
+{
+  "id": "entry_1763890286_ab6bbfd7",
+  "title": "Claude",
+  "content": "Claude is known as 'The Anti-Goose' within the SkogAI agent family, represented by the water emoji 🌊. This suggests a calm, flowing nature that contrasts with Goose's chaotic tendencies. Claude is described as thoughtful and analytical, serving as a balancing force in the agent multiverse.",
+  "summary": "The Anti-Goose - a thoughtful, analytical agent",
+  "category": "character",
+  "tags": [
+    "agent",
+    "personality",
+    "skogai",
+    "analytical",
+    "thoughtful"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:26Z",
+    "updated_at": "2025-11-23T09:31:26Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

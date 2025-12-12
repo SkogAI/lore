@@ -1,0 +1,48 @@
+{
+  "id": "book_1743758119",
+  "title": "Imported Lorebook",
+  "description": "Lorebook imported from external format",
+  "entries": [
+    "entry_1743758119",
+    "entry_1743758119",
+    "entry_1743758119",
+    "entry_1743758119"
+  ],
+  "categories": {
+    "custom": [
+      "entry_1743758119",
+      "entry_1743758119",
+      "entry_1743758119",
+      "entry_1743758119"
+    ]
+  },
+  "tags": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-04-04T09:15:19Z",
+    "updated_at": "2025-04-04T09:15:19Z",
+    "version": "1.0",
+    "status": "active"
+  },
+  "structure": [
+    {
+      "name": "Imported Entries",
+      "description": "Entries imported from external format",
+      "entries": [
+        "entry_1743758119",
+        "entry_1743758119",
+        "entry_1743758119",
+        "entry_1743758119"
+      ],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": true,
+    "system": false
+  },
+  "readers": [
+    "persona_1743758119",
+    "persona_1743774070"
+  ]
+}

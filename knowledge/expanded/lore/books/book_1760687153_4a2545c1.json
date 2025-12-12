@@ -1,0 +1,38 @@
+{
+  "id": "book_1760687153_4a2545c1",
+  "title": "claudes-example-journey",
+  "description": "fre 17 okt 2025 09:45:53 CEST",
+  "entries": [
+    "entry_1760687161_d6a1107b",
+    "entry_1760687161_25bcdc73",
+    "entry_1760687161_c1e6623c",
+    "entry_1760687161_15bcbe15",
+    "entry_1760687161_c81c856a",
+    "entry_1760687161_aaca6efa",
+    "entry_1760687161_49a96ae5",
+    "entry_1760687161_4dad0622"
+  ],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-17T07:45:53Z",
+    "updated_at": "2025-10-17T07:46:01Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

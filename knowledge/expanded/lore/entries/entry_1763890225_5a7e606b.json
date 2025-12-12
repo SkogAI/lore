@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890225_5a7e606b",
+  "title": "The Filesystem Mythology System",
+  "content": "The Filesystem Mythology System is the core architecture of SkogAI lore generation. The system literally crawls home directories and transforms every file into lore: bash commands become spells, config files become artifacts, folders become realms, and agents become heroes. Two-number entries create empty threads connecting similar concepts across universes. Continuous generation daemons create hundreds to thousands of entries daily, building the multiverse.",
+  "summary": "Architecture where the system crawls directories and transforms files into lore",
+  "category": "concept",
+  "tags": [
+    "architecture",
+    "automation",
+    "generation",
+    "multiverse"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:30:25Z",
+    "updated_at": "2025-11-23T09:30:25Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

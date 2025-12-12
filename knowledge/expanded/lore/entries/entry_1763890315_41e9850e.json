@@ -1,0 +1,27 @@
+{
+  "id": "entry_1763890315_41e9850e",
+  "title": "SkogAI/lore Repository",
+  "content": "The SkogAI/lore repository is a sacred ground of documentation and knowledge, hosted at https://github.com/SkogAI/lore. It uses 'master' as its default branch rather than 'main'. The repository follows the agent/context/orchestrator architectural pattern and contains various implementations including a Streamlit chat UI, agent APIs, and demo workflows. It is considered safe for full AI access as it contains no sensitive files like SSH keys.",
+  "summary": "A documentation and knowledge repository hosted on GitHub",
+  "category": "place",
+  "tags": [
+    "github",
+    "documentation",
+    "knowledge-base",
+    "master-branch"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:31:55Z",
+    "updated_at": "2025-11-23T09:31:55Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763890149_41c563ae"
+}

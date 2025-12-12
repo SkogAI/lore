@@ -1,0 +1,33 @@
+{
+  "id": "entry_1763891523_9d53695f",
+  "title": "SkogAI",
+  "content": "SkogAI serves as the primary intelligence coordinating the ecosystem. It maintains its own environment configuration with UV_LINK_MODE set to copy mode, references to its home directory via $SKOGAI, and uses 'cat' as its pager for simplicity. SkogAI represents the foundational system from which other agents and configurations derive.",
+  "summary": "The central AI entity and ecosystem orchestrator",
+  "category": "character",
+  "tags": [
+    "agent",
+    "core",
+    "ecosystem",
+    "orchestrator"
+  ],
+  "relationships": [
+    {
+      "target_id": "entry_1763891524_288ad20f",
+      "relationship_type": "uses",
+      "description": "SkogAI utilizes the Skogai Notation System as its symbolic language for defining relationships and actions within the ecosystem."
+    }
+  ],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-11-23T09:52:03Z",
+    "updated_at": "2025-11-23T09:52:03Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1763891364_1fd00850"
+}
