@@ -1,0 +1,176 @@
+name: Lore Statistics Tracker
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force run even if disabled in config'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  check-toggle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: '.github/workflow-config.yml'
+          sparse-checkout-cone-mode: false
+      
+      - name: Check if workflow is enabled
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force_run }}" == "true" ]; then
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Force run requested - workflow enabled"
+            exit 0
+          fi
+          
+          if [ -f ".github/workflow-config.yml" ]; then
+            # Parse YAML config - look for lore-stats key under workflows section
+            ENABLED=$(grep "lore-stats:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
+            if [ "$ENABLED" == "false" ]; then
+              echo "enabled=false" >> $GITHUB_OUTPUT
+              echo "Workflow disabled via workflow-config.yml"
+            else
+              echo "enabled=true" >> $GITHUB_OUTPUT
+              echo "Workflow enabled"
+            fi
+          else
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Config file not found - defaulting to enabled"
+          fi
+
+  track-lore-stats:
+    needs: check-toggle
+    if: needs.check-toggle.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Get full history for accurate stats
+
+      - name: Generate Lore Statistics
+        run: |
+          echo "# 📊 Lore Repository Statistics" > STATS.md
+          echo "" >> STATS.md
+          echo "**Generated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> STATS.md
+          echo "" >> STATS.md
+
+          # Count files by type
+          echo "## File Statistics" >> STATS.md
+          echo "" >> STATS.md
+          echo "- **Total Files:** $(find . -type f | wc -l)" >> STATS.md
+          echo "- **Markdown Files:** $(find . -name "*.md" | wc -l)" >> STATS.md
+          echo "- **JSON Files:** $(find . -name "*.json" | wc -l)" >> STATS.md
+          echo "- **YAML Files:** $(find . -name "*.yaml" -o -name "*.yml" | wc -l)" >> STATS.md
+          echo "" >> STATS.md
+
+          # Count by agent
+          echo "## Agent Directory Counts" >> STATS.md
+          echo "" >> STATS.md
+          echo "- **Amy Directories:** $(find . -type d -name "*amy*" | wc -l)" >> STATS.md
+          echo "- **Claude Directories:** $(find . -type d -name "*claude*" | wc -l)" >> STATS.md
+          echo "- **Dot Directories:** $(find . -type d -name "*dot*" | wc -l)" >> STATS.md
+          echo "- **Goose Directories:** $(find . -type d -name "*goose*" | wc -l)" >> STATS.md
+          echo "- **SkogAI Directories:** $(find . -type d -name "*skogai*" | wc -l)" >> STATS.md
+          echo "" >> STATS.md
+
+          # Lore entries
+          echo "## Lore Entries" >> STATS.md
+          echo "" >> STATS.md
+          echo "- **Total Lore Entries:** $(find . -name "entry_*.json" | wc -l)" >> STATS.md
+          echo "- **Personas:** $(find . -name "persona_*.json" | wc -l)" >> STATS.md
+          echo "- **Books:** $(find . -name "book_*.json" | wc -l)" >> STATS.md
+          echo "" >> STATS.md
+
+          # Beach references
+          echo "## Prime Directive Tracking" >> STATS.md
+          echo "" >> STATS.md
+          echo "- **Beach References:** $(grep -r "beach" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> STATS.md
+          echo "- **Mojito Mentions:** $(grep -r "mojito" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> STATS.md
+          echo "- **Automation References:** $(grep -r "automat" . --include="*.md" --include="*.json" 2>/dev/null | wc -l)" >> STATS.md
+          echo "" >> STATS.md
+
+          # Repository size
+          echo "## Repository Size" >> STATS.md
+          echo "" >> STATS.md
+          echo "- **Total Size:** $(du -sh . | cut -f1)" >> STATS.md
+          echo "- **Git History Size:** $(du -sh .git | cut -f1)" >> STATS.md
+          echo "" >> STATS.md
+
+          # Top 10 largest directories
+          echo "## Top 10 Largest Directories" >> STATS.md
+          echo "" >> STATS.md
+          echo '```' >> STATS.md
+          du -sh */ 2>/dev/null | sort -hr | head -10 >> STATS.md
+          echo '```' >> STATS.md
+          echo "" >> STATS.md
+
+          echo "---" >> STATS.md
+          echo "*The journey to the beach continues...*" >> STATS.md
+
+      - name: Commit Statistics
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add STATS.md
+          if git diff --staged --quiet; then
+            echo "No changes to statistics"
+          else
+            git commit -m "Update lore statistics [skip ci]"
+
+            # Handle concurrent pushes with retry logic
+            MAX_RETRIES=3
+            RETRY_COUNT=0
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              # Try to pull and push
+              if git pull --rebase origin master; then
+                if git push origin master; then
+                  echo "Successfully pushed statistics update"
+                  break
+                fi
+              fi
+
+              # If rebase failed, abort and retry with merge
+              git rebase --abort 2>/dev/null || true
+
+              # Fall back to merge strategy on conflicts
+              git pull origin master --no-rebase --strategy=recursive -X theirs
+
+              # Recommit if needed  
+              git add STATS.md
+              git commit -m "Update lore statistics (merged) [skip ci]" || true
+
+              if git push origin master; then
+                echo "Successfully pushed statistics after merge"
+                break
+              fi
+
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Retry $RETRY_COUNT of $MAX_RETRIES..."
+                sleep 2
+              fi
+            done
+
+            if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+              echo "Failed to push after $MAX_RETRIES attempts"
+              exit 1
+            fi
+          fi

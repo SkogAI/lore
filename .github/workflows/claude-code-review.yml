@@ -1,0 +1,102 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    # Optional: Only run on specific file changes
+    # paths:
+    #   - "src/**/*.ts"
+    #   - "src/**/*.tsx"
+    #   - "src/**/*.js"
+    #   - "src/**/*.jsx"
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force run even if disabled in config'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  check-toggle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: '.github/workflow-config.yml'
+          sparse-checkout-cone-mode: false
+      
+      - name: Check if workflow is enabled
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force_run }}" == "true" ]; then
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Force run requested - workflow enabled"
+            exit 0
+          fi
+          
+          if [ -f ".github/workflow-config.yml" ]; then
+            # Parse YAML config - look for claude-code-review key under workflows section
+            ENABLED=$(grep "claude-code-review:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
+            if [ "$ENABLED" == "false" ]; then
+              echo "enabled=false" >> $GITHUB_OUTPUT
+              echo "Workflow disabled via workflow-config.yml"
+            else
+              echo "enabled=true" >> $GITHUB_OUTPUT
+              echo "Workflow enabled"
+            fi
+          else
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Config file not found - defaulting to enabled"
+          fi
+
+  claude-review:
+    needs: check-toggle
+    if: needs.check-toggle.outputs.enabled == 'true'
+    # Optional: Filter by PR author
+    # if: |
+    #   github.event.pull_request.user.login == 'external-contributor' ||
+    #   github.event.pull_request.user.login == 'new-developer' ||
+    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
+    
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Please review this pull request and provide feedback on:
+            - Code quality and best practices
+            - Potential bugs or issues
+            - Performance considerations
+            - Security concerns
+            - Test coverage
+            
+            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive and helpful in your feedback.
+
+            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+          
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://docs.claude.com/en/docs/claude-code/sdk#command-line for available options
+          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'

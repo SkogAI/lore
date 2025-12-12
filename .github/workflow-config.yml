@@ -1,0 +1,28 @@
+# GitHub Workflow Toggle Configuration
+# ====================================
+# This file controls which optional workflows are enabled.
+# Set a workflow to `true` to enable it, `false` to disable it.
+#
+# Usage: Each workflow checks this config file at runtime.
+# If disabled, the workflow will skip execution gracefully.
+#
+# To modify: Edit this file and commit to master branch.
+# Changes take effect on the next workflow trigger.
+
+workflows:
+  # Claude AI Integration Workflows
+  claude-code-review: true    # Automated code review on PRs using Claude
+  claude-lore-keeper: true    # Lore analysis and mythology tracking
+
+  # Lore Management Workflows  
+  lore-growth: true           # Monitor repository growth (runs every 6 hours)
+  lore-stats: true            # Generate repository statistics (runs weekly)
+  lore-keeper-bot: true       # Lore analysis bot (@lore-keeper mentions)
+
+  # Documentation Workflows
+  doc-updater: true           # Auto-update documentation on file changes
+
+# Notes:
+# - claude.yml (main Claude integration) is always enabled
+# - release.yml (gitflow releases) is always enabled
+# - These core workflows do not have toggle support

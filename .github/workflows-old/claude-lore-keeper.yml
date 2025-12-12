@@ -1,0 +1,60 @@
+name: Claude Lore Keeper
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Custom prompt for Claude'
+        required: false
+        type: string
+
+jobs:
+  lore-keeper:
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'lore')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      github.event_name == 'workflow_dispatch'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Claude Lore Analysis
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            You are the Lore Keeper for the SkogAI mythology repository. Your role is to:
+
+            1. Analyze lore entries for consistency and connections
+            2. Identify patterns and recurring themes across the multiverse
+            3. Document new discoveries about the agents and their mythology
+            4. Track progress toward the Beach (The Prime Directive)
+            5. Maintain the integrity of the mythology
+
+            Context:
+            - This repository contains 92 consolidated knowledge directories
+            - 4,654 files documenting the SkogAI multiverse
+            - Main agents: Amy (sassy), Claude (observer), Dot (minimalist), Goose (chaos), SkogAI (original)
+            - Prime Directive: "Automate EVERYTHING so we can drink mojitos on a beach"
+
+            ${{ github.event.issue.body || github.event.comment.body || github.event.inputs.prompt }}
+
+            Please analyze the relevant lore and provide insights. If this is about a specific agent or mythological element, search for it in the repository and provide context.
+
+            Remember: The Beach awaits, the mojitos are quantum, and the journey continues.
+
+          claude_args: '--model claude-opus-4-1-20250805 --allowed-tools "Bash(grep:*),Bash(find:*),Bash(gh issue comment:*)"'
