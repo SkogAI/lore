@@ -239,26 +239,40 @@ ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 
 if [ -f "$ENTRY_FILE" ]; then
   # Use Python to update the JSON properly
-  # Pass content via stdin to avoid shell escaping issues
-  python3 << PYTHON_SCRIPT
+  # Pass narrative through a temp file to avoid shell escaping issues
+  TEMP_NARRATIVE="/tmp/lore-narrative-$SESSION_ID.txt"
+  echo "$GENERATED_NARRATIVE" > "$TEMP_NARRATIVE"
+  
+  export TEMP_NARRATIVE ENTRY_FILE INPUT_TYPE PERSONA_NAME
+  python3 << 'PYTHON_SCRIPT'
 import json
 import sys
+import os
 
-# Read the generated narrative from environment
-narrative = """$GENERATED_NARRATIVE"""
+# Read the generated narrative from temp file
+temp_file = os.environ.get('TEMP_NARRATIVE')
+with open(temp_file, 'r') as f:
+    narrative = f.read()
 
-with open('$ENTRY_FILE', 'r') as f:
+entry_file = os.environ.get('ENTRY_FILE')
+input_type = os.environ.get('INPUT_TYPE')
+persona_name = os.environ.get('PERSONA_NAME')
+
+with open(entry_file, 'r') as f:
     entry = json.load(f)
 
 entry['content'] = narrative
-entry['summary'] = 'Auto-generated lore from $INPUT_TYPE'
-entry['tags'] = ['generated', 'automated', '$PERSONA_NAME', '$INPUT_TYPE']
+entry['summary'] = f'Auto-generated lore from {input_type}'
+entry['tags'] = ['generated', 'automated', persona_name, input_type]
 
-with open('$ENTRY_FILE', 'w') as f:
+with open(entry_file, 'w') as f:
     json.dump(entry, f, indent=2)
 
 print("Entry updated with narrative")
 PYTHON_SCRIPT
+
+  # Clean up temp file
+  rm -f "$TEMP_NARRATIVE"
 else
   echo "Warning: Entry file not found, content not updated"
 fi
