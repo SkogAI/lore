@@ -115,16 +115,32 @@ Example:
 
 Cross-book references create a shared mythology where each agent has their own story about the same underlying system concepts.
 
-## Current State
+## Current State (Updated 2025-12-12)
 
-- 89 books
-- 301 entries
-- 74 personas
+- **95 books** (up from 89)
+- **686 entries** (up from 301)
+- **85 personas** (up from 74)
 
-Recent additions:
-- book_1765003689 - Builder agent book (created for me during previous session)
-- book_1744512793 - First orchestrator book (proper fantasy lore)
-- book_1759486042 - Lore-collector book (Claude from previous session)
+### Verified Working Components
+
+**Core Infrastructure:**
+- ✅ Python LoreAPI - Full CRUD operations for entries/books/personas
+- ✅ manage-lore.sh - Fixed and working (now writes JSON files correctly)
+- ✅ All three LLM providers tested: Claude, OpenAI (via OpenRouter), Ollama (local)
+
+**Lore Generation Tools:**
+- ✅ llama-lore-creator.sh - Creates entries with LLM content (all providers)
+- ✅ llama-lore-integrator.sh - Extracts lore from documents
+- ✅ integration/lore-flow.sh - Full 5-step pipeline operational
+
+**Known Issues:**
+- ⚠️ [Issue #5](https://github.com/SkogAI/lore/issues/5): LLM meta-commentary in content
+- ⚠️ [Issue #6](https://github.com/SkogAI/lore/issues/6): Pipeline content update bug
+
+Recent test additions (2025-12-12):
+- Multiple test entries created during comprehensive provider testing
+- Verified end-to-end workflow from entry creation to book linking
+- Confirmed all providers generate valid JSON entries
 
 ## Numbered Knowledge System
 
@@ -150,15 +166,24 @@ From @docs/CONCEPT.md:
 4. Storage → JSON entries with content, tags, relationships
 5. Future sessions → Agents load their lore as context/memory
 
-### What I Don't Fully Know Yet
+### What Has Been Verified (2025-12-12)
+
+- [x] Integration workflows - The pipeline connecting git commits → lore generation **works end-to-end**
+  - Tested manual input and git-diff modes
+  - All 5 steps complete: extract → select persona → load context → generate narrative → create entry
+  - Known issue: content field empty (Issue #6), but entry creation works
+
+- [x] LLM provider integration - All three providers confirmed working
+  - Claude (via OpenRouter API)
+  - OpenAI (via OpenRouter API)
+  - Ollama (local models like llama3)
+
+### What Needs Further Exploration
 
 - [ ] Orchestrator implementation details - How it captures work sessions
 - [ ] Knowledge Router logic - How it selects what knowledge to load
 - [ ] Context State Machine - State transitions and lifecycle
-- [ ] Persona-bridge integration - How personas render into agent prompts in practice
-- [ ] Integration workflows - The actual automation connecting git commits → lore generation
-
-These exist in the codebase but weren't explored in detail during cleanup.
+- [ ] Persona-bridge integration - How personas render into agent prompts (code exists but needs testing)
 
 ---
 Key insight: This isn't a content generation system. It's a memory persistence system using narrative compression to store technical knowledge in a format that AI agents can load as

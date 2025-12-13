@@ -4,13 +4,12 @@
 
 set -e
 
-# SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKOGAI_DIR="/home/skogix/lore/"
+SKOGAI_LORE="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MODEL_NAME=${1:-"llama3.2:3b"}
 PIPE_NAME="skogai-lore-generator"
 PIPE_PATH="/tmp/${PIPE_NAME}"
 GENERATION_INTERVAL=${2:-"600"} # Default: 10 minutes between generations
-HISTORY_DIR="${SKOGAI_DIR}/logs/lore_generation"
+HISTORY_DIR="${SKOGAI_LORE}/logs/lore_generation"
 MAX_HISTORY_FILES=50
 
 mkdir -p "${HISTORY_DIR}"
@@ -61,7 +60,7 @@ generate_random_entry() {
 
   # Generate the entry
   echo "Generating random entry: $RANDOM_TITLE ($RANDOM_CATEGORY)"
-  "${SKOGAI_DIR}/tools/llama-lore-creator.sh" $MODEL_NAME entry "$RANDOM_TITLE" "$RANDOM_CATEGORY"
+  "${SKOGAI_LORE}/tools/llama-lore-creator.sh" $MODEL_NAME entry "$RANDOM_TITLE" "$RANDOM_CATEGORY"
 }
 
 # Generate random lorebook
@@ -78,7 +77,7 @@ generate_random_book() {
 
   # Generate the book
   echo "Generating random book: $RANDOM_TITLE - $RANDOM_DESC ($ENTRY_COUNT entries)"
-  "${SKOGAI_DIR}/tools/llama-lore-creator.sh" $MODEL_NAME lorebook "$RANDOM_TITLE" "$RANDOM_DESC" $ENTRY_COUNT
+  "${SKOGAI_LORE}/tools/llama-lore-creator.sh" $MODEL_NAME lorebook "$RANDOM_TITLE" "$RANDOM_DESC" $ENTRY_COUNT
 }
 
 # Generate random persona with lore
@@ -92,10 +91,10 @@ generate_random_persona() {
 
   # Generate the persona
   echo "Generating random persona: $RANDOM_NAME - $RANDOM_DESC"
-  PERSONA_ID=$("${SKOGAI_DIR}/tools/llama-lore-creator.sh" $MODEL_NAME persona "$RANDOM_NAME" "$RANDOM_DESC" | grep "Created persona" | grep -o "persona_[0-9_]*")
+  PERSONA_ID=$("${SKOGAI_LORE}/tools/llama-lore-creator.sh" $MODEL_NAME persona "$RANDOM_NAME" "$RANDOM_DESC" | grep "Created persona" | grep -o "persona_[0-9_]*")
 
   # Generate a lorebook and link it
-  "${SKOGAI_DIR}/tools/llama-lore-creator.sh" $MODEL_NAME link "$PERSONA_ID" "1"
+  "${SKOGAI_LORE}/tools/llama-lore-creator.sh" $MODEL_NAME link "$PERSONA_ID" "1"
 }
 
 # Generate history timestamp

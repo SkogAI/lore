@@ -14,7 +14,7 @@ set -e
 # @env LORE_DIR=/home/skogix/lore/knowledge/expanded/lore path to yo lore!
 # @env BOOKS_DIR=/home/skogix/lore/knowledge/expanded/lore/books path to yo books!
 # @env ENTRIES_DIR=/home/skogix/lore/knowledge/expanded/lore/entries path to yo entries!
-# @env PERSONA_DIR=/home/skogix/lore/knowledge/expanded/persona path to yo persona!
+# @env PERSONA_DIR=/home/skogix/lore/knowledge/expanded/personas path to yo persona!
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 # 📜 Sacred configuration scrolls
@@ -42,11 +42,41 @@ _portal_gateways() {
   echo "3000 8000 8080 9000"
 }
 
+# 🔍 Schema field helpers
+_get_category() {
+  jq -r '.category' "$1"
+}
+
+_get_status() {
+  jq -r '.metadata.status // empty' "$1"
+}
+
+_get_book_id() {
+  jq -r '.book_id // empty' "$1"
+}
+
 # 📖 Chronicle inscriptions
-# @cmd 🔮 Manage that lore yao!
-manage() {
-  # "$LORE_SCRIPTS"/manage-lore.sh "$argc_input"
-  :
+# @cmd 🔮 Validate entry schema yao
+# @arg entry![`_choice_entries`] Entry to validate
+# @alias validate_entry
+validate-entry() {
+  jq -f scripts/jq/schema-validation/transform.jq --arg schema '{"required":["id","title","content","category"],"types":{"id":"string","title":"string","content":"string","category":"string"}}' "${ENTRIES_DIR}/${argc_entry}.json"
+}
+
+# 📖 Chronicle inscriptions
+# @cmd 🔮 Validate book schema yao
+# @arg book![`_choice_books`] Book to validate
+# @alias validate_book
+validate-book() {
+  jq -f scripts/jq/schema-validation/transform.jq --arg schema '{"required":["id","title","description"],"types":{"id":"string","title":"string","description":"string","entries":"array"}}' "${BOOKS_DIR}/${argc_book}.json"
+}
+
+# 📖 Chronicle inscriptions
+# @cmd 🔮 Validate persona schema yao
+# @arg persona![`_choice_personas`] Persona to validate
+# @alias validate_persona
+validate-persona() {
+  jq -f scripts/jq/schema-validation/transform.jq --arg schema '{"required":["id","name","core_traits","voice"],"types":{"id":"string","name":"string","core_traits":"object","voice":"object"}}' "${PERSONA_DIR}/${argc_persona}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -60,20 +90,11 @@ list-books() {
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Show them books yao
 # @option --format[=json|yaml] Output format
-# @arg book![`_choice_books`] Book name to show. Use "list" to see all books.
+# @arg book[`_choice_books`] Book to show (omit to list all)
 # @alias show_book
 show-book() {
-  if [[ "$argc_book" == "list" ]]; then
-    _choice_books >>"$LLM_OUTPUT"
-  else
-    local book_json="${BOOKS_DIR}/${argc_book}.json"
-
-    if [[ "${argc_format:-json}" == "yaml" ]]; then
-      json2yaml <"$book_json" >>"$LLM_OUTPUT"
-    else
-      cat "$book_json" >>"$LLM_OUTPUT"
-    fi
-  fi
+  [[ -z "$argc_book" ]] && _choice_books && return
+  [[ "${argc_format:-json}" == "yaml" ]] && json2yaml <"${BOOKS_DIR}/${argc_book}.json" || cat "${BOOKS_DIR}/${argc_book}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -85,17 +106,12 @@ list-entries() {
 
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Show them entries yao
-# @option --entry![`_choice_entries`] Entry ID to show
 # @option --format[=json|yaml] Output format
+# @arg entry[`_choice_entries`] Entry to show (omit to list all)
 # @alias show_entry
 show-entry() {
-  local entry_json="${ENTRIES_DIR}/${argc_entry}.json"
-
-  if [[ "${argc_format:-json}" == "yaml" ]]; then
-    json2yaml <"$entry_json" >>"$LLM_OUTPUT"
-  else
-    cat "$entry_json" >>"$LLM_OUTPUT"
-  fi
+  [[ -z "$argc_entry" ]] && _choice_entries && return
+  [[ "${argc_format:-json}" == "yaml" ]] && json2yaml <"${ENTRIES_DIR}/${argc_entry}.json" || cat "${ENTRIES_DIR}/${argc_entry}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -104,47 +120,18 @@ show-entry() {
 # @arg book![`_choice_books`] Book to read entries from
 # @alias read_book_entries
 read-book-entries() {
-  local book_file="${BOOKS_DIR}/${argc_book}.json"
-
-  for entry_id in $(jq -r '.entries[]' "$book_file"); do
-    local entry_file="${ENTRIES_DIR}/${entry_id}.json"
-    [[ -f "$entry_file" ]] || continue
-
-    if [[ "${argc_format:-json}" == "yaml" ]]; then
-      json2yaml <"$entry_file" >>"$LLM_OUTPUT"
-    else
-      cat "$entry_file" >>"$LLM_OUTPUT"
-    fi
-    echo "---" >>"$LLM_OUTPUT"
+  jq -r '.entries[]' "${BOOKS_DIR}/${argc_book}.json" | while read entry_id; do
+    [[ -f "${ENTRIES_DIR}/${entry_id}.json" ]] || continue
+    [[ "${argc_format:-json}" == "yaml" ]] && json2yaml <"${ENTRIES_DIR}/${entry_id}.json" || cat "${ENTRIES_DIR}/${entry_id}.json"
+    echo "---"
   done
 }
 
-_choice_books() {
-  for book_file in "${BOOKS_DIR}"/*.json; do
-    [[ -f "$book_file" ]] && basename "$book_file" .json
-  done
-}
+_choice_books() { basename -s .json "${BOOKS_DIR}"/*.json; }
+_choice_entries() { basename -s .json "${ENTRIES_DIR}"/*.json; }
+_choice_personas() { basename -s .json "${PERSONA_DIR}"/*.json; }
 
-_choice_entries() {
-  for entry_file in "${ENTRIES_DIR}"/*.json; do
-    [[ -f "$entry_file" ]] && basename "$entry_file" .json
-  done
-}
-
-_choice_personas() {
-  for persona_file in "${PERSONA_DIR}"/*.json; do
-    [[ -f "$persona_file" ]] && basename "$persona_file" .json
-  done
-}
-
-_choice_categories() {
-  echo "character"
-  echo "place"
-  echo "event"
-  echo "object" "concept" "custom"
-  echo "concept"
-  echo "custom"
-}
+_choice_categories() { echo -e "character\nplace\nevent\nobject\nconcept\ncustom"; }
 
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Create new entry yao
@@ -153,33 +140,14 @@ _choice_categories() {
 # @alias create_entry
 create-entry() {
   local entry_id="entry_$(date +%s)_$(openssl rand -hex 4)"
-  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-  cat >"${ENTRIES_DIR}/${entry_id}.json" <<EOF
-{
-  "id": "${entry_id}",
-  "title": "${argc_title}",
-  "content": "",
-  "summary": "",
-  "category": "${argc_category}",
-  "tags": [],
-  "relationships": [],
-  "attributes": {},
-  "metadata": {
-    "created_by": "$(whoami)",
-    "created_at": "${timestamp}",
-    "updated_at": "${timestamp}",
-    "version": "1.0",
-    "canonical": true
-  },
-  "visibility": {
-    "public": true,
-    "restricted_to": []
-  }
-}
-EOF
-
-  echo "Created: ${entry_id}" >>"$LLM_OUTPUT"
+  jq -f scripts/jq/create-entry/transform.jq \
+    --arg id "$entry_id" \
+    --arg title "$argc_title" \
+    --arg category "$argc_category" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --arg creator "$(whoami)" \
+    --null-input \
+    > "${ENTRIES_DIR}/${entry_id}.json" && echo "Created: ${entry_id}" >>"$LLM_OUTPUT"
 }
 
 # 📖 Chronicle inscriptions
@@ -189,41 +157,30 @@ EOF
 # @alias create_book
 create-book() {
   local book_id="book_$(date +%s)_$(openssl rand -hex 4)"
-  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-  cat >"${BOOKS_DIR}/${book_id}.json" <<EOF
-{
-  "id": "${book_id}",
-  "title": "${argc_title}",
-  "description": "${argc_description}",
-  "entries": [],
-  "categories": {},
-  "tags": [],
-  "owners": [],
-  "readers": [],
-  "metadata": {
-    "created_by": "$(whoami)",
-    "created_at": "${timestamp}",
-    "updated_at": "${timestamp}",
-    "version": "1.0",
-    "status": "draft"
-  },
-  "structure": [
-    {
-      "name": "Introduction",
-      "description": "Overview of this lore book",
-      "entries": [],
-      "subsections": []
-    }
-  ],
-  "visibility": {
-    "public": false,
-    "system": false
-  }
+  jq -f scripts/jq/create-book/transform.jq \
+    --arg id "$book_id" \
+    --arg title "$argc_title" \
+    --arg description "$argc_description" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --arg creator "$(whoami)" \
+    --null-input \
+    > "${BOOKS_DIR}/${book_id}.json" && echo "Created: ${book_id}" >>"$LLM_OUTPUT"
 }
-EOF
 
-  echo "Created: ${book_id}" >>"$LLM_OUTPUT"
+# 📖 Chronicle inscriptions
+# @cmd 🔮 Create new persona yao
+# @option --name! <NAME> Persona name
+# @option --voice-tone="neutral" <TONE> Voice tone
+# @alias create_persona
+create-persona() {
+  local persona_id="persona_$(date +%s)"
+  jq -f scripts/jq/create-persona/transform.jq \
+    --arg id "$persona_id" \
+    --arg name "$argc_name" \
+    --arg voice_tone "$argc_voice_tone" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --null-input \
+    > "${PERSONA_DIR}/${persona_id}.json" && echo "Created: ${persona_id}" >>"$LLM_OUTPUT"
 }
 
 # 📖 Chronicle inscriptions

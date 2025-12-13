@@ -153,7 +153,7 @@ fi
 
 # Test 12: Invalid regex pattern (handled gracefully with try-catch)
 echo -n "Test 12: Invalid regex pattern (handled gracefully)... "
-result=$(jq -c -f "$TRANSFORM" --arg array_path "data.nested.items" --arg field_name "value" --arg pattern "[" "$SCRIPT_DIR/test-input-12.json" 2>/dev/null || echo '{"data":{"nested":{"items":[]}}}')
+result=$(jq -c -f "$TRANSFORM" --arg array_path "data.nested.items" --arg field_name "value" --arg pattern "[" "$SCRIPT_DIR/test-input-12.json" || echo '{"data":{"nested":{"items":[]}}}')
 expected='{"data":{"nested":{"items":[]}}}'
 if [[ "$result" == "$expected" ]]; then
     echo "PASS"

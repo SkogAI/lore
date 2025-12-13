@@ -22,7 +22,7 @@ check_file() {
 
     # Check each pattern
     for pattern in "${PATTERNS[@]}"; do
-        if grep -n -E "$pattern" "$file" 2>/dev/null | grep -v "^#" > /tmp/violations_$$; then
+        if grep -n -E "$pattern" "$file" | grep -v "^#" > /tmp/violations_$$; then
             if [ $violations -eq 0 ]; then
                 echo ""
                 echo "❌ Hardcoded paths found in $file:"

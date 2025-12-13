@@ -62,7 +62,7 @@ systemctl --user start "${SERVICE_NAME}.service"
 systemctl --user enable "${SERVICE_NAME}.service"
 
 # Enable lingering if not already enabled (allows service to run when user not logged in)
-loginctl enable-linger $(whoami) 2>/dev/null || true
+loginctl enable-linger $(whoami) || true
 
 echo "Service ${SERVICE_NAME} installed and started with model ${MODEL}"
 echo "Generation interval: ${INTERVAL} seconds"

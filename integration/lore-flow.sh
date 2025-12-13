@@ -40,9 +40,9 @@ echo "[1/5] Extracting content..."
 case $INPUT_TYPE in
   git-diff)
     # Get git diff
-    RAW_CONTENT=$(git diff "$INPUT_CONTENT" 2>/dev/null || git show "$INPUT_CONTENT" 2>/dev/null)
+    RAW_CONTENT=$(git diff "$INPUT_CONTENT" || git show "$INPUT_CONTENT")
     # Try to extract author from commit
-    GIT_AUTHOR=$(git log -1 --format='%an' "$INPUT_CONTENT" 2>/dev/null || echo "")
+    GIT_AUTHOR=$(git log -1 --format='%an' "$INPUT_CONTENT" || echo "")
     ;;
   log)
     # Read from log file
@@ -118,11 +118,11 @@ if [ -n "$GIT_AUTHOR" ]; then
   PERSONA_ID=$(lookup_persona "$GIT_AUTHOR" "$PERSONA_MAPPING")
 else
   # Use DEFAULT from mapping or hardcoded default
-  PERSONA_ID=$(grep "^DEFAULT=" "$PERSONA_MAPPING" 2>/dev/null | cut -d'=' -f2 | tr -d ' ' || echo "$DEFAULT_PERSONA")
+  PERSONA_ID=$(grep "^DEFAULT=" "$PERSONA_MAPPING" | cut -d'=' -f2 | tr -d ' ' || echo "$DEFAULT_PERSONA")
 fi
 
 # Get persona name from persona-manager
-PERSONA_NAME=$(python3 "$PERSONA_MANAGER" --persona "$PERSONA_ID" --get-name 2>/dev/null || echo "Unknown")
+PERSONA_NAME=$(python3 "$PERSONA_MANAGER" --persona "$PERSONA_ID" --get-name || echo "Unknown")
 
 if [ "$PERSONA_NAME" = "Unknown" ]; then
   echo "Warning: Persona $PERSONA_ID not found, using default"
@@ -137,7 +137,7 @@ echo ""
 echo "[3/5] Loading persona context..."
 
 # Use persona-manager.py to get formatted context
-PERSONA_PROMPT=$(python3 "$PERSONA_MANAGER" --persona "$PERSONA_ID" --render-prompt 2>/dev/null || echo "")
+PERSONA_PROMPT=$(python3 "$PERSONA_MANAGER" --persona "$PERSONA_ID" --render-prompt || echo "")
 
 if [ -z "$PERSONA_PROMPT" ]; then
   echo "Warning: Could not load persona prompt, using basic template"
@@ -179,7 +179,9 @@ fi
 LLM_MODEL=${LLM_MODEL:-"llama3.2"}
 
 # Extract lore from the content (outputs JSON or markdown)
-EXTRACTED_LORE=$("$LORE_INTEGRATOR" "$LLM_MODEL" extract-lore "$TEMP_CONTENT" json 2>/dev/null || echo "")
+# Use llama3.2 as default model if LLM_PROVIDER is not set
+LORE_MODEL="${LLM_MODEL:-llama3.2}"
+EXTRACTED_LORE=$("$LORE_INTEGRATOR" "$LORE_MODEL" extract-lore "$TEMP_CONTENT" json || echo "")
 
 if [ -z "$EXTRACTED_LORE" ]; then
   echo "Warning: LLM extraction failed, creating basic entry"
@@ -197,7 +199,7 @@ try:
         print('No entries extracted')
 except:
     print('Failed to parse LLM output')
-" 2>/dev/null)
+")
 fi
 
 echo "Narrative generated: ${#GENERATED_NARRATIVE} characters"
@@ -215,7 +217,7 @@ ENTRY_TITLE="$PERSONA_NAME's Tale - Session $SESSION_ID"
 
 # If git diff, try to extract commit message for title
 if [ "$INPUT_TYPE" = "git-diff" ] && [ -n "$INPUT_CONTENT" ]; then
-  COMMIT_MSG=$(git log -1 --format='%s' "$INPUT_CONTENT" 2>/dev/null || echo "")
+  COMMIT_MSG=$(git log -1 --format='%s' "$INPUT_CONTENT" || echo "")
   if [ -n "$COMMIT_MSG" ]; then
     ENTRY_TITLE="$COMMIT_MSG"
   fi
@@ -225,7 +227,7 @@ echo "Creating lore entry: $ENTRY_TITLE"
 echo "Category: $LORE_CATEGORY"
 
 # Create entry using manage-lore.sh
-ENTRY_ID=$("$LORE_DIR/tools/manage-lore.sh" create-entry "$ENTRY_TITLE" "$LORE_CATEGORY" 2>/dev/null | grep -oP 'entry_\d+_[a-f0-9]+' | head -1 || echo "")
+ENTRY_ID=$("$LORE_DIR/tools/manage-lore.sh" create-entry "$ENTRY_TITLE" "$LORE_CATEGORY" | grep -oP 'entry_\d+_[a-f0-9]+' || echo "")
 
 if [ -z "$ENTRY_ID" ]; then
   echo "Error: Failed to create lore entry"
@@ -277,11 +279,7 @@ entry['tags'] = ['generated', 'automated', persona_name, input_type]
 
 with open(entry_file, 'w') as f:
     json.dump(entry, f, indent=2)
-
-print("Entry updated with narrative")
-PYTHON_SCRIPT
-
-  # Clean up happens via trap
+" && echo "Entry updated with narrative"
 else
   echo "Warning: Entry file not found, content not updated"
 fi
@@ -289,21 +287,21 @@ fi
 # Add to persona's chronicle book
 # Find or create the persona's chronicle
 CHRONICLE_NAME="${PERSONA_NAME}'s Chronicles"
-CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" list-books 2>/dev/null | grep -F "$CHRONICLE_NAME" | grep -oP 'book_\d+' | head -1 || echo "")
+CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" list-books | grep -F "$CHRONICLE_NAME" | grep -oP 'book_\d+' | head -1 || echo "")
 
 if [ -z "$CHRONICLE_ID" ]; then
   echo "Creating chronicle book: $CHRONICLE_NAME"
-  CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" create-book "$CHRONICLE_NAME" "Automated chronicles of $PERSONA_NAME's adventures" 2>/dev/null | grep -oP 'book_\d+' || echo "")
+  CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" create-book "$CHRONICLE_NAME" "Automated chronicles of $PERSONA_NAME's adventures" | grep -oP 'book_\d+' || echo "")
 
   if [ -n "$CHRONICLE_ID" ]; then
     # Link to persona
-    "$LORE_DIR/tools/manage-lore.sh" link-to-persona "$CHRONICLE_ID" "$PERSONA_ID" 2>/dev/null
+    "$LORE_DIR/tools/manage-lore.sh" link-to-persona "$CHRONICLE_ID" "$PERSONA_ID"
   fi
 fi
 
 if [ -n "$CHRONICLE_ID" ]; then
   echo "Adding entry to chronicle: $CHRONICLE_ID"
-  "$LORE_DIR/tools/manage-lore.sh" add-to-book "$ENTRY_ID" "$CHRONICLE_ID" 2>/dev/null
+  "$LORE_DIR/tools/manage-lore.sh" add-to-book "$ENTRY_ID" "$CHRONICLE_ID"
 else
   echo "Warning: Could not create/find chronicle book"
 fi
