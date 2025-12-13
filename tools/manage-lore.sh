@@ -199,7 +199,7 @@ list_entries() {
   echo "Available Lore Entries:"
   echo "----------------------"
 
-  if [ -z "$(ls -A "${ENTRIES_DIR}" 2>/dev/null)" ]; then
+  if [ -z "$(ls -A "${ENTRIES_DIR}")" ]; then
     echo "No lore entries found."
     return 0
   fi
@@ -222,7 +222,7 @@ list_books() {
   echo "Available Lore Books:"
   echo "-------------------"
 
-  if [ -z "$(ls -A "${BOOKS_DIR}" 2>/dev/null)" ]; then
+  if [ -z "$(ls -A "${BOOKS_DIR}")" ]; then
     echo "No lore books found."
     return 0
   fi

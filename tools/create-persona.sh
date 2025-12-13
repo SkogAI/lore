@@ -116,7 +116,7 @@ list_personas() {
   echo "Available Personas:"
   echo "------------------"
   
-  if [ -z "$(ls -A "${PERSONAS_DIR}" 2>/dev/null)" ]; then
+  if [ -z "$(ls -A "${PERSONAS_DIR}")" ]; then
     echo "No personas found."
     return 0
   fi

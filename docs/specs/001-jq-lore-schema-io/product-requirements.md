@@ -115,57 +115,33 @@ As a lore curator, I want validated relationships so that the lore graph remains
 
 ### Non-Functional Requirements
 
-#### NFR1: Compatibility
-**Description:** Functions must work with existing jq CRUD transformations in @scripts/jq/
+#### NFR1: Integration Format
+**Description:** Functions must be argc commands in Argcfile.sh format
 
 **Acceptance Criteria:**
-- Functions use crud-get/crud-set/crud-has as building blocks
-- Functions follow same invocation pattern (jq -f transform.jq --arg ...)
-- Functions maintain same directory structure (function-name/transform.jq, schema.json, test.sh)
-
-#### NFR2: Performance
-**Description:** Functions must execute quickly for CLI usage
-
-**Acceptance Criteria:**
-- Validation completes in <100ms for typical entry/book/persona files
+- Functions are defined as argc commands in Argcfile.sh
+- Functions use jq transformations from @scripts/jq/ as building blocks
 - No external dependencies beyond jq itself
-- Functions don't read multiple files unless necessary
 
-#### NFR3: Testability
-**Description:** All functions must have comprehensive test suites
-
-**Acceptance Criteria:**
-- Minimum 8-10 test cases per function
-- Tests cover happy path, edge cases, error cases
-- Tests validate against all three schema types
-- Tests check falsy value handling (null, false, 0, "", [], {})
-
-#### NFR4: Documentation
-**Description:** Functions must be self-documenting and provide clear usage examples
+#### NFR2: Schema Validation
+**Description:** Standard JSON schema validation against official schemas
 
 **Acceptance Criteria:**
-- Each function has jq header comment with usage
-- schema.json provides examples
-- Integration with Argcfile.sh is documented
-- Error messages are clear and actionable
+- Validates required fields exist
+- Validates field types match schema definitions
+- Validates enum values against allowed options
+- Returns clear validation results
 
 ---
 
 ## Success Criteria
 
-### Metrics
-
-1. **Schema Compliance:** 100% of lore files validate against their schemas
-2. **Code Reuse:** Argcfile.sh reduces jq code duplication by 60%+
-3. **Error Prevention:** Zero invalid JSON files written after deployment
-4. **Test Coverage:** 90%+ test coverage for all functions
-
 ### Key Outcomes
 
-1. Argcfile.sh uses atomic jq-functions instead of inline jq commands
-2. All three schemas (entry, book, persona) have validation functions
+1. Argcfile.sh has argc commands that validate entries, books, and personas against schemas
+2. argc commands use atomic jq-functions from @scripts/jq/ as building blocks
 3. Developers can validate JSON before writing to files
-4. Integration tests demonstrate end-to-end schema compliance
+4. Invalid data cannot be written through argc commands
 
 ---
 
@@ -217,16 +193,16 @@ As a lore curator, I want validated relationships so that the lore graph remains
 
 ### Constraints
 
-1. **No External Dependencies:** Functions must use only standard jq (no external tools)
+1. **No External Dependencies:** Functions use only standard jq
 2. **Backward Compatibility:** Must not break existing argc commands
 3. **Schema Adherence:** Must follow exact schema contracts in knowledge/core/
-4. **Performance:** Must execute in <100ms for CLI responsiveness
+4. **argc Format:** Functions defined as argc commands in Argcfile.sh
 
 ### Assumptions
 
 1. JSON schemas in knowledge/core/ are stable and complete
 2. Existing jq transformations in @scripts/jq/ are reliable
-3. Argcfile.sh can be modified to use new functions
+3. argc handles structured I/O for the functions
 4. All lore files follow timestamp-based ID format
 
 ### Dependencies
@@ -234,7 +210,6 @@ As a lore curator, I want validated relationships so that the lore graph remains
 1. Existing jq CRUD transformations (crud-get, crud-set, crud-has, etc.)
 2. JSON schemas: schema.json, book-schema.json, persona/schema.json
 3. Argcfile.sh argc command framework
-4. Test infrastructure matching @scripts/jq/test-all.sh pattern
 
 ---
 
@@ -243,21 +218,12 @@ As a lore curator, I want validated relationships so that the lore graph remains
 The following are explicitly NOT part of this specification:
 
 1. **LLM Integration:** No changes to llama-lore-creator.sh or agent_api.py
-2. **File System Operations:** Functions only handle JSON transformation, not file I/O
-3. **Migration Tools:** No automated migration of existing lore files
-4. **Web UI:** No web interface for lore management
-5. **Search/Indexing:** No full-text search or indexing capabilities
-6. **Schema Updates:** No changes to existing schema.json files
-
----
-
-## Open Questions
-
-1. **Validation Strictness:** Should validation be strict (fail on unknown fields) or permissive (allow additional fields)?
-2. **Error Format:** Should errors return boolean false or detailed error objects with messages?
-3. **Batch Operations:** Do we need functions that validate/update multiple files at once?
-4. **Version Handling:** Should functions validate schema version compatibility?
-5. **Integration Point:** Should functions be in @scripts/jq/ or separate @scripts/jq-lore/ directory?
+2. **Migration Tools:** No automated migration of existing lore files
+3. **Web UI:** No web interface for lore management
+4. **Search/Indexing:** No full-text search or indexing capabilities
+5. **Schema Updates:** No changes to existing schema.json files
+6. **Schema Versioning:** No version compatibility validation
+7. **Performance Benchmarks:** No specific performance requirements or metrics
 
 ---
 
