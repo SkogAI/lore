@@ -1,0 +1,29 @@
+{
+  "id": "book_1765640153_324298d3",
+  "title": "Test Book from argc",
+  "description": "Testing jq transformation integration",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-13T15:35:53Z",
+    "updated_at": "2025-12-13T15:35:53Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

@@ -140,33 +140,14 @@ _choice_categories() { echo -e "character\nplace\nevent\nobject\nconcept\ncustom
 # @alias create_entry
 create-entry() {
   local entry_id="entry_$(date +%s)_$(openssl rand -hex 4)"
-  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-  cat >"${ENTRIES_DIR}/${entry_id}.json" <<EOF
-{
-  "id": "${entry_id}",
-  "title": "${argc_title}",
-  "content": "",
-  "summary": "",
-  "category": "${argc_category}",
-  "tags": [],
-  "relationships": [],
-  "attributes": {},
-  "metadata": {
-    "created_by": "$(whoami)",
-    "created_at": "${timestamp}",
-    "updated_at": "${timestamp}",
-    "version": "1.0",
-    "canonical": true
-  },
-  "visibility": {
-    "public": true,
-    "restricted_to": []
-  }
-}
-EOF
-
-  echo "Created: ${entry_id}" >>"$LLM_OUTPUT"
+  jq -f scripts/jq/create-entry/transform.jq \
+    --arg id "$entry_id" \
+    --arg title "$argc_title" \
+    --arg category "$argc_category" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --arg creator "$(whoami)" \
+    --null-input \
+    > "${ENTRIES_DIR}/${entry_id}.json" && echo "Created: ${entry_id}" >>"$LLM_OUTPUT"
 }
 
 # 📖 Chronicle inscriptions
@@ -176,41 +157,30 @@ EOF
 # @alias create_book
 create-book() {
   local book_id="book_$(date +%s)_$(openssl rand -hex 4)"
-  local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-  cat >"${BOOKS_DIR}/${book_id}.json" <<EOF
-{
-  "id": "${book_id}",
-  "title": "${argc_title}",
-  "description": "${argc_description}",
-  "entries": [],
-  "categories": {},
-  "tags": [],
-  "owners": [],
-  "readers": [],
-  "metadata": {
-    "created_by": "$(whoami)",
-    "created_at": "${timestamp}",
-    "updated_at": "${timestamp}",
-    "version": "1.0",
-    "status": "draft"
-  },
-  "structure": [
-    {
-      "name": "Introduction",
-      "description": "Overview of this lore book",
-      "entries": [],
-      "subsections": []
-    }
-  ],
-  "visibility": {
-    "public": false,
-    "system": false
-  }
+  jq -f scripts/jq/create-book/transform.jq \
+    --arg id "$book_id" \
+    --arg title "$argc_title" \
+    --arg description "$argc_description" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --arg creator "$(whoami)" \
+    --null-input \
+    > "${BOOKS_DIR}/${book_id}.json" && echo "Created: ${book_id}" >>"$LLM_OUTPUT"
 }
-EOF
 
-  echo "Created: ${book_id}" >>"$LLM_OUTPUT"
+# 📖 Chronicle inscriptions
+# @cmd 🔮 Create new persona yao
+# @option --name! <NAME> Persona name
+# @option --voice-tone="neutral" <TONE> Voice tone
+# @alias create_persona
+create-persona() {
+  local persona_id="persona_$(date +%s)"
+  jq -f scripts/jq/create-persona/transform.jq \
+    --arg id "$persona_id" \
+    --arg name "$argc_name" \
+    --arg voice_tone "$argc_voice_tone" \
+    --arg timestamp "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --null-input \
+    > "${PERSONA_DIR}/${persona_id}.json" && echo "Created: ${persona_id}" >>"$LLM_OUTPUT"
 }
 
 # 📖 Chronicle inscriptions
