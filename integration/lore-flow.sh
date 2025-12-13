@@ -173,8 +173,13 @@ if [ ! -f "$LORE_INTEGRATOR" ]; then
   exit 1
 fi
 
+# Determine model name from environment or use default
+# Model name is first parameter to llama-lore-integrator.sh
+# If not set, llama-lore-integrator.sh will use its default (llama3.2)
+LLM_MODEL=${LLM_MODEL:-"llama3.2"}
+
 # Extract lore from the content (outputs JSON or markdown)
-EXTRACTED_LORE=$("$LORE_INTEGRATOR" - extract-lore "$TEMP_CONTENT" json 2>/dev/null || echo "")
+EXTRACTED_LORE=$("$LORE_INTEGRATOR" "$LLM_MODEL" extract-lore "$TEMP_CONTENT" json 2>/dev/null || echo "")
 
 if [ -z "$EXTRACTED_LORE" ]; then
   echo "Warning: LLM extraction failed, creating basic entry"
@@ -220,7 +225,7 @@ echo "Creating lore entry: $ENTRY_TITLE"
 echo "Category: $LORE_CATEGORY"
 
 # Create entry using manage-lore.sh
-ENTRY_ID=$("$LORE_DIR/tools/manage-lore.sh" create-entry "$ENTRY_TITLE" "$LORE_CATEGORY" 2>/dev/null | grep -oP 'entry_\d+_[a-f0-9]+' || echo "")
+ENTRY_ID=$("$LORE_DIR/tools/manage-lore.sh" create-entry "$ENTRY_TITLE" "$LORE_CATEGORY" 2>/dev/null | grep -oP 'entry_\d+_[a-f0-9]+' | head -1 || echo "")
 
 if [ -z "$ENTRY_ID" ]; then
   echo "Error: Failed to create lore entry"
@@ -234,18 +239,26 @@ ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 
 if [ -f "$ENTRY_FILE" ]; then
   # Use Python to update the JSON properly
-  python3 -c "
-import json, sys
+  # Pass content via stdin to avoid shell escaping issues
+  python3 << PYTHON_SCRIPT
+import json
+import sys
+
+# Read the generated narrative from environment
+narrative = """$GENERATED_NARRATIVE"""
+
 with open('$ENTRY_FILE', 'r') as f:
     entry = json.load(f)
 
-entry['content'] = '''$GENERATED_NARRATIVE'''
+entry['content'] = narrative
 entry['summary'] = 'Auto-generated lore from $INPUT_TYPE'
 entry['tags'] = ['generated', 'automated', '$PERSONA_NAME', '$INPUT_TYPE']
 
 with open('$ENTRY_FILE', 'w') as f:
     json.dump(entry, f, indent=2)
-" 2>/dev/null && echo "Entry updated with narrative"
+
+print("Entry updated with narrative")
+PYTHON_SCRIPT
 else
   echo "Warning: Entry file not found, content not updated"
 fi
