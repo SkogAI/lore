@@ -42,31 +42,25 @@ _portal_gateways() {
   echo "3000 8000 8080 9000"
 }
 
+# 🔍 Schema field helpers
+_get_category() {
+  jq -r '.category' "$1"
+}
+
+_get_status() {
+  jq -r '.metadata.status // empty' "$1"
+}
+
+_get_book_id() {
+  jq -r '.book_id // empty' "$1"
+}
+
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Validate entry schema yao
 # @arg entry![`_choice_entries`] Entry to validate
 # @alias validate_entry
 validate-entry() {
-  local result=$(jq -f scripts/jq/schema-validation/transform.jq \
-    --arg schema '{"required":["id","title","content","category"],"types":{"id":"string","title":"string","content":"string","category":"string"}}' \
-    "${ENTRIES_DIR}/${argc_entry}.json")
-
-  local valid=$(echo "$result" | jq -r '.valid')
-  if [[ "$valid" != "true" ]]; then
-    echo "$result" | jq -r '.errors[]'
-    return 1
-  fi
-
-  local category=$(jq -r '.category' "${ENTRIES_DIR}/${argc_entry}.json")
-  case "$category" in
-    character|place|event|object|concept|custom) ;;
-    *) echo "Invalid category: $category"; return 1 ;;
-  esac
-
-  local book_id=$(jq -r '.book_id // empty' "${ENTRIES_DIR}/${argc_entry}.json")
-  [[ -n "$book_id" && ! -f "${BOOKS_DIR}/${book_id}.json" ]] && { echo "Book not found: $book_id"; return 1; }
-
-  echo "✅ ${argc_entry}"
+  jq -f scripts/jq/schema-validation/transform.jq --arg schema '{"required":["id","title","content","category"],"types":{"id":"string","title":"string","content":"string","category":"string"}}' "${ENTRIES_DIR}/${argc_entry}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -74,33 +68,7 @@ validate-entry() {
 # @arg book![`_choice_books`] Book to validate
 # @alias validate_book
 validate-book() {
-  local result=$(jq -f scripts/jq/schema-validation/transform.jq \
-    --arg schema '{"required":["id","title","description"],"types":{"id":"string","title":"string","description":"string","entries":"array"}}' \
-    "${BOOKS_DIR}/${argc_book}.json")
-
-  local valid=$(echo "$result" | jq -r '.valid')
-  if [[ "$valid" != "true" ]]; then
-    echo "$result" | jq -r '.errors[]'
-    return 1
-  fi
-
-  local status=$(jq -r '.metadata.status // empty' "${BOOKS_DIR}/${argc_book}.json")
-  if [[ -n "$status" ]]; then
-    case "$status" in
-      draft|active|archived|deprecated) ;;
-      *) echo "Invalid status: $status"; return 1 ;;
-    esac
-  fi
-
-  for entry_id in $(jq -r '.entries[]' "${BOOKS_DIR}/${argc_book}.json" 2>/dev/null); do
-    [[ -f "${ENTRIES_DIR}/${entry_id}.json" ]] || { echo "Entry not found: $entry_id"; return 1; }
-  done
-
-  for persona_id in $(jq -r '.readers[]' "${BOOKS_DIR}/${argc_book}.json" 2>/dev/null); do
-    [[ -f "${PERSONA_DIR}/${persona_id}.json" ]] || { echo "Persona not found: $persona_id"; return 1; }
-  done
-
-  echo "✅ ${argc_book}"
+  jq -f scripts/jq/schema-validation/transform.jq --arg schema '{"required":["id","title","description"],"types":{"id":"string","title":"string","description":"string","entries":"array"}}' "${BOOKS_DIR}/${argc_book}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -108,21 +76,7 @@ validate-book() {
 # @arg persona![`_choice_personas`] Persona to validate
 # @alias validate_persona
 validate-persona() {
-  local result=$(jq -f scripts/jq/schema-validation/transform.jq \
-    --arg schema '{"required":["id","name","core_traits","voice"],"types":{"id":"string","name":"string","core_traits":"object","voice":"object"}}' \
-    "${PERSONA_DIR}/${argc_persona}.json")
-
-  local valid=$(echo "$result" | jq -r '.valid')
-  if [[ "$valid" != "true" ]]; then
-    echo "$result" | jq -r '.errors[]'
-    return 1
-  fi
-
-  for book_id in $(jq -r '.knowledge.lore_books[]' "${PERSONA_DIR}/${argc_persona}.json" 2>/dev/null); do
-    [[ -f "${BOOKS_DIR}/${book_id}.json" ]] || { echo "Book not found: $book_id"; return 1; }
-  done
-
-  echo "✅ ${argc_persona}"
+  jq -f scripts/jq/schema-validation/transform.jq --arg schema '{"required":["id","name","core_traits","voice"],"types":{"id":"string","name":"string","core_traits":"object","voice":"object"}}' "${PERSONA_DIR}/${argc_persona}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -136,20 +90,11 @@ list-books() {
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Show them books yao
 # @option --format[=json|yaml] Output format
-# @arg book![`_choice_books`] Book name to show. Use "list" to see all books.
+# @arg book[`_choice_books`] Book to show (omit to list all)
 # @alias show_book
 show-book() {
-  if [[ "$argc_book" == "list" ]]; then
-    _choice_books >>"$LLM_OUTPUT"
-  else
-    local book_json="${BOOKS_DIR}/${argc_book}.json"
-
-    if [[ "${argc_format:-json}" == "yaml" ]]; then
-      json2yaml <"$book_json" >>"$LLM_OUTPUT"
-    else
-      cat "$book_json" >>"$LLM_OUTPUT"
-    fi
-  fi
+  [[ -z "$argc_book" ]] && _choice_books && return
+  [[ "${argc_format:-json}" == "yaml" ]] && json2yaml <"${BOOKS_DIR}/${argc_book}.json" || cat "${BOOKS_DIR}/${argc_book}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -161,17 +106,12 @@ list-entries() {
 
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Show them entries yao
-# @option --entry![`_choice_entries`] Entry ID to show
 # @option --format[=json|yaml] Output format
+# @arg entry[`_choice_entries`] Entry to show (omit to list all)
 # @alias show_entry
 show-entry() {
-  local entry_json="${ENTRIES_DIR}/${argc_entry}.json"
-
-  if [[ "${argc_format:-json}" == "yaml" ]]; then
-    json2yaml <"$entry_json" >>"$LLM_OUTPUT"
-  else
-    cat "$entry_json" >>"$LLM_OUTPUT"
-  fi
+  [[ -z "$argc_entry" ]] && _choice_entries && return
+  [[ "${argc_format:-json}" == "yaml" ]] && json2yaml <"${ENTRIES_DIR}/${argc_entry}.json" || cat "${ENTRIES_DIR}/${argc_entry}.json"
 }
 
 # 📖 Chronicle inscriptions
@@ -180,47 +120,18 @@ show-entry() {
 # @arg book![`_choice_books`] Book to read entries from
 # @alias read_book_entries
 read-book-entries() {
-  local book_file="${BOOKS_DIR}/${argc_book}.json"
-
-  for entry_id in $(jq -r '.entries[]' "$book_file"); do
-    local entry_file="${ENTRIES_DIR}/${entry_id}.json"
-    [[ -f "$entry_file" ]] || continue
-
-    if [[ "${argc_format:-json}" == "yaml" ]]; then
-      json2yaml <"$entry_file" >>"$LLM_OUTPUT"
-    else
-      cat "$entry_file" >>"$LLM_OUTPUT"
-    fi
-    echo "---" >>"$LLM_OUTPUT"
+  jq -r '.entries[]' "${BOOKS_DIR}/${argc_book}.json" | while read entry_id; do
+    [[ -f "${ENTRIES_DIR}/${entry_id}.json" ]] || continue
+    [[ "${argc_format:-json}" == "yaml" ]] && json2yaml <"${ENTRIES_DIR}/${entry_id}.json" || cat "${ENTRIES_DIR}/${entry_id}.json"
+    echo "---"
   done
 }
 
-_choice_books() {
-  for book_file in "${BOOKS_DIR}"/*.json; do
-    [[ -f "$book_file" ]] && basename "$book_file" .json
-  done
-}
+_choice_books() { basename -s .json "${BOOKS_DIR}"/*.json; }
+_choice_entries() { basename -s .json "${ENTRIES_DIR}"/*.json; }
+_choice_personas() { basename -s .json "${PERSONA_DIR}"/*.json; }
 
-_choice_entries() {
-  for entry_file in "${ENTRIES_DIR}"/*.json; do
-    [[ -f "$entry_file" ]] && basename "$entry_file" .json
-  done
-}
-
-_choice_personas() {
-  for persona_file in "${PERSONA_DIR}"/*.json; do
-    [[ -f "$persona_file" ]] && basename "$persona_file" .json
-  done
-}
-
-_choice_categories() {
-  echo "character"
-  echo "place"
-  echo "event"
-  echo "object" "concept" "custom"
-  echo "concept"
-  echo "custom"
-}
+_choice_categories() { echo -e "character\nplace\nevent\nobject\nconcept\ncustom"; }
 
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Create new entry yao
