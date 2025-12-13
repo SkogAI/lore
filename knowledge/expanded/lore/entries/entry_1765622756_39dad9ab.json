@@ -1,0 +1,26 @@
+{
+  "id": "entry_1765622756_39dad9ab",
+  "title": "Village Elder's Tale - Session 1765622581",
+  "content": "Test narrative content from manual update",
+  "summary": "Auto-generated lore from manual",
+  "category": "event",
+  "tags": [
+    "generated",
+    "automated",
+    "Test Persona",
+    "manual"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-13T10:45:56Z",
+    "updated_at": "2025-12-13T10:45:56Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  }
+}

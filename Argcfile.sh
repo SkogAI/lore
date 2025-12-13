@@ -42,86 +42,87 @@ _portal_gateways() {
   echo "3000 8000 8080 9000"
 }
 
-# 🔍 Validation helpers for schema compliance
-_validate_required_fields() {
-  local json_file="$1"
-  shift
-  local required_fields=("$@")
+# 📖 Chronicle inscriptions
+# @cmd 🔮 Validate entry schema yao
+# @arg entry![`_choice_entries`] Entry to validate
+# @alias validate_entry
+validate-entry() {
+  local result=$(jq -f scripts/jq/schema-validation/transform.jq \
+    --arg schema '{"required":["id","title","content","category"],"types":{"id":"string","title":"string","content":"string","category":"string"}}' \
+    "${ENTRIES_DIR}/${argc_entry}.json")
 
-  for field in "${required_fields[@]}"; do
-    if ! jq -e "has(\"$field\")" "$json_file" >/dev/null 2>&1; then
-      echo "Error: Missing required field: $field" >&2
-      return 1
-    fi
-  done
-  return 0
-}
-
-_validate_field_type() {
-  local json_file="$1"
-  local field_path="$2"
-  local expected_type="$3"
-
-  local actual_type=$(jq -r ".$field_path | type" "$json_file" 2>/dev/null)
-
-  if [[ "$actual_type" != "$expected_type" ]]; then
-    echo "Error: Field '$field_path' must be $expected_type, got $actual_type" >&2
+  local valid=$(echo "$result" | jq -r '.valid')
+  if [[ "$valid" != "true" ]]; then
+    echo "$result" | jq -r '.errors[]'
     return 1
   fi
-  return 0
-}
 
-_validate_enum() {
-  local json_file="$1"
-  local field_path="$2"
-  shift 2
-  local allowed_values=("$@")
-
-  local actual_value=$(jq -r ".$field_path" "$json_file" 2>/dev/null)
-
-  for allowed in "${allowed_values[@]}"; do
-    if [[ "$actual_value" == "$allowed" ]]; then
-      return 0
-    fi
-  done
-
-  echo "Error: Field '$field_path' must be one of: ${allowed_values[*]}, got '$actual_value'" >&2
-  return 1
-}
-
-_validate_file_exists() {
-  local file_id="$1"
-  local file_type="$2"
-
-  local file_path=""
-  case "$file_type" in
-    entry)
-      file_path="${ENTRIES_DIR}/${file_id}.json"
-      ;;
-    book)
-      file_path="${BOOKS_DIR}/${file_id}.json"
-      ;;
-    persona)
-      file_path="${PERSONA_DIR}/${file_id}.json"
-      ;;
-    *)
-      echo "Error: Invalid file type: $file_type" >&2
-      return 1
-      ;;
+  local category=$(jq -r '.category' "${ENTRIES_DIR}/${argc_entry}.json")
+  case "$category" in
+    character|place|event|object|concept|custom) ;;
+    *) echo "Invalid category: $category"; return 1 ;;
   esac
 
-  if [[ ! -f "$file_path" ]]; then
-    echo "Error: Referenced $file_type does not exist: $file_id" >&2
-    return 1
-  fi
-  return 0
+  local book_id=$(jq -r '.book_id // empty' "${ENTRIES_DIR}/${argc_entry}.json")
+  [[ -n "$book_id" && ! -f "${BOOKS_DIR}/${book_id}.json" ]] && { echo "Book not found: $book_id"; return 1; }
+
+  echo "✅ ${argc_entry}"
 }
 
 # 📖 Chronicle inscriptions
-# @cmd 🔮 Manage that lore yao!
-manage() {
-  # "$LORE_SCRIPTS"/manage-lore.sh "$argc_input"
-  :
+# @cmd 🔮 Validate book schema yao
+# @arg book![`_choice_books`] Book to validate
+# @alias validate_book
+validate-book() {
+  local result=$(jq -f scripts/jq/schema-validation/transform.jq \
+    --arg schema '{"required":["id","title","description"],"types":{"id":"string","title":"string","description":"string","entries":"array"}}' \
+    "${BOOKS_DIR}/${argc_book}.json")
+
+  local valid=$(echo "$result" | jq -r '.valid')
+  if [[ "$valid" != "true" ]]; then
+    echo "$result" | jq -r '.errors[]'
+    return 1
+  fi
+
+  local status=$(jq -r '.metadata.status // empty' "${BOOKS_DIR}/${argc_book}.json")
+  if [[ -n "$status" ]]; then
+    case "$status" in
+      draft|active|archived|deprecated) ;;
+      *) echo "Invalid status: $status"; return 1 ;;
+    esac
+  fi
+
+  for entry_id in $(jq -r '.entries[]' "${BOOKS_DIR}/${argc_book}.json" 2>/dev/null); do
+    [[ -f "${ENTRIES_DIR}/${entry_id}.json" ]] || { echo "Entry not found: $entry_id"; return 1; }
+  done
+
+  for persona_id in $(jq -r '.readers[]' "${BOOKS_DIR}/${argc_book}.json" 2>/dev/null); do
+    [[ -f "${PERSONA_DIR}/${persona_id}.json" ]] || { echo "Persona not found: $persona_id"; return 1; }
+  done
+
+  echo "✅ ${argc_book}"
+}
+
+# 📖 Chronicle inscriptions
+# @cmd 🔮 Validate persona schema yao
+# @arg persona![`_choice_personas`] Persona to validate
+# @alias validate_persona
+validate-persona() {
+  local result=$(jq -f scripts/jq/schema-validation/transform.jq \
+    --arg schema '{"required":["id","name","core_traits","voice"],"types":{"id":"string","name":"string","core_traits":"object","voice":"object"}}' \
+    "${PERSONA_DIR}/${argc_persona}.json")
+
+  local valid=$(echo "$result" | jq -r '.valid')
+  if [[ "$valid" != "true" ]]; then
+    echo "$result" | jq -r '.errors[]'
+    return 1
+  fi
+
+  for book_id in $(jq -r '.knowledge.lore_books[]' "${PERSONA_DIR}/${argc_persona}.json" 2>/dev/null); do
+    [[ -f "${BOOKS_DIR}/${book_id}.json" ]] || { echo "Book not found: $book_id"; return 1; }
+  done
+
+  echo "✅ ${argc_persona}"
 }
 
 # 📖 Chronicle inscriptions
