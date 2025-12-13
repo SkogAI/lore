@@ -174,7 +174,9 @@ if [ ! -f "$LORE_INTEGRATOR" ]; then
 fi
 
 # Extract lore from the content (outputs JSON or markdown)
-EXTRACTED_LORE=$("$LORE_INTEGRATOR" - extract-lore "$TEMP_CONTENT" json || echo "")
+# Use llama3.2 as default model if LLM_PROVIDER is not set
+LORE_MODEL="${LLM_MODEL:-llama3.2}"
+EXTRACTED_LORE=$("$LORE_INTEGRATOR" "$LORE_MODEL" extract-lore "$TEMP_CONTENT" json || echo "")
 
 if [ -z "$EXTRACTED_LORE" ]; then
   echo "Warning: LLM extraction failed, creating basic entry"

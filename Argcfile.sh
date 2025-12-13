@@ -42,6 +42,81 @@ _portal_gateways() {
   echo "3000 8000 8080 9000"
 }
 
+# 🔍 Validation helpers for schema compliance
+_validate_required_fields() {
+  local json_file="$1"
+  shift
+  local required_fields=("$@")
+
+  for field in "${required_fields[@]}"; do
+    if ! jq -e "has(\"$field\")" "$json_file" >/dev/null 2>&1; then
+      echo "Error: Missing required field: $field" >&2
+      return 1
+    fi
+  done
+  return 0
+}
+
+_validate_field_type() {
+  local json_file="$1"
+  local field_path="$2"
+  local expected_type="$3"
+
+  local actual_type=$(jq -r ".$field_path | type" "$json_file" 2>/dev/null)
+
+  if [[ "$actual_type" != "$expected_type" ]]; then
+    echo "Error: Field '$field_path' must be $expected_type, got $actual_type" >&2
+    return 1
+  fi
+  return 0
+}
+
+_validate_enum() {
+  local json_file="$1"
+  local field_path="$2"
+  shift 2
+  local allowed_values=("$@")
+
+  local actual_value=$(jq -r ".$field_path" "$json_file" 2>/dev/null)
+
+  for allowed in "${allowed_values[@]}"; do
+    if [[ "$actual_value" == "$allowed" ]]; then
+      return 0
+    fi
+  done
+
+  echo "Error: Field '$field_path' must be one of: ${allowed_values[*]}, got '$actual_value'" >&2
+  return 1
+}
+
+_validate_file_exists() {
+  local file_id="$1"
+  local file_type="$2"
+
+  local file_path=""
+  case "$file_type" in
+    entry)
+      file_path="${ENTRIES_DIR}/${file_id}.json"
+      ;;
+    book)
+      file_path="${BOOKS_DIR}/${file_id}.json"
+      ;;
+    persona)
+      file_path="${PERSONA_DIR}/${file_id}.json"
+      ;;
+    *)
+      echo "Error: Invalid file type: $file_type" >&2
+      return 1
+      ;;
+  esac
+
+  if [[ ! -f "$file_path" ]]; then
+    echo "Error: Referenced $file_type does not exist: $file_id" >&2
+    return 1
+  fi
+  return 0
+}
+
 # 📖 Chronicle inscriptions
 # @cmd 🔮 Manage that lore yao!
 manage() {
