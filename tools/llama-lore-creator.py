@@ -80,7 +80,9 @@ Your response should include:
 - Unique characteristics or features
 - Historical significance if relevant
 
-Write 2-3 paragraphs of rich, evocative content."""
+Write 2-3 paragraphs of rich, evocative content.
+
+Write ONLY the lore content. No meta-commentary, no asking permission, no explanations. Begin immediately with the narrative."""
 
     content = run_llm(prompt, provider, model)
 
@@ -118,7 +120,9 @@ Format your response exactly like this:
 TRAITS: trait1,trait2,trait3,trait4
 VOICE: concise description of voice and speaking style
 
-Be creative and make sure traits are comma-separated without spaces."""
+Be creative and make sure traits are comma-separated without spaces.
+
+Output ONLY the formatted response. No meta-commentary, no asking permission. Begin immediately with the TRAITS line."""
 
     response = run_llm(prompt, provider, model)
 
@@ -165,7 +169,9 @@ Format your response as a numbered list like this:
 2. [Category: character] Elder Moonwhisper
 3. [Category: event] The Great Sundering
 
-Categories MUST be one of: place, character, object, event, concept"""
+Categories MUST be one of: place, character, object, event, concept
+
+Output ONLY the numbered list. No meta-commentary, no asking permission. Begin immediately with the list."""
 
     response = run_llm(prompt, provider, model)
 
