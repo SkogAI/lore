@@ -80,7 +80,9 @@ Your response should include:
 - Unique characteristics or features
 - Historical significance if relevant
 
-Write 2-3 paragraphs of rich, evocative content."""
+Write 2-3 paragraphs of rich, evocative content.
+
+Write ONLY the lore content. No meta-commentary, no asking permission, no explanations. Begin immediately with the narrative."""
 
     content = run_llm(prompt, provider, model)
 

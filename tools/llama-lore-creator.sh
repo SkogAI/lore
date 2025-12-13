@@ -83,7 +83,9 @@ generate_lore_entry() {
     - Unique characteristics or features
     - Historical significance if relevant
 
-    Write 2-3 paragraphs of rich, evocative content."
+    Write 2-3 paragraphs of rich, evocative content.
+
+    Write ONLY the lore content. No meta-commentary, no asking permission, no explanations. Begin immediately with the narrative."
 
   # Run LLM to generate content
   CONTENT=$(run_llm "$PROMPT")
