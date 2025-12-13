@@ -17,6 +17,8 @@
 set -e
 
 SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Use SKOGAI_LORE if set, otherwise fall back to SKOGAI_DIR
+SKOGAI_LORE="${SKOGAI_LORE:-$SKOGAI_DIR}"
 LORE_DIR="${SKOGAI_LORE}/knowledge/expanded/lore"
 BOOKS_DIR="${LORE_DIR}/books"
 ENTRIES_DIR="${LORE_DIR}/entries"

@@ -12,9 +12,6 @@ LOG_DIR="./logs"
 LOG_FILE="$LOG_DIR/skogai-agent-small.log"
 mkdir -p $LOG_DIR
 
-# Make sure we're in the right directory
-# cd /home/skogix/skogai
-
 echo "Starting SkogAI Small Agent Service with model: $MODEL_NAME"
 echo "$(date): Service started with model: $MODEL_NAME" >>$LOG_FILE
 

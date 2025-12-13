@@ -173,6 +173,11 @@ if [ ! -f "$LORE_INTEGRATOR" ]; then
   exit 1
 fi
 
+# Determine model name from environment or use default
+# Model name is first parameter to llama-lore-integrator.sh
+# If not set, llama-lore-integrator.sh will use its default (llama3.2)
+LLM_MODEL=${LLM_MODEL:-"llama3.2"}
+
 # Extract lore from the content (outputs JSON or markdown)
 # Use llama3.2 as default model if LLM_PROVIDER is not set
 LORE_MODEL="${LLM_MODEL:-llama3.2}"
@@ -236,16 +241,43 @@ ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 
 if [ -f "$ENTRY_FILE" ]; then
   # Use Python to update the JSON properly
-  python3 -c "
-import json, sys
-with open('$ENTRY_FILE', 'r') as f:
+  # Pass narrative through a secure temp file to avoid shell escaping issues
+  TEMP_NARRATIVE=$(mktemp -t lore-narrative-XXXXXX.txt)
+  trap 'rm -f "$TEMP_NARRATIVE"' EXIT
+  
+  echo "$GENERATED_NARRATIVE" > "$TEMP_NARRATIVE"
+  
+  export TEMP_NARRATIVE ENTRY_FILE INPUT_TYPE PERSONA_NAME
+  python3 << 'PYTHON_SCRIPT'
+import json
+import sys
+import os
+
+# Read the generated narrative from temp file passed via environment
+narrative_file = os.environ.get('TEMP_NARRATIVE')
+if not narrative_file or not os.path.isfile(narrative_file):
+    print("Error: Invalid narrative file", file=sys.stderr)
+    sys.exit(1)
+
+with open(narrative_file, 'r') as f:
+    narrative = f.read()
+
+entry_file = os.environ.get('ENTRY_FILE')
+input_type = os.environ.get('INPUT_TYPE')
+persona_name = os.environ.get('PERSONA_NAME')
+
+if not entry_file or not os.path.isfile(entry_file):
+    print("Error: Invalid entry file", file=sys.stderr)
+    sys.exit(1)
+
+with open(entry_file, 'r') as f:
     entry = json.load(f)
 
-entry['content'] = '''$GENERATED_NARRATIVE'''
-entry['summary'] = 'Auto-generated lore from $INPUT_TYPE'
-entry['tags'] = ['generated', 'automated', '$PERSONA_NAME', '$INPUT_TYPE']
+entry['content'] = narrative
+entry['summary'] = f'Auto-generated lore from {input_type}'
+entry['tags'] = ['generated', 'automated', persona_name, input_type]
 
-with open('$ENTRY_FILE', 'w') as f:
+with open(entry_file, 'w') as f:
     json.dump(entry, f, indent=2)
 " && echo "Entry updated with narrative"
 else
