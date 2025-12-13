@@ -240,7 +240,7 @@ ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 if [ -f "$ENTRY_FILE" ]; then
   # Use Python to update the JSON properly
   # Pass narrative through a secure temp file to avoid shell escaping issues
-  TEMP_NARRATIVE=$(mktemp /tmp/lore-narrative-XXXXXX.txt)
+  TEMP_NARRATIVE=$(mktemp -t lore-narrative-XXXXXX.txt)
   trap 'rm -f "$TEMP_NARRATIVE"' EXIT
   
   echo "$GENERATED_NARRATIVE" > "$TEMP_NARRATIVE"
