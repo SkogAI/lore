@@ -133,7 +133,9 @@ generate_persona() {
     TRAITS: trait1,trait2,trait3,trait4
     VOICE: concise description of voice and speaking style
 
-    Be creative and make sure traits are comma-separated without spaces."
+    Be creative and make sure traits are comma-separated without spaces.
+
+    Output ONLY the formatted response. No meta-commentary, no asking permission. Begin immediately with the TRAITS line."
 
   # Run LLM to generate traits
   RESPONSE=$(run_llm "$PROMPT")
@@ -185,7 +187,9 @@ generate_lorebook() {
     1. [Category: place/character/object/event] Entry Title
     2. [Category: place/character/object/event] Entry Title
 
-    Categories MUST be one of: place, character, object, event, concept"
+    Categories MUST be one of: place, character, object, event, concept
+
+    Output ONLY the numbered list. No meta-commentary, no asking permission. Begin immediately with the list."
 
   # Run LLM to generate entry titles
   ENTRIES=$(run_llm "$PROMPT")
