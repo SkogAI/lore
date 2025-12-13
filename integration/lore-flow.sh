@@ -239,8 +239,10 @@ ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 
 if [ -f "$ENTRY_FILE" ]; then
   # Use Python to update the JSON properly
-  # Pass narrative through a temp file to avoid shell escaping issues
-  TEMP_NARRATIVE="/tmp/lore-narrative-$SESSION_ID.txt"
+  # Pass narrative through a secure temp file to avoid shell escaping issues
+  TEMP_NARRATIVE=$(mktemp /tmp/lore-narrative-XXXXXX.txt)
+  trap 'rm -f "$TEMP_NARRATIVE"' EXIT
+  
   echo "$GENERATED_NARRATIVE" > "$TEMP_NARRATIVE"
   
   export TEMP_NARRATIVE ENTRY_FILE INPUT_TYPE PERSONA_NAME
@@ -249,14 +251,22 @@ import json
 import sys
 import os
 
-# Read the generated narrative from temp file
-temp_file = os.environ.get('TEMP_NARRATIVE')
-with open(temp_file, 'r') as f:
+# Read the generated narrative from temp file passed via environment
+narrative_file = os.environ.get('TEMP_NARRATIVE')
+if not narrative_file or not os.path.isfile(narrative_file):
+    print("Error: Invalid narrative file", file=sys.stderr)
+    sys.exit(1)
+
+with open(narrative_file, 'r') as f:
     narrative = f.read()
 
 entry_file = os.environ.get('ENTRY_FILE')
 input_type = os.environ.get('INPUT_TYPE')
 persona_name = os.environ.get('PERSONA_NAME')
+
+if not entry_file or not os.path.isfile(entry_file):
+    print("Error: Invalid entry file", file=sys.stderr)
+    sys.exit(1)
 
 with open(entry_file, 'r') as f:
     entry = json.load(f)
@@ -271,8 +281,7 @@ with open(entry_file, 'w') as f:
 print("Entry updated with narrative")
 PYTHON_SCRIPT
 
-  # Clean up temp file
-  rm -f "$TEMP_NARRATIVE"
+  # Clean up happens via trap
 else
   echo "Warning: Entry file not found, content not updated"
 fi
