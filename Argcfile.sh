@@ -14,7 +14,7 @@ set -e
 # @env LORE_DIR=/home/skogix/lore/knowledge/expanded/lore path to yo lore!
 # @env BOOKS_DIR=/home/skogix/lore/knowledge/expanded/lore/books path to yo books!
 # @env ENTRIES_DIR=/home/skogix/lore/knowledge/expanded/lore/entries path to yo entries!
-# @env PERSONA_DIR=/home/skogix/lore/knowledge/expanded/persona path to yo persona!
+# @env PERSONA_DIR=/home/skogix/lore/knowledge/expanded/personas path to yo persona!
 # @env LLM_OUTPUT=/dev/stdout The output path
 
 # 📜 Sacred configuration scrolls
