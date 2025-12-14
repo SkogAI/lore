@@ -227,7 +227,7 @@ echo "Creating lore entry: $ENTRY_TITLE"
 echo "Category: $LORE_CATEGORY"
 
 # Create entry using manage-lore.sh
-ENTRY_ID=$("$LORE_DIR/tools/manage-lore.sh" create-entry "$ENTRY_TITLE" "$LORE_CATEGORY" | grep -oP 'entry_\d+_[a-f0-9]+' || echo "")
+ENTRY_ID=$("$LORE_DIR/tools/manage-lore.sh" create-entry "$ENTRY_TITLE" "$LORE_CATEGORY" | grep -oP 'entry_\d+_[a-f0-9]+' | head -1 || echo "")
 
 if [ -z "$ENTRY_ID" ]; then
   echo "Error: Failed to create lore entry"
@@ -240,46 +240,32 @@ echo "Entry created: $ENTRY_ID"
 ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 
 if [ -f "$ENTRY_FILE" ]; then
-  # Use Python to update the JSON properly
-  # Pass narrative through a secure temp file to avoid shell escaping issues
-  TEMP_NARRATIVE=$(mktemp -t lore-narrative-XXXXXX.txt)
-  trap 'rm -f "$TEMP_NARRATIVE"' EXIT
-  
+  # Save narrative to temp file to avoid quote escaping issues
+  TEMP_NARRATIVE="/tmp/narrative-$SESSION_ID.txt"
   echo "$GENERATED_NARRATIVE" > "$TEMP_NARRATIVE"
-  
-  export TEMP_NARRATIVE ENTRY_FILE INPUT_TYPE PERSONA_NAME
-  python3 << 'PYTHON_SCRIPT'
+
+  # Use Python to update the JSON properly
+  python3 -c "
 import json
-import sys
-import os
 
-# Read the generated narrative from temp file passed via environment
-narrative_file = os.environ.get('TEMP_NARRATIVE')
-if not narrative_file or not os.path.isfile(narrative_file):
-    print("Error: Invalid narrative file", file=sys.stderr)
-    sys.exit(1)
-
-with open(narrative_file, 'r') as f:
+# Read the narrative from temp file
+with open('$TEMP_NARRATIVE', 'r') as f:
     narrative = f.read()
 
-entry_file = os.environ.get('ENTRY_FILE')
-input_type = os.environ.get('INPUT_TYPE')
-persona_name = os.environ.get('PERSONA_NAME')
-
-if not entry_file or not os.path.isfile(entry_file):
-    print("Error: Invalid entry file", file=sys.stderr)
-    sys.exit(1)
-
-with open(entry_file, 'r') as f:
+# Update entry
+with open('$ENTRY_FILE', 'r') as f:
     entry = json.load(f)
 
 entry['content'] = narrative
-entry['summary'] = f'Auto-generated lore from {input_type}'
-entry['tags'] = ['generated', 'automated', persona_name, input_type]
+entry['summary'] = 'Auto-generated lore from $INPUT_TYPE'
+entry['tags'] = ['generated', 'automated', '$PERSONA_NAME', '$INPUT_TYPE']
 
 with open(entry_file, 'w') as f:
     json.dump(entry, f, indent=2)
 " && echo "Entry updated with narrative"
+
+  # Clean up temp file
+  rm -f "$TEMP_NARRATIVE"
 else
   echo "Warning: Entry file not found, content not updated"
 fi

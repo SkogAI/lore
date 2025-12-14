@@ -17,13 +17,11 @@
 set -e
 
 SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-# Use SKOGAI_LORE if set, otherwise fall back to SKOGAI_DIR
-SKOGAI_LORE="${SKOGAI_LORE:-$SKOGAI_DIR}"
-LORE_DIR="${SKOGAI_LORE}/knowledge/expanded/lore"
+LORE_DIR="${SKOGAI_DIR}/knowledge/expanded/lore"
 BOOKS_DIR="${LORE_DIR}/books"
 ENTRIES_DIR="${LORE_DIR}/entries"
-PERSONA_DIR="${SKOGAI_LORE}/knowledge/expanded/personas"
-SCHEMA_DIR="${SKOGAI_LORE}/knowledge/core/lore"
+PERSONA_DIR="${SKOGAI_DIR}/knowledge/expanded/personas"
+SCHEMA_DIR="${SKOGAI_DIR}/knowledge/core/lore"
 ENTRY_SCHEMA="${SCHEMA_DIR}/schema.json"
 BOOK_SCHEMA="${SCHEMA_DIR}/book-schema.json"
 
@@ -84,6 +82,36 @@ show_help() {
 # ============================================================================
 # Core Functions
 # ============================================================================
+
+# Atomic update function - updates JSON file atomically
+atomic_update() {
+  local file="$1"
+  local jq_expression="$2"
+  local validate_type="$3"  # "entry", "book", or empty for no validation
+
+  if [ ! -f "$file" ]; then
+    echo "ERROR: File not found: $file" >&2
+    return 1
+  fi
+
+  local temp_file="${file}.tmp.$$"
+
+  # Apply jq transformation
+  if ! jq "$jq_expression" "$file" > "$temp_file" 2>/dev/null; then
+    echo "ERROR: jq transformation failed" >&2
+    rm -f "$temp_file"
+    return 1
+  fi
+
+  # Move temp file to target
+  if ! mv "$temp_file" "$file"; then
+    echo "ERROR: Failed to update file" >&2
+    rm -f "$temp_file"
+    return 1
+  fi
+
+  return 0
+}
 
 # Generate a unique identifier
 generate_id() {
