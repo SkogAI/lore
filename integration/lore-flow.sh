@@ -173,6 +173,11 @@ if [ ! -f "$LORE_INTEGRATOR" ]; then
   exit 1
 fi
 
+# Determine model name from environment or use default
+# Model name is first parameter to llama-lore-integrator.sh
+# If not set, llama-lore-integrator.sh will use its default (llama3.2)
+LLM_MODEL=${LLM_MODEL:-"llama3.2"}
+
 # Extract lore from the content (outputs JSON or markdown)
 # Use llama3.2 as default model if LLM_PROVIDER is not set
 LORE_MODEL="${LLM_MODEL:-llama3.2}"
@@ -255,7 +260,7 @@ entry['content'] = narrative
 entry['summary'] = 'Auto-generated lore from $INPUT_TYPE'
 entry['tags'] = ['generated', 'automated', '$PERSONA_NAME', '$INPUT_TYPE']
 
-with open('$ENTRY_FILE', 'w') as f:
+with open(entry_file, 'w') as f:
     json.dump(entry, f, indent=2)
 " && echo "Entry updated with narrative"
 
