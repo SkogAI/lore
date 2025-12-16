@@ -84,7 +84,24 @@ validate-persona() {
 # @option --filter="" <FILTER> Filter books by name pattern
 # @alias list_books
 list-books() {
-  _choice_books >>"$LLM_OUTPUT"
+  for book_file in "${BOOKS_DIR}"/*.json; do
+    [[ ! -f "$book_file" ]] && continue
+    local book_id=$(basename "$book_file" .json)
+
+    local title=$(jq -r '.title // "Untitled"' "$book_file")
+    local description=$(jq -r '.description // ""' "$book_file" | head -c 80)
+    local entry_count=$(jq -r '.entries | length' "$book_file")
+    local status=$(jq -r '.metadata.status // "unknown"' "$book_file")
+
+    # Apply filter if provided (check both id and title)
+    if [[ -n "$argc_filter" ]]; then
+      if [[ ! "$book_id" =~ $argc_filter ]] && [[ ! "$title" =~ $argc_filter ]]; then
+        continue
+      fi
+    fi
+
+    printf "%-30s %-40s [%2d entries] [%s]\n" "$book_id" "$title" "$entry_count" "$status"
+  done >>"$LLM_OUTPUT"
 }
 
 # 📖 Chronicle inscriptions
@@ -99,9 +116,33 @@ show-book() {
 
 # 📖 Chronicle inscriptions
 # @cmd 🔮 List them entries yao
+# @option --filter="" <FILTER> Filter entries by title/id pattern
+# @option --category[`_choice_categories`] Filter by category
 # @alias list_entries
 list-entries() {
-  _choice_entries >>"$LLM_OUTPUT"
+  for entry_file in "${ENTRIES_DIR}"/*.json; do
+    [[ ! -f "$entry_file" ]] && continue
+    local entry_id=$(basename "$entry_file" .json)
+
+    # Apply filter if provided
+    if [[ -n "$argc_filter" ]] && [[ ! "$entry_id" =~ $argc_filter ]]; then
+      local title=$(jq -r '.title // ""' "$entry_file")
+      [[ ! "$title" =~ $argc_filter ]] && continue
+    fi
+
+    # Apply category filter if provided
+    if [[ -n "$argc_category" ]]; then
+      local cat=$(jq -r '.category // ""' "$entry_file")
+      [[ "$cat" != "$argc_category" ]] && continue
+    fi
+
+    local title=$(jq -r '.title // "Untitled"' "$entry_file")
+    local category=$(jq -r '.category // "unknown"' "$entry_file")
+    local tags=$(jq -r '.tags | if . then join(", ") else "" end' "$entry_file" | head -c 30)
+    local book_id=$(jq -r '.book_id // "unlinked"' "$entry_file")
+
+    printf "%-35s %-35s [%-10s] [%-20s] %s\n" "$entry_id" "$title" "$category" "$book_id" "$tags"
+  done >>"$LLM_OUTPUT"
 }
 
 # 📖 Chronicle inscriptions
