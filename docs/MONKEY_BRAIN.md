@@ -74,4 +74,3 @@ This is currently a framework that simulates the orchestration. To make it fully
 ## The simple explanation
 
 It's like having a smart manager who knows which expert to call for which job, keeps notes on everything, and makes sure everyone sticks to what they're good at. No more "I know a little about everything" - now you get "I know EXACTLY what you need for THIS specific task."
-

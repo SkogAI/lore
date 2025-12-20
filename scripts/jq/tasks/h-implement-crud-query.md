@@ -44,4 +44,3 @@ Following the established pattern in config/jq-transforms/:
 - [ ] Test cases added to test.sh
 - [ ] All tests pass (./test.sh exits 0)
 - [ ] Pattern matches existing transformations (crud-get/crud-set)
-

@@ -10,7 +10,7 @@ The project serves as both a knowledge archive and an active AI agent ecosystem 
 
 - `/agents/` - AI agent implementations and APIs
   - `/api/` - Core agent API layer (`agent_api.py`, `lore_api.py`)
-  - `/implementations/` - Specific agent implementations 
+  - `/implementations/` - Specific agent implementations
   - `/templates/` - Agent templates
 - `/demo/` - Demo scripts and examples
   - `small_model_workflow.py` - Small model workflow demonstration

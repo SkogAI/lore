@@ -1,6 +1,6 @@
 # Get value at path with optional default
 # Usage: jq -f crud-get/transform.jq --arg path "user.name" [--arg default "value"] input.json
-# 
+#
 # Arguments:
 #   path: dot-separated path to value (e.g., "user.name")
 #   default: value to return if path doesn't exist (optional, use empty string to skip)

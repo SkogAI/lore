@@ -443,24 +443,24 @@ Lore Entry: Character: Dots
 ID: entry_1744884241_273f74fe
 Category: custom
 ---
-Summary: 
+Summary:
 ---
 Content:
 
 ---
-Tags: 
+Tags:
 Created: 2025-04-17T10:04:01Z by skogix
 /mnt/extra/backup/skogai-old-all/demo (master ✗) /mnt/extra/backup/skogai-old-all/tools/manage-lore.sh show-entry entry_1744884308_9bc065cd
 Lore Entry: **Agent: Dots**
 ID: entry_1744884308_9bc065cd
 Category: custom
 ---
-Summary: 
+Summary:
 ---
 Content:
 
 ---
-Tags: 
+Tags:
 Created: 2025-04-17T10:05:08Z by skogix
 /mnt/extra/backup/skogai-old-all/demo (master ✗) /mnt/extra/backup/skogai-old-all/tools/manage-lore.sh show-book book_1744882934_cfbe965b
 /mnt/extra/backup/skogai-old-all/demo (master ✗) /mnt/extra/backup/skogai-old-all/tools/manage-lore.sh show-entry entry_1744884274_9f7ed0a9
@@ -468,12 +468,12 @@ Lore Entry: Git Workflow
 ID: entry_1744884274_9f7ed0a9
 Category: custom
 ---
-Summary: 
+Summary:
 ---
 Content:
 
 ---
-Tags: 
+Tags:
 Created: 2025-04-17T10:04:34Z by skogix
 
 ```/mnt/extra/backup/skogai-old-all/tools/create-persona.sh
@@ -523,15 +523,15 @@ create_persona() {
   local voice=\"$4\"
   local persona_id=\"$(generate_id)\"
   local timestamp=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")
-  
+
   if [ -z \"$name\" ] || [ -z \"$description\" ]; then
     echo \"Usage: $0 create \\\"Name\\\" \\\"Description\\\" \\\"trait1,trait2,trait3\\\" \\\"voice tone\\\"\"
     return 1
   fi
-  
+
   # Parse traits into an array
   IFS=',' read -r -a traits_array <<< \"$traits\"
-  
+
   # Create JSON structure
   cat > \"${PERSONAS_DIR}/${persona_id}.json\" << EOF
 {
@@ -594,19 +594,19 @@ EOF
 list_personas() {
   echo \"Available Personas:\"
   echo \"------------------\"
-  
+
   if [ -z \"$(ls -A \"${PERSONAS_DIR}\" 2>/dev/null)\" ]; then
     echo \"No personas found.\"
     return 0
   fi
-  
+
   for persona_file in \"${PERSONAS_DIR}\"/*.json; do
     if [ -f \"$persona_file\" ]; then
       local id=$(jq -r '.id' \"$persona_file\")
       local name=$(jq -r '.name' \"$persona_file\")
       local traits=$(jq -r '.core_traits.values | join(\", \")' \"$persona_file\")
       local lore_count=$(jq -r '.knowledge.lore_books | length' \"$persona_file\")
-      
+
       echo \"$id - $name ($traits) - $lore_count lore books\"
     fi
   done
@@ -615,19 +615,19 @@ list_personas() {
 # Show a specific persona
 show_persona() {
   local persona_id=\"$1\"
-  
+
   if [ -z \"$persona_id\" ]; then
     echo \"Usage: $0 show persona_id\"
     return 1
   fi
-  
+
   local persona_file=\"${PERSONAS_DIR}/${persona_id}.json\"
-  
+
   if [ ! -f \"$persona_file\" ]; then
     echo \"Error: Persona not found: $persona_id\"
     return 1
   fi
-  
+
   echo \"=== Persona: $(jq -r '.name' \"$persona_file\") ===\"
   echo \"ID: $(jq -r '.id' \"$persona_file\")\"
   echo \"\"
@@ -642,12 +642,12 @@ show_persona() {
   if [ \"$(jq -r '.background.origin' \"$persona_file\")\" != \"\" ]; then
     echo \"  Origin: $(jq -r '.background.origin' \"$persona_file\")\"
   fi
-  
+
   echo \"\"
   echo \"Knowledge:\"
   echo \"  Expertise: $(jq -r '.knowledge.expertise | join(\", \")' \"$persona_file\")\"
   echo \"  Limitations: $(jq -r '.knowledge.limitations | join(\", \")' \"$persona_file\")\"
-  
+
   # Show linked lore books
   echo \"\"
   echo \"Lore Books:\"
@@ -671,21 +671,21 @@ edit_persona() {
   local persona_id=\"$1\"
   local field=\"$2\"
   local value=\"$3\"
-  
+
   if [ -z \"$persona_id\" ] || [ -z \"$field\" ] || [ -z \"$value\" ]; then
     echo \"Usage: $0 edit persona_id field value\"
     echo \"Fields: name, description, tone, temperament\"
     echo \"For arrays (traits, expertise, etc.), use add-trait, add-expertise, etc.\"
     return 1
   fi
-  
+
   local persona_file=\"${PERSONAS_DIR}/${persona_id}.json\"
-  
+
   if [ ! -f \"$persona_file\" ]; then
     echo \"Error: Persona not found: $persona_id\"
     return 1
   fi
-  
+
   case \"$field\" in
     name)
       jq \".name = \\\"$value\\\"\" \"$persona_file\" > \"${persona_file}.tmp\" && mv \"${persona_file}.tmp\" \"$persona_file\"
@@ -709,7 +709,7 @@ edit_persona() {
       return 1
       ;;
   esac
-  
+
   # Update modified timestamp
   local timestamp=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")
   jq \".meta.modified = \\\"$timestamp\\\"\" \"$persona_file\" > \"${persona_file}.tmp\" && mv \"${persona_file}.tmp\" \"$persona_file\"
@@ -718,19 +718,19 @@ edit_persona() {
 # Delete a persona
 delete_persona() {
   local persona_id=\"$1\"
-  
+
   if [ -z \"$persona_id\" ]; then
     echo \"Usage: $0 delete persona_id\"
     return 1
   fi
-  
+
   local persona_file=\"${PERSONAS_DIR}/${persona_id}.json\"
-  
+
   if [ ! -f \"$persona_file\" ]; then
     echo \"Error: Persona not found: $persona_id\"
     return 1
   fi
-  
+
   # Confirm deletion
   echo \"Are you sure you want to delete persona: $(jq -r '.name' \"$persona_file\") ($persona_id)? [y/N]\"
   read -r confirm
@@ -821,13 +821,13 @@ create_entry() {
   local category=\"$2\"
   local entry_id=\"entry_$(generate_id)\"
   local timestamp=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")
-  
+
   if [ -z \"$title\" ] || [ -z \"$category\" ]; then
     echo \"Usage: $0 create-entry \\\"Entry Title\\\" category\"
     echo \"Categories: character, place, event, object, concept, custom\"
     return 1
   fi
-  
+
   # Create JSON structure
   cat > \"${ENTRIES_DIR}/${entry_id}.json\" << EOF
 {
@@ -863,12 +863,12 @@ create_book() {
   local description=\"$2\"
   local book_id=\"book_$(generate_id)\"
   local timestamp=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")
-  
+
   if [ -z \"$title\" ]; then
     echo \"Usage: $0 create-book \\\"Book Title\\\" \\\"Optional description\\\"\"
     return 1
   fi
-  
+
   # Create JSON structure
   cat > \"${BOOKS_DIR}/${book_id}.json\" << EOF
 {
@@ -911,18 +911,18 @@ list_entries() {
   local category=\"$1\"
   echo \"Available Lore Entries:\"
   echo \"----------------------\"
-  
+
   if [ -z \"$(ls -A \"${ENTRIES_DIR}\" 2>/dev/null)\" ]; then
     echo \"No lore entries found.\"
     return 0
   fi
-  
+
   for entry_file in \"${ENTRIES_DIR}\"/*.json; do
     if [ -f \"$entry_file\" ]; then
       local id=$(jq -r '.id' \"$entry_file\")
       local title=$(jq -r '.title' \"$entry_file\")
       local entry_category=$(jq -r '.category' \"$entry_file\")
-      
+
       if [ -z \"$category\" ] || [ \"$category\" = \"$entry_category\" ]; then
         echo \"$id - $title ($entry_category)\"
       fi
@@ -934,19 +934,19 @@ list_entries() {
 list_books() {
   echo \"Available Lore Books:\"
   echo \"-------------------\"
-  
+
   if [ -z \"$(ls -A \"${BOOKS_DIR}\" 2>/dev/null)\" ]; then
     echo \"No lore books found.\"
     return 0
   fi
-  
+
   for book_file in \"${BOOKS_DIR}\"/*.json; do
     if [ -f \"$book_file\" ]; then
       local id=$(jq -r '.id' \"$book_file\")
       local title=$(jq -r '.title' \"$book_file\")
       local entry_count=$(jq '.entries | length' \"$book_file\")
       local status=$(jq -r '.metadata.status' \"$book_file\")
-      
+
       echo \"$id - $title ($entry_count entries) [$status]\"
     fi
   done
@@ -955,19 +955,19 @@ list_books() {
 # Show a specific lore entry
 show_entry() {
   local entry_id=\"$1\"
-  
+
   if [ -z \"$entry_id\" ]; then
     echo \"Usage: $0 show-entry entry_id\"
     return 1
   fi
-  
+
   local entry_file=\"${ENTRIES_DIR}/${entry_id}.json\"
-  
+
   if [ ! -f \"$entry_file\" ]; then
     echo \"Error: Entry not found: $entry_id\"
     return 1
   fi
-  
+
   echo \"Lore Entry: $(jq -r '.title' \"$entry_file\")\"
   echo \"ID: $(jq -r '.id' \"$entry_file\")\"
   echo \"Category: $(jq -r '.category' \"$entry_file\")\"
@@ -984,19 +984,19 @@ show_entry() {
 # Show a specific lore book
 show_book() {
   local book_id=\"$1\"
-  
+
   if [ -z \"$book_id\" ]; then
     echo \"Usage: $0 show-book book_id\"
     return 1
   fi
-  
+
   local book_file=\"${BOOKS_DIR}/${book_id}.json\"
-  
+
   if [ ! -f \"$book_file\" ]; then
     echo \"Error: Book not found: $book_id\"
     return 1
   fi
-  
+
   echo \"Lore Book: $(jq -r '.title' \"$book_file\")\"
   echo \"ID: $(jq -r '.id' \"$book_file\")\"
   echo \"Description: $(jq -r '.description' \"$book_file\")\"
@@ -1006,7 +1006,7 @@ show_book() {
   jq -r '.structure[] | \"• \" + .name + \": \" + .description' \"$book_file\"
   echo \"---\"
   echo \"Entries ($(jq '.entries | length' \"$book_file\")):\"
-  
+
   local entries=$(jq -r '.entries[]' \"$book_file\")
   if [ -n \"$entries\" ]; then
     for entry_id in $entries; do
@@ -1027,31 +1027,31 @@ add_to_book() {
   local entry_id=\"$1\"
   local book_id=\"$2\"
   local section=\"$3\"
-  
+
   if [ -z \"$entry_id\" ] || [ -z \"$book_id\" ]; then
     echo \"Usage: $0 add-to-book entry_id book_id [section_name]\"
     return 1
   fi
-  
+
   local entry_file=\"${ENTRIES_DIR}/${entry_id}.json\"
   local book_file=\"${BOOKS_DIR}/${book_id}.json\"
-  
+
   if [ ! -f \"$entry_file\" ]; then
     echo \"Error: Entry not found: $entry_id\"
     return 1
   fi
-  
+
   if [ ! -f \"$book_file\" ]; then
     echo \"Error: Book not found: $book_id\"
     return 1
   fi
-  
+
   # Add entry to book's entry list if not already there
   if ! jq -e \".entries | contains([\\\"$entry_id\\\"])\" \"$book_file\" > /dev/null; then
     jq \".entries += [\\\"$entry_id\\\"]\" \"$book_file\" > \"${book_file}.tmp\" && mv \"${book_file}.tmp\" \"$book_file\"
     echo \"Added entry to book's entry list\"
   fi
-  
+
   # If section is specified, add to that section
   if [ -n \"$section\" ]; then
     if jq -e \".structure[] | select(.name == \\\"$section\\\")\" \"$book_file\" > /dev/null; then
@@ -1064,14 +1064,14 @@ add_to_book() {
       jq -r '.structure[].name' \"$book_file\"
     fi
   fi
-  
+
   # Update book's updated_at timestamp
   local timestamp=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")
   jq \".metadata.updated_at = \\\"$timestamp\\\"\" \"$book_file\" > \"${book_file}.tmp\" && mv \"${book_file}.tmp\" \"$book_file\"
-  
+
   # Update entry's book_id
   jq \".book_id = \\\"$book_id\\\"\" \"$entry_file\" > \"${entry_file}.tmp\" && mv \"${entry_file}.tmp\" \"$entry_file\"
-  
+
   echo \"Successfully added $entry_id to $book_id\"
 }
 
@@ -1079,31 +1079,31 @@ add_to_book() {
 link_to_persona() {
   local book_id=\"$1\"
   local persona_id=\"$2\"
-  
+
   if [ -z \"$book_id\" ] || [ -z \"$persona_id\" ]; then
     echo \"Usage: $0 link-to-persona book_id persona_id\"
     return 1
   fi
-  
+
   local book_file=\"${BOOKS_DIR}/${book_id}.json\"
   local persona_file=\"${PERSONA_DIR}/${persona_id}.json\"
-  
+
   if [ ! -f \"$book_file\" ]; then
     echo \"Error: Book not found: $book_id\"
     return 1
   fi
-  
+
   if [ ! -f \"$persona_file\" ]; then
     echo \"Error: Persona not found: $persona_id\"
     return 1
   fi
-  
+
   # Add persona to book's readers list if not already there
   if ! jq -e \".readers | contains([\\\"$persona_id\\\"])\" \"$book_file\" > /dev/null; then
     jq \".readers += [\\\"$persona_id\\\"]\" \"$book_file\" > \"${book_file}.tmp\" && mv \"${book_file}.tmp\" \"$book_file\"
     echo \"Added persona to book's readers list\"
   fi
-  
+
   # Add book to persona's lore_books list if not already there
   if jq -e '.knowledge.lore_books' \"$persona_file\" > /dev/null; then
     if ! jq -e \".knowledge.lore_books | contains([\\\"$book_id\\\"])\" \"$persona_file\" > /dev/null; then
@@ -1113,24 +1113,24 @@ link_to_persona() {
     # Create lore_books array if it doesn't exist
     jq \".knowledge.lore_books = [\\\"$book_id\\\"]\" \"$persona_file\" > \"${persona_file}.tmp\" && mv \"${persona_file}.tmp\" \"$persona_file\"
   fi
-  
+
   echo \"Successfully linked book $book_id to persona $persona_id\"
 }
 
 # Search lore entries
 search_lore() {
   local query=\"$1\"
-  
+
   if [ -z \"$query\" ]; then
     echo \"Usage: $0 search \\\"search term\\\"\"
     return 1
   fi
-  
+
   echo \"Searching for: $query\"
   echo \"-------------------\"
-  
+
   local found=0
-  
+
   for entry_file in \"${ENTRIES_DIR}\"/*.json; do
     if [ -f \"$entry_file\" ]; then
       if jq -r '.title + \" \" + .content + \" \" + .summary + \" \" + (.tags | join(\" \"))' \"$entry_file\" | grep -qi \"$query\"; then
@@ -1142,7 +1142,7 @@ search_lore() {
       fi
     fi
   done
-  
+
   if [ $found -eq 0 ]; then
     echo \"No matches found.\"
   fi
@@ -1239,7 +1239,7 @@ create_entry() {
   local category=\"$2\"
   local entry_id=\"entry_$(generate_id)\"
   local timestamp=$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")
-  
+
   if [ -z \"$title\" ] || [ -z \"$category\" ]; then
     echo \"Usage: $0 create-entry \\\"Entry Title\\\" category\"
     echo \"Categories: character, place, event, object, concept, custom```
@@ -1307,7 +1307,7 @@ call_id = "None"
 [[messages]]
 role = "user"
 content = """
-Well this was the combination of you/dot as an agent and us role playing cyberpunk 2077 :): /mnt/extra/backup/skogai-old-all (master ✗) ./tools/manage-lore.sh show-book book_1744978299             
+Well this was the combination of you/dot as an agent and us role playing cyberpunk 2077 :): /mnt/extra/backup/skogai-old-all (master ✗) ./tools/manage-lore.sh show-book book_1744978299
 Lore Book: Specialized Lore for Agent Dot
 ID: book_1744978299
 Description: Lore collection specifically created for agent agents: Dot
@@ -1327,7 +1327,7 @@ Entries (10):
 • The Cygnus City Hack (entry_1744979158)
 • Synthetic Intelligence Ethics (entry_1744979263)
 • The Singularity Threshold (entry_1744979357)
-/mnt/extra/backup/skogai-old-all (master ✗) ./tools/manage-lore.sh show-entry entry_1744978417                              
+/mnt/extra/backup/skogai-old-all (master ✗) ./tools/manage-lore.sh show-entry entry_1744978417
 Lore Entry: Dr. Rachel Kim
 ID: entry_1744978417
 Category: character
@@ -1526,7 +1526,7 @@ from agents.implementations.small_model_agents import SmallModelAgents
 
 def run_workflow(topic: str, model_name: str = \"smo-agent\", output_dir: Optional[str] = None):
     \"\"\"Run the complete content creation workflow using small local models.
-    
+
     Args:
         topic: The topic to create content about
         model_name: Name of the Ollama model to use
@@ -1534,64 +1534,64 @@ def run_workflow(topic: str, model_name: str = \"smo-agent\", output_dir: Option
     \"\"\"
     # Initialize the small model agents
     agent_manager = SmallModelAgents(model_name=model_name)
-    
+
     # Create output directory if needed
     if output_dir is None:
         timestamp = int(time.time())
         output_dir = f\"/home/skogix/skogai/demo/small_model_content_{timestamp}\"
-    
+
     os.makedirs(output_dir, exist_ok=True)
-    
+
     print(f\"Creating content for topic: {topic}\")
     print(f\"Using model: {model_name}\")
     print(f\"Output directory: {output_dir}\")
     print(\"-\" * 50)
-    
+
     # Step 1: Research
     print(\"Step 1: Research...\")
     research_response = agent_manager.run_agent(\"research\", topic)
-    
+
     # Save raw response
     with open(f\"{output_dir}/research_raw.txt\", \"w\") as f:
         f.write(research_response)
-    
+
     # Extract structured data
     research_data = agent_manager.extract_research_facts(research_response)
-    
+
     # Save structured data
     with open(f\"{output_dir}/research_data.json\", \"w\") as f:
         json.dump(research_data, f, indent=2)
-    
+
     print(\"  Research complete!\")
     print(\"  Key facts found:\", len(research_data.get(\"key_facts\", [])))
     print(\"  Concepts identified:\", len(research_data.get(\"main_concepts\", [])))
     print(\"-\" * 50)
-    
+
     # Step 2: Outline
     print(\"Step 2: Creating outline...\")
     outline_prompt = f\"Create an outline for an informative article about {topic}\"
     outline_response = agent_manager.run_agent(
-        \"outline\", 
+        \"outline\",
         outline_prompt,
         {\"research_output\": research_data}
     )
-    
+
     # Save raw response
     with open(f\"{output_dir}/outline_raw.txt\", \"w\") as f:
         f.write(outline_response)
-    
+
     # Extract structured outline
     outline_data = agent_manager.extract_outline_structure(outline_response)
-    
+
     # Save structured data
     with open(f\"{output_dir}/outline_data.json\", \"w\") as f:
         json.dump(outline_data, f, indent=2)
-    
+
     print(\"  Outline complete!\")
     print(\"  Title:\", outline_data.get(\"title\", \"\"))
     print(\"  Sections:\", len(outline_data.get(\"structure\", [])))
     print(\"-\" * 50)
-    
+
     # Step 3: Writing
     print(\"Step 3: Writing content...\")
     writing_prompt = f\"Write an article based on this outline about {topic}. Use a conversational tone.\"
@@ -1600,30 +1600,30 @@ def run_workflow(topic: str, model_name: str = \"smo-agent\", output_dir: Option
         writing_prompt,
         {\"outline_output\": outline_data}
     )
-    
+
     # Save raw response
     with open(f\"{output_dir}/writing_raw.txt\", \"w\") as f:
         f.write(writing_response)
-    
+
     # Extract content sections
     content_data = agent_manager.extract_written_content(writing_response)
-    
+
     # Save structured data
     with open(f\"{output_dir}/content_data.json\", \"w\") as f:
         json.dump(content_data, f, indent=2)
-    
+
     # Save as a clean article
     article_text = content_data.get(\"full_text\", writing_response)
     with open(f\"{output_dir}/final_article.md\", \"w\") as f:
         f.write(article_text)
-    
+
     print(\"  Writing complete!\")
     print(\"  Title:\", content_data.get(\"title\", \"\"))
     print(\"  Sections:\", len(content_data.get(\"content_sections\", [])))
     print(\"-\" * 50)
-    
+
     print(f\"Content creation complete! Final article saved to: {output_dir}/final_article.md\")
-    
+
     return output_dir
 
 if __name__ == \"__main__\":
@@ -1631,9 +1631,9 @@ if __name__ == \"__main__\":
     parser.add_argument(\"topic\", help=\"Topic to create content about\")
     parser.add_argument(\"--model\", default=\"llama3\", help=\"Name of the Ollama model to use\")
     parser.add_argument(\"--output\", help=\"Directory to save output files\")
-    
+
     args = parser.parse_args()
-    
+
     run_workflow(args.topic, args.model, args.output)
 """
 timestamp = "2025-05-19T20:53:43.479903"
@@ -1987,5 +1987,3 @@ find /mnt/extra/backup/skogai-old-all/ -maxdepth 2 -type d | sort
 """
 timestamp = "2025-05-19T20:48:44.019586"
 call_id = "None"
-
-

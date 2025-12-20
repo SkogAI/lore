@@ -44,15 +44,15 @@ create_persona() {
   local voice="$4"
   local persona_id="$(generate_id)"
   local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-  
+
   if [ -z "$name" ] || [ -z "$description" ]; then
     echo "Usage: $0 create \"Name\" \"Description\" \"trait1,trait2,trait3\" \"voice tone\""
     return 1
   fi
-  
+
   # Parse traits into an array
   IFS=',' read -r -a traits_array <<< "$traits"
-  
+
   # Create JSON structure
   cat > "${PERSONAS_DIR}/${persona_id}.json" << EOF
 {
@@ -115,19 +115,19 @@ EOF
 list_personas() {
   echo "Available Personas:"
   echo "------------------"
-  
+
   if [ -z "$(ls -A "${PERSONAS_DIR}")" ]; then
     echo "No personas found."
     return 0
   fi
-  
+
   for persona_file in "${PERSONAS_DIR}"/*.json; do
     if [ -f "$persona_file" ]; then
       local id=$(jq -r '.id' "$persona_file")
       local name=$(jq -r '.name' "$persona_file")
       local traits=$(jq -r '.core_traits.values | join(", ")' "$persona_file")
       local lore_count=$(jq -r '.knowledge.lore_books | length' "$persona_file")
-      
+
       echo "$id - $name ($traits) - $lore_count lore books"
     fi
   done
@@ -136,19 +136,19 @@ list_personas() {
 # Show a specific persona
 show_persona() {
   local persona_id="$1"
-  
+
   if [ -z "$persona_id" ]; then
     echo "Usage: $0 show persona_id"
     return 1
   fi
-  
+
   local persona_file="${PERSONAS_DIR}/${persona_id}.json"
-  
+
   if [ ! -f "$persona_file" ]; then
     echo "Error: Persona not found: $persona_id"
     return 1
   fi
-  
+
   echo "=== Persona: $(jq -r '.name' "$persona_file") ==="
   echo "ID: $(jq -r '.id' "$persona_file")"
   echo ""
@@ -163,12 +163,12 @@ show_persona() {
   if [ "$(jq -r '.background.origin' "$persona_file")" != "" ]; then
     echo "  Origin: $(jq -r '.background.origin' "$persona_file")"
   fi
-  
+
   echo ""
   echo "Knowledge:"
   echo "  Expertise: $(jq -r '.knowledge.expertise | join(", ")' "$persona_file")"
   echo "  Limitations: $(jq -r '.knowledge.limitations | join(", ")' "$persona_file")"
-  
+
   # Show linked lore books
   echo ""
   echo "Lore Books:"
@@ -192,21 +192,21 @@ edit_persona() {
   local persona_id="$1"
   local field="$2"
   local value="$3"
-  
+
   if [ -z "$persona_id" ] || [ -z "$field" ] || [ -z "$value" ]; then
     echo "Usage: $0 edit persona_id field value"
     echo "Fields: name, description, tone, temperament"
     echo "For arrays (traits, expertise, etc.), use add-trait, add-expertise, etc."
     return 1
   fi
-  
+
   local persona_file="${PERSONAS_DIR}/${persona_id}.json"
-  
+
   if [ ! -f "$persona_file" ]; then
     echo "Error: Persona not found: $persona_id"
     return 1
   fi
-  
+
   case "$field" in
     name)
       jq ".name = \"$value\"" "$persona_file" > "${persona_file}.tmp" && mv "${persona_file}.tmp" "$persona_file"
@@ -230,7 +230,7 @@ edit_persona() {
       return 1
       ;;
   esac
-  
+
   # Update modified timestamp
   local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   jq ".meta.modified = \"$timestamp\"" "$persona_file" > "${persona_file}.tmp" && mv "${persona_file}.tmp" "$persona_file"
@@ -239,19 +239,19 @@ edit_persona() {
 # Delete a persona
 delete_persona() {
   local persona_id="$1"
-  
+
   if [ -z "$persona_id" ]; then
     echo "Usage: $0 delete persona_id"
     return 1
   fi
-  
+
   local persona_file="${PERSONAS_DIR}/${persona_id}.json"
-  
+
   if [ ! -f "$persona_file" ]; then
     echo "Error: Persona not found: $persona_id"
     return 1
   fi
-  
+
   # Confirm deletion
   echo "Are you sure you want to delete persona: $(jq -r '.name' "$persona_file") ($persona_id)? [y/N]"
   read -r confirm

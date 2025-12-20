@@ -67,4 +67,3 @@ echo "You can now use the client to send requests:"
 echo "./skogai-agent-small-client.sh \"Your topic here\""
 
 echo "Setup complete!"
-

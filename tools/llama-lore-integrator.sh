@@ -82,13 +82,13 @@ extract_lore_from_file() {
 
   # Prompt for lore extraction
   if [ "$output_format" == "json" ]; then
-    PROMPT="Analyze the following text and extract structured lore information from it. 
-        
+    PROMPT="Analyze the following text and extract structured lore information from it.
+
         TEXT:
         $content
-        
+
         Extract lore entities as structured JSON. Include entries for characters, places, objects, events, or concepts mentioned in the text.
-        
+
         Format your response as valid JSON like this:
         {
           \"entries\": [
@@ -101,23 +101,23 @@ extract_lore_from_file() {
             }
           ]
         }
-        
+
         Only include your JSON output, nothing else."
   else
     PROMPT="Analyze the following text and extract lore information from it.
-        
+
         TEXT:
         $content
-        
+
         Extract 3-5 key lore elements (characters, places, objects, events, or concepts) mentioned in the text.
-        
+
         For each element, format your response like this:
-        
+
         ## [CATEGORY: character/place/object/event/concept] TITLE
         SUMMARY: Brief one-sentence description
         CONTENT: 1-2 paragraphs of expanded details based on the text
         TAGS: tag1, tag2, tag3
-        
+
         Be concise and focus on the most important lore elements."
   fi
 
@@ -268,12 +268,12 @@ create_persona_from_text() {
 
   # Prompt for persona extraction
   PROMPT="Analyze the following text and extract information about a character or persona.
-    
+
     TEXT:
     $content
-    
+
     Based on this text, create a detailed persona profile with the following:
-    
+
     NAME: The character's name
     DESCRIPTION: A brief description (1-2 sentences)
     TRAITS: List 4-6 personality traits, comma-separated
@@ -281,7 +281,7 @@ create_persona_from_text() {
     BACKGROUND: Their origin or background story
     EXPERTISE: Areas of knowledge or skill, comma-separated
     LIMITATIONS: Weaknesses or gaps in knowledge, comma-separated
-    
+
     Format your response exactly as shown above, with each field on a separate line."
 
   # Run LLM to analyze content
@@ -361,17 +361,17 @@ analyze_lore_connections() {
 
   # Prompt for connection analysis
   PROMPT="Analyze these lore entries and identify meaningful connections between them:
-    
+
     $ENTRY_DATA
-    
+
     For each connection you find, format your response like this:
-    
+
     ## CONNECTION
     SOURCE: [entry_id of source]
     TARGET: [entry_id of target]
     RELATIONSHIP: [describe relationship type: part_of, located_in, created_by, opposes, allies_with, etc.]
     DESCRIPTION: [1-2 sentences describing the connection]
-    
+
     Identify at least 3-5 meaningful connections."
 
   # Run LLM to analyze connections
@@ -512,4 +512,3 @@ help | --help | -h | "")
   exit 1
   ;;
 esac
-

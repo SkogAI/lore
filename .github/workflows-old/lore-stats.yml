@@ -108,7 +108,7 @@ jobs:
               # Fall back to merge strategy on conflicts
               git pull origin master --no-rebase --strategy=recursive -X theirs
 
-              # Recommit if needed  
+              # Recommit if needed
               git add STATS.md
               git commit -m "Update lore statistics (merged) [skip ci]" || true
 

@@ -375,13 +375,13 @@ Use GitHub UI to manually trigger workflows:
 claude1.yml, claude2.yml, claude-lore-keeper.yml
     ↓
   Require: CLAUDE_CODE_OAUTH_TOKEN
-  
+
 lore-growth.yml, lore-stats.yml, doc-updater.yml
     ↓
   Generate: GROWTH.md, STATS.md, NAVIGATION.md, LAST_MODIFIED.md
     ↓
   Updates tracked by: doc-updater.yml
-  
+
 lore-keeper-bot.yml
     ↓
   Read-only analysis, no dependencies

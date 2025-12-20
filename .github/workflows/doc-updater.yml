@@ -27,7 +27,7 @@ jobs:
         with:
           sparse-checkout: '.github/workflow-config.yml'
           sparse-checkout-cone-mode: false
-      
+
       - name: Check if workflow is enabled
         id: check
         run: |
@@ -36,7 +36,7 @@ jobs:
             echo "Force run requested - workflow enabled"
             exit 0
           fi
-          
+
           if [ -f ".github/workflow-config.yml" ]; then
             # Parse YAML config - look for doc-updater key under workflows section
             ENABLED=$(grep "doc-updater:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')

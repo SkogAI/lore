@@ -19,7 +19,7 @@ for test_script in "$SCRIPT_DIR"/*/test.sh; do
         echo "========================================"
         echo "Testing: $transformation"
         echo "========================================"
-        
+
         if "$test_script"; then
             PASSED_TESTS+=("$transformation")
         else

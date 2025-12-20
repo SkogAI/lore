@@ -164,7 +164,7 @@ TOPIC: {topic}
 DEPTH: {depth}
 FOCUS: {focus}
 
-Conduct thorough research on this topic and return your findings in the specified JSON format. 
+Conduct thorough research on this topic and return your findings in the specified JSON format.
 Be comprehensive, accurate, and focus on the most important aspects of the topic.
 """
 

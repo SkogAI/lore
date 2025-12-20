@@ -31,7 +31,7 @@ jobs:
         with:
           sparse-checkout: '.github/workflow-config.yml'
           sparse-checkout-cone-mode: false
-      
+
       - name: Check if workflow is enabled
         id: check
         run: |
@@ -40,7 +40,7 @@ jobs:
             echo "Force run requested - workflow enabled"
             exit 0
           fi
-          
+
           if [ -f ".github/workflow-config.yml" ]; then
             # Parse YAML config - look for lore-keeper-bot key under workflows section
             ENABLED=$(grep "lore-keeper-bot:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
@@ -55,7 +55,7 @@ jobs:
             echo "enabled=true" >> $GITHUB_OUTPUT
             echo "Config file not found - defaulting to enabled"
           fi
-      
+
       - name: Check trigger conditions
         id: conditions
         run: |
