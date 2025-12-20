@@ -1,0 +1,64 @@
+{
+  "id": "book_1766191455",
+  "title": "Specialized Lore for Sisyphus Agent",
+  "description": "Lore collection specifically created for Sisyphus agents: The agent working with documentation - creating more than he stores away",
+  "entries": [
+    "entry_1766191475",
+    "entry_1766191494",
+    "entry_1766191516",
+    "entry_1766191537",
+    "entry_1766191555",
+    "entry_1766191573",
+    "entry_1766191592",
+    "entry_1766191613",
+    "entry_1766191632",
+    "entry_1766191656"
+  ],
+  "categories": {
+    "character": [
+      "entry_1766191475",
+      "entry_1766191494"
+    ],
+    "place": [
+      "entry_1766191516",
+      "entry_1766191537"
+    ],
+    "object": [
+      "entry_1766191555",
+      "entry_1766191573"
+    ],
+    "event": [
+      "entry_1766191592",
+      "entry_1766191613"
+    ],
+    "concept": [
+      "entry_1766191632",
+      "entry_1766191656"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1766191666",
+    "persona_1766191666"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-20T00:44:15Z",
+    "updated_at": "2025-12-20T00:47:46Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

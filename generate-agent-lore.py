@@ -43,7 +43,7 @@ def run_llm(model: str, prompt: str, provider: str = "ollama") -> str:
     elif provider == "claude":
         # Use Claude CLI binary with system prompt
         try:
-            system_prompt_file = os.path.expandvars("$SKOGAI_DOCS/prompts/lore-writer.md")
+            system_prompt_file = os.path.join(os.path.dirname(__file__), "orchestrator", "variants", "lore-writer.md")
             with open(system_prompt_file, 'r') as f:
                 system_prompt = f.read()
 
@@ -169,16 +169,41 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
 
     # Determine what types of lore this agent needs
     lore_needs = determine_agent_needs(agent_type, agent_description, model, provider)
+
+    if not lore_needs:
+        return {"success": False, "error": "Failed to determine agent lore needs"}
+
     # Create the lorebook
     timestamp = int(time.time())
     book = api.create_lore_book(
         title=f"Specialized Lore for {agent_type.title()} Agent",
         description=f"Lore collection specifically created for {agent_type} agents: {agent_description}"
     )
+
+    # Track entries by category
+    entries_by_category = {}
+
     # Process each category
     for category, entries in lore_needs.items():
         if not entries:
             continue
+
+        entries_by_category[category] = []
+
+        for entry_data in entries:
+            title = entry_data.get("title", f"Untitled {category.title()}")
+            reason = entry_data.get("reason", "")
+
+            # Generate content for this entry
+            content = generate_lore_entry(title, category, agent_type, model, provider)
+
+            if not content:
+                logger.warning(f"Failed to generate content for {title}")
+                continue
+
+            # Create summary from the reason
+            summary = f"Purpose: {reason}" if reason else f"Lore for {agent_type} agent"
+
             # Create the entry
             entry = api.create_lore_entry(
                 title=title,
@@ -187,6 +212,13 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
                 tags=[agent_type, category],
                 summary=summary
             )
+
+            # Add to book
+            api.add_entry_to_book(entry["id"], book["id"])
+            entries_by_category[category].append(entry["id"])
+
+            logger.info(f"Created lore entry: {title} ({category})")
+
     # Update book categories
     book = api.get_lore_book(book["id"])
     if book:

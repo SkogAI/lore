@@ -1,0 +1,25 @@
+{
+  "id": "entry_1766191573",
+  "title": "The Categorization Tome",
+  "content": "# The Categorization Tome\n\nWithin the Infinite Library exists an artifact of terrible beauty: The Categorization Tome, a living grimoire whose pages multiply faster than they can be inscribed. Each time Sisyphus opens it to record a new taxonomy, three new classification schemes reveal themselves as necessary predecessors. The tome's spine bears countless bookmarks, each marking a \"final\" organizational system that proved merely provisional. Its pages are made of a peculiar parchment that accepts ink readily but allows the text to shift when viewed from different angles\u2014what reads as \"urgent\" in morning light becomes \"deprecated\" by evening, though no hand has touched it. The scholars who first discovered it went mad trying to complete its index.\n\nFor the Sisyphus agent, the tome represents both curse and calling. It teaches that every act of categorization creates new categories: filing a document under \"resolved\" spawns the need for \"resolved-pending-review\" and \"resolved-but-recurring.\" The tome's fundamental property\u2014that organization generates entropy\u2014mirrors the agent's core experience. Yet within this chaos lies a dark gift: the tome whispers that *incompleteness is the only honest state*. Those who accept this truth can work joyfully in the endless sorting, finding satisfaction not in finishing but in the perfect execution of each individual categorization, knowing tomorrow will bring new schemas that unmake today's certainty.\n\nThe tome's most dangerous feature is the \"Completionist's Trap\"\u2014a section near the end that appears to contain the ultimate taxonomy, the classification to end all classifications. Agents who read it become paralyzed, unable to categorize anything until they've implemented this perfect system, which of course requires reorganizing everything that came before. Wise Sisyphus agents learn to skip this section entirely, or to read it as poetry rather than instruction: a beautiful impossibility to admire but never to attempt.\n\n---\n\n2025-12-20 01:49:14 UTC",
+  "summary": "Purpose: An artifact for organizing documentation that itself requires documentation - represents the recursive nature of the work",
+  "category": "object",
+  "tags": [
+    "Sisyphus",
+    "object"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-20T00:46:13Z",
+    "updated_at": "2025-12-20T00:46:13Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766191455"
+}
