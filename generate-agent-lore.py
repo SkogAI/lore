@@ -43,7 +43,7 @@ def run_llm(model: str, prompt: str, provider: str = "ollama") -> str:
     elif provider == "claude":
         # Use Claude CLI binary with system prompt
         try:
-            system_prompt_file = os.path.expandvars("$SKOGAI_DOCS/prompts/lore-writer.md")
+            system_prompt_file = os.path.expandvars("$SKOGAI_LORE/orchestrator/lore-writer.md")
             with open(system_prompt_file, 'r') as f:
                 system_prompt = f.read()
 
