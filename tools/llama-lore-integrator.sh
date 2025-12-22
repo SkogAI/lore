@@ -80,45 +80,70 @@ extract_lore_from_file() {
   # Get file content, limiting to first 8000 chars to avoid context issues
   local content=$(head -c 8000 "$file_path")
 
-  # Prompt for lore extraction
+  # Optimized prompt for lore extraction
   if [ "$output_format" == "json" ]; then
-    PROMPT="Analyze the following text and extract structured lore information from it.
+    PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
 
-        TEXT:
-        $content
+## Task
+Analyze this content and identify 3-5 lore-worthy entities.
 
-        Extract lore entities as structured JSON. Include entries for characters, places, objects, events, or concepts mentioned in the text.
+## TEXT
+$content
 
-        Format your response as valid JSON like this:
-        {
-          \"entries\": [
-            {
-              \"title\": \"Entity Name\",
-              \"category\": \"character/place/object/event/concept\",
-              \"summary\": \"Brief description\",
-              \"content\": \"Detailed description based on text\",
-              \"tags\": [\"tag1\", \"tag2\"]
-            }
-          ]
-        }
+## CRITICAL: Output JSON ONLY
+No meta-commentary, no explanations, no preamble.
 
-        Only include your JSON output, nothing else."
+Format EXACTLY like this:
+{
+  \"entries\": [
+    {
+      \"title\": \"Entity Name\",
+      \"category\": \"character\",
+      \"summary\": \"One sentence essence\",
+      \"content\": \"2-3 paragraphs narrative prose in present tense\",
+      \"tags\": [\"tag1\", \"tag2\", \"tag3\"]
+    }
+  ]
+}
+
+Rules:
+- Categories: character, place, object, event, concept
+- Content: narrative prose, NO meta-commentary
+- Start IMMEDIATELY with \"{\"
+
+Output NOW:"
   else
-    PROMPT="Analyze the following text and extract lore information from it.
+    PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
 
-        TEXT:
-        $content
+## Task
+Analyze this content and identify 3-5 lore-worthy entities.
 
-        Extract 3-5 key lore elements (characters, places, objects, events, or concepts) mentioned in the text.
+## TEXT
+$content
 
-        For each element, format your response like this:
+## CRITICAL: Output Format ONLY
+No meta-commentary, no explanations, no preamble.
 
-        ## [CATEGORY: character/place/object/event/concept] TITLE
-        SUMMARY: Brief one-sentence description
-        CONTENT: 1-2 paragraphs of expanded details based on the text
-        TAGS: tag1, tag2, tag3
+For each entity:
+---
+## [CATEGORY] Title
 
-        Be concise and focus on the most important lore elements."
+**Summary**: One sentence essence
+
+**Content**:
+[2-3 paragraphs of narrative prose - NO meta-commentary like \"This entry\" or \"I will\"]
+
+**Tags**: tag1, tag2, tag3
+---
+
+Rules:
+- Categories: CHARACTER, PLACE, OBJECT, EVENT, CONCEPT
+- Write content DIRECTLY in narrative voice
+- Transform technical → mythological
+- Present tense, immersive tone
+- Start IMMEDIATELY with first \"---\"
+
+Output NOW:"
   fi
 
   # Run LLM to analyze content

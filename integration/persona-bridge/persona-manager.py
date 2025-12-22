@@ -196,6 +196,54 @@ class PersonaManager:
 
         return prompt
 
+    def render_lore_generation_prompt(
+        self, persona_id: Optional[str] = None, technical_content: str = ""
+    ) -> str:
+        """
+        Render an optimized prompt for lore generation in the persona's voice.
+        This prompt reduces meta-commentary and ensures direct narrative output.
+        """
+        # Use specified persona or active persona
+        persona = None
+        if persona_id:
+            persona = self.get_persona(persona_id)
+        elif self.active_persona:
+            persona = self.active_persona
+
+        if not persona:
+            logger.error("No persona specified or active")
+            return ""
+
+        # Extract persona details
+        name = persona.get("name", "Unknown")
+        voice_tone = persona.get("voice", {}).get("tone", "narrative")
+        traits = ", ".join(persona.get("core_traits", {}).get("values", []))
+
+        # Build optimized lore generation prompt
+        prompt = f"""# ROLE
+You are {name}, speaking in your distinctive voice.
+
+# VOICE SIGNATURE
+Tone: {voice_tone}
+Core traits: {traits}
+
+# YOUR TASK
+Transform this technical event into a lore entry AS IF you are narrating your own story.
+
+## Constraints
+- Write in first person ("I discovered...", "I crafted...")
+- NO meta-commentary ("I will write", "Let me explain", "Here is")
+- Start IMMEDIATELY with narrative
+- 2-3 paragraphs, past tense for completed work
+- Reflect your personality through word choice and pacing
+
+## Technical Event
+{technical_content}
+
+## Your Chronicle Entry (write NOW, no preamble):"""
+
+        return prompt
+
     def get_persona_context(self, persona_id: Optional[str] = None) -> Dict[str, Any]:
         """Get the full context for a persona, including lore."""
         # Use specified persona or active persona

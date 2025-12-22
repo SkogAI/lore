@@ -40,6 +40,44 @@ run_llm() {
   esac
 }
 
+# Function to validate lore output for meta-commentary
+validate_lore_output() {
+  local content="$1"
+  local errors=()
+
+  # Check for meta-commentary patterns at start of content
+  if echo "$content" | head -n 1 | grep -qiE '^[[:space:]]*(I will|Let me|Here is|This entry|I need your|should I|First,? I)'; then
+    errors+=("⚠️  Contains meta-commentary in first line")
+  fi
+
+  # Check minimum length
+  word_count=$(echo "$content" | wc -w)
+  if [ "$word_count" -lt 100 ]; then
+    errors+=("⚠️  Too short ($word_count words, recommended 100+)")
+  fi
+
+  # Report
+  if [ ${#errors[@]} -gt 0 ]; then
+    printf '%s\n' "${errors[@]}" >&2
+    return 1
+  fi
+
+  echo "✅ Lore content validated" >&2
+  return 0
+}
+
+# Function to strip meta-commentary from content
+strip_meta_commentary() {
+  local content="$1"
+
+  # If first line contains meta-commentary, remove it
+  if echo "$content" | head -n 1 | grep -qiE '^[[:space:]]*(I will|Let me|Here is|This entry|I need your|should I|First,? I)'; then
+    echo "$content" | tail -n +2
+  else
+    echo "$content"
+  fi
+}
+
 # Provider-specific setup
 if [ "$PROVIDER" = "ollama" ]; then
   # Ensure Ollama is installed
@@ -74,21 +112,49 @@ generate_lore_entry() {
   echo "Generating lore entry: $title ($category)"
   echo "Using model: $MODEL_NAME"
 
-  # Prompt for lore generation
-  PROMPT="Create a detailed lore entry about '$title'. This should be high-quality fantasy/sci-fi lore content for a '$category'.
+  # Optimized prompt for lore generation (reduces meta-commentary)
+  PROMPT="You are a master lore writer crafting narrative mythology.
 
-    Your response should include:
-    - Rich descriptive details
-    - Interesting connections to potential other lore elements
-    - Unique characteristics or features
-    - Historical significance if relevant
+## CRITICAL INSTRUCTION
+Write the lore entry content DIRECTLY. No meta-commentary, no explanations, no approval requests.
 
-    Write 2-3 paragraphs of rich, evocative content.
+## Task
+Create a $category entry titled \"$title\"
 
-    Write ONLY the lore content. No meta-commentary, no asking permission, no explanations. Begin immediately with the narrative."
+## Format Requirements
+- 2-3 paragraphs of rich narrative prose
+- Present tense, immersive storytelling
+- Mythological/fantastical tone
+- NO phrases like: \"I will\", \"Let me\", \"I need\", \"Here is\", \"This entry\"
+
+## Quality Checklist (Internal - DO NOT OUTPUT)
+✓ Directly starts with narrative
+✓ No meta-commentary
+✓ 150-300 words
+✓ Establishes atmosphere and significance
+
+## Examples of CORRECT Output
+
+Example 1 (Character):
+In the depths of the digital realm, the Architect moves through layers of abstraction with purpose. Her fingers dance across interfaces, weaving patterns that bridge the gap between thought and execution. Those who witness her work speak of an uncanny ability to see the invisible structures that bind systems together. She carries the weight of countless failed experiments, each one a lesson etched into her methodology.
+
+Example 2 (Place):
+The Repository stands as a monument to collective memory, its branches spreading like roots through time. Within its halls, every change echoes with the voices of those who came before. Guardians patrol its corridors, ensuring that no knowledge is lost, no pattern forgotten. Here, the past and future converge in an eternal present.
+
+Example 3 (Event):
+The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
+
+## Your Task
+Write the $category entry for \"$title\" NOW. Begin directly with narrative prose:"
 
   # Run LLM to generate content
   CONTENT=$(run_llm "$PROMPT")
+
+  # Validate and clean content
+  if ! validate_lore_output "$CONTENT"; then
+    echo "⚠️  Validation issues detected, attempting to clean content..."
+    CONTENT=$(strip_meta_commentary "$CONTENT")
+  fi
 
   # Create temporary file for content
   TEMP_FILE=$(mktemp)
@@ -126,16 +192,22 @@ generate_persona() {
   echo "Description: $description"
   echo "Using model: $MODEL_NAME"
 
-  # Prompt for persona traits generation
+  # Optimized prompt for persona traits generation
   PROMPT="Generate personality traits and voice characteristics for a character named '$name' who is '$description'.
 
-    Format your response exactly like this:
-    TRAITS: trait1,trait2,trait3,trait4
-    VOICE: concise description of voice and speaking style
+## CRITICAL: Output Format ONLY
+No meta-commentary, no explanations, no preamble.
 
-    Be creative and make sure traits are comma-separated without spaces.
+Format your response EXACTLY like this:
+TRAITS: trait1,trait2,trait3,trait4
+VOICE: concise description of voice and speaking style
 
-    Output ONLY the formatted response. No meta-commentary, no asking permission. Begin immediately with the TRAITS line."
+Rules:
+- Traits must be comma-separated without spaces
+- Voice should be 5-10 words describing speaking style
+- Start IMMEDIATELY with \"TRAITS:\"
+
+Output NOW:"
 
   # Run LLM to generate traits
   RESPONSE=$(run_llm "$PROMPT")
@@ -180,16 +252,23 @@ generate_lorebook() {
   # Get the ID of the newly created book
   BOOK_ID=$(ls -t $SKOGAI_LORE/knowledge/expanded/lore/books/ | head -n 1 | sed 's/\.json//')
 
-  # Generate prompt for entry titles
-  PROMPT="Generate $entry_count unique and interesting lore entry titles for a fantasy/sci-fi world called '$title'. $description
+  # Optimized prompt for entry titles generation
+  PROMPT="Generate $entry_count unique lore entry titles for a fantasy/sci-fi world called '$title'. $description
 
-    Format your response exactly like this, numbered list:
-    1. [Category: place/character/object/event] Entry Title
-    2. [Category: place/character/object/event] Entry Title
+## CRITICAL: Format ONLY
+No meta-commentary, no explanations, no preamble.
 
-    Categories MUST be one of: place, character, object, event, concept
+Format EXACTLY like this:
+1. [Category: place] Entry Title
+2. [Category: character] Entry Title
+3. [Category: object] Entry Title
 
-    Output ONLY the numbered list. No meta-commentary, no asking permission. Begin immediately with the list."
+Rules:
+- Categories MUST be: place, character, object, event, or concept
+- Start IMMEDIATELY with \"1.\"
+- Each line: number, category in brackets, title
+
+Output NOW:"
 
   # Run LLM to generate entry titles
   ENTRIES=$(run_llm "$PROMPT")
