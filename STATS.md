@@ -1,12 +1,12 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-12-21 00:52:56 UTC
+**Generated:** 2025-12-23 00:18:25 UTC
 
 ## File Statistics
 
-- **Total Files:** 2074
-- **Markdown Files:** 122
-- **JSON Files:** 1682
+- **Total Files:** 2121
+- **Markdown Files:** 121
+- **JSON Files:** 1726
 - **YAML Files:** 19
 
 ## Agent Directory Counts
@@ -19,32 +19,32 @@
 
 ## Lore Entries
 
-- **Total Lore Entries:** 695
-- **Personas:** 84
-- **Books:** 96
+- **Total Lore Entries:** 729
+- **Personas:** 86
+- **Books:** 101
 
 ## Prime Directive Tracking
 
 - **Beach References:** 53
 - **Mojito Mentions:** 118
-- **Automation References:** 94
+- **Automation References:** 88
 
 ## Repository Size
 
-- **Total Size:** 12M
-- **Git History Size:** 1.8M
+- **Total Size:** 13M
+- **Git History Size:** 2.3M
 
 ## Top 10 Largest Directories
 
 ```
 4.4M	scripts/
-4.1M	knowledge/
-212K	docs/
-160K	integration/
-132K	tools/
+4.2M	knowledge/
+176K	integration/
+168K	tools/
+140K	docs/
 120K	agents/
-96K	context/
-36K	orchestrator/
+108K	context/
+40K	orchestrator/
 20K	demo/
 12K	tests/
 ```
