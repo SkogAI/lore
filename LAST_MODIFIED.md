@@ -1,6 +1,6 @@
 # ⏰ Last Modified Report
 
-**Generated:** 2025-12-22 12:56:11 UTC
+**Generated:** 2025-12-23 00:18:28 UTC
 
 ## Recently Modified Files (Last 24 Hours)
 
@@ -17,6 +17,7 @@
 ./integration/services/skogai-agent-small-client.sh
 ./integration/services/skogai-agent-small.service
 ./integration/persona-bridge/integration-plan.txt
+./integration/persona-bridge/persona-manager.py.backup
 ./integration/persona-bridge/lore-implementation-plan.md
 ./integration/persona-bridge/persona-manager.py
 ./integration/persona-mapping.conf
@@ -24,20 +25,19 @@
 ./integration/IMPLEMENTATION_SUMMARY.md
 ./integration/workflows/test-workflow.sh
 ./integration/README.md
-./integration/INTEGRATION_ARCHITECTURE.md
 ```
 
 ## Most Recently Modified Directories
 
 ```
-2025-12-22 12:56 - tools
-2025-12-22 12:56 - tests/basic-flow
-2025-12-22 12:56 - tests
-2025-12-22 12:56 - scripts/pre-commit
-2025-12-22 12:56 - scripts/jq/validate-types
-2025-12-22 12:56 - scripts/jq/validate-required
-2025-12-22 12:56 - scripts/jq/validate-range
-2025-12-22 12:56 - scripts/jq/validate-message-schema
-2025-12-22 12:56 - scripts/jq/validate-format
-2025-12-22 12:56 - scripts/jq/try-transform
+2025-12-23 00:18 - tools
+2025-12-23 00:18 - tests/basic-flow
+2025-12-23 00:18 - tests
+2025-12-23 00:18 - scripts/pre-commit
+2025-12-23 00:18 - scripts/jq/validate-types
+2025-12-23 00:18 - scripts/jq/validate-required
+2025-12-23 00:18 - scripts/jq/validate-range
+2025-12-23 00:18 - scripts/jq/validate-message-schema
+2025-12-23 00:18 - scripts/jq/validate-format
+2025-12-23 00:18 - scripts/jq/try-transform
 ```
