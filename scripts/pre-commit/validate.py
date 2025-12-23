@@ -137,8 +137,6 @@ def main():
     print()
 
     if files_with_violations > 0:
-=======
-=======
         print("Migration needed! Use the config.paths module:")
         print()
         print("  from config.paths import get_base_dir, get_path")

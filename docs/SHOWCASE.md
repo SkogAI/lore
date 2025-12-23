@@ -144,4 +144,3 @@ Based on these examples, effective lore entries should include:
 ---
 
 *Generated for SkogAI Lore System*
-

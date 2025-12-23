@@ -24,4 +24,3 @@ fi
 echo "Sending request: $1"
 echo "$1" >$PIPE
 echo "Request sent! Check logs at ./logs/skogai-agent-small.log for progress."
-

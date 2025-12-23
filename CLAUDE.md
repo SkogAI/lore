@@ -5,6 +5,7 @@ A multi-agent system that generates narrative lore entries stored as JSON files,
 ## Core Concepts
 
 ### Entry
+
 **An entry is the atomic unit of lore** - a single piece of narrative content (character, place, event, object, concept).
 
 - **Schema**: @knowledge/core/lore/schema.json
@@ -15,6 +16,7 @@ A multi-agent system that generates narrative lore entries stored as JSON files,
 The `content` field contains the actual narrative text in markdown format.
 
 ### Book
+
 **A book is a collection of entries** organized by theme, persona, or topic.
 
 - **Schema**: @knowledge/core/book-schema.json
@@ -25,6 +27,7 @@ The `content` field contains the actual narrative text in markdown format.
 Books control access through `readers` (personas that can view) and `owners` (personas that can modify).
 
 ### Persona
+
 **A persona is an AI character profile** with unique voice, traits, and characteristics used to generate consistent narrative content.
 
 - **Schema**: @knowledge/core/persona/schema.json
@@ -39,6 +42,7 @@ Personas define `voice.tone`, personality `values`/`motivations`, and interactio
 The system outputs structured JSON data in `knowledge/expanded/`:
 
 **Entries:** `knowledge/expanded/lore/entries/entry_<timestamp>.json`
+
 ```json
 {
   "id": "entry_1764992601",
@@ -55,6 +59,7 @@ The system outputs structured JSON data in `knowledge/expanded/`:
 ```
 
 **Books:** `knowledge/expanded/lore/books/book_<timestamp>.json`
+
 ```json
 {
   "id": "book_1764992601",
@@ -70,6 +75,7 @@ The system outputs structured JSON data in `knowledge/expanded/`:
 ```
 
 **Personas:** `knowledge/expanded/personas/persona_<timestamp>.json`
+
 ```json
 {
   "id": "persona_1764992753",
@@ -85,9 +91,10 @@ The system outputs structured JSON data in `knowledge/expanded/`:
 ```
 
 **Current Data:**
-- 89 books
-- 301 entries
-- 74 personas
+
+- 102 books
+- 728 entries
+- 89 personas
 
 ## How to Use lore_api
 
@@ -140,12 +147,14 @@ lore.link_book_to_persona(book['id'], persona['id'])
 ### What lore_api Actually Does
 
 **Simple operations:**
+
 1. Generates ID: `timestamp` or `timestamp_randomhex`
 2. Creates JSON structure with required fields
 3. Writes to file: `json.dump(data, file)`
 4. Returns the created object
 
 **Linking operations:**
+
 1. Reads two JSON files
 2. Updates arrays: `book["entries"].append(entry_id)`
 3. Writes both files back
@@ -173,6 +182,7 @@ print(result)
 ### What agent_api Actually Does
 
 **NOT data creation - just LLM calls:**
+
 1. Builds prompt from agent templates
 2. Calls OpenRouter API (GPT-4, etc.)
 3. Returns LLM response as JSON
@@ -234,6 +244,7 @@ argc create-entry --title "My Entry" --content "Content..." --category lore
 **Context is the glue connecting data + agents + time + history.**
 
 Each context is a session snapshot that ties together:
+
 - **Data**: Which personas, books, entries are active
 - **Agents**: Which agents are running, what mode orchestrator is in
 - **Time**: Session timeline and timestamps
@@ -242,6 +253,7 @@ Each context is a session snapshot that ties together:
 ### Structure
 
 **Templates:** `@context/templates/`
+
 - `base-context.json` - Basic session state template
 - `persona-context.json` - Persona-specific context schema
 
@@ -288,11 +300,13 @@ session_id=$(./tools/context-manager.sh create base)
 ```
 
 **Operations:**
+
 - `create <template>` - Copy template, generate session_id (timestamp), set created/updated timestamps
 - `update <session_id> <key> <value>` - Update field using jq, update last_modified
 - `archive <session_id>` - Move from current/ to archive/
 
 **Integration:**
+
 - Session tracking across multi-agent workflows
 - Connects generated content to personas and books
 - Maintains continuity - resume with right persona/knowledge/mode
@@ -334,14 +348,16 @@ session_id=$(./tools/context-manager.sh create base)
 
 ### Numbered Knowledge System
 ```
-00-09   Core/Emergency     → Load FIRST
-10-19   Navigation
-20-29   Identity
-30-99   Operational
+
+00-09 Core/Emergency → Load FIRST
+10-19 Navigation
+20-29 Identity
+30-99 Operational
 100-199 Standards
 200-299 Project-specific
 300-399 Tools/Docs
-1000+   Frameworks
+1000+ Frameworks
+
 ```
 
 @orchestrator/       - Coordinates agents and knowledge
@@ -398,11 +414,13 @@ result = prepare_task("lore", topic="quantum computing", persona_id="persona_123
 **Knowledge Categorization:**
 
 The orchestrator loads numbered knowledge files based on task type:
+
 - `content` mode: loads 00, 10, 20, 101 (core + navigation + identity + standards)
 - `lore` mode: loads 00, 10, 300, 303 (core + navigation + tools)
 - `research` mode: loads 00, 10, 02 (core + navigation + emergency)
 
 Knowledge is categorized by prefix ranges:
+
 ```python
 KNOWLEDGE_CATEGORIES = {
     "core": (0, 9),         # Load FIRST
@@ -550,6 +568,7 @@ Session: 1764315234
 ```
 
 Creates:
+
 1. **Lore entry** with LLM-generated narrative in Amy's voice
 2. **Chronicle book** named "Amy Ravenwolf's Chronicles" (auto-created if needed)
 3. **Links** entry → book, book → persona
@@ -573,6 +592,7 @@ git commit -m "feat: add quantum superposition to mojito mixer"
 2. **Map** author "skogix" → persona_1744992765 (Amy Ravenwolf)
 3. **Load** Amy's voice, traits, and existing lore books
 4. **Prompt LLM:**
+
    ```
    You are Amy Ravenwolf [persona context loaded...]
 
@@ -583,6 +603,7 @@ git commit -m "feat: add quantum superposition to mojito mixer"
 
    Narrate as a lore entry in your voice.
    ```
+
 5. **LLM generates** (in Amy's voice):
    ```
    The breakthrough came at dawn. After weeks of experimentation
@@ -714,6 +735,7 @@ done
 ```
 
 **Key insight:** Each layer is independent and uses existing tools. The integration layer is pure orchestration - it doesn't reinvent, it coordinates.
+
 - this is the representation of our current understanding of the lore project - it should be updated when ending a session to know where we stand: @docs/CURRENT_UNDERSTANDING.md
 
 ## Key Documentation
@@ -760,6 +782,7 @@ Save under session context ID (preserves agent universe continuity)
 - **Event** = Significant code changes/features (e.g., Dragon's Hoard Discovery)
 
 Each entry contains:
+
 - Content written from AI agent's perspective
 - "Relevant connections for the agent's work"
 - "Unique characteristics that matter"
@@ -768,6 +791,7 @@ Each entry contains:
 ### Example Flow
 
 A git commit becomes a story:
+
 - Bug fix → "Dot vanquished the daemon with his 4000-token blade"
 - New feature → "Amy discovered a new spell in the forest glade"
 - Refactor → "The architect restructured the realm's foundations"
@@ -779,6 +803,7 @@ This is the **"every bash command became a spell"** philosophy in action.
 ### Agent/Context/Orchestrator Pattern
 
 **Orchestrator** (`orchestrator/orchestrator.py`):
+
 - Creates session contexts with timestamp-based IDs
 - Loads numbered knowledge from `lorefiles/skogai/current/goose-memory-backup/`
 - Wraps shell tools in `tools/` directory
@@ -792,6 +817,7 @@ This is the **"every bash command became a spell"** philosophy in action.
 Creates a complete specialized lorebook for an agent type. The LLM determines what lore the agent needs, then generates all content.
 
 **Usage:**
+
 ```bash
 # Create lorebook for an agent type
 python generate-agent-lore.py --agent-type orchestrator --provider claude
@@ -812,6 +838,7 @@ python generate-agent-lore.py --agent-type narrator --provider claude --export .
 ```
 
 **What it does:**
+
 1. `determine_agent_needs()` - LLM analyzes agent type and suggests 0-3 entries per category (character/place/object/event/concept)
 2. `generate_lore_entry()` - For each suggested entry, LLM generates rich content tailored to the agent
 3. Creates lorebook and adds all entries
@@ -826,6 +853,7 @@ python generate-agent-lore.py --agent-type narrator --provider claude --export .
 LLM-powered generation of lore content from scratch.
 
 #### entry
+
 Generate a single lore entry with LLM-created content.
 
 ```bash
@@ -833,6 +861,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "The Crystal Forest" "
 ```
 
 **What it does:**
+
 1. Creates empty entry via manage-lore.sh
 2. LLM generates 2-3 paragraphs of rich content
 3. Updates entry with generated content
@@ -841,6 +870,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "The Crystal Forest" "
 **Categories:** character, place, object, event, concept, custom
 
 #### persona
+
 Generate a persona with LLM-determined traits and voice.
 
 ```bash
@@ -848,11 +878,13 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - persona "Elara" "An elven so
 ```
 
 **What it does:**
+
 1. LLM generates TRAITS (comma-separated) and VOICE description
 2. Creates persona via create-persona.sh with those values
 3. Falls back to defaults if LLM output can't be parsed
 
 #### lorebook
+
 Generate a complete lorebook with multiple entries.
 
 ```bash
@@ -860,12 +892,14 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - lorebook "Eldoria" "A magica
 ```
 
 **What it does:**
+
 1. Creates empty book via manage-lore.sh
 2. LLM generates entry titles with categories (numbered list)
 3. For each title, calls `entry` to generate full content
 4. Adds each entry to the book
 
 #### link
+
 Link a persona to lore books (existing or newly generated).
 
 ```bash
@@ -876,6 +910,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - link persona_1743770116 2
 ```
 
 **What it does:**
+
 1. Gets existing books (up to count)
 2. If not enough, generates a new lorebook named "{Persona}'s Chronicles"
 3. Links each book to the persona via manage-lore.sh
@@ -887,6 +922,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - link persona_1743770116 2
 Extract and integrate existing content into the lore system.
 
 #### extract-lore
+
 Extract lore entities from a text file.
 
 ```bash
@@ -898,15 +934,18 @@ LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - extract-lore story.txt js
 ```
 
 **What it does:**
+
 1. Reads first 8000 chars of file
 2. LLM identifies 3-5 key entities (characters, places, objects, events, concepts)
 3. Returns formatted output (markdown or JSON) with title, category, summary, content, tags
 
 **Output formats:**
+
 - `lore` (default): Markdown with `## [CATEGORY] TITLE` sections
 - `json`: Structured JSON with entries array
 
 #### create-entries
+
 Create lore entries from LLM analysis output.
 
 ```bash
@@ -916,12 +955,14 @@ ANALYSIS=$(LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - extract-lore s
 ```
 
 **What it does:**
+
 1. Parses JSON or markdown analysis
 2. Creates entry for each entity via manage-lore.sh
 3. Updates entry with content, summary, tags
 4. Optionally adds to specified book
 
 #### create-persona
+
 Create a persona from a character description file.
 
 ```bash
@@ -929,12 +970,14 @@ LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - create-persona character.
 ```
 
 **What it does:**
+
 1. Reads first 8000 chars of file
 2. LLM extracts: NAME, DESCRIPTION, TRAITS, VOICE, BACKGROUND, EXPERTISE, LIMITATIONS
 3. Creates persona via create-persona.sh
 4. Updates with background/expertise/limitations
 
 #### import-directory
+
 Create a complete lorebook from a directory of files.
 
 ```bash
@@ -942,6 +985,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - import-directory ./docs "
 ```
 
 **What it does:**
+
 1. Creates empty lorebook
 2. For each text file in directory:
    - Extracts lore via `extract-lore`
@@ -952,6 +996,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - import-directory ./docs "
 **This is the primary workflow for importing existing content.**
 
 #### analyze-connections
+
 Find and create relationships between entries in a book.
 
 ```bash
@@ -959,6 +1004,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - analyze-connections book_
 ```
 
 **What it does:**
+
 1. Gets all entries from the specified book
 2. Sends entry titles/summaries/categories to LLM
 3. LLM identifies meaningful connections (3-5 minimum)
@@ -968,6 +1014,7 @@ LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - analyze-connections book_
    - `description` - Context about the connection
 
 **Example relationship:**
+
 ```json
 {
   "relationships": [
@@ -989,6 +1036,7 @@ This turns isolated entries into a connected lore graph that agents can traverse
 Basic CRUD operations for lore entries and books (no LLM required).
 
 #### create-entry
+
 Create an empty lore entry.
 
 ```bash
@@ -1001,6 +1049,7 @@ Create an empty lore entry.
 Creates JSON file with empty content - edit manually or use LLM tools to populate.
 
 #### create-book
+
 Create an empty lore book.
 
 ```bash
@@ -1010,6 +1059,7 @@ Create an empty lore book.
 Creates JSON file with empty entries array and default "Introduction" section.
 
 #### list-entries
+
 List all lore entries.
 
 ```bash
@@ -1021,6 +1071,7 @@ List all lore entries.
 ```
 
 #### list-books
+
 List all lore books.
 
 ```bash
@@ -1029,6 +1080,7 @@ List all lore books.
 ```
 
 #### show-entry
+
 Display a specific lore entry.
 
 ```bash
@@ -1038,6 +1090,7 @@ Display a specific lore entry.
 Shows: title, ID, category, summary, content, tags, created timestamp.
 
 #### show-book
+
 Display a specific lore book.
 
 ```bash
@@ -1047,6 +1100,7 @@ Display a specific lore book.
 Shows: title, ID, description, status, structure sections, list of entries.
 
 #### add-to-book
+
 Add an entry to a book.
 
 ```bash
@@ -1058,12 +1112,14 @@ Add an entry to a book.
 ```
 
 **What it does:**
+
 1. Adds entry ID to book's entries array
 2. Optionally adds to specified section
 3. Updates book's updated_at timestamp
 4. Sets entry's book_id field
 
 #### link-to-persona
+
 Associate a lore book with a persona.
 
 ```bash
@@ -1071,12 +1127,14 @@ Associate a lore book with a persona.
 ```
 
 **What it does:**
+
 1. Adds persona to book's `readers` array
 2. Adds book to persona's `knowledge.lore_books` array
 
 This gives the persona access to the book's lore context.
 
 #### search
+
 Search lore entries by keyword.
 
 ```bash
@@ -1093,6 +1151,7 @@ Searches: title, content, summary, tags (case-insensitive).
 CRUD operations for personas (no LLM required).
 
 #### create
+
 Create a new persona.
 
 ```bash
@@ -1100,6 +1159,7 @@ Create a new persona.
 ```
 
 **Arguments:**
+
 1. Name
 2. Description
 3. Traits (comma-separated)
@@ -1108,6 +1168,7 @@ Create a new persona.
 Creates JSON with default structure for temperament, voice, background, knowledge, interaction_style.
 
 #### list
+
 List all personas.
 
 ```bash
@@ -1116,6 +1177,7 @@ List all personas.
 ```
 
 #### show
+
 Display persona details.
 
 ```bash
@@ -1125,6 +1187,7 @@ Display persona details.
 Shows: name, ID, temperament, values, voice tone, background, expertise, limitations, linked lore books.
 
 #### edit
+
 Edit a persona field.
 
 ```bash
@@ -1136,6 +1199,7 @@ Edit a persona field.
 **Fields:** name, description, tone, temperament
 
 #### delete
+
 Delete a persona.
 
 ```bash
@@ -1148,6 +1212,7 @@ Delete a persona.
 ### Tool Status (tested 2025-12-12)
 
 **Working (no LLM required):**
+
 - `./tools/manage-lore.sh` - All commands work ✓
   - Fixed: Now properly writes entry and book JSON files
 - `python orchestrator/orchestrator.py init [content|lore|research]` ✓
@@ -1156,6 +1221,7 @@ Delete a persona.
 **Working with LLM - All Providers Tested:**
 
 **Shell Script Tools (Working):**
+
 - ✓ `LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Title" "category"`
 - ✓ `LLM_PROVIDER=openai ./tools/llama-lore-creator.sh gpt-4 entry "Title" "category"`
 - ✓ `LLM_PROVIDER=ollama ./tools/llama-lore-creator.sh llama3 entry "Title" "category"`
@@ -1163,14 +1229,17 @@ Delete a persona.
 - ✓ `LLM_PROVIDER=claude ./tools/llama-lore-integrator.sh - extract-lore file.txt [json|lore]`
 
 **Python Tools:**
+
 - ✓ `python generate-agent-lore.py --provider claude --agent-type TYPE`
   - Creates lorebook with 4-10 entries (has known bug - see below)
 
 **Integration Pipeline:**
+
 - ✓ `./integration/lore-flow.sh manual "content"` - Runs all 5 steps
 - ✓ `./integration/lore-flow.sh git-diff HEAD` - Extracts from commits
 
 **Provider Status:**
+
 - ✅ **Claude** - Tested and working via OpenRouter API
 - ✅ **OpenAI** - Tested and working via OpenRouter API
 - ✅ **Ollama** - Tested and working with local models
@@ -1178,27 +1247,32 @@ Delete a persona.
 **Known Issues (GitHub Issues):**
 
 ⚠️ [Issue #5](https://github.com/SkogAI/lore/issues/5): LLM generates meta-commentary instead of lore content
+
 - **Impact:** Generated content includes "I need your approval..." instead of direct narrative
 - **Workaround:** Manually edit entries or fix prompt in `llama-lore-creator.sh`
 - **Status:** Needs prompt engineering fix
 
 ⚠️ [Issue #6](https://github.com/SkogAI/lore/issues/6): Pipeline creates entries with empty content
+
 - **Impact:** `lore-flow.sh` creates entry files but `content` field is empty
 - **Workaround:** Use `llama-lore-creator.sh` directly instead of pipeline
 - **Status:** Needs investigation in pipeline timing/paths
 
 **Agent APIs** (`agents/api/`):
+
 - `agent_api.py` - Core agent communication with LLM providers
 - `lore_api.py` - LoreAPI class for managing lore entries, books, and personas
   - JSON-based storage in `knowledge/expanded/lore/{entries,books}/` and `knowledge/expanded/personas/`
   - Schema validation from `knowledge/core/{persona,lore}/schema.json`
 
 **Knowledge System** (`knowledge/`):
+
 - Numbered knowledge files (00-09 core, 10-89 expanded, 90-99 implementation)
 - Index at `knowledge/INDEX.md`
 - Core schemas define persona, lore_entry, and lore_book structures
 
 ### Key Agent Personalities
+
 - **Amy Ravenwolf** - Fiery personality template
 - **Claude** - Thoughtful, analytical
 - **Dot** - Minimalist (4000 token philosophy)
@@ -1225,6 +1299,7 @@ Delete a persona.
 ## Session Handover
 
 When ending sessions, update `docs/project/handover.md` with:
+
 - What was accomplished
 - Context and active session IDs
 - Repository state and next steps

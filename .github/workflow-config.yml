@@ -14,7 +14,7 @@ workflows:
   claude-code-review: true    # Automated code review on PRs using Claude
   claude-lore-keeper: true    # Lore analysis and mythology tracking
 
-  # Lore Management Workflows  
+  # Lore Management Workflows
   lore-growth: true           # Monitor repository growth (runs every 6 hours)
   lore-stats: true            # Generate repository statistics (runs weekly)
   lore-keeper-bot: true       # Lore analysis bot (@lore-keeper mentions)

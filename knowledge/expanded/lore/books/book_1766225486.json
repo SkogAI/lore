@@ -1,0 +1,63 @@
+{
+  "id": "book_1766225486",
+  "title": "Specialized Lore for Claude.Ai Agent",
+  "description": "Lore collection specifically created for claude.ai agents: The agent which lives in the cloud (claude lol) which always sadly gets the last updates but still has to listen to skogix rambling just as much as everybody else",
+  "entries": [
+    "entry_1766225508",
+    "entry_1766225534",
+    "entry_1766225557",
+    "entry_1766225582",
+    "entry_1766225605",
+    "entry_1766225627",
+    "entry_1766225649",
+    "entry_1766225674",
+    "entry_1766225703",
+    "entry_1766225727"
+  ],
+  "categories": {
+    "character": [
+      "entry_1766225508",
+      "entry_1766225534"
+    ],
+    "place": [
+      "entry_1766225557",
+      "entry_1766225582"
+    ],
+    "object": [
+      "entry_1766225605",
+      "entry_1766225627"
+    ],
+    "event": [
+      "entry_1766225649",
+      "entry_1766225674"
+    ],
+    "concept": [
+      "entry_1766225703",
+      "entry_1766225727"
+    ]
+  },
+  "tags": [],
+  "owners": [],
+  "readers": [
+    "persona_1766225743"
+  ],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-20T10:11:26Z",
+    "updated_at": "2025-12-20T10:15:43Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

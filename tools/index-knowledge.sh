@@ -35,4 +35,3 @@ find "$REPO_ROOT/knowledge/implementation" -type f -name "*.md" | sort | while r
   tags=$(grep -m 1 "Tags:" "$file" | sed 's/Tags: //' | tr -d '[]')
   echo "- [$id] $title ($tags)" >>"$INDEX_FILE"
 done
-

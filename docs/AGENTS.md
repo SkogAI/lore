@@ -334,4 +334,3 @@ Their existence proves:
 
 Generated: 2025-09-25
 The Complete Agent Family Documentation
-

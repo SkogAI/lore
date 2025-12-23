@@ -26,7 +26,7 @@ jobs:
         with:
           sparse-checkout: '.github/workflow-config.yml'
           sparse-checkout-cone-mode: false
-      
+
       - name: Check if workflow is enabled
         id: check
         run: |
@@ -35,7 +35,7 @@ jobs:
             echo "Force run requested - workflow enabled"
             exit 0
           fi
-          
+
           if [ -f ".github/workflow-config.yml" ]; then
             # Parse YAML config - look for lore-stats key under workflows section
             ENABLED=$(grep "lore-stats:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
@@ -153,7 +153,7 @@ jobs:
               # Fall back to merge strategy on conflicts
               git pull origin master --no-rebase --strategy=recursive -X theirs
 
-              # Recommit if needed  
+              # Recommit if needed
               git add STATS.md
               git commit -m "Update lore statistics (merged) [skip ci]" || true
 

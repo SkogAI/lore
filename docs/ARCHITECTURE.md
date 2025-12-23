@@ -374,4 +374,3 @@ logs/
 ---
 
 *Documentation compiled from archaeological excavation of the ancient SkogAI system, June 2025 archives*
-
