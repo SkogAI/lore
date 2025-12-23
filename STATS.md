@@ -1,13 +1,13 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-12-23 08:52:15 UTC
+**Generated:** 2025-12-23 08:57:42 UTC
 
 ## File Statistics
 
-- **Total Files:** 2122
+- **Total Files:** 2121
 - **Markdown Files:** 121
 - **JSON Files:** 1727
-- **YAML Files:** 19
+- **YAML Files:** 17
 
 ## Agent Directory Counts
 
