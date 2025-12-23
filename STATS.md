@@ -1,12 +1,12 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-12-23 00:18:25 UTC
+**Generated:** 2025-12-23 00:18:24 UTC
 
 ## File Statistics
 
-- **Total Files:** 2121
+- **Total Files:** 2116
 - **Markdown Files:** 121
-- **JSON Files:** 1726
+- **JSON Files:** 1724
 - **YAML Files:** 19
 
 ## Agent Directory Counts
@@ -19,7 +19,7 @@
 
 ## Lore Entries
 
-- **Total Lore Entries:** 729
+- **Total Lore Entries:** 727
 - **Personas:** 86
 - **Books:** 101
 
@@ -39,9 +39,9 @@
 ```
 4.4M	scripts/
 4.2M	knowledge/
-176K	integration/
-168K	tools/
+160K	integration/
 140K	docs/
+136K	tools/
 120K	agents/
 108K	context/
 40K	orchestrator/
