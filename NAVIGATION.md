@@ -1,6 +1,6 @@
 # 🗺️ Quick Navigation Index
 
-**Auto-generated:** 2025-12-23 00:18:28 UTC
+**Auto-generated:** 2025-12-23 00:18:15 UTC
 
 ## 📁 Main Documentation
 
@@ -27,13 +27,13 @@
 
 Directories with most knowledge files:
 ```
-973 files: knowledge
+971 files: knowledge
 ```
 
 ## 🔮 Lore Entry Locations
 
 Directories containing lore entries:
-- 729 entries: [knowledge/expanded/lore/entries](knowledge/expanded/lore/entries)
+- 727 entries: [knowledge/expanded/lore/entries](knowledge/expanded/lore/entries)
 
 ---
 *Navigate the multiverse. Find the patterns. Reach the Beach.*
