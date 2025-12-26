@@ -79,3 +79,4 @@ Thumbs.db
 .DS_Store
 .aider*
 .claude/tsc-cache/*
+.worktrees

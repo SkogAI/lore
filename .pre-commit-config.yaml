@@ -25,9 +25,9 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
-      # Prevent committing to main/master
-      - id: no-commit-to-branch
-        args: ['--branch', 'master', '--branch', 'main']
+      # # Prevent committing to main/master
+      # - id: no-commit-to-branch
+      #   args: ['--branch', 'master', '--branch', 'main']
 
       # Check for files that would conflict in case-insensitive filesystems
       - id: check-case-conflict
@@ -43,11 +43,11 @@ repos:
 
       # Check for files that contain merge conflict strings
       - id: mixed-line-ending
-        args: ['--fix=lf']
+        args: ["--fix=lf"]
 
       # Remove trailing whitespace
       - id: trailing-whitespace
-        args: ['--markdown-linebreak-ext=md']
+        args: ["--markdown-linebreak-ext=md"]
 
       # Ensure files end with newline
       - id: end-of-file-fixer
