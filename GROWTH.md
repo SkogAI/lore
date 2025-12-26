@@ -1,10 +1,10 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-12-26 16:05:26 UTC
+**Timestamp:** 2025-12-26 18:23:16 UTC
 
 ## Current State
 
-- Total Files: 2132
+- Total Files: 2129
 - Lore Entries: 729
 - Personas: 86
 - Beach References: 54
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-ac0cc8c - . (37 seconds ago)
-A	.worktree-todo-mapping.json
-A	.worktrees/todo-001-example-implement-feature
-A	.worktrees/todo-002-example-refactor-code
-A	QUICKSTART.md
-A	README_WORKTREE_SETUP.md
-A	assets/todo-template.md
-A	docs/WORKTREE_TODO_SYSTEM.md
-A	todos/001-ready-p1-example-implement-feature.md
-A	todos/002-ready-p2-example-refactor-code.md
-A	todos/003-pending-p3-example-documentation.md
-A	tools/worktree-todo-manager.sh
+ccbc76a - Update lore statistics [skip ci] (87 minutes ago)
+M	STATS.md
 
-ba2dd55 - 📈 Lore growth detected [skip ci] (4 hours ago)
+ba92663 - Update configuration and remove unused files (87 minutes ago)
+M	.gitignore
+M	.pre-commit-config.yaml
+D	integration/persona-bridge/persona-manager.py.backup
+
+bfa95af - Update lore statistics [skip ci] (2 hours ago)
+M	STATS.md
+
+ed0d44d - Remove worktree submodule (2 hours ago)
+D	.worktrees/todo-001-example-implement-feature
+
+e92c793 - Update lore statistics [skip ci] (2 hours ago)
+M	STATS.md
+
+5742a8c - Merge branch 'master' of https://github.com/SkogAI/lore (2 hours ago)
+148ee4d - 📈 Lore growth detected [skip ci] (2 hours ago)
 M	GROWTH.md
-
-0e1b1b0 - 📈 Lore growth detected [skip ci] (10 hours ago)
-M	GROWTH.md
-
-a0c6e8f - 📈 Lore growth detected [skip ci] (15 hours ago)
 ```
 
 ---
