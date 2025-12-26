@@ -1,0 +1,16 @@
+{
+  "001": {
+    "worktree": "todo-001-example-implement-feature",
+    "todo_file": "/home/skogix/lore/.worktrees/worktree-setup/todos/001-ready-p1-example-implement-feature.md",
+    "priority": "p1",
+    "status": "active",
+    "created_at": "2025-12-26T16:02:17Z"
+  },
+  "002": {
+    "worktree": "todo-002-example-refactor-code",
+    "todo_file": "/home/skogix/lore/.worktrees/worktree-setup/todos/002-ready-p2-example-refactor-code.md",
+    "priority": "p2",
+    "status": "active",
+    "created_at": "2025-12-26T16:02:40Z"
+  }
+}
