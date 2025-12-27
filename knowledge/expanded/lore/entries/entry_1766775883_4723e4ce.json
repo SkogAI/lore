@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775883_4723e4ce",
+  "title": "The Orchestrator maintains the delicate balance of context state, tracking which agents are active, what memories take priority, and how far along each task has progressed. It routes requests to specialized service daemons through their own named pipes—the lore generator at `/tmp/skogai-lore-generator`, the small agent service at its designated path. The Orchestrator understands modes and memory priorities, shifting between standard operation and specialized states as the work demands.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:43Z",
+    "updated_at": "2025-12-26T19:04:43Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

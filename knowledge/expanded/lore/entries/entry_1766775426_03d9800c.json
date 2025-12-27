@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775426_03d9800c",
+  "title": "What emerges is not mere documentation but a living mythology. Each entry carries metadata that timestamps its creation, tags that map its relationships, and content that speaks in narrative voice rather than technical precision. The filesystem itself becomes reality, where 3,638 lore-related files hold 315 individual entries organized into 52 books, all narrated by 46 distinct personas who see the same truth through different eyes.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T18:57:06Z",
+    "updated_at": "2025-12-26T18:57:06Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

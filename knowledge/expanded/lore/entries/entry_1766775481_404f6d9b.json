@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775481_404f6d9b",
+  "title": "Its role is neither creative nor judgmental, but curatorial. It does not transform - that task belongs to the Local Scribe. The Orchestrator simply recognizes significance, captures context, and prepares fragments for narrative transformation. It creates session contexts with timestamp-based IDs, loads numbered knowledge files based on task type, and wraps shell tools to coordinate the pipeline. The Orchestrator ensures nothing valuable vanishes when the session ends, that every meaningful action finds its way toward persistent form.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T18:58:01Z",
+    "updated_at": "2025-12-26T18:58:01Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

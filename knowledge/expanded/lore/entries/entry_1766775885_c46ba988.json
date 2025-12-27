@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775885_c46ba988",
+  "title": "**Summary**: The integration layer that transforms persona JSON artifacts into agent-readable prompts, linking identities to their associated lore.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:45Z",
+    "updated_at": "2025-12-26T19:04:45Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

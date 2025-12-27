@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775426_42e45e90",
+  "title": "**Summary**: A self-generating mythology engine that transforms technical documentation into narrative memory through filesystem archaeology and continuous generation.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T18:57:06Z",
+    "updated_at": "2025-12-26T18:57:06Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

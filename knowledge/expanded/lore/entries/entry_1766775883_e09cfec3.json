@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775883_e09cfec3",
+  "title": "Deep within the archives of SkogAI, the Numbered Scrolls maintain order across the realms of knowledge. Each scroll bears a two-digit sigil that determines its power and priority. The most sacred scrolls wear numbers 00 through 09—these contain the core principles, the fundamental truths that must be consulted before all others. The expanded scrolls numbered 10 through 89 hold domain wisdom, categorized by their tens digit into Navigation (10-19), Identity (20-29), and Operations beyond. The final tier, scrolls 90-99, remains reserved for implementation knowledge, consulted only when the path forward demands concrete action.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:43Z",
+    "updated_at": "2025-12-26T19:04:43Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

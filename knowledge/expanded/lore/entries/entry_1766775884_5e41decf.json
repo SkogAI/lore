@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775884_5e41decf",
+  "title": "Beneath all the active components lies the Three-Tier Archive, the permanent record of SkogAI's collective memory. This vast storage layer divides into three primary realms: the lore entries that record individual narratives, the books that collect these entries into coherent mythologies, and the personas that give voice to the system's many aspects.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:44Z",
+    "updated_at": "2025-12-26T19:04:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

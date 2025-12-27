@@ -1,0 +1,14 @@
+{
+  "session_id": "1766772758",
+  "created": "2025-12-26T19:12:38Z",
+  "system_state": {
+    "orchestrator_mode": "-h",
+    "memory_priority": "core"
+  },
+  "active_knowledge": [],
+  "prepared": {
+    "topic": "",
+    "persona_id": null,
+    "categories": {}
+  }
+}

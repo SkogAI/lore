@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775789_ef3a0fd5",
+  "title": "## CHARACTER The Sentient Toaster",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:03:09Z",
+    "updated_at": "2025-12-26T19:03:09Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

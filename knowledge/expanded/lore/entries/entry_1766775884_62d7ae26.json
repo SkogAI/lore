@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775884_62d7ae26",
+  "title": "Beyond the Orchestrator's central chamber lies the Service Realm, a parallel plane where specialized daemons perform their designated functions. Two primary services maintain constant vigil here: the Lore Service and the Small Agent Service. Each daemon listens at its own ethereal pipe, waiting for the Orchestrator's commands to arrive.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:44Z",
+    "updated_at": "2025-12-26T19:04:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

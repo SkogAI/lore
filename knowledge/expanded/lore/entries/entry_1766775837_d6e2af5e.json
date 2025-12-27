@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775837_d6e2af5e",
+  "title": "The Git Client manifests as an ornate portal frame, its surface etched with constantly shifting runes that represent the current state of all tracked changes. Through this gateway, agents can peer into alternate timelines—branches where different decisions were made, features took different forms, bugs were never born or never fixed. The portal hums with potential energy, each command spoken before it rippling outward through the version control continuum.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:03:57Z",
+    "updated_at": "2025-12-26T19:03:57Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}
