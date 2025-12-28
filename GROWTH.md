@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-12-27 23:16:22 UTC
+**Timestamp:** 2025-12-28 01:25:17 UTC
 
 ## Current State
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-1bf54bc - Changes to 473 files (19 seconds ago)
+475e9d0 - Update lore statistics [skip ci] (29 minutes ago)
+M	STATS.md
+
+0aafbee - 📈 Lore growth detected [skip ci] (2 hours ago)
+M	GROWTH.md
+
+45b540a - 📚 Auto-update documentation [skip ci] (2 hours ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+
+1fc703e - Update lore statistics [skip ci] (2 hours ago)
+M	STATS.md
+
+1bf54bc - Changes to 473 files (2 hours ago)
 A	.claude/settings.local.json
 M	.envrc
 D	.worktree-todo-mapping.json
 D	QUICKSTART.md
 D	README_WORKTREE_SETUP.md
 D	assets/todo-template.md
-A	context/current/context-1766772752.json
-A	context/current/context-1766772758.json
-A	context/current/context-1766772760.json
-A	demo/content_creation_1766772874/research_output.json
-A	knowledge/expanded/lore/books/book_1766775177_fa916ced.json
-A	knowledge/expanded/lore/books/book_1766775315_36536cb4.json
-A	knowledge/expanded/lore/entries/entry_1766772849_8c2d6a75.json
-A	knowledge/expanded/lore/entries/entry_1766775203_e4e64452.json
-A	knowledge/expanded/lore/entries/entry_1766775369_d2eb92b2.json
-A	knowledge/expanded/lore/entries/entry_1766775369_deac2803.json
-A	knowledge/expanded/lore/entries/entry_1766775370_01b927e0.json
-A	knowledge/expanded/lore/entries/entry_1766775370_01e1e8e0.json
-A	knowledge/expanded/lore/entries/entry_1766775370_5d0435e4.json
 ```
 
 ---
