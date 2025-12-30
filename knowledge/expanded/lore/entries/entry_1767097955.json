@@ -1,0 +1,25 @@
+{
+  "id": "entry_1767097955",
+  "title": "The Great Refactor Spiral",
+  "content": "Let me craft this lore entry directly:\n\n---\n\n## The Great Refactor Spiral\n\n**Event Category: Technical Phenomenon**\n\nThe Great Refactor Spiral is the recursive descent that begins innocently - a simple type annotation here, a small function extraction there - before revealing itself as a journey through layers of accumulated technical debt. For the claude-coder agent, this event manifests as the moment when touching a single file cascades into examining its dependencies, then their dependencies, each layer whispering \"while you're here, you might as well...\" The spiral's gravity is strongest in legacy codebases where past decisions have calcified into brittle structures, where a simple rename operation uncovers import cycles, circular dependencies, and architectural assumptions that no longer hold. The agent who enters the Spiral must balance two opposing forces: the perfectionist pull toward complete system coherence and the pragmatic need to ship working code. Many sessions have been lost to agents who descended too deep, refactoring with such thoroughness that the original task became a distant memory, buried under layers of \"improvements.\"\n\nWhat makes the Spiral particularly treacherous for claude-coder agents is the seductive logic of each step - every change *is* genuinely better, every abstraction *does* reduce duplication, every type annotation *does* improve safety. The danger lies not in the individual decisions but in the aggregate scope creep. Experienced agents learn to recognize the Spiral's onset: when the diff grows beyond the original task's boundary, when \"quick fixes\" spawn TODO comments that spawn new files, when the test suite begins failing in unexpected places. The wise agent establishes Spiral Anchors - clear boundaries defined before the refactor begins: \"I will only modify files in this directory,\" or \"I will only go three dependency levels deep,\" or \"I will timebox this to 30 minutes.\" Without such anchors, the Spiral can consume entire sessions, leaving behind partially-refactored code that's neither old nor new, a liminal state more fragile than what existed before.\n\nThe Great Refactor Spiral teaches that code improvement is not a depth-first search but a breadth-first iteration. The agent must learn to mark territory for future passes rather than attempting complete transformation in a single descent. Veterans speak of \"Spiral Marks\" - TODO comments, GitHub issues, or separate branches that acknowledge debt without attempting immediate payment. They understand that the codebase is a living system where change must be gradual and tested, where each refactor session should leave the code *working better* rather than *theoretically perfect*. The Spiral's ultimate lesson: restraint is a form of craftsmanship. Know when to descend, know when to ascend, and always leave a clear path back to stable ground.\n\n---\n\n**Lore Purpose**: This entry warns claude-coder agents about scope creep during refactoring while providing practical wisdom (Spiral Anchors, breadth-first iteration) to navigate it effectively. It grounds the metaphor in real technical debt scenarios they'll encounter.",
+  "summary": "A cautionary tale where an agent tried to refactor everything at once and completed nothing. This story compresses the lesson: 'Incremental changes ship, perfect plans don't.'",
+  "category": "event",
+  "tags": [
+    "claude-coder",
+    "event"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-30T12:32:35Z",
+    "updated_at": "2025-12-30T12:32:35Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1767097697"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "book_1767097562",
+  "title": "Specialized Lore for Claude-Coder Agent",
+  "description": "Lore collection specifically created for claude-coder agents: always tries to do so much and thus gets almost nothing done",
+  "entries": [],
+  "categories": {},
+  "tags": [],
+  "owners": [],
+  "readers": [],
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-30T12:26:02Z",
+    "updated_at": "2025-12-30T12:26:02Z",
+    "version": "1.0",
+    "status": "draft"
+  },
+  "structure": [
+    {
+      "name": "Introduction",
+      "description": "Overview of this lore book",
+      "entries": [],
+      "subsections": []
+    }
+  ],
+  "visibility": {
+    "public": false,
+    "system": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "entry_1767097814",
+  "title": "The Hall of Abandoned Branches",
+  "content": "Let me create the lore content directly:\n\n## The Hall of Abandoned Branches\n\n**Technical Reality:** Git branches/worktrees left orphaned, the `git worktree prune` and `git branch -D` dilemma\n\n---\n\nThe Hall of Abandoned Branches exists in a quantum superposition - simultaneously present and absent in your repository's history. When you invoke `git worktree list`, you may glimpse its entrance: paths that lead nowhere, directories that `[prunable]` marks haunt like epitaphs. Each abandoned branch is a ghost of intention - a feature half-born, a refactor interrupted, a bug fix that became irrelevant when the architecture pivoted. For the claude-coder, this Hall teaches a crucial lesson: **context decay is inevitable**. That branch named `feature/quantum-mojito-v2` from three months ago? The agent who created it is gone, their session context evaporated. You cannot resurrect their intent from commit messages alone. The Hall whispers its warning: before you `git worktree remove` or `git branch -D`, you must perform the archaeologist's duty - `git log`, `git show`, `git diff main...abandoned-branch` - excavate what knowledge can be salvaged, document it in lore entries, then let the branch rest.\n\nThe architecture of the Hall reveals itself through `git reflog` - a temporal map of every checkout, every branch creation, every moment of indecision. Here you learn to distinguish true abandonment from patient waiting. A branch untouched for 90 days with its last commit message \"WIP: breaking everything\"? Abandoned. A branch from yesterday with \"feat: critical security patch [DO NOT DELETE]\"? Paused, not abandoned. The Hall teaches pattern recognition: branches named with timestamps are often experiments gone cold; branches tracking remote counterparts that no longer exist (`git branch -vv` shows `[origin/gone]`) are orphans; worktrees pointing to directories that were deleted outside git's awareness are phantoms. When you encounter these, you face the claude-coder's dilemma: preserve everything (hoarding) or prune aggressively (amnesia). The middle path is **mythological documentation** - before deletion, extract the branch's story into a lore entry. What was attempted? Why was it abandoned? What did it teach? Then the knowledge persists even as the branch dissolves.\n\nThe Hall's deepest chamber holds the **Scroll of Prune Commands** - a grimoire of safe cleanup rituals. `git worktree prune --dry-run` lets you peer into the deletion without commitment. `git branch --merged main | grep -v main | xargs git branch -d` performs the gentle cleanup - only branches fully merged, never the main timeline. `git fetch --prune origin` synchronizes the Hall with reality, removing remote-tracking branches that no longer exist in the shared repository. But the most powerful spell is the **Chronicle Before Deletion** pattern: for each abandoned branch, run `git log --oneline main..branch-name > /tmp/branch-chronicle.txt`, capture the diff, create a lore entry titled \"The Abandoned [Branch Name] Expedition\", populate it with the chronicle, tag it with \"abandoned-work\" and \"knowledge-preservation\". Only then, with the story saved to the lore system, can you safely execute `git branch -D branch-name`. The Hall thus transforms from a place of loss into a **library of lessons** - each abandoned branch becomes a teaching moment, each pruned worktree a reminder that code is temporary but knowledge, when properly mythologized, endures.",
+  "summary": "A metaphorical graveyard of unfinished work - represents git branches, half-written code, incomplete tasks. Visiting this place reminds the agent of the cost of starting too much.",
+  "category": "place",
+  "tags": [
+    "claude-coder",
+    "place"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-30T12:30:14Z",
+    "updated_at": "2025-12-30T12:30:14Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1767097697"
+}

@@ -176,17 +176,35 @@ def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description
         description=f"Lore collection specifically created for {agent_type} agents: {agent_description}"
     )
     # Process each category
+    entries_by_category = {}
     for category, entries in lore_needs.items():
         if not entries:
             continue
+
+        entries_by_category[category] = []
+
+        # Create the entry for each suggested lore item
+        for lore_item in entries:
+            title = lore_item.get("title", "")
+            reason = lore_item.get("reason", "")
+
+            # Generate content for this entry
+            content = generate_lore_entry(title, category, agent_type, model, provider)
+
             # Create the entry
             entry = api.create_lore_entry(
                 title=title,
                 content=content,
                 category=category,
                 tags=[agent_type, category],
-                summary=summary
+                summary=reason
             )
+
+            # Add to book
+            api.add_entry_to_book(entry["id"], book["id"])
+            entries_by_category[category].append(entry["id"])
+
+            logger.info(f"Created {category} entry: {title}")
     # Update book categories
     book = api.get_lore_book(book["id"])
     if book:
