@@ -1,0 +1,48 @@
+# Worktrunk Project Configuration for Claude Code Plugin Marketplace
+# Location: .config/wt.toml (checked into git, shared by all developers)
+#
+# This config defines lifecycle hooks that run automatically when working with worktrees.
+# For personal settings (LLM integration, worktree paths), see ~/.config/worktrunk/config.toml
+
+# Post-Create Hook
+# Runs after creating a new worktree (wt switch --create <branch>)
+# Useful for: initialization, dependency installation, documentation updates
+#
+# Update Claude Code documentation when creating new worktrees
+# This ensures each worktree has the latest docs from code.claude.com
+# post-create = "direnv allow"
+
+# Pre-Merge Hook
+# Runs before merging worktree back to target branch (wt merge <target>)
+# Useful for: validation, tests, linting, ensuring clean state
+#
+# Currently disabled - uncomment if you want to enforce doc freshness before merges
+# pre-merge = "node docs/claude-code/scripts/update_docs.js"
+
+# Post-Start Hook
+# Runs when switching to an existing worktree (wt switch <existing-branch>)
+# Useful for: updates, syncing, long-running setup tasks
+#
+# Currently disabled - enable if you want docs updated on every switch
+# post-start = "node docs/claude-code/scripts/update_docs.js"
+
+# Pre-Commit Hook
+# Runs before creating commits (via wt step commit or wt merge with commit)
+# Useful for: linting, formatting, quick validation
+#
+# Currently disabled - no pre-commit checks needed for this project yet
+
+# Notes:
+# - All paths are relative to the repository root
+# - Hooks can be single commands (string) or multiple commands (array)
+# - Failed hooks (non-zero exit) will abort the operation
+# - Use wt step post-create to manually run post-create hook
+# - Use wt step pre-merge to manually run pre-merge hook
+#
+
+[pre-commit]
+syntax = ""
+[post-create]
+direnv = "direnv allow"
+[pre-merge]
+direnv = "direnv allow"
