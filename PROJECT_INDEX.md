@@ -324,7 +324,11 @@ PERSONA_DIR          # Path to personas (default: expanded/personas)
 ## 🧭 Navigation Tips
 
 - **Start with:** `CLAUDE.md` - Complete system documentation
-- **API Reference:** `docs/api/` - Entry, Book, Persona APIs
+- **API Reference:** `docs/api/` - Entry, Book, Persona, Generation Tools APIs
+  - `docs/api/entry.md` - Entry operations and examples
+  - `docs/api/book.md` - Book operations and examples
+  - `docs/api/persona.md` - Persona operations and examples
+  - `docs/api/generation-tools.md` - All generation endpoints (NEW)
 - **Architecture:** `docs/ARCHITECTURE.md`, `docs/SYSTEM_MAP.md`
 - **Examples:** `integration/QUICK_START.md`
 - **Current State:** `docs/CURRENT_UNDERSTANDING.md`

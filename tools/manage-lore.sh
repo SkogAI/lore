@@ -3,10 +3,6 @@
 # SkogAI Lore Management Tool
 # Provides functionality for creating, listing, and managing lore entries and books
 #
-# ⚠️  DEPRECATION NOTICE:
-# This bash-based tool is deprecated in favor of the Python API.
-# Please use agents/api/lore_api.py for new integrations.
-# See docs/guides/migration/MIGRATION_GUIDE.md for migration instructions.
 # Features:
 # - Schema validation using jq
 # - Input validation and sanitization
@@ -48,9 +44,6 @@ mkdir -p "${PERSONA_DIR}"
 # Display help information
 show_help() {
   echo "SkogAI Lore Management Tool"
-  echo ""
-  echo "⚠️  NOTE: This tool is deprecated. Use the Python API instead."
-  echo "   See: docs/guides/migration/MIGRATION_GUIDE.md"
   echo ""
   echo "Usage: $0 [command] [options]"
   echo ""
