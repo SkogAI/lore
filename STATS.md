@@ -1,11 +1,11 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-12-30 15:30:44 UTC
+**Generated:** 2025-12-30 18:18:28 UTC
 
 ## File Statistics
 
-- **Total Files:** 2630
-- **Markdown Files:** 130
+- **Total Files:** 2631
+- **Markdown Files:** 131
 - **JSON Files:** 2215
 - **YAML Files:** 18
 
@@ -32,14 +32,14 @@
 ## Repository Size
 
 - **Total Size:** 15M
-- **Git History Size:** 2.5M
+- **Git History Size:** 2.6M
 
 ## Top 10 Largest Directories
 
 ```
 6.2M	knowledge/
 4.4M	scripts/
-288K	docs/
+320K	docs/
 168K	tools/
 160K	integration/
 120K	context/
