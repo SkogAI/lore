@@ -745,6 +745,7 @@ done
 - **[Pipeline Plan](docs/project/PIPELINE_PLAN.md)** - Implementation proposal for orchestrator
 - **[Operations Map](docs/OPERATIONS_MAP.md)** - Complete tool and workflow documentation
 - **[System Map](docs/SYSTEM_MAP.md)** - Architecture and component relationships
+- **[Generation Tools](docs/api/generation-tools.md)** - Complete reference for all lore generation endpoints and tools
 
 ## Build & Development Commands
 
