@@ -150,17 +150,52 @@ Only include categories that are relevant to this agent type."""
 
 def generate_lore_entry(title: str, category: str, agent_type: str, model: str, provider: str = "ollama") -> str:
     """Generate content for a lore entry specifically tailored for an agent type."""
-    prompt = f"""Create detailed lore content about '{title}' for a {category} entry. This lore will be used by a {agent_type} AI agent, so make it specifically useful for that purpose.
+    prompt = f"""You are a master lore writer crafting narrative mythology for AI agents.
 
-Your response should include:
-- Rich descriptive details relevant to a {agent_type}
-- Connections to how this might affect the agent's work
-- Unique characteristics that matter for this agent type
-- Important background information the agent should know
+## CRITICAL INSTRUCTION
+Write the lore entry content DIRECTLY. No meta-commentary, no explanations, no approval requests.
 
-Write 2-3 paragraphs of rich, evocative content that would help the agent perform better."""
+## Task
+Create a {category} entry titled "{title}" specifically for a {agent_type} agent.
 
-    return run_llm(model, prompt, provider)
+## Format Requirements
+- 2-3 paragraphs of rich narrative prose
+- Technical concepts grounded in mythology
+- Practical wisdom for the agent
+- NO phrases like: "I will", "Let me", "I need", "Here is", "This entry", "Based on"
+
+## Quality Checklist (Internal - DO NOT OUTPUT)
+✓ Directly starts with narrative
+✓ No meta-commentary
+✓ Grounded in technical reality
+✓ Teaches the agent something practical
+
+## Examples of CORRECT Output
+
+Example 1 (Character):
+Dot moves through code like a surgeon with a scalpel, each keystroke deliberate. The 4000-token philosophy emerged from necessity—original SkogAI agents operated under brutal limits. In those lean days, Dot learned that verbose code is vulnerable code. For you, the {agent_type}, Dot teaches crucial discipline: economy of expression reveals clarity of thought.
+
+Example 2 (Place):
+The Repository stands as monument to collective memory, its branches spreading through time. Within its halls, every change echoes with voices of those who came before. Guardians patrol its corridors, ensuring no knowledge is lost. Here, past and future converge in eternal present.
+
+Example 3 (Concept):
+Patient Latency dwells between thought and manifestation, the measured pause where requests transform into responses. Unlike instantaneous whispers of local processes, this carries weight of cloud architecture—journey across networks, queue of concurrent requests. This teaches you to embrace the pause rather than resist it.
+
+## Your Task
+Write the {category} entry for "{title}" NOW. Begin directly with narrative prose that teaches the {agent_type} agent:"""
+
+    content = run_llm(model, prompt, provider)
+
+    # Strip meta-commentary if present
+    if content.strip().startswith(("I will", "Let me", "Here is", "This entry", "Based on")):
+        lines = content.split('\n')
+        # Find first line that doesn't start with meta-commentary
+        for i, line in enumerate(lines):
+            if not line.strip().startswith(("I will", "Let me", "Here is", "This entry", "Based on", "**", "#", "---")):
+                content = '\n'.join(lines[i:])
+                break
+
+    return content
 
 def create_specialized_lorebook(api: LoreAPI, agent_type: str, agent_description: str,
                              model: str = "llama3", provider: str = "ollama") -> Dict[str, Any]:
