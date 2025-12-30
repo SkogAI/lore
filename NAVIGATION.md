@@ -1,6 +1,6 @@
 # 🗺️ Quick Navigation Index
 
-**Auto-generated:** 2025-12-30 18:18:29 UTC
+**Auto-generated:** 2025-12-30 18:19:37 UTC
 
 ## 📁 Main Documentation
 
@@ -27,7 +27,7 @@
 
 Directories with most knowledge files:
 ```
-1457 files: knowledge
+1458 files: knowledge
 ```
 
 ## 🔮 Lore Entry Locations
