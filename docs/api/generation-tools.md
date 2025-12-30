@@ -847,12 +847,6 @@ session_id=$(./tools/context-manager.sh create persona "persona")
 
 Shell script for basic lore CRUD operations.
 
-### ⚠️ Deprecation Notice
-
-This bash tool is deprecated in favor of the Python API (`agents/api/lore_api.py`).
-
-See `docs/guides/migration/MIGRATION_GUIDE.md` for migration instructions.
-
 ### Purpose
 
 Provides basic file operations for:
@@ -1058,25 +1052,6 @@ Validate a book JSON file against schema.
 - **Atomic updates** (write to temp, then move)
 - **Error handling** with cleanup
 - **Duplicate detection** with warnings
-
-### Migration to Python API
-
-**Old (bash):**
-```bash
-./tools/manage-lore.sh create-entry "Title" "place"
-```
-
-**New (Python):**
-```python
-from agents.api.lore_api import LoreAPI
-
-lore = LoreAPI()
-entry = lore.create_lore_entry(
-    title="Title",
-    content="...",
-    category="place"
-)
-```
 
 ---
 
