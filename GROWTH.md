@@ -1,26 +1,26 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-12-30 13:21:55 UTC
+**Timestamp:** 2025-12-30 15:30:44 UTC
 
 ## Current State
 
-- Total Files: 2627
-- Lore Entries: 1201
-- Personas: 90
+- Total Files: 2630
+- Lore Entries: 1202
+- Personas: 91
 - Beach References: 75
 
 ## Pattern Detection
 
 ### Sacred Numbers Appearance
 - Number 7: 367 occurrences
-- Number 15: 232 occurrences
+- Number 15: 233 occurrences
 - Number 23.4: 38 occurrences
 - Number 4000: 35 occurrences
 
 ### Agent Activity Indicators
 - Amy mentions: 181
 - Claude mentions: 329
-- Dot mentions: 273
+- Dot mentions: 274
 - Goose mentions: 306
 
 ## Mythology Expansion
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-6585a2f - . (#18) (14 seconds ago)
-M	CLAUDE.md
-A	docs/api/generation-tools.md
-A	knowledge/expanded/lore/books/book_1767098553.json
-A	knowledge/expanded/lore/entries/entry_1767098569.json
-A	knowledge/expanded/lore/entries/entry_1767098590.json
-A	knowledge/expanded/lore/entries/entry_1767098607.json
-A	knowledge/expanded/lore/entries/entry_1767098624.json
-A	knowledge/expanded/lore/entries/entry_1767098644.json
-A	knowledge/expanded/lore/entries/entry_1767098663.json
-A	knowledge/expanded/lore/entries/entry_1767098682.json
+95c47eb - Create specialized lore generation file for recent interaction (2 minutes ago)
+A	2025-12-30-this-session-is-being-continued-from-a-previous-co.txt
 
-b54461f - 📚 Auto-update documentation [skip ci] (35 minutes ago)
+782afbc - Add generation tools API reference and documentation navigation (2 hours ago)
+M	PROJECT_INDEX.md
+M	docs/api/generation-tools.md
+M	knowledge/expanded/lore/books/book_1767098553.json
+A	knowledge/expanded/lore/entries/entry_1767098701.json
+A	knowledge/expanded/personas/persona_1767098722.json
+M	tools/manage-lore.sh
+
+53f10b2 - 📚 Auto-update documentation [skip ci] (2 hours ago)
 M	LAST_MODIFIED.md
 M	NAVIGATION.md
 
-58525d2 - 📈 Lore growth detected [skip ci] (35 minutes ago)
-M	GROWTH.md
+9a5e03d - Update lore statistics [skip ci] (2 hours ago)
+M	STATS.md
 
-0b6d7bf - Update lore statistics [skip ci] (35 minutes ago)
+4438755 - 📚 Auto-update documentation [skip ci] (2 hours ago)
+M	LAST_MODIFIED.md
 ```
 
 ---
