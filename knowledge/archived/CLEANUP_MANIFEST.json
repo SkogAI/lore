@@ -900,5 +900,56 @@
     "books": "knowledge/archived/lore/books/",
     "personas": "knowledge/archived/personas/"
   },
-  "note": "Archive structure mirrors knowledge/expanded/ for consistency"
+  "note": "Archive structure mirrors knowledge/expanded/ for consistency",
+  "phase2_cleanup": {
+    "date": "2025-12-31T16:07:21.651127",
+    "description": "Conservative cleanup - archived minimal/test entities, kept narrative entries",
+    "moved_files": {
+      "entries": [
+        "entry_1765527862_1e2e0a0e.json",
+        "entry_1764992601.json",
+        "entry_1765509009.json",
+        "entry_1763884789_f80d91d3.json",
+        "entry_1759487978_3186467b.json",
+        "entry_1765622756_39dad9ab.json"
+      ],
+      "books": [
+        "book_1765020294.json",
+        "book_1763886177_37c36795.json",
+        "book_1763885364_3a8c4281.json",
+        "book_1764992601.json",
+        "book_1765509076.json",
+        "book_1763812594_9ad7c317.json",
+        "book_1763814117.json",
+        "book_1767098553.json",
+        "book_1763820180_d3dd7ae8.json"
+      ],
+      "personas": [
+        "persona_1763812641.json",
+        "persona_1743770701.json",
+        "persona_1743770697.json",
+        "persona_1743791116.json",
+        "persona_1743770706.json",
+        "persona_1743791121.json",
+        "persona_1743770703.json",
+        "persona_1765509076.json"
+      ]
+    },
+    "counts": {
+      "entries": 6,
+      "books": 9,
+      "personas": 8,
+      "total": 23
+    },
+    "kept_entries": [
+      "entry_1765620850_661f3732",
+      "entry_1765020390",
+      "entry_1765020348",
+      "entry_1763886221_b716db8f",
+      "entry_1763814134",
+      "entry_1763885402_e02a0aad",
+      "entry_1766414426_70f6cd9b"
+    ],
+    "errors": []
+  }
 }
