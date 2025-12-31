@@ -1,12 +1,12 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2025-12-31 22:39:13 UTC
+**Generated:** 2025-12-31 22:40:25 UTC
 
 ## File Statistics
 
-- **Total Files:** 2640
-- **Markdown Files:** 136
-- **JSON Files:** 2217
+- **Total Files:** 2643
+- **Markdown Files:** 138
+- **JSON Files:** 2218
 - **YAML Files:** 18
 
 ## Agent Directory Counts
@@ -27,7 +27,7 @@
 
 - **Beach References:** 74
 - **Mojito Mentions:** 142
-- **Automation References:** 129
+- **Automation References:** 134
 
 ## Repository Size
 
@@ -39,11 +39,11 @@
 ```
 6.2M	knowledge/
 4.4M	scripts/
-320K	docs/
+368K	docs/
 168K	tools/
 160K	integration/
+124K	agents/
 120K	context/
-120K	agents/
 44K	orchestrator/
 28K	demo/
 12K	tests/
