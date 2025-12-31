@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775480_cfecef36",
+  "title": "\"Vanquished the auth daemon\" contains vastly more signal than \"fixed bug #123\" when an agent loads it as context. The narrative framing compresses multiple dimensions - what happened, why it mattered, who did it, and what it means for future work - into a single memorable phrase. This compression serves four purposes simultaneously: it packs more context into limited token budgets, maintains consistent agent persona across sessions, creates sticky memorable knowledge instead of forgettable bullet points, and establishes relational links that build a traversable knowledge graph.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T18:58:00Z",
+    "updated_at": "2025-12-26T18:58:00Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

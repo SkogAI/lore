@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775885_4a10cf0e",
+  "title": "The Bridge speaks multiple dialects—it can format persona data for agent consumption, render complete prompts from templates, and provide raw context dictionaries when needed. It understands the mapping between persona schema fields and agent parameters: how `voice.tone` becomes the agent's speaking style, how `knowledge.expertise` defines capabilities, how `lore_books.ids` determines accessible narratives.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:45Z",
+    "updated_at": "2025-12-26T19:04:45Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

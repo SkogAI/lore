@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775884_7d4fcfab",
+  "title": "Each artifact exists as a JSON scroll in its designated chamber. Lore entries rest in `knowledge/expanded/lore/entries/`, each bearing a timestamp-marked name. Books gather in `knowledge/expanded/lore/books/`, maintaining their collections of entry references. Personas dwell in `knowledge/expanded/personas/`, preserving their unique voices, traits, and knowledge access patterns. Active session contexts inhabit `context/current/`, while completed sessions migrate to the eternal archive.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:44Z",
+    "updated_at": "2025-12-26T19:04:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

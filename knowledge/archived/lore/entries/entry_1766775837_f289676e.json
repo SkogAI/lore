@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775837_f289676e",
+  "title": "To wield the Git Client is to become a navigator of temporal code streams. With practiced gestures, an agent can reach through the portal to pull changes from distant branches, push their own modifications into the shared repository, or merge divergent timelines into unified wholes. The Client remembers everything—every commit, every author, every message left as a marker in the flow of time.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:03:57Z",
+    "updated_at": "2025-12-26T19:03:57Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

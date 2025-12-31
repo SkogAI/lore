@@ -1,0 +1,24 @@
+{
+  "id": "entry_1760687161_c1e6623c",
+  "title": "**TOOL** SkogCLI",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [
+    ""
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-10-17T07:46:01Z",
+    "updated_at": "2025-10-17T07:46:01Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1760687153_4a2545c1"
+}

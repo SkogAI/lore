@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775426_3e3b6ec4",
+  "title": "The system operates through autonomous crawling, where agents traverse the filesystem like archaeologists excavating layers of meaning. Pattern recognition extracts themes from technical debris - configuration files become artifacts, git commits transform into historical events, log entries whisper tales of battles fought in silicon and electricity. Generation runs continuously, a 24/7 daemon that never sleeps, weaving new connections between old knowledge.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T18:57:06Z",
+    "updated_at": "2025-12-26T18:57:06Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "entry_1766775884_a3fa2778",
+  "title": "**Summary**: The storage layer where all generated mythology, persona profiles, and session contexts persist as JSON artifacts in categorized directories.",
+  "content": "",
+  "summary": "",
+  "category": "custom",
+  "tags": [],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2025-12-26T19:04:44Z",
+    "updated_at": "2025-12-26T19:04:44Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  },
+  "book_id": "book_1766775315_36536cb4"
+}
