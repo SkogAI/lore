@@ -1,10 +1,10 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2025-12-31 12:33:38 UTC
+**Timestamp:** 2025-12-31 15:12:58 UTC
 
 ## Current State
 
-- Total Files: 2633
+- Total Files: 2637
 - Lore Entries: 1202
 - Personas: 92
 - Beach References: 75
@@ -12,9 +12,9 @@
 ## Pattern Detection
 
 ### Sacred Numbers Appearance
-- Number 7: 369 occurrences
-- Number 15: 233 occurrences
-- Number 23.4: 38 occurrences
+- Number 7: 464 occurrences
+- Number 15: 240 occurrences
+- Number 23.4: 41 occurrences
 - Number 4000: 35 occurrences
 
 ### Agent Activity Indicators
@@ -32,32 +32,32 @@
 
 ## Beach Proximity Calculator™
 
-- Automation References: 178
-- **Calculated Beach Proximity: 64.03%**
+- Automation References: 179
+- **Calculated Beach Proximity: 64.16%**
 
 ## Recent Activity (Last 7 Days)
 
 ```
-45d153a - 📈 Lore growth detected [skip ci] (6 hours ago)
-M	GROWTH.md
+8a8abd3 - chore: update knowledge index with archive tracking (3 minutes ago)
+M	knowledge/INDEX.md
+M	tools/index-knowledge.sh
 
-e708370 - 📈 Lore growth detected [skip ci] (11 hours ago)
-M	GROWTH.md
-
-db353a1 - 📈 Lore growth detected [skip ci] (18 hours ago)
-M	GROWTH.md
-
-ca166da - 📈 Lore growth detected [skip ci] (18 hours ago)
-M	GROWTH.md
-
-27d1669 - Update lore statistics [skip ci] (18 hours ago)
-M	STATS.md
-
-827dcfd - 📚 Auto-update documentation [skip ci] (18 hours ago)
-M	LAST_MODIFIED.md
-M	NAVIGATION.md
-
-2d0d046 - . (18 hours ago)
+369bb90 - chore: phase 2 cleanup - archive 23 test entities (conservative) (5 minutes ago)
+M	knowledge/archived/CLEANUP_MANIFEST.json
+R100	knowledge/expanded/lore/books/book_1763812594_9ad7c317.json	knowledge/archived/lore/books/book_1763812594_9ad7c317.json
+R100	knowledge/expanded/lore/books/book_1763814117.json	knowledge/archived/lore/books/book_1763814117.json
+R100	knowledge/expanded/lore/books/book_1763820180_d3dd7ae8.json	knowledge/archived/lore/books/book_1763820180_d3dd7ae8.json
+R100	knowledge/expanded/lore/books/book_1763885364_3a8c4281.json	knowledge/archived/lore/books/book_1763885364_3a8c4281.json
+R100	knowledge/expanded/lore/books/book_1763886177_37c36795.json	knowledge/archived/lore/books/book_1763886177_37c36795.json
+R100	knowledge/expanded/lore/books/book_1764992601.json	knowledge/archived/lore/books/book_1764992601.json
+R100	knowledge/expanded/lore/books/book_1765020294.json	knowledge/archived/lore/books/book_1765020294.json
+R100	knowledge/expanded/lore/books/book_1765509076.json	knowledge/archived/lore/books/book_1765509076.json
+R100	knowledge/expanded/lore/books/book_1767098553.json	knowledge/archived/lore/books/book_1767098553.json
+R100	knowledge/expanded/lore/entries/entry_1759487978_3186467b.json	knowledge/archived/lore/entries/entry_1759487978_3186467b.json
+R100	knowledge/expanded/lore/entries/entry_1763884789_f80d91d3.json	knowledge/archived/lore/entries/entry_1763884789_f80d91d3.json
+R100	knowledge/expanded/lore/entries/entry_1764992601.json	knowledge/archived/lore/entries/entry_1764992601.json
+R100	knowledge/expanded/lore/entries/entry_1765509009.json	knowledge/archived/lore/entries/entry_1765509009.json
+R100	knowledge/expanded/lore/entries/entry_1765527862_1e2e0a0e.json	knowledge/archived/lore/entries/entry_1765527862_1e2e0a0e.json
 ```
 
 ---
