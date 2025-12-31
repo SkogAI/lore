@@ -3,6 +3,9 @@
     "allow": [
       "Bash(chmod:*)",
       "Bash(./tools/worktree-todo-manager.sh:*)"
+    ],
+    "additionalDirectories": [
+      "/home/skogix/docs/prompts/"
     ]
   }
 }
