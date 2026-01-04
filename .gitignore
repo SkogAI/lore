@@ -80,3 +80,6 @@ Thumbs.db
 .aider*
 .claude/tsc-cache/*
 .worktrees
+
+# Octocode
+.octocode/
