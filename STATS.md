@@ -1,12 +1,12 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-04 18:17:26 UTC
+**Generated:** 2026-01-04 18:21:44 UTC
 
 ## File Statistics
 
-- **Total Files:** 2647
-- **Markdown Files:** 141
-- **JSON Files:** 2218
+- **Total Files:** 2668
+- **Markdown Files:** 146
+- **JSON Files:** 2219
 - **YAML Files:** 18
 
 ## Agent Directory Counts
@@ -15,7 +15,7 @@
 - **Claude Directories:** 3
 - **Dot Directories:** 0
 - **Goose Directories:** 1
-- **SkogAI Directories:** 0
+- **SkogAI Directories:** 1
 
 ## Lore Entries
 
@@ -27,7 +27,7 @@
 
 - **Beach References:** 76
 - **Mojito Mentions:** 146
-- **Automation References:** 134
+- **Automation References:** 143
 
 ## Repository Size
 
