@@ -324,6 +324,12 @@ PERSONA_DIR          # Path to personas (default: expanded/personas)
 ## 🧭 Navigation Tips
 
 - **Start with:** `CLAUDE.md` - Complete system documentation
+- **Session Memories:** `.serena/memories/` - Claude Code session learnings (5 sessions)
+  - `session-2025-12-30-lore-pipeline-discussion.md` - Pipeline learnings
+  - `lore-generation-tools-documentation-session.md` - Tool documentation session
+  - `session-2025-12-31-prompts-repository-and-skill-patterns.md` - Skill patterns
+  - `session-2025-12-31-docs-analysis.md` - Repository analysis
+  - `session-2025-12-31-argc-sanity-check.md` - CLI coverage verification
 - **API Reference:** `docs/api/` - Entry, Book, Persona, Generation Tools APIs
   - `docs/api/entry.md` - Entry operations and examples
   - `docs/api/book.md` - Book operations and examples

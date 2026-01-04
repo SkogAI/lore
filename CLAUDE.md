@@ -738,6 +738,24 @@ done
 
 - this is the representation of our current understanding of the lore project - it should be updated when ending a session to know where we stand: @docs/CURRENT_UNDERSTANDING.md
 
+## Session Memories
+
+**Location:** `.serena/memories/`
+
+Claude Code maintains session memories to preserve learnings across sessions:
+
+- **session-2025-12-30-lore-pipeline-discussion.md** - Pipeline architecture learnings, context as narrative continuity
+- **lore-generation-tools-documentation-session.md** - Created comprehensive tool docs, corrected deprecation status
+- **session-2025-12-31-prompts-repository-and-skill-patterns.md** - Skill routing patterns, agent prompting philosophy
+- **session-2025-12-31-docs-analysis.md** - Repository analysis, PROJECT_INDEX creation (94% token savings)
+- **session-2025-12-31-argc-sanity-check.md** - Verified argc provides 100% lore API coverage
+
+These memories document:
+- What worked vs what didn't
+- Key mistakes and how to avoid them
+- Technical discoveries and insights
+- Cross-session continuity for future work
+
 ## Key Documentation
 
 - **[Concept](docs/CONCEPT.md)** - Core vision: memory system for agents using narrative

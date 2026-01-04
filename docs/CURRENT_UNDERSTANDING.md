@@ -210,3 +210,110 @@ From @docs/CONCEPT.md:
 
 Key insight: This isn't a content generation system. It's a memory persistence system using narrative compression to store technical knowledge in a format that AI agents can load as
 context across sessions, maintaining consistent personality and building a shared mythological knowledge graph.
+
+## Recent Session Learnings (2025-12-30 to 2026-01-04)
+
+### Session Memory System
+
+**Location:** `.serena/memories/`
+
+Claude Code now maintains session memories documenting learnings across sessions. Key discoveries:
+
+### 1. Pipeline Architecture Reality (2025-12-30)
+
+**What We Learned:**
+- `lore-flow.sh` IS the working pipeline - 5 steps: extract → select persona → load context → generate → store
+- Context = **narrative continuity** (not just session tracking) - connects data + time + persona + flow
+- Local LLMs (ollama) work fine, cloud LLMs require correct prompting
+- `llama-lore-integrator.sh` supports ollama/claude/openai
+
+**Key Mistakes to Avoid:**
+- Over-designing before understanding the actual system
+- Proposing to rebuild things that already work
+- Not asking clarifying questions early enough
+- Hallucinating problems that don't exist
+
+### 2. Tool Status Clarification (2025-12-30)
+
+**Critical Discovery:**
+- Shell tools (manage-lore.sh, llama-*.sh) are PRIMARY, stable implementation
+- Python API (lore_api.py) is "broken as fudge" - NOT the shell tools
+- All shell tools support 3 LLM providers (ollama, claude, openai)
+
+**Documentation Created:**
+- `docs/api/generation-tools.md` (1078 lines) - Complete reference for all 6 generation tools
+- Corrected incorrect deprecation notices
+
+### 3. Skill Routing Patterns (2025-12-31)
+
+**Architecture Learned:**
+```
+Claude Code (me)
+  └─> Creates ROUTING SKILLS (skogai-skills pattern)
+      └─> Delegates to SUBAGENTS
+          └─> Who CREATE PROMPTS (skogai-agent-prompting patterns)
+              └─> For END AGENTS (ollama, lore)
+```
+
+**Key Concepts:**
+- **Features = Prompts** (not code functions)
+- **Tools = Primitives** (enable capability, don't encode logic)
+- **Dynamic Context Injection** - Runtime state, not cached
+- **Progressive Disclosure** - Load only what's needed
+
+### 4. Repository Index & Token Savings (2025-12-31)
+
+**Achievement:**
+- Created PROJECT_INDEX.md covering 204 files (~30K lines)
+- Index size: ~3KB = **94% token reduction** per session
+- ROI: 10 sessions = 550K tokens saved, 100 sessions = 5.5M tokens saved
+
+**Discovered:**
+- TODO-AICHAT-BASED-SKOGAI legacy docs (63 files)
+- Prompts repository setup at `agents/prompts/`
+
+### 5. CLI Coverage Verification (2025-12-31)
+
+**Verified:**
+- argc provides **100% coverage** of lore API
+- All CRUD operations working (create, read, list, link, validate)
+- End-to-end flow tested successfully
+- Critical: `LLM_OUTPUT` env var required for argc commands
+
+**Current Data Volume (verified 2026-01-04):**
+- 1,202 lore entries (up from 728)
+- 107 books (up from 102)
+- 92 personas (up from 89)
+
+### What Changed Our Understanding
+
+**Context is not just session tracking** - it's the glue connecting:
+- Data (which personas/books/entries are active)
+- Agent (which agent is running, what mode)
+- Time (session timeline and timestamps)
+- History (what knowledge was loaded, what actions occurred)
+- **Narrative Flow** (continuity of storytelling across entries)
+
+**The System Works** - verified components:
+- ✅ lore-flow.sh pipeline (all 5 steps)
+- ✅ All 3 LLM providers (claude, openai, ollama)
+- ✅ Shell tool CRUD operations
+- ✅ argc CLI coverage
+- ✅ Session context tracking
+
+**Known Issues Still Present:**
+- Issue #5: LLM generates meta-commentary instead of lore content
+- Issue #6: Pipeline creates entries with empty content field
+
+### Next Steps Identified
+
+From session memories, clear priorities:
+1. Fix Issue #6 (empty content in pipeline) - blocking auto-generation
+2. Improve prompt engineering for Issue #5 (meta-commentary)
+3. Test persona-bridge integration (code exists, not verified)
+4. Document orchestrator implementation details
+
+---
+
+**Last Updated:** 2026-01-04
+**Session Memories:** 5 sessions documented in `.serena/memories/`
