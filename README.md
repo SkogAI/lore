@@ -37,7 +37,7 @@ tools/manage-lore.sh create-entry "The Discovery" "lore"
 ## Architecture
 
 ```
-Git Commit ’ Extract ’ Persona Selection ’ LLM Generation ’ Store as JSON
+Git Commit â†’ Extract â†’ Persona Selection â†’ LLM Generation â†’ Store as JSON
 ```
 
 Files stored in `knowledge/expanded/lore/` as JSON with schema validation.
