@@ -120,6 +120,37 @@ python agents/api/lore_api.py                        # Test API
 - Dot 💻 - Minimalist (4000 token max)
 - Goose 🦢 - Chaos agent (HATES MINT)
 
+## SESSION MEMORIES
+
+**Location:** `.serena/memories/`
+
+Claude Code session memories documenting key learnings:
+
+1. **session-2025-12-30-lore-pipeline-discussion.md**
+   - Actual system: `lore-flow.sh` working 5-step pipeline
+   - Context = narrative continuity (data + time + persona + flow)
+   - Mistakes: Over-designing before understanding, treating local LLMs wrong
+
+2. **lore-generation-tools-documentation-session.md**
+   - Created `docs/api/generation-tools.md` (1078 lines)
+   - Corrected: Shell tools are primary, Python API is broken
+   - Removed incorrect deprecation notices
+
+3. **session-2025-12-31-prompts-repository-and-skill-patterns.md**
+   - Skill pattern: SKILL.md router + progressive disclosure
+   - Agent-prompting philosophy: Features = prompts, tools = primitives
+   - Three-layer: Claude Code → Subagents → End Agents (ollama, lore)
+
+4. **session-2025-12-31-docs-analysis.md**
+   - Created PROJECT_INDEX.md (204 files, ~30K lines → 3KB index)
+   - Discovered TODO-AICHAT-BASED-SKOGAI legacy docs (63 files)
+   - Prompts repository setup at `agents/prompts/`
+
+5. **session-2025-12-31-argc-sanity-check.md**
+   - Verified argc provides 100% lore API coverage
+   - Critical: `LLM_OUTPUT` env var required
+   - End-to-end flow tested and working
+
 ## SUBDIRECTORY AGENTS
 
 - `scripts/jq/AGENTS.md` - jq transformation conventions
