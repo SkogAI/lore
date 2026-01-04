@@ -1,6 +1,6 @@
 # ⏰ Last Modified Report
 
-**Generated:** 2025-12-31 22:40:23 UTC
+**Generated:** 2026-01-04 16:42:37 UTC
 
 ## Recently Modified Files (Last 24 Hours)
 
@@ -22,22 +22,22 @@
 ./integration/persona-mapping.conf
 ./integration/lore-flow.sh
 ./integration/IMPLEMENTATION_SUMMARY.md
+./integration/AGENTS.md
 ./integration/workflows/test-workflow.sh
 ./integration/README.md
-./integration/INTEGRATION_ARCHITECTURE.md
 ```
 
 ## Most Recently Modified Directories
 
 ```
-2025-12-31 22:40 - tools
-2025-12-31 22:40 - tests/basic-flow
-2025-12-31 22:40 - tests
-2025-12-31 22:40 - scripts/pre-commit
-2025-12-31 22:40 - scripts/jq/validate-types
-2025-12-31 22:40 - scripts/jq/validate-required
-2025-12-31 22:40 - scripts/jq/validate-range
-2025-12-31 22:40 - scripts/jq/validate-message-schema
-2025-12-31 22:40 - scripts/jq/validate-format
-2025-12-31 22:40 - scripts/jq/try-transform
+2026-01-04 16:42 - .
+2026-01-04 16:42 - tools
+2026-01-04 16:42 - tests/basic-flow
+2026-01-04 16:42 - tests
+2026-01-04 16:42 - scripts/pre-commit
+2026-01-04 16:42 - scripts/jq/validate-types
+2026-01-04 16:42 - scripts/jq/validate-required
+2026-01-04 16:42 - scripts/jq/validate-range
+2026-01-04 16:42 - scripts/jq/validate-message-schema
+2026-01-04 16:42 - scripts/jq/validate-format
 ```
