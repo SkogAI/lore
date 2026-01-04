@@ -44,7 +44,7 @@ Files stored in `knowledge/expanded/lore/` as JSON with schema validation.
 
 ## Current Scale
 
-- **1,202 lore entries** - Narrative units
+- **1202 lore entries** - Narrative units
 - **107 books** - Collections
 - **92 personas** - AI characters
 
