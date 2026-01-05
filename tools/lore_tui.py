@@ -6,6 +6,7 @@ Provides Vim-style keyboard navigation and rich visual feedback.
 
 import os
 import sys
+import json
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 
@@ -25,10 +26,94 @@ from textual.binding import Binding
 from textual.screen import Screen
 from textual import events
 
-# Add the parent directory to the path so we can import our modules
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from agents.api.lore_api import LoreAPI
+class LoreDataAccess:
+    """Direct JSON file access for lore data (read-only)."""
+
+    def __init__(self, base_dir: str = None):
+        """Initialize with paths to lore storage."""
+        if base_dir is None:
+            base_dir = Path(__file__).parent.parent
+        self.base_dir = Path(base_dir)
+        self.lore_entries_dir = self.base_dir / "knowledge" / "expanded" / "lore" / "entries"
+        self.lore_books_dir = self.base_dir / "knowledge" / "expanded" / "lore" / "books"
+
+        # Ensure directories exist
+        self.lore_entries_dir.mkdir(parents=True, exist_ok=True)
+        self.lore_books_dir.mkdir(parents=True, exist_ok=True)
+
+    def list_lore_books(self) -> List[Dict[str, Any]]:
+        """List all lore books by reading JSON files directly."""
+        books = []
+        for book_file in self.lore_books_dir.glob("*.json"):
+            try:
+                with open(book_file, "r") as f:
+                    book = json.load(f)
+                    books.append(book)
+            except Exception as e:
+                # Skip invalid files
+                pass
+        return books
+
+    def get_lore_book(self, book_id: str) -> Optional[Dict[str, Any]]:
+        """Retrieve a lore book by ID."""
+        book_path = self.lore_books_dir / f"{book_id}.json"
+        if not book_path.exists():
+            return None
+        try:
+            with open(book_path, "r") as f:
+                return json.load(f)
+        except Exception:
+            return None
+
+    def list_lore_entries(self, category: str = None) -> List[Dict[str, Any]]:
+        """List all lore entries, optionally filtered by category."""
+        entries = []
+        for entry_file in self.lore_entries_dir.glob("*.json"):
+            try:
+                with open(entry_file, "r") as f:
+                    entry = json.load(f)
+                    if category is None or entry.get("category") == category:
+                        entries.append(entry)
+            except Exception:
+                # Skip invalid files
+                pass
+        return entries
+
+    def get_lore_entry(self, entry_id: str) -> Optional[Dict[str, Any]]:
+        """Retrieve a lore entry by ID."""
+        entry_path = self.lore_entries_dir / f"{entry_id}.json"
+        if not entry_path.exists():
+            return None
+        try:
+            with open(entry_path, "r") as f:
+                return json.load(f)
+        except Exception:
+            return None
+
+    def search_lore(self, query: str) -> List[Dict[str, Any]]:
+        """Search lore entries by keyword."""
+        results = []
+        seen_ids = set()
+        query_lower = query.lower()
+
+        for entry in self.list_lore_entries():
+            entry_id = entry.get("id")
+            if entry_id is None or entry_id in seen_ids:
+                continue
+
+            searchable_text = " ".join([
+                entry.get("title", ""),
+                entry.get("content", ""),
+                entry.get("summary", ""),
+                " ".join(entry.get("tags", [])),
+            ]).lower()
+
+            if query_lower in searchable_text:
+                results.append(entry)
+                seen_ids.add(entry_id)
+
+        return results
 
 
 # Vim keybindings mixin for screens with ListView
@@ -207,10 +292,10 @@ class BookDetailScreen(VimNavigationMixin, Screen):
         Binding("tab", "switch_panel", "Tab", priority=True),
     ]
 
-    def __init__(self, book: Dict[str, Any], api: LoreAPI, *args, **kwargs):
+    def __init__(self, book: Dict[str, Any], data_access: LoreDataAccess, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.book = book
-        self.api = api
+        self.data_access = data_access
         self.entries: List[Dict[str, Any]] = []
         self.selected_entry_index = 0
         self._active_panel = "entries"  # Track which panel is active
@@ -254,7 +339,7 @@ class BookDetailScreen(VimNavigationMixin, Screen):
 
         # Load and display entries
         for entry_id in self.book.get("entries", []):
-            entry = self.api.get_lore_entry(entry_id)
+            entry = self.data_access.get_lore_entry(entry_id)
             if entry:
                 self.entries.append(entry)
                 title = entry.get("title", "Untitled")
@@ -341,9 +426,9 @@ class BookBrowserScreen(VimNavigationMixin, Screen):
         Binding("l", "select", "Select", show=False),
     ]
 
-    def __init__(self, api: LoreAPI, *args, **kwargs):
+    def __init__(self, data_access: LoreDataAccess, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.api = api
+        self.data_access = data_access
         self.books: List[Dict[str, Any]] = []
         self._pending_g = False
 
@@ -356,7 +441,7 @@ class BookBrowserScreen(VimNavigationMixin, Screen):
     def on_mount(self) -> None:
         """Populate the list when the screen is mounted."""
         # Load all books
-        self.books = self.api.list_lore_books()
+        self.books = self.data_access.list_lore_books()
         books_list = self.query_one("#books-list", ListView)
 
         if not self.books:
@@ -394,7 +479,7 @@ class BookBrowserScreen(VimNavigationMixin, Screen):
         if list_view and list_view.index is not None and list_view.index >= 0:
             if list_view.index < len(self.books):
                 book = self.books[list_view.index]
-                self.app.push_screen(BookDetailScreen(book, self.api))
+                self.app.push_screen(BookDetailScreen(book, self.data_access))
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         """Handle book selection."""
@@ -407,7 +492,7 @@ class BookBrowserScreen(VimNavigationMixin, Screen):
             for book in self.books:
                 if book["id"] == book_id:
                     # Show book detail screen
-                    self.app.push_screen(BookDetailScreen(book, self.api))
+                    self.app.push_screen(BookDetailScreen(book, self.data_access))
                     break
 
     def action_quit(self) -> None:
@@ -416,7 +501,7 @@ class BookBrowserScreen(VimNavigationMixin, Screen):
 
     def action_search(self) -> None:
         """Open search interface."""
-        self.app.push_screen(SearchScreen(self.api))
+        self.app.push_screen(SearchScreen(self.data_access))
 
     def action_help(self) -> None:
         """Show help screen."""
@@ -434,9 +519,9 @@ class SearchScreen(VimNavigationMixin, Screen):
         Binding("l", "select", "Select", show=False),
     ]
 
-    def __init__(self, api: LoreAPI, *args, **kwargs):
+    def __init__(self, data_access: LoreDataAccess, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.api = api
+        self.data_access = data_access
         self.results: List[Dict[str, Any]] = []
         self._pending_g = False
         self._in_search_input = True  # Track if we're in search input
@@ -509,7 +594,7 @@ class SearchScreen(VimNavigationMixin, Screen):
             return
 
         # Search for entries
-        self.results = self.api.search_lore(query)
+        self.results = self.data_access.search_lore(query)
 
         # Display results
         if not self.results:
@@ -664,13 +749,13 @@ class LoreTUI(App):
                 # Fall back to current directory
                 base_dir = str(Path.cwd())
 
-        self.api = LoreAPI(base_dir=base_dir)
+        self.data_access = LoreDataAccess(base_dir=base_dir)
         self.title = "Lore Browser"
         self.sub_title = "Interactive Terminal UI for Lore Entries"
 
     def on_mount(self) -> None:
         """Initialize the application."""
-        self.push_screen(BookBrowserScreen(self.api))
+        self.push_screen(BookBrowserScreen(self.data_access))
 
     def action_help(self) -> None:
         """Show help information."""
