@@ -61,7 +61,7 @@ interpolate_prompt() {
   local result="$template"
   
   # Replace each variable pair (name, value)
-  while [ $# -gt 0 ]; do
+  while [ $# -gt 1 ]; do
     local var_name="$1"
     local var_value="$2"
     result="${result//\{\{$var_name\}\}/$var_value}"

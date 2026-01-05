@@ -175,8 +175,9 @@ PROMPT="${PROMPT:-$FALLBACK_PROMPT}"
 
 ### Version Management
 
-- Increment patch version (1.0 → 1.1) for minor wording changes
-- Increment minor version (1.0 → 2.0) for structural changes
+- Increment patch version (1.0.0 → 1.0.1) for minor wording changes
+- Increment minor version (1.0.0 → 1.1.0) for adding variables or examples
+- Increment major version (1.0.0 → 2.0.0) for structural changes that break compatibility
 - Keep old versions in `prompts/archive/` if needed for compatibility
 
 ## Testing Prompts
