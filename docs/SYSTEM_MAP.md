@@ -58,15 +58,12 @@
 
 ### Structure
 ```
-MASTER_KNOWLEDGE/agents/skogai/current/
-├── core/
-│   └── 00/                          # Priority 00-09: Core
-│       └── system-principles.md     # ID: [0001]
+knowledge/
+├── core/                            # Core schemas and templates
 ├── expanded/
 │   └── 20/                          # Priority 10-89: Domain
 │       └── content-creation-workflow.md
-│   └── 90/                          # Priority 90-99: Implementation
-│       └── (reserved)
+└── archived/                        # Historical knowledge
 ```
 
 ### Access Protocol (from core-v0.md)
@@ -268,15 +265,15 @@ LLM_PROVIDER=openai ./tools/llama-lore-integrator.sh gpt-4 extract-lore story.tx
 
 ## 7. Agent-Specific Knowledge
 
-### Per-Agent Knowledge (MASTER_KNOWLEDGE/agents/)
+### Per-Agent Knowledge
 
 | Agent | Specialization | Key Files |
 |-------|----------------|-----------|
-| **SkogAI** | Core system, content workflows | SKOGAI-BEST-PRACTICES.md, SKOGAI-COMMANDMENTS.md, core/00/ |
-| **Claude** | Workflow orchestration, MCP | claude-workflow.md, context-system-getting-started.md |
-| **Dot** | Agent forking, delegation | agent-forking.md, delegation-template.md |
-| **Goose** | Git flow, submodules | git-flow-submodule-workflow.md |
-| **Amy** | Agent forking infrastructure | agent-forking.md, forking-workspace.md |
+| **SkogAI** | Core system, content workflows | docs/AGENTS.md, knowledge/expanded/20/content-creation-workflow.md |
+| **Claude** | Workflow orchestration, MCP | docs/AGENTS.md, docs/ARCHITECTURE.md |
+| **Dot** | Minimalist programming | docs/AGENTS.md |
+| **Goose** | Chaos agent, quantum mojitos | docs/AGENTS.md |
+| **Amy** | Personality template | docs/AGENTS.md |
 
 ---
 
@@ -367,9 +364,10 @@ Track:
 - `generate-agent-lore.py` - Generate specialized agent lore
 
 ### Knowledge
-- `MASTER_KNOWLEDGE/agents/*/current/` - Agent-specific knowledge
-- `knowledge/core/` - Schemas
-- `knowledge/expanded/` - Data storage
+- `docs/AGENTS.md` - Agent-specific profiles and documentation
+- `knowledge/core/` - Schemas and templates
+- `knowledge/expanded/` - Lore entries, books, and personas
+- `knowledge/archived/` - Historical knowledge
 
 ### Context
 - `context/templates/` - Context schemas
