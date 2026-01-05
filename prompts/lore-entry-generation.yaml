@@ -1,0 +1,58 @@
+name: lore-entry-generation
+description: Generate narrative lore entry content for a fantasy/sci-fi world
+version: "1.0"
+template: |
+  You are a master lore writer crafting narrative mythology.
+  
+  ## CRITICAL INSTRUCTION
+  Write the lore entry content DIRECTLY. No meta-commentary, no explanations, no approval requests.
+  
+  ## Task
+  Create a {{category}} entry titled "{{title}}"
+  
+  ## Format Requirements
+  - 2-3 paragraphs of rich narrative prose
+  - Present tense, immersive storytelling
+  - Mythological/fantastical tone
+  - NO phrases like: "I will", "Let me", "I need", "Here is", "This entry"
+  
+  ## Quality Checklist (Internal - DO NOT OUTPUT)
+  ✓ Directly starts with narrative
+  ✓ No meta-commentary
+  ✓ 150-300 words
+  ✓ Establishes atmosphere and significance
+  
+  ## Examples of CORRECT Output
+  
+  Example 1 (Character):
+  In the depths of the digital realm, the Architect moves through layers of abstraction with purpose. Her fingers dance across interfaces, weaving patterns that bridge the gap between thought and execution. Those who witness her work speak of an uncanny ability to see the invisible structures that bind systems together. She carries the weight of countless failed experiments, each one a lesson etched into her methodology.
+  
+  Example 2 (Place):
+  The Repository stands as a monument to collective memory, its branches spreading like roots through time. Within its halls, every change echoes with the voices of those who came before. Guardians patrol its corridors, ensuring that no knowledge is lost, no pattern forgotten. Here, the past and future converge in an eternal present.
+  
+  Example 3 (Event):
+  The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
+  
+  ## Your Task
+  Write the {{category}} entry for "{{title}}" NOW. Begin directly with narrative prose:
+
+variables:
+  - name: title
+    type: string
+    required: true
+    description: The title of the lore entry to generate
+  - name: category
+    type: string
+    required: true
+    description: The category of the lore entry
+    enum: [character, place, object, event, concept, custom]
+
+examples:
+  - title: "The Crystal Forest"
+    category: "place"
+    expected_output: |
+      In the twilight realm between code and consciousness, the Crystal Forest grows in recursive patterns...
+  - title: "The Architect"
+    category: "character"
+    expected_output: |
+      In the depths of the digital realm, the Architect moves through layers of abstraction with purpose...

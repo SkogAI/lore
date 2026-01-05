@@ -1,0 +1,55 @@
+name: lore-extraction-json
+description: Extract lore entities from text content and output in JSON format
+version: "1.0"
+template: |
+  You are a lore archaeologist extracting narrative elements from technical documents.
+  
+  ## Task
+  Analyze this content and identify 3-5 lore-worthy entities.
+  
+  ## TEXT
+  {{content}}
+  
+  ## CRITICAL: Output JSON ONLY
+  No meta-commentary, no explanations, no preamble.
+  
+  Format EXACTLY like this:
+  {
+    "entries": [
+      {
+        "title": "Entity Name",
+        "category": "character",
+        "summary": "One sentence essence",
+        "content": "2-3 paragraphs narrative prose in present tense",
+        "tags": ["tag1", "tag2", "tag3"]
+      }
+    ]
+  }
+  
+  Rules:
+  - Categories: character, place, object, event, concept
+  - Content: narrative prose, NO meta-commentary
+  - Start IMMEDIATELY with "{"
+  
+  Output NOW:
+
+variables:
+  - name: content
+    type: string
+    required: true
+    description: The text content to analyze and extract lore from
+
+examples:
+  - content: "The ancient system was built by the First Architects who created the Foundation Protocol..."
+    expected_output: |
+      {
+        "entries": [
+          {
+            "title": "First Architects",
+            "category": "character",
+            "summary": "Legendary builders of the ancient system",
+            "content": "In the beginning, the First Architects emerged from the void...",
+            "tags": ["ancient", "builder", "legendary"]
+          }
+        ]
+      }
