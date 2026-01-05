@@ -15,6 +15,15 @@ ENTRIES_DIR = SKOGAI_DIR / "knowledge/expanded/lore/entries"
 BOOKS_DIR = SKOGAI_DIR / "knowledge/expanded/lore/books"
 PERSONAS_DIR = SKOGAI_DIR / "knowledge/expanded/personas"
 
+# Meta-commentary patterns to detect/remove
+# These are common phrases LLMs use instead of direct content
+META_PATTERNS = [
+    r'^\s*(I will|Let me|Here is|Here\'s|This entry|This is)',
+    r'^\s*(I need your|should I|would you like|First,? I|Now,? I)',
+    r'^\s*(I\'ve created|I have created|As requested|Based on your request)'
+]
+
+
 
 def run_llm(prompt: str, provider: str, model: str) -> str:
     """Run LLM with specified provider."""
@@ -64,13 +73,7 @@ def validate_lore_output(content: str) -> bool:
     errors = []
     
     # Check for meta-commentary patterns anywhere in content
-    meta_patterns = [
-        r'^\s*(I will|Let me|Here is|Here\'s|This entry|This is)',
-        r'^\s*(I need your|should I|would you like|First,? I|Now,? I)',
-        r'^\s*(I\'ve created|I have created|As requested|Based on your request)'
-    ]
-    
-    for pattern in meta_patterns:
+    for pattern in META_PATTERNS:
         if re.search(pattern, content, re.IGNORECASE | re.MULTILINE):
             errors.append("⚠️  Contains meta-commentary")
             break
@@ -95,17 +98,10 @@ def strip_meta_commentary(content: str) -> str:
     lines = content.split('\n')
     cleaned_lines = []
     
-    # Patterns to remove
-    meta_patterns = [
-        r'^\s*(I will|Let me|Here is|Here\'s|This entry|This is)',
-        r'^\s*(I need your|should I|would you like|First,? I|Now,? I)',
-        r'^\s*(I\'ve created|I have created|As requested|Based on your request)'
-    ]
-    
     for line in lines:
         # Check if line matches any meta-commentary pattern
         is_meta = False
-        for pattern in meta_patterns:
+        for pattern in META_PATTERNS:
             if re.search(pattern, line, re.IGNORECASE):
                 is_meta = True
                 break
@@ -166,7 +162,6 @@ The Great Refactoring began at midnight when the old systems could no longer bea
 BEGIN YOUR ENTRY NOW (narrative prose only, no preamble)"""
 
     # Retry loop for generating valid content
-    content = None
     while attempt < max_retries:
         attempt += 1
         

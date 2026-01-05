@@ -7,6 +7,11 @@ SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MODEL_NAME=${1:-"llama3.2:3b"}
 PROVIDER=${LLM_PROVIDER:-"ollama"} # Set via env var or defaults to ollama
 
+# Meta-commentary patterns to detect/remove
+# These are common phrases LLMs use instead of direct content
+META_PATTERNS='^\s*(I will|Let me|Here is|Here'\''s|This entry|This is|I need your|should I|would you like|First,? I|Now,? I|I'\''ve created|I have created|As requested|Based on your request)'
+
+
 # Function to run LLM with specified provider
 run_llm() {
   local prompt="$1"
@@ -46,7 +51,7 @@ validate_lore_output() {
   local errors=()
 
   # Check for meta-commentary patterns anywhere in content (not just first line)
-  if echo "$content" | grep -qiE '^[[:space:]]*(I will|Let me|Here is|Here'\''s|This entry|This is|I need your|should I|would you like|First,? I|Now,? I|I'\''ve created|I have created|As requested|Based on your request)'; then
+  if echo "$content" | grep -qiE "$META_PATTERNS"; then
     errors+=("⚠️  Contains meta-commentary")
   fi
 
@@ -72,14 +77,8 @@ strip_meta_commentary() {
   local cleaned="$content"
 
   # Remove common meta-commentary patterns from anywhere in content
-  # Patterns to remove (case insensitive):
-  # - Lines starting with "I will", "Let me", "Here is", etc.
-  # - Lines containing "I need your approval/permission"
-  # - Lines asking "Should I" or "Would you like"
-  cleaned=$(echo "$cleaned" | grep -viE '^[[:space:]]*(I will|Let me|Here is|Here'\''s|This entry|This is|I need your|should I|would you like|First,? I|Now,? I)')
-  
-  # Remove lines that are purely meta-commentary about the task
-  cleaned=$(echo "$cleaned" | grep -viE '^[[:space:]]*(I'\''ve created|I have created|As requested|Based on your request)')
+  # Using the META_PATTERNS variable defined at top of script
+  cleaned=$(echo "$cleaned" | grep -viE "$META_PATTERNS")
   
   # Remove empty lines at the start
   cleaned=$(echo "$cleaned" | sed '/./,$!d')
