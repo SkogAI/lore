@@ -90,8 +90,8 @@ process_task() {
       
       if result=$(cd "$SKOGAI_DIR" && ./tools/llama-lore-creator.sh "$MODEL_NAME" entry "$title" "$category" 2>&1); then
         # Extract the entry ID from the output
-        # This looks for patterns like "entry_1234567890" in the output
-        local entry_id=$(echo "$result" | grep -oE 'entry_[0-9_]+' | tail -n 1)
+        # Looking for patterns like "entry_1234567890" (timestamp-based IDs)
+        local entry_id=$(echo "$result" | grep -oE 'entry_[0-9]+' | tail -n 1)
         
         if [ -n "$entry_id" ]; then
           echo "   ✅ Successfully created: $entry_id"
@@ -111,7 +111,8 @@ process_task() {
           mv "$task_file" "${COMPLETED_DIR}/${task_id}.json"
           return 0
         else
-          error_msg="Could not extract entry_id from output. Output may be in unexpected format."
+          # Include output for debugging
+          error_msg="Could not extract entry_id from output. Output: $(echo "$result" | head -c 200)"
         fi
       else
         error_msg="Failed to generate lore entry: $result"
