@@ -12,7 +12,7 @@ Multi-agent system transforming technical changes into narrative lore. Git commi
 
 ```
 lore/
-├── agents/api/           # LoreAPI + AgentAPI (Python CRUD + LLM calls)
+├── agents/api/           # LoreAPI + AgentAPI (DEPRECATED - use shell tools)
 ├── integration/          # Automated lore pipeline (git → persona → narrative)
 ├── knowledge/            # JSON data store (728 entries, 102 books, 89 personas)
 │   ├── core/             # Schemas + numbered knowledge (00-09 core)
@@ -20,7 +20,7 @@ lore/
 │   └── archived/         # Historical preservation (NEVER delete)
 ├── orchestrator/         # Session context + knowledge loading
 ├── scripts/jq/           # 50+ schema-driven jq transformations
-├── tools/                # CLI tools (manage-lore.sh, llama-*.sh)
+├── tools/                # CLI tools (manage-lore.sh, llama-*.sh) - PRIMARY
 └── context/              # Session state JSON files
 ```
 
@@ -28,15 +28,16 @@ lore/
 
 | Task | Location | Notes |
 |------|----------|-------|
-| Create lore entry | `tools/manage-lore.sh create-entry` | Or `LoreAPI.create_lore_entry()` |
-| Create book | `tools/manage-lore.sh create-book` | Or `LoreAPI.create_lore_book()` |
-| Create persona | `tools/create-persona.sh create` | Or `LoreAPI.create_persona()` |
+| Create lore entry | `tools/manage-lore.sh create-entry` | **PRIMARY** - Shell tools recommended |
+| Create book | `tools/manage-lore.sh create-book` | **PRIMARY** - Shell tools recommended |
+| Create persona | `tools/create-persona.sh create` | **PRIMARY** - Shell tools recommended |
 | Auto-generate from git | `integration/lore-flow.sh git-diff HEAD` | Maps author → persona |
 | LLM content generation | `tools/llama-lore-creator.sh` | Requires `LLM_PROVIDER` env |
 | JSON transforms | `scripts/jq/<transform>/transform.jq` | Schema in `schema.json` |
 | Entry schema | `knowledge/core/lore/schema.json` | Required: id, title, content, category |
 | Persona schema | `knowledge/core/persona/schema.json` | Required: id, name, core_traits, voice |
 | CLI commands | `./Argcfile.sh --help` | argc-based CLI |
+| Python API | `agents/api/lore_api.py` | ⚠️ **DEPRECATED** - use shell tools |
 
 ## CONVENTIONS
 
@@ -70,6 +71,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 | DO NOT | Why |
 |--------|-----|
+| Use Python API for new code | **DEPRECATED** - has known issues, use shell tools |
 | Use hardcoded absolute paths | Pre-commit hook blocks `/home/skogix/*` |
 | Delete archived lore | Historical preservation is CRITICAL |
 | Use `// fallback` in jq for falsy values | Breaks on null/false - use `try-catch` |
@@ -86,9 +88,12 @@ python orchestrator/orchestrator.py init [content|lore|research]  # Start sessio
 ./Argcfile.sh list-books                                          # List all books
 ./Argcfile.sh create-entry --title "X" --category lore            # Create entry
 
-# Lore Generation
-./integration/lore-flow.sh manual "description"      # Manual input
-./integration/lore-flow.sh git-diff HEAD             # From git commit
+# Lore Generation (Recommended - Shell Tools)
+./tools/manage-lore.sh create-entry "Title" "category"             # Create entry
+./tools/manage-lore.sh create-book "Title" "Description"           # Create book
+./tools/create-persona.sh create "Name" "Desc" "traits" "tone"    # Create persona
+./integration/lore-flow.sh manual "description"                    # Manual input
+./integration/lore-flow.sh git-diff HEAD                           # From git commit
 LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Title" "category"
 
 # Testing
@@ -97,8 +102,9 @@ LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Title" "category"
 
 # Validation
 ./scripts/pre-commit/validate.sh                     # Check paths
-python agents/api/lore_api.py                        # Test API
 ```
+
+**Note:** Python API (`python agents/api/lore_api.py`) is **DEPRECATED**. Use shell tools above.
 
 ## NOTES
 
@@ -107,6 +113,9 @@ python agents/api/lore_api.py                        # Test API
 **Package Manager:** `uv` with `pyproject.toml` - Python 3.12+ required
 
 **LLM Providers:** Claude, OpenAI, Ollama via OpenRouter API (`OPENROUTER_API_KEY`)
+
+**Shell Tools are PRIMARY**: Use `manage-lore.sh`, `create-persona.sh`, and `llama-*.sh` scripts.  
+**Python API is DEPRECATED**: `agents/api/lore_api.py` and `agent_api.py` have known issues. See `docs/api/DEPRECATION.md` for details.
 
 **Known Issues:**
 - Issue #5: LLM generates meta-commentary instead of lore

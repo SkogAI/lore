@@ -4,7 +4,9 @@ CLI utilities for lore management and LLM-powered content generation.
 
 ## OVERVIEW
 
-Shell scripts + Python tools for CRUD operations and narrative generation. Some require `LLM_PROVIDER` env var for LLM calls.
+**PRIMARY TOOLS**: Shell scripts for CRUD operations and narrative generation. Some require `LLM_PROVIDER` env var for LLM calls.
+
+**Note**: Shell tools are the canonical, actively maintained interface. Python API (`agents/api/lore_api.py`) is deprecated due to known issues. See `docs/api/DEPRECATION.md` for details.
 
 ## STRUCTURE
 
@@ -53,7 +55,7 @@ Created lore entry: entry_1763812594_160d22f7
 
 | DO NOT | Why |
 |--------|-----|
-| Use `manage-lore.sh` for new code | Deprecated - use `LoreAPI` Python class |
+| Use Python API for new code | Deprecated - has known issues, use shell tools |
 | Hardcode absolute paths | Pre-commit blocks them |
 | Generate without persona context | LLM needs voice/traits for consistency |
 
@@ -77,6 +79,6 @@ python lore_tui.py --base-dir ./knowledge/expanded
 
 ## NOTES
 
-**Deprecation:** `manage-lore.sh` works but Python API (`agents/api/lore_api.py`) is preferred.
+**Shell tools are PRIMARY**: Use `manage-lore.sh`, `create-persona.sh`, and `llama-*.sh` scripts. Python API (`agents/api/lore_api.py`) is DEPRECATED.
 
 **Known Issue:** LLM sometimes outputs "I need your approval..." - fix prompt in `llama-lore-creator.sh`.

@@ -1,6 +1,21 @@
 # Persona API
 
+> ⚠️ **DEPRECATION NOTICE**: The Python API (`lore_api.py`) is deprecated. Please use shell tools instead.  
+> See [DEPRECATION.md](./DEPRECATION.md) for migration guide.
+
 A persona is an AI character profile with unique voice, traits, and characteristics used to generate consistent narrative content.
+
+## Recommended Tools
+
+**Shell scripts** (PRIMARY):
+- `tools/create-persona.sh create` - Create personas
+- `tools/create-persona.sh list` - List all personas
+- `tools/create-persona.sh show <id>` - Show persona details
+- `tools/create-persona.sh edit <id> <field> <value>` - Edit personas
+
+**CLI** (argc-based):
+- `argc create-persona` - Create persona with flags
+- `argc list-personas` - List all personas
 
 ## Schema
 
@@ -64,7 +79,12 @@ See the [full JSON Schema](../../knowledge/core/persona/schema.json) for complet
 
 ## Create a Persona
 
-### Using lore_api (Python)
+### Using lore_api (Python) - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools or CLI instead. See above for recommended tools.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -88,6 +108,18 @@ print(f"Created: {persona['id']}")
 - Splits `personality_traits[2:4]` into `core_traits.motivations`
 - Sets `voice.tone` from `voice_tone` parameter
 - Generates default structure for other fields
+
+</details>
+
+### Using create-persona.sh (Recommended)
+
+```bash
+./tools/create-persona.sh create "Aria Nightwhisper" \
+  "A keeper of digital records" \
+  "methodical,curious,patient,detail-oriented" \
+  "poetic yet precise"
+# Output: Created: persona_1764992753
+```
 
 ### Using argc (CLI)
 
@@ -115,7 +147,26 @@ echo '{}' | \
 
 ## Read a Persona
 
-### Using lore_api
+### Using shell tools (Recommended)
+
+```bash
+# Show full persona
+./tools/create-persona.sh show persona_1764992753
+
+# Using jq directly
+cat knowledge/expanded/personas/persona_1764992753.json
+
+# Get specific fields
+jq -r '.name' knowledge/expanded/personas/persona_1764992753.json
+jq -r '.voice.tone' knowledge/expanded/personas/persona_1764992753.json
+```
+
+### Using lore_api - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools instead.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 ```python
 persona = lore.get_persona("persona_1764992753")
@@ -123,7 +174,9 @@ print(persona['name'])
 print(persona['voice']['tone'])
 ```
 
-### Using jq
+</details>
+
+### Using jq (Direct JSON manipulation)
 
 ```bash
 # Get full persona
@@ -174,7 +227,27 @@ See [@docs/api/book.md](./book.md#link-persona-to-book)
 
 ## List Personas
 
-### Using lore_api
+### Using shell tools (Recommended)
+
+```bash
+# Using create-persona.sh
+./tools/create-persona.sh list
+
+# Using argc
+argc list-personas
+
+# Using shell
+for persona in knowledge/expanded/personas/*.json; do
+    jq -r '"\(.id): \(.name)"' "$persona"
+done
+```
+
+### Using lore_api - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools instead.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 ```python
 personas = lore.list_personas()
@@ -182,21 +255,34 @@ for persona in personas:
     print(f"{persona['id']}: {persona['name']}")
 ```
 
-### Using argc
+</details>
+
+## Get Persona Context
+
+### Using shell tools (Recommended)
 
 ```bash
-argc list-personas
-```
+# Get persona with all linked books
+persona_id="persona_1764992753"
 
-### Using shell
+# Show persona details
+./tools/create-persona.sh show "$persona_id"
 
-```bash
-for persona in knowledge/expanded/personas/*.json; do
-    jq -r '"\(.id): \(.name)"' "$persona"
+# Get linked books manually
+for book in knowledge/expanded/lore/books/*.json; do
+    if jq -e ".readers | contains([\"$persona_id\"])" "$book" > /dev/null; then
+        echo "Book: $(jq -r '.title' "$book")"
+        echo "Entries: $(jq '.entries | length' "$book")"
+    fi
 done
 ```
 
-## Get Persona Context
+### Using lore_api - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools instead.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 The `lore_api` can build a complete context for a persona including their lore books:
 
@@ -209,6 +295,8 @@ print(f"Books: {len(context['lore_books'])}")
 for book in context['lore_books']:
     print(f"  - {book['title']}: {len(book['entries'])} entries")
 ```
+
+</details>
 
 ## Common Patterns
 

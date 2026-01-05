@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+"""
+⚠️  DEPRECATED - This Python API is deprecated and has known issues.
+
+Please use the shell tools instead:
+- tools/llama-lore-creator.sh - LLM-powered content generation
+- tools/llama-lore-integrator.sh - Extract lore from documents
+- integration/lore-flow.sh - Complete automation pipeline
+
+See docs/api/DEPRECATION.md for full details and migration guide.
+
+Shell tools provide more reliable LLM integration and are actively maintained.
+"""
 
 import os
 import sys
