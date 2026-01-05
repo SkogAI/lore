@@ -16,7 +16,7 @@ mkdir -p "${PENDING_DIR}" "${PROCESSING_DIR}" "${COMPLETED_DIR}" "${FAILED_DIR}"
 
 # Generate a unique task ID
 generate_task_id() {
-  echo "task_$(date +%s)"
+  echo "task_$(date +%s)_$$_$RANDOM"
 }
 
 # Show help

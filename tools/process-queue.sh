@@ -80,6 +80,7 @@ process_task() {
       
       # Set environment and call the creator
       export LLM_PROVIDER="$PROVIDER"
+      export SKOGAI_LORE="${SKOGAI_LORE:-$SKOGAI_DIR}"
       
       if result=$(cd "$SKOGAI_DIR" && ./tools/llama-lore-creator.sh "$MODEL_NAME" entry "$title" "$category" 2>&1); then
         # Extract the entry ID from the output
