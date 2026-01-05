@@ -1,6 +1,6 @@
 # 🗺️ Quick Navigation Index
 
-**Auto-generated:** 2026-01-05 12:58:55 UTC
+**Auto-generated:** 2026-01-05 13:54:38 UTC
 
 ## 📁 Main Documentation
 
@@ -19,6 +19,7 @@
 ### goose
 
 ### skogai
+- [.skogai](.skogai)
 
 ## 📅 Archive Directories by Date
 
