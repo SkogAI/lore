@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-05 17:29:33 UTC
+**Timestamp:** 2026-01-05 18:26:13 UTC
 
 ## Current State
 
@@ -21,7 +21,7 @@
 - Amy mentions: 191
 - Claude mentions: 528
 - Dot mentions: 289
-- Goose mentions: 314
+- Goose mentions: 315
 
 ## Mythology Expansion
 
@@ -38,7 +38,18 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-6c40639 - chore: cleanup legacy directories and consolidate project structure (79 seconds ago)
+3054602 - 📈 Lore growth detected [skip ci] (57 minutes ago)
+M	GROWTH.md
+
+c449e4b - 📚 Auto-update documentation [skip ci] (57 minutes ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+M	README.md
+
+7e5b4ff - Update lore statistics [skip ci] (57 minutes ago)
+M	STATS.md
+
+6c40639 - chore: cleanup legacy directories and consolidate project structure (58 minutes ago)
 M	.gitignore
 A	.skogai/todos/002-complete-p2-document-garden-plugin-system.md
 D	.todo/jq-api-project/README.md
@@ -47,17 +58,6 @@ A	knowledge/expanded/lore/entries/entry_1767633468_92dd5036.json
 D	plans/docs-claude-md-garden-update.md
 D	scripts/jq/AGENTS.md
 D	scripts/jq/CLAUDE.md
-D	scripts/jq/IMPLEMENTATION_SPEC.md
-D	scripts/jq/README.md
-D	scripts/jq/USAGE_EXAMPLES.md
-D	scripts/jq/add-field/schema.json
-D	scripts/jq/add-field/test-input-1.json
-D	scripts/jq/add-field/test-input-10.json
-D	scripts/jq/add-field/test-input-11.json
-D	scripts/jq/add-field/test-input-12.json
-D	scripts/jq/add-field/test-input-2.json
-D	scripts/jq/add-field/test-input-3.json
-D	scripts/jq/add-field/test-input-4.json
 ```
 
 ---
