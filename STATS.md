@@ -1,6 +1,6 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-05 15:43:53 UTC
+**Generated:** 2026-01-05 16:01:28 UTC
 
 ## File Statistics
 
@@ -39,7 +39,7 @@
 ```
 6.2M	knowledge/
 4.4M	scripts/
-376K	docs/
+380K	docs/
 172K	tools/
 168K	integration/
 124K	agents/
