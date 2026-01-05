@@ -1,6 +1,6 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-05 08:19:23 UTC
+**Generated:** 2026-01-05 08:20:03 UTC
 
 ## File Statistics
 
@@ -32,7 +32,7 @@
 ## Repository Size
 
 - **Total Size:** 16M
-- **Git History Size:** 2.9M
+- **Git History Size:** 2.8M
 
 ## Top 10 Largest Directories
 
@@ -41,7 +41,7 @@
 4.4M	scripts/
 376K	docs/
 172K	tools/
-164K	integration/
+168K	integration/
 124K	agents/
 120K	context/
 44K	orchestrator/
