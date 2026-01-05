@@ -1,11 +1,11 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-05 16:24:20 UTC
+**Generated:** 2026-01-05 16:28:44 UTC
 
 ## File Statistics
 
-- **Total Files:** 3727
-- **Markdown Files:** 260
+- **Total Files:** 3720
+- **Markdown Files:** 253
 - **JSON Files:** 3002
 - **YAML Files:** 18
 
@@ -26,8 +26,8 @@
 ## Prime Directive Tracking
 
 - **Beach References:** 78
-- **Mojito Mentions:** 151
-- **Automation References:** 174
+- **Mojito Mentions:** 150
+- **Automation References:** 162
 
 ## Repository Size
 
