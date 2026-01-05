@@ -27,7 +27,7 @@ The Garden Plugin System provides a **structured trial-based evaluation** framew
 
 This pattern is documented across four comprehensive guides:
 
-### 1. **GARDEN_BEST_PRACTICES.md** (Primary Reference)
+### 1. **best-practices.md** (Primary Reference)
 **For:** Project teams implementing the garden system
 
 **Contains:**
@@ -55,7 +55,7 @@ This pattern is documented across four comprehensive guides:
 - Prevention strategies table (page Z)
 - Template for `.skogai/` structure (easy copy-paste)
 
-### 2. **GARDEN_DECISION_FRAMEWORK.md** (Strategic Guide)
+### 2. **decision-framework.md** (Strategic Guide)
 **For:** Teams making evaluation decisions
 
 **Contains:**
@@ -84,7 +84,7 @@ This pattern is documented across four comprehensive guides:
 - Scenario-based decision paths
 - Anti-pattern identification
 
-### 3. **SKOGAI_DIRECTORY_TEMPLATE.md** (Setup Guide)
+### 3. **directory-template.md** (Setup Guide)
 **For:** Setting up `.skogai/` structure in new projects
 
 **Contains:**
@@ -108,7 +108,7 @@ This pattern is documented across four comprehensive guides:
 - 22 template files ready to use
 - Comments show what to fill in
 
-### 4. **This Document: GARDEN_IMPLEMENTATION_SUMMARY.md**
+### 4. **This Document: implementation-summary.md**
 **For:** Understanding the complete system at a glance
 
 **Use this as:**
@@ -167,8 +167,8 @@ PERMANENT or REMOVED
 ## Implementation Roadmap
 
 ### Week 1: Setup
-- [ ] Read `GARDEN_BEST_PRACTICES.md` Part 1-2 (understand system)
-- [ ] Read `SKOGAI_DIRECTORY_TEMPLATE.md` (how to structure)
+- [ ] Read `best-practices.md` Part 1-2 (understand system)
+- [ ] Read `directory-template.md` (how to structure)
 - [ ] Run bootstrap script or manual setup
 - [ ] Create `.skogai/CLAUDE.md` and `garden/README.md`
 - [ ] Verify `/garden:status` command works
@@ -181,7 +181,7 @@ PERMANENT or REMOVED
 - [ ] Team can see project structure and vision
 
 ### Week 2-3: First Trial
-- [ ] Read `GARDEN_DECISION_FRAMEWORK.md` Part 1 (pre-trial)
+- [ ] Read `decision-framework.md` Part 1 (pre-trial)
 - [ ] Complete pre-trial checklist (5 questions)
 - [ ] Start first plugin trial with `/garden:trial`
 - [ ] Document trial in `.skogai/garden/trial-log.md`
@@ -194,7 +194,7 @@ PERMANENT or REMOVED
 - [ ] Message counter incrementing steadily
 
 ### Week 4-5: Evaluation Period
-- [ ] Read `GARDEN_DECISION_FRAMEWORK.md` Part 2 (during-trial)
+- [ ] Read `decision-framework.md` Part 2 (during-trial)
 - [ ] Weekly assessment checklist (every 7 days)
 - [ ] Monitor for red flags (errors, disuse, alternatives)
 - [ ] Refine success criteria based on reality
@@ -207,7 +207,7 @@ PERMANENT or REMOVED
 - [ ] Ready for decision at 50 messages
 
 ### Week 6: Decision Point
-- [ ] Read `GARDEN_DECISION_FRAMEWORK.md` Part 3 (decision framework)
+- [ ] Read `decision-framework.md` Part 3 (decision framework)
 - [ ] Review success criteria vs. actual outcomes
 - [ ] Complete quantitative decision matrix
 - [ ] Make KEEP / SWAP / REMOVE decision
@@ -220,7 +220,7 @@ PERMANENT or REMOVED
 - [ ] Action items assigned
 
 ### Ongoing: Maintenance
-- [ ] Read `GARDEN_BEST_PRACTICES.md` Part 6 (prevention strategies)
+- [ ] Read `best-practices.md` Part 6 (prevention strategies)
 - [ ] Weekly: Check `/garden:status`
 - [ ] Monthly: Audit trial progress, permanent plugins
 - [ ] Quarterly: Full system review
@@ -463,20 +463,20 @@ Don't add complexity upfront. Begin with:
 
 **If you have 1 hour:**
 1. This document (10 minutes) - Orientation
-2. `GARDEN_BEST_PRACTICES.md` Part 1-3 (30 minutes) - System overview
-3. `SKOGAI_DIRECTORY_TEMPLATE.md` quick start (15 minutes) - Setup
+2. `best-practices.md` Part 1-3 (30 minutes) - System overview
+3. `directory-template.md` quick start (15 minutes) - Setup
 4. Run bootstrap script (5 minutes) - Get started
 
 **If you have 3 hours:**
-1. All sections of `GARDEN_BEST_PRACTICES.md` (90 minutes)
-2. `GARDEN_DECISION_FRAMEWORK.md` Part 1-3 (60 minutes)
-3. `SKOGAI_DIRECTORY_TEMPLATE.md` detailed read (20 minutes)
+1. All sections of `best-practices.md` (90 minutes)
+2. `decision-framework.md` Part 1-3 (60 minutes)
+3. `directory-template.md` detailed read (20 minutes)
 4. Plan first trial with checklist (10 minutes)
 
 **If you have 1 day:**
-1. Complete `GARDEN_BEST_PRACTICES.md` (2 hours)
-2. Complete `GARDEN_DECISION_FRAMEWORK.md` (2 hours)
-3. Complete `SKOGAI_DIRECTORY_TEMPLATE.md` (1 hour)
+1. Complete `best-practices.md` (2 hours)
+2. Complete `decision-framework.md` (2 hours)
+3. Complete `directory-template.md` (1 hour)
 4. Set up project structure (1 hour)
 5. Plan first 3 trials with team (1 hour)
 6. Start first trial with full team (1 hour)
@@ -493,19 +493,19 @@ Don't add complexity upfront. Begin with:
 
 ## Quick Links to Documents
 
-- **Full Best Practices:** `/home/skogix/lore/docs/GARDEN_BEST_PRACTICES.md`
-- **Decision Framework:** `/home/skogix/lore/docs/GARDEN_DECISION_FRAMEWORK.md`
-- **Directory Template:** `/home/skogix/lore/docs/SKOGAI_DIRECTORY_TEMPLATE.md`
-- **Implementation (this file):** `/home/skogix/lore/docs/GARDEN_IMPLEMENTATION_SUMMARY.md`
+- **Full Best Practices:** `.skogai/garden/best-practices.md`
+- **Decision Framework:** `.skogai/garden/decision-framework.md`
+- **Directory Template:** `.skogai/garden/directory-template.md`
+- **Implementation (this file):** `.skogai/garden/implementation-summary.md`
 
 ---
 
 ## Next Steps
 
-1. **Read** `GARDEN_BEST_PRACTICES.md` introduction to understand the system
+1. **Read** `best-practices.md` introduction to understand the system
 2. **Understand** the 50-message threshold philosophy and state machine
-3. **Use** `SKOGAI_DIRECTORY_TEMPLATE.md` to set up your project
-4. **Reference** `GARDEN_DECISION_FRAMEWORK.md` for first trial decisions
+3. **Use** `directory-template.md` to set up your project
+4. **Reference** `decision-framework.md` for first trial decisions
 5. **Return to this document** as navigation guide during implementation
 
 ---

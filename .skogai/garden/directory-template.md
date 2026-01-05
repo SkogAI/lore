@@ -136,7 +136,7 @@ Trial plugins are evaluated after 50 messages of actual use:
 - `evaluation-criteria.md` - Detailed decision framework
 - `trial-log.md` - Historical record of all trials and decisions
 
-See `@docs/GARDEN_BEST_PRACTICES.md` for comprehensive guidance.
+See `@.skogai/garden/best-practices.md` for comprehensive guidance.
 EOF
 
 echo "✓ Created .skogai/garden/README.md"
@@ -304,7 +304,7 @@ cat > .skogai/garden/evaluation-criteria.md << 'EOF'
 
 - `README.md` - Quick reference and commands
 - `trial-log.md` - Historical decisions
-- `@docs/GARDEN_BEST_PRACTICES.md` - Comprehensive guidance
+- `@.skogai/garden/best-practices.md` - Comprehensive guidance
 EOF
 
 echo "✓ Created .skogai/garden/evaluation-criteria.md"
@@ -867,4 +867,4 @@ Add to `.skogai/plan/codebase/`:
 
 **Last Updated:** 2026-01-05
 **Template Version:** 1.0.0
-**For Guidance:** See `@docs/GARDEN_BEST_PRACTICES.md`
+**For Guidance:** See `@.skogai/garden/best-practices.md`

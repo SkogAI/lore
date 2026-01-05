@@ -19,4 +19,13 @@ Quick commands:
 - `/garden:trial <plugin>` - Start trial
 - `/garden:keep <plugin>` - Promote to permanent
 
-See `@.skogai/garden/README.md` for full documentation.
+**Documentation (all in `garden/`):**
+
+| File | Purpose |
+|------|---------|
+| `README.md` | Quick reference and commands |
+| `implementation-summary.md` | 30-minute overview (START HERE) |
+| `best-practices.md` | Comprehensive 10-part guide |
+| `decision-framework.md` | Strategic decision patterns |
+| `directory-template.md` | Setup templates and bootstrap |
+| `architecture.md` | Technical architecture reference |
