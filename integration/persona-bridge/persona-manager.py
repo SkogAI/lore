@@ -31,7 +31,6 @@ class PersonaManager:
         self.lore_books_dir = os.path.join(self.base_dir, "knowledge/expanded/lore/books")
         self.lore_entries_dir = os.path.join(self.base_dir, "knowledge/expanded/lore/entries")
         self.create_persona_sh = os.path.join(self.base_dir, "tools/create-persona.sh")
-        self.manage_lore_sh = os.path.join(self.base_dir, "tools/manage-lore.sh")
         self.templates_dir = os.path.join(self.base_dir, "agents/templates/personas")
         self.context_template_path = os.path.join(
             self.base_dir, "context/templates/persona-context.json"
@@ -169,7 +168,12 @@ class PersonaManager:
     def create_persona(
         self, name: str, description: str, traits: List[str], voice: str
     ) -> Optional[Dict[str, Any]]:
-        """Create a new persona."""
+        """
+        Create a new persona.
+        
+        Note: Traits should not contain commas as they are used as delimiters 
+        by the shell script.
+        """
         # Join traits with commas for the shell script
         traits_str = ",".join(traits)
         
@@ -188,6 +192,7 @@ class PersonaManager:
             return None
         
         # Extract persona ID from output (format: "Created persona: persona_1234567890")
+        # The shell script consistently uses this format
         match = re.search(r"Created persona: (persona_\d+)", output)
         if not match:
             logger.error(f"Could not extract persona ID from output: {output}")
