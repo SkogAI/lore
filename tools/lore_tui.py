@@ -50,8 +50,8 @@ class LoreDataAccess:
                 with open(book_file, "r") as f:
                     book = json.load(f)
                     books.append(book)
-            except Exception as e:
-                # Skip invalid files
+            except (json.JSONDecodeError, OSError):
+                # Skip invalid or unreadable files
                 pass
         return books
 
@@ -63,7 +63,7 @@ class LoreDataAccess:
         try:
             with open(book_path, "r") as f:
                 return json.load(f)
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             return None
 
     def list_lore_entries(self, category: str = None) -> List[Dict[str, Any]]:
@@ -75,8 +75,8 @@ class LoreDataAccess:
                     entry = json.load(f)
                     if category is None or entry.get("category") == category:
                         entries.append(entry)
-            except Exception:
-                # Skip invalid files
+            except (json.JSONDecodeError, OSError):
+                # Skip invalid or unreadable files
                 pass
         return entries
 
@@ -88,7 +88,7 @@ class LoreDataAccess:
         try:
             with open(entry_path, "r") as f:
                 return json.load(f)
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             return None
 
     def search_lore(self, query: str) -> List[Dict[str, Any]]:
