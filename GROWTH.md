@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-05 08:19:24 UTC
+**Timestamp:** 2026-01-05 08:20:47 UTC
 
 ## Current State
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-f813d5f - docs: Fix broken links in SYSTEM_MAP.md (#44) (17 seconds ago)
-M	docs/SYSTEM_MAP.md
+5ef2820 - docs: Update CLAUDE.md with current data and shell tool priority (3 hours ago)
+M	CLAUDE.md
 
-10ed406 - Merge branch 'master' of https://github.com/SkogAI/lore (26 seconds ago)
-41c1f78 - 📈 Lore growth detected [skip ci] (28 seconds ago)
-M	GROWTH.md
-
-4bc0648 - 📚 Auto-update documentation [skip ci] (28 seconds ago)
-M	LAST_MODIFIED.md
-M	NAVIGATION.md
-
-9fd90c1 - Update lore statistics [skip ci] (28 seconds ago)
+7191f60 - Update lore statistics [skip ci] (24 seconds ago)
 M	STATS.md
 
-838725b - docs: Replace hardcoded absolute paths with relative paths in MONKEY_BRAIN.md (#42) (44 seconds ago)
-M	docs/MONKEY_BRAIN.md
+bb43c4b - Migrate generate-agent-lore.py from LoreAPI to shell tools (3 hours ago)
+M	generate-agent-lore.py
 
-c9d930b - 📚 Auto-update documentation [skip ci] (2 minutes ago)
+edb1757 - Update lore statistics [skip ci] (44 seconds ago)
+M	STATS.md
+
+9e03b14 - Address code review feedback - remove unused variable and improve docs (3 hours ago)
+M	integration/persona-bridge/persona-manager.py
+
+c6535bb - Migrate persona-manager.py from LoreAPI to direct file access (3 hours ago)
+M	integration/persona-bridge/persona-manager.py
+
+a00fae8 - 📚 Auto-update documentation [skip ci] (82 seconds ago)
 M	LAST_MODIFIED.md
-M	NAVIGATION.md
 ```
 
 ---
