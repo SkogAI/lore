@@ -1,11 +1,12 @@
 # ⏰ Last Modified Report
 
-**Generated:** 2026-01-05 16:37:07 UTC
+**Generated:** 2026-01-05 17:29:34 UTC
 
 ## Recently Modified Files (Last 24 Hours)
 
 ```
 ./.skogai/todos/001-pending-p2-migrate-argcfile-queue-to-general-queue.md
+./.skogai/todos/002-complete-p2-document-garden-plugin-system.md
 ./.skogai/garden/directory-template.md
 ./.skogai/garden/architecture.md
 ./.skogai/garden/README.md
@@ -24,20 +25,19 @@
 ./.skogai/plan/codebase/TESTING.md
 ./.skogai/plan/phase-1-RESEARCH.md
 ./.skogai/plan/phases/01-verify-pipeline/phase-1-1-PLAN.md
-./.skogai/plan/phases/01-verify-pipeline/1-1-PLAN.md
 ```
 
 ## Most Recently Modified Directories
 
 ```
-2026-01-05 16:37 - tools
-2026-01-05 16:37 - tests/basic-flow
-2026-01-05 16:37 - tests
-2026-01-05 16:37 - scripts/pre-commit
-2026-01-05 16:37 - scripts/jq/validate-types
-2026-01-05 16:37 - scripts/jq/validate-required
-2026-01-05 16:37 - scripts/jq/validate-range
-2026-01-05 16:37 - scripts/jq/validate-message-schema
-2026-01-05 16:37 - scripts/jq/validate-format
-2026-01-05 16:37 - scripts/jq/try-transform
+2026-01-05 17:29 - tools
+2026-01-05 17:29 - tests/basic-flow
+2026-01-05 17:29 - tests
+2026-01-05 17:29 - scripts/pre-commit
+2026-01-05 17:29 - scripts
+2026-01-05 17:29 - orchestrator/variants
+2026-01-05 17:29 - orchestrator/identity
+2026-01-05 17:29 - orchestrator
+2026-01-05 17:29 - knowledge/goose-memory-backup
+2026-01-05 17:29 - knowledge/expanded/personas
 ```
