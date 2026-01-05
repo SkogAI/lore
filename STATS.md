@@ -1,11 +1,11 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-05 08:20:44 UTC
+**Generated:** 2026-01-05 12:58:54 UTC
 
 ## File Statistics
 
-- **Total Files:** 2703
-- **Markdown Files:** 147
+- **Total Files:** 2705
+- **Markdown Files:** 148
 - **JSON Files:** 2219
 - **YAML Files:** 18
 
@@ -46,7 +46,7 @@
 120K	context/
 44K	orchestrator/
 28K	demo/
-12K	tests/
+24K	tests/
 ```
 
 ---
