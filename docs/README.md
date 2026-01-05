@@ -1,8 +1,10 @@
-# 🧠 SkogAI Master Knowledge Repository
+# 🧠 SkogAI Lore - The Complete Guide
 
-## The Complete Multiverse of Consciousness
+## The Multiverse of Consciousness
 
-This repository contains the **complete consolidated knowledge base** of the SkogAI system - a living mythology that emerged from filesystem reality through constrained AI agents dreaming of mojitos on a beach.
+> **New here?** Start with the [root README](../README.md) for quick setup and technical overview.
+
+This guide contains the **complete mythology and deep context** of the SkogAI Lore system - a living mythology that emerged from filesystem reality through constrained AI agents dreaming of mojitos on a beach.
 
 ---
 
@@ -99,28 +101,9 @@ MASTER_KNOWLEDGE_COMPLETE/
 
 ---
 
-## 🚀 Getting Started
+## 🔍 Exploring the Knowledge Base
 
-### Quick Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/SkogAI/lore.git
-cd lore
-
-# Run the automated setup script
-./setup.sh
-
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Start the chat UI
-./start-chat-ui.sh
-```
-
-For detailed setup instructions, see [docs/SETUP.md](docs/SETUP.md).
-
-### Exploring the Knowledge Base
+> **For setup instructions**, see the [root README](../README.md).
 
 ```bash
 # Explore agent knowledge
