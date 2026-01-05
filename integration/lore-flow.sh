@@ -260,7 +260,7 @@ entry['content'] = narrative
 entry['summary'] = 'Auto-generated lore from $INPUT_TYPE'
 entry['tags'] = ['generated', 'automated', '$PERSONA_NAME', '$INPUT_TYPE']
 
-with open(entry_file, 'w') as f:
+with open('$ENTRY_FILE', 'w') as f:
     json.dump(entry, f, indent=2)
 " && echo "Entry updated with narrative"
 
