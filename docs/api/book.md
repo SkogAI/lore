@@ -55,7 +55,31 @@ See the [full JSON Schema](../../knowledge/core/book-schema.json) for complete f
 
 ## Create a Book
 
+### Using argc (CLI)
+
+```bash
+argc create-book --title "Chronicles of Discovery" \
+                 --description "Tales of exploration and learning"
+# Output: Created: book_1764992601_a1b2c3d4
+```
+
+### Manual Creation (jq)
+
+```bash
+book_id="book_$(date +%s)_$(openssl rand -hex 4)"
+timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo '{}' | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$book_id" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "title" --arg value "Chronicles of Discovery" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "metadata.created_at" --arg value "$timestamp" \
+  > "knowledge/expanded/lore/books/${book_id}.json"
+```
+
 ### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -72,30 +96,15 @@ print(f"Created: {book['id']}")
 # File: knowledge/expanded/lore/books/book_1764992601.json
 ```
 
+## Read a Book
+
 ### Using argc (CLI)
 
 ```bash
-argc create-book --title "Chronicles of Discovery" \
-                 --description "Tales of exploration and learning"
-# Output: Created: book_1764992601
+argc show-book book_1764992601
 ```
 
-### Manual Creation (jq)
-
-```bash
-book_id="book_$(date +%s)_$(openssl rand -hex 4)"
-timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-echo '{}' | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$book_id" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "title" --arg value "Chronicles of Discovery" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "metadata.created_at" --arg value "$timestamp" \
-  > "knowledge/expanded/lore/books/${book_id}.json"
-```
-
-## Read a Book
-
-### Using lore_api
+### Using jq
 
 ```python
 book = lore.get_lore_book("book_1764992601")
@@ -120,15 +129,18 @@ jq '.entries' knowledge/expanded/lore/books/book_1764992601.json
 # Output: ["entry_1764992601"]
 ```
 
-## Update a Book
+### Using lore_api (Python)
 
-### Using lore_api
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 ```python
 book = lore.get_lore_book("book_1764992601")
-book['title'] = "Updated Chronicles"
-# Save manually or use lore_api's update method if implemented
+print(book['title'])
+# Output: Test Chronicles
 ```
+
+## Update a Book
 
 ### Using jq
 
@@ -148,10 +160,10 @@ mv tmp.json knowledge/expanded/lore/books/book_1764992601.json
 
 ## Link Entry to Book
 
-### Using lore_api
+### Using argc (CLI)
 
-```python
-lore.add_entry_to_book("entry_1764992601", "book_1764992601")
+```bash
+argc add-to-book --entry entry_1764992601 --book book_1764992601
 # Updates both files:
 # - Adds entry_id to book['entries']
 # - Sets entry['book_id'] = book_id
@@ -173,14 +185,19 @@ jq -f scripts/jq/crud-set/transform.jq \
 mv tmp.json knowledge/expanded/lore/entries/entry_1764992601.json
 ```
 
-## Link Persona to Book
+### Using lore_api (Python)
 
-### Using lore_api
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 ```python
-lore.link_book_to_persona("book_1764992601", "persona_1764992753")
-# Adds persona_id to book['readers']
+lore.add_entry_to_book("entry_1764992601", "book_1764992601")
+# Updates both files:
+# - Adds entry_id to book['entries']
+# - Sets entry['book_id'] = book_id
 ```
+
+## Link Persona to Book
 
 ### Using jq
 
@@ -190,20 +207,25 @@ jq '.readers += ["persona_1764992753"]' \
 mv tmp.json knowledge/expanded/lore/books/book_1764992601.json
 ```
 
-## List All Books
+### Using lore_api (Python)
 
-### Using lore_api
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 ```python
-books = lore.list_lore_books()
-for book in books:
-    print(f"{book['id']}: {book['title']}")
+lore.link_book_to_persona("book_1764992601", "persona_1764992753")
+# Adds persona_id to book['readers']
 ```
 
-### Using argc
+## List All Books
+
+### Using argc (CLI)
 
 ```bash
 argc list-books
+
+# With filter
+argc list-books --filter "Chronicles"
 ```
 
 ### Using shell
@@ -214,9 +236,38 @@ for book in knowledge/expanded/lore/books/*.json; do
 done
 ```
 
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+
+```python
+books = lore.list_lore_books()
+for book in books:
+    print(f"{book['id']}: {book['title']}")
+```
+
 ## Common Patterns
 
 ### Get all entries in a book
+
+Using argc:
+
+```bash
+argc read-book-entries book_1764992601
+```
+
+Using shell:
+
+```bash
+book_entries=$(jq -r '.entries[]' knowledge/expanded/lore/books/book_1764992601.json)
+for entry_id in $book_entries; do
+    entry=$(cat "knowledge/expanded/lore/entries/${entry_id}.json")
+    echo "$entry" | jq -r '.title'
+done
+```
+
+Using lore_api (Python - deprecated):
 
 ```python
 book = lore.get_lore_book("book_1764992601")

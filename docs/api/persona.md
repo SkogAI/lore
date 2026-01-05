@@ -64,7 +64,32 @@ See the [full JSON Schema](../../knowledge/core/persona/schema.json) for complet
 
 ## Create a Persona
 
+### Using argc (CLI)
+
+```bash
+argc create-persona --name "Aria Nightwhisper" \
+                    --voice-tone "poetic yet precise"
+# Output: Created: persona_1764992753
+```
+
+### Manual Creation (jq)
+
+```bash
+persona_id="persona_$(date +%s)"
+timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo '{}' | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$persona_id" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "name" --arg value "Aria Nightwhisper" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "voice.tone" --arg value "poetic yet precise" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "meta.created" --arg value "$timestamp" \
+  > "knowledge/expanded/personas/${persona_id}.json"
+```
+
 ### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -89,39 +114,7 @@ print(f"Created: {persona['id']}")
 - Sets `voice.tone` from `voice_tone` parameter
 - Generates default structure for other fields
 
-### Using argc (CLI)
-
-```bash
-argc create-persona --name "Aria Nightwhisper" \
-                    --description "Digital archivist..." \
-                    --traits methodical curious patient detail-oriented \
-                    --voice-tone "poetic yet precise"
-# Output: Created: persona_1764992753
-```
-
-### Manual Creation (jq)
-
-```bash
-persona_id="persona_$(date +%s)"
-timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-echo '{}' | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$persona_id" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "name" --arg value "Aria Nightwhisper" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "voice.tone" --arg value "poetic yet precise" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "meta.created" --arg value "$timestamp" \
-  > "knowledge/expanded/personas/${persona_id}.json"
-```
-
 ## Read a Persona
-
-### Using lore_api
-
-```python
-persona = lore.get_persona("persona_1764992753")
-print(persona['name'])
-print(persona['voice']['tone'])
-```
 
 ### Using jq
 
@@ -141,6 +134,17 @@ jq -f scripts/jq/crud-get/transform.jq \
 
 # Get core values
 jq '.core_traits.values' knowledge/expanded/personas/persona_1764992753.json
+```
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+
+```python
+persona = lore.get_persona("persona_1764992753")
+print(persona['name'])
+print(persona['voice']['tone'])
 ```
 
 ## Update a Persona
@@ -174,20 +178,6 @@ See [@docs/api/book.md](./book.md#link-persona-to-book)
 
 ## List Personas
 
-### Using lore_api
-
-```python
-personas = lore.list_personas()
-for persona in personas:
-    print(f"{persona['id']}: {persona['name']}")
-```
-
-### Using argc
-
-```bash
-argc list-personas
-```
-
 ### Using shell
 
 ```bash
@@ -196,7 +186,23 @@ for persona in knowledge/expanded/personas/*.json; do
 done
 ```
 
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+
+```python
+personas = lore.list_personas()
+for persona in personas:
+    print(f"{persona['id']}: {persona['name']}")
+```
+
 ## Get Persona Context
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 The `lore_api` can build a complete context for a persona including their lore books:
 

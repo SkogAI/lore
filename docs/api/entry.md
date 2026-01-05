@@ -47,7 +47,32 @@ See the [full JSON Schema](../../knowledge/core/lore/schema.json) for complete f
 
 ## Create an Entry
 
+### Using argc (CLI)
+
+```bash
+argc create-entry --title "The Discovery" \
+                  --category lore
+# Output: Created: entry_1764992601_a1b2c3d4
+```
+
+### Manual Creation (jq)
+
+```bash
+entry_id="entry_$(date +%s)"
+timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo '{}' | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$entry_id" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "title" --arg value "The Discovery" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "content" --arg value "In the twilight hours..." | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "metadata.created_at" --arg value "$timestamp" \
+  > "knowledge/expanded/lore/entries/${entry_id}.json"
+```
+
 ### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -66,38 +91,12 @@ print(f"Created: {entry['id']}")
 # File: knowledge/expanded/lore/entries/entry_1764992601.json
 ```
 
+## Read an Entry
+
 ### Using argc (CLI)
 
 ```bash
-argc create-entry --title "The Discovery" \
-                  --content "In the twilight hours..." \
-                  --category lore \
-                  --tags discovery research mystery
-# Output: Created: entry_1764992601
-```
-
-### Manual Creation (jq)
-
-```bash
-entry_id="entry_$(date +%s)"
-timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-echo '{}' | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$entry_id" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "title" --arg value "The Discovery" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "content" --arg value "In the twilight hours..." | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "metadata.created_at" --arg value "$timestamp" \
-  > "knowledge/expanded/lore/entries/${entry_id}.json"
-```
-
-## Read an Entry
-
-### Using lore_api
-
-```python
-entry = lore.get_lore_entry("entry_1764992601")
-print(entry['title'])
-print(entry['content'])
+argc show-entry entry_1764992601
 ```
 
 ### Using jq
@@ -113,6 +112,17 @@ jq -f scripts/jq/crud-get/transform.jq \
 
 # Get title and content only
 jq '{title, content}' knowledge/expanded/lore/entries/entry_1764992601.json
+```
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+
+```python
+entry = lore.get_lore_entry("entry_1764992601")
+print(entry['title'])
+print(entry['content'])
 ```
 
 ## Update an Entry
@@ -146,23 +156,17 @@ See [@docs/api/book.md](./book.md#link-entry-to-book)
 
 ## List Entries
 
-### Using lore_api
-
-```python
-# All entries
-entries = lore.list_lore_entries()
-
-# By category
-lore_entries = lore.list_lore_entries(category="lore")
-
-for entry in lore_entries:
-    print(f"{entry['id']}: {entry['title']}")
-```
-
-### Using argc
+### Using argc (CLI)
 
 ```bash
+# List all entries
 argc list-entries
+
+# Filter by category
+argc list-entries --category lore
+
+# Filter by pattern
+argc list-entries --filter "Discovery"
 ```
 
 ### Using shell
@@ -186,6 +190,22 @@ for entry in knowledge/expanded/lore/entries/*.json; do
         jq -r '.title' "$entry"
     fi
 done
+```
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated. 
+> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+
+```python
+# All entries
+entries = lore.list_lore_entries()
+
+# By category
+lore_entries = lore.list_lore_entries(category="lore")
+
+for entry in lore_entries:
+    print(f"{entry['id']}: {entry['title']}")
 ```
 
 ## Search Entries
