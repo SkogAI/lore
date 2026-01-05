@@ -1,26 +1,26 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-05 16:37:07 UTC
+**Timestamp:** 2026-01-05 17:29:33 UTC
 
 ## Current State
 
-- Total Files: 3722
-- Lore Entries: 1206
+- Total Files: 2747
+- Lore Entries: 1207
 - Personas: 92
 - Beach References: 79
 
 ## Pattern Detection
 
 ### Sacred Numbers Appearance
-- Number 7: 522 occurrences
-- Number 15: 318 occurrences
-- Number 23.4: 47 occurrences
+- Number 7: 504 occurrences
+- Number 15: 268 occurrences
+- Number 23.4: 41 occurrences
 - Number 4000: 38 occurrences
 
 ### Agent Activity Indicators
 - Amy mentions: 191
-- Claude mentions: 542
-- Dot mentions: 351
+- Claude mentions: 528
+- Dot mentions: 289
 - Goose mentions: 314
 
 ## Mythology Expansion
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-fb4cd1c - feat(skill): enhance lore-creation skill with XML structure and assets (5 minutes ago)
-M	.claude/skills/lore-creation-starting-skill/SKILL.md
-A	.claude/skills/lore-creation-starting-skill/references/narrative-transforms.md
-A	.claude/skills/lore-creation-starting-skill/scripts/quick-lore.sh
-
-ce9ae60 - 📈 Lore growth detected [skip ci] (8 minutes ago)
-M	GROWTH.md
-
-349376c - 📚 Auto-update documentation [skip ci] (8 minutes ago)
-M	LAST_MODIFIED.md
-M	NAVIGATION.md
-
-e01ed36 - Update lore statistics [skip ci] (8 minutes ago)
-M	STATS.md
-
-5db550f - Update documentation references from absolute to relative paths in garden system files (9 minutes ago)
-M	.skogai/CLAUDE.md
-M	.skogai/garden/directory-template.md
-M	.skogai/garden/implementation-summary.md
-D	.skogai/plan/codebase-2/ARCHITECTURE.md
+6c40639 - chore: cleanup legacy directories and consolidate project structure (79 seconds ago)
+M	.gitignore
+A	.skogai/todos/002-complete-p2-document-garden-plugin-system.md
+D	.todo/jq-api-project/README.md
+M	knowledge/expanded/lore/books/book_1764315530_3d900cdd.json
+A	knowledge/expanded/lore/entries/entry_1767633468_92dd5036.json
+D	plans/docs-claude-md-garden-update.md
+D	scripts/jq/AGENTS.md
+D	scripts/jq/CLAUDE.md
+D	scripts/jq/IMPLEMENTATION_SPEC.md
+D	scripts/jq/README.md
+D	scripts/jq/USAGE_EXAMPLES.md
+D	scripts/jq/add-field/schema.json
+D	scripts/jq/add-field/test-input-1.json
+D	scripts/jq/add-field/test-input-10.json
+D	scripts/jq/add-field/test-input-11.json
+D	scripts/jq/add-field/test-input-12.json
+D	scripts/jq/add-field/test-input-2.json
+D	scripts/jq/add-field/test-input-3.json
+D	scripts/jq/add-field/test-input-4.json
 ```
 
 ---
