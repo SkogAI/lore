@@ -78,16 +78,26 @@ process_task() {
       # Call llama-lore-creator.sh to generate the entry
       echo "   Generating lore entry..."
       
+      # Note: llama-lore-creator.sh doesn't currently support passing persona_id
+      # The persona_id is stored in the task for future use and manual linking
+      if [ -n "$persona_id" ]; then
+        echo "   Note: Persona association will need to be manually linked after generation"
+      fi
+      
       # Set environment and call the creator
       export LLM_PROVIDER="$PROVIDER"
       export SKOGAI_LORE="${SKOGAI_LORE:-$SKOGAI_DIR}"
       
       if result=$(cd "$SKOGAI_DIR" && ./tools/llama-lore-creator.sh "$MODEL_NAME" entry "$title" "$category" 2>&1); then
         # Extract the entry ID from the output
+        # This looks for patterns like "entry_1234567890" in the output
         local entry_id=$(echo "$result" | grep -oE 'entry_[0-9_]+' | tail -n 1)
         
         if [ -n "$entry_id" ]; then
           echo "   ✅ Successfully created: $entry_id"
+          
+          # TODO: If persona_id is set, link the entry to the persona
+          # This would require extending manage-lore.sh or manual linking
           
           # Update task with result
           jq --arg entry_id "$entry_id" \
@@ -101,7 +111,7 @@ process_task() {
           mv "$task_file" "${COMPLETED_DIR}/${task_id}.json"
           return 0
         else
-          error_msg="Could not extract entry_id from output"
+          error_msg="Could not extract entry_id from output. Output may be in unexpected format."
         fi
       else
         error_msg="Failed to generate lore entry: $result"

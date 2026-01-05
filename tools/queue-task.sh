@@ -15,6 +15,8 @@ FAILED_DIR="${QUEUE_DIR}/failed"
 mkdir -p "${PENDING_DIR}" "${PROCESSING_DIR}" "${COMPLETED_DIR}" "${FAILED_DIR}"
 
 # Generate a unique task ID
+# Uses timestamp + PID + random for uniqueness across concurrent processes
+# This is sufficient for a file-based queue system (not cryptographic use)
 generate_task_id() {
   echo "task_$(date +%s)_$$_$RANDOM"
 }
@@ -39,8 +41,9 @@ show_help() {
   echo "  show TASK_ID"
   echo "      Show details of a specific task"
   echo ""
-  echo "  clear [STATE]"
+  echo "  clear [STATE] [--yes]"
   echo "      Clear tasks. STATE can be: completed, failed, all"
+  echo "      Use --yes to skip confirmation (useful for automation)"
   echo ""
   echo "  help"
   echo "      Show this help message"
@@ -257,6 +260,7 @@ show_task() {
 # Clear completed or failed tasks
 clear_tasks() {
   local state="${1:-completed}"
+  local auto_confirm="${2:-false}"
   
   case "$state" in
     completed)
@@ -266,8 +270,8 @@ clear_tasks() {
       local dir="${FAILED_DIR}"
       ;;
     all)
-      clear_tasks completed
-      clear_tasks failed
+      clear_tasks completed "$auto_confirm"
+      clear_tasks failed "$auto_confirm"
       return
       ;;
     *)
@@ -280,6 +284,13 @@ clear_tasks() {
   
   if [ $count -eq 0 ]; then
     echo "No $state tasks to clear"
+    return 0
+  fi
+  
+  # Check for --yes flag or auto-confirm mode
+  if [ "$auto_confirm" = "true" ]; then
+    rm -f "$dir"/*.json
+    echo "✅ Cleared $count $state task(s)"
     return 0
   fi
   
@@ -309,7 +320,12 @@ case "$1" in
     show_task "$2"
     ;;
   clear)
-    clear_tasks "$2"
+    # Check for --yes flag
+    auto_yes="false"
+    if [ "$3" = "--yes" ]; then
+      auto_yes="true"
+    fi
+    clear_tasks "$2" "$auto_yes"
     ;;
   help|--help|-h|"")
     show_help
