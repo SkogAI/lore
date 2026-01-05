@@ -1,10 +1,10 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-05 06:32:03 UTC
+**Timestamp:** 2026-01-05 08:16:59 UTC
 
 ## Current State
 
-- Total Files: 2704
+- Total Files: 2703
 - Lore Entries: 1202
 - Personas: 92
 - Beach References: 77
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-92238bb - 📈 Lore growth detected [skip ci] (5 hours ago)
+d908585 - Archive legacy character creation documentation (#38) (15 seconds ago)
+A	docs/archived/README.md
+R100	docs/skogix-old-lorecreation/skogai-character-guide.md	docs/archived/skogai-character-guide.md
+R100	docs/skogix-old-lorecreation/skogai-creation-guid.md	docs/archived/skogai-creation-guid.md
+R100	docs/skogix-old-lorecreation/skogai-lorebook-system.md	docs/archived/skogai-lorebook-system.md
+
+4c46acd - 📈 Lore growth detected [skip ci] (2 hours ago)
 M	GROWTH.md
 
-e006580 - 📈 Lore growth detected [skip ci] (12 hours ago)
+92238bb - 📈 Lore growth detected [skip ci] (7 hours ago)
 M	GROWTH.md
 
-52f71d8 - Update lore statistics [skip ci] (12 hours ago)
+e006580 - 📈 Lore growth detected [skip ci] (14 hours ago)
+M	GROWTH.md
+
+52f71d8 - Update lore statistics [skip ci] (14 hours ago)
 M	STATS.md
 
-8d13080 - 📚 Auto-update documentation [skip ci] (12 hours ago)
+8d13080 - 📚 Auto-update documentation [skip ci] (14 hours ago)
 M	LAST_MODIFIED.md
-M	NAVIGATION.md
-
-2d45368 - 📈 Lore growth detected [skip ci] (12 hours ago)
-M	GROWTH.md
-
-a1a9dbd - Merge remote-tracking branch 'refs/remotes/origin/master' (12 hours ago)
-6eb090a - Add argc skill and supporting examples to project (12 hours ago)
-R100	.claude/lore-creation/SKILL.md	.claude/skills/lore-creation-starting-skill/SKILL.md
-A	.claude/skills/skogai-argc/SKILL.md
 ```
 
 ---
