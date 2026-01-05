@@ -1,271 +1,312 @@
 # Directory Structure
 
-## Repository Layout
+**Generated:** 2026-01-05
+
+## Repository Root
 
 ```
 /home/skogix/lore/
-├── agents/                          # Agent system
+├── agents/                        # Python API layer
 │   ├── api/
-│   │   ├── lore_api.py             # Lore CRUD operations (280 lines)
-│   │   └── agent_api.py            # LLM provider wrapper
-│   ├── implementations/
-│   │   └── small_model_agents.py   # Constrained token agents
-│   ├── prompts -> /home/skogix/docs/prompts/  # Prompt templates (symlink)
-│   └── templates/                  # Agent templates
+│   │   ├── lore_api.py           # Lore CRUD operations (558 lines)
+│   │   └── agent_api.py          # LLM provider wrapper (322 lines)
+│   ├── implementations/          # Agent implementations
+│   ├── prompts/                  # Prompt templates
+│   └── templates/                # Persona templates
 │
-├── context/                         # Session management
-│   ├── current/                    # Active session contexts (13 JSON files)
-│   ├── archive/                    # Completed session contexts (5 JSON files)
-│   └── templates/                  # Context schema templates
-│       ├── base-context.json       # Basic session state template
-│       └── persona-context.json    # Persona-specific context schema
+├── context/                       # Session state management
+│   ├── templates/                # Context schemas
+│   │   ├── base-context.json     # Session template
+│   │   └── persona-context.json  # Persona-specific fields
+│   ├── current/                  # Active sessions (13 contexts)
+│   └── archive/                  # Completed sessions (5 contexts)
 │
-├── knowledge/                       # Data and schemas
-│   ├── core/
-│   │   ├── lore/
-│   │   │   ├── schema.json         # Entry schema contract
-│   │   │   └── book-schema.json    # Book schema contract (deprecated location)
-│   │   ├── book-schema.json        # Book schema contract (canonical)
-│   │   ├── persona/
-│   │   │   └── schema.json         # Persona schema contract
-│   │   ├── 00/                     # Core knowledge (load FIRST)
-│   │   └── 20/                     # Identity knowledge
-│   ├── expanded/
-│   │   ├── lore/
-│   │   │   ├── entries/            # 368 lore entry JSON files
-│   │   │   └── books/              # 88 lore book JSON files
-│   │   ├── personas/               # 53 persona JSON files
-│   │   └── 20/                     # Content-creation-workflow.md
-│   ├── archived/                   # Historical personas (61+)
-│   ├── implementation/             # Implementation knowledge
-│   └── goose-memory-backup/        # Legacy knowledge
+├── docs/                          # Documentation
+│   ├── CONCEPT.md                # Core vision
+│   ├── CURRENT_UNDERSTANDING.md  # System state (~800 lines)
+│   ├── SYSTEM_MAP.md             # Architecture overview
+│   ├── ARCHITECTURE.md           # Technical architecture
+│   ├── api/                      # API Reference
+│   │   ├── entry.md              # Entry API docs
+│   │   ├── book.md               # Book API docs
+│   │   ├── persona.md            # Persona API docs
+│   │   └── generation-tools.md   # Tool reference (1078 lines)
+│   └── project/
+│       └── handover.md           # Session handover notes
 │
-├── orchestrator/                    # Session coordination
-│   ├── orchestrator.py             # Main orchestrator (200+ lines)
-│   ├── identity/                   # Orchestrator identity configs
-│   ├── lore-writer.md              # Lore writing specs
-│   └── variants/                   # Orchestrator variants
-│
-├── integration/                     # Pipeline automation
-│   ├── lore-flow.sh               # 5-step pipeline (main entry point)
-│   ├── orchestrator-flow.sh       # Orchestrator pipeline (stub)
+├── integration/                   # Pipeline & orchestration
+│   ├── lore-flow.sh              # Main 5-step pipeline (293 lines)
+│   ├── orchestrator-flow.sh      # TODO stub for orchestration
 │   ├── persona-bridge/
-│   │   └── persona-manager.py     # Persona context loading
-│   ├── persona-mapping.conf       # Git author → persona mapping
-│   ├── services/                  # Service daemon scripts
-│   │   ├── skogai-lore-service.sh
-│   │   └── skogai-agent-small-service.sh
-│   └── workflows/                 # Automation workflows
+│   │   └── persona-manager.py    # Load & render personas (120+ lines)
+│   ├── persona-mapping.conf      # Git author -> Persona mapping
+│   ├── workflows/                # Automation scripts
+│   └── services/                 # Systemd service definitions
 │
-├── tools/                          # Primary CRUD interface
-│   ├── manage-lore.sh             # Main CRUD tool (800+ lines)
-│   ├── create-persona.sh          # Persona creation
-│   ├── context-manager.sh         # Context lifecycle
-│   ├── llama-lore-creator.sh      # LLM-powered generation
-│   ├── llama-lore-creator.py      # Python version
-│   ├── llama-lore-integrator.sh   # Extract from documents
-│   ├── llama-lore-integrator.py   # Python version
-│   ├── index-knowledge.sh         # Generate knowledge index
-│   ├── lore_tui.py                # TUI interface
-│   └── worktree-todo-manager.sh   # Worktree TODO management
+├── knowledge/                     # Data storage (core + generated)
+│   ├── core/                     # Schema definitions
+│   │   ├── lore/
+│   │   │   └── schema.json       # Entry schema (Draft 07)
+│   │   ├── book-schema.json      # Book schema
+│   │   └── persona/
+│   │       └── schema.json       # Persona schema
+│   ├── expanded/                 # Generated data
+│   │   ├── lore/
+│   │   │   ├── entries/          # 1,202 entry JSON files
+│   │   │   └── books/            # 107 book JSON files
+│   │   └── personas/             # 92 persona JSON files
+│   └── archived/                 # Historical preservation
 │
-├── scripts/
-│   ├── jq/                        # Standard jq CRUD operations
-│   │   ├── crud-get/              # Read JSON values
-│   │   ├── crud-set/              # Update JSON values
-│   │   ├── crud-delete/           # Delete JSON values
-│   │   └── crud-merge/            # Merge JSON values
+├── orchestrator/                  # Session context creation
+│   ├── orchestrator.py           # Session + knowledge orchestration (~150 lines)
+│   ├── identity/                 # Orchestrator identity configs
+│   ├── lore-writer.md            # Lore writing specs
+│   └── variants/                 # Mode-specific configurations
+│
+├── scripts/                       # Utility scripts
+│   ├── jq/                       # JSON CRUD operations (60+ transforms)
+│   │   ├── crud-get/             # Get values from JSON
+│   │   ├── crud-set/             # Set values in JSON
+│   │   ├── crud-delete/          # Delete values from JSON
+│   │   ├── crud-merge/           # Merge JSON values
+│   │   └── schema-validation/    # Validate JSON (62 test cases)
 │   └── pre-commit/
-│       ├── validate.sh            # Shell script path validation
-│       └── validate.py            # Python pre-commit validation
+│       ├── validate.sh           # Shell script path validation
+│       └── validate.py           # Python pre-commit validation
 │
-├── docs/                           # Documentation
-│   ├── CLAUDE.md                  # Main project doc (CANONICAL)
-│   ├── CURRENT_UNDERSTANDING.md   # System state
-│   ├── ARCHITECTURE.md            # Technical architecture
-│   ├── SYSTEM_MAP.md              # System overview
-│   ├── CONCEPT.md                 # Core vision
-│   ├── api/
-│   │   ├── entry.md               # Entry API docs
-│   │   ├── book.md                # Book API docs
-│   │   ├── persona.md             # Persona API docs
-│   │   └── generation-tools.md    # Tool reference (1078 lines)
-│   ├── analysis/                  # Analysis docs
-│   └── project/                   # Project documentation
-│       └── handover.md            # Session handover notes
+├── tools/                         # Lore management CLI
+│   ├── manage-lore.sh            # CRUD: entries, books, personas (~500 lines)
+│   ├── create-persona.sh         # Persona creation
+│   ├── context-manager.sh        # Session lifecycle (120+ lines)
+│   ├── llama-lore-integrator.sh  # Content extraction (~200 lines)
+│   ├── llama-lore-creator.sh     # LLM entry generation (150 lines)
+│   └── index-knowledge.sh        # Generate INDEX.md
 │
-├── .skogai/                        # SkogAI workflow state
+├── .skogai/                       # SkogAI workflow state
 │   └── plan/
-│       └── codebase/              # Codebase analysis (THIS MAP)
+│       └── codebase/             # This codebase map
 │
-├── .serena/                        # Claude Code session memories
-│   └── memories/                  # Session learnings (5 files)
+├── .serena/                       # Claude Code session memories
+│   └── memories/                 # Session learnings (5 files)
 │
-├── .github/                        # GitHub configuration
-│   ├── workflows/                 # CI/CD workflows
-│   │   ├── claude.yml             # Claude Code integration
-│   │   ├── lore-growth.yml        # Growth monitoring
-│   │   └── doc-updater.yml        # Documentation updates
-│   └── workflows-old/             # Archived workflows
+├── .github/                       # GitHub configuration
+│   └── workflows/                # CI/CD workflows
 │
-├── Argcfile.sh                     # CLI interface (argc-powered)
-├── generate-agent-lore.py          # Specialized lore generation
-├── CLAUDE.md                       # Project instructions (CANONICAL)
-├── pyproject.toml                  # Python project config
-├── uv.lock                         # Python dependencies lock file
-├── .pre-commit-config.yaml         # Pre-commit hooks config
-├── .envrc                          # Direnv environment config
-└── .gitignore                      # Git ignore patterns
+├── Argcfile.sh                    # argc-powered CLI interface
+├── generate-agent-lore.py         # Specialized lorebook generation
+├── CLAUDE.md                      # Project instructions (~2000 lines)
+├── pyproject.toml                 # Python project config
+└── uv.lock                        # Python dependencies lock
 ```
 
+## Key Locations
+
+### Data Storage
+| Type | Location | Count |
+|------|----------|-------|
+| Lore Entries | `knowledge/expanded/lore/entries/` | 1,202 files |
+| Lore Books | `knowledge/expanded/lore/books/` | 107 files |
+| Personas | `knowledge/expanded/personas/` | 92 files |
+| Active Contexts | `context/current/` | 13 files |
+| Archived Contexts | `context/archive/` | 5 files |
+
+### Schemas (Contracts)
+| Type | Location |
+|------|----------|
+| Entry Schema | `knowledge/core/lore/schema.json` |
+| Book Schema | `knowledge/core/book-schema.json` |
+| Persona Schema | `knowledge/core/persona/schema.json` |
+
+### Pipeline
+| Component | Location |
+|-----------|----------|
+| Main Pipeline | `integration/lore-flow.sh` |
+| Persona Manager | `integration/persona-bridge/persona-manager.py` |
+| Author Mapping | `integration/persona-mapping.conf` |
+
+### CLI Interface
+| Tool | Location |
+|------|----------|
+| Argc CLI | `Argcfile.sh` |
+| Main CRUD Tool | `tools/manage-lore.sh` |
+| LLM Creator | `tools/llama-lore-creator.sh` |
+| LLM Integrator | `tools/llama-lore-integrator.sh` |
+
+### Documentation
+| Document | Location |
+|----------|----------|
+| Main Doc (CANONICAL) | `CLAUDE.md` |
+| Current State | `docs/CURRENT_UNDERSTANDING.md` |
+| API Docs | `docs/api/{entry,book,persona}.md` |
+| Tool Reference | `docs/api/generation-tools.md` |
+
 ## Module Organization
+
+### Tool Hierarchy
+```
+Level 4: orchestrator.py          (session context + knowledge loading)
+    ↓
+Level 3: lore-flow.sh             (orchestrates all tools)
+    ↓
+Level 2: llama-lore-creator.sh    (LLM-powered generation)
+         llama-lore-integrator.sh (extraction + analysis)
+    ↓
+Level 1: manage-lore.sh           (CRUD, no LLM)
+```
 
 ### Data Layer
 - **Location:** `knowledge/`, `agents/api/`
 - **Purpose:** JSON schemas and storage
-- **Files:**
-  - Schemas: `knowledge/core/{lore,book,persona}/schema.json`
-  - Data: `knowledge/expanded/lore/{entries,books}/`, `knowledge/expanded/personas/`
+- **Pattern:** Simple JSON file I/O with schema loading
 
 ### API Layer
 - **Location:** `agents/api/`
 - **Purpose:** CRUD operations
 - **Files:**
-  - `lore_api.py` (280 lines) - JSON file CRUD
-  - `agent_api.py` - LLM provider integration
+  - `lore_api.py` (558 lines) - JSON file CRUD
+  - `agent_api.py` (322 lines) - LLM provider integration
 
 ### Tool Layer
 - **Location:** `tools/`
 - **Purpose:** Primary CLI interface (shell + Python)
-- **Files:**
-  - `manage-lore.sh` (800+ lines) - Main CRUD tool
-  - `llama-lore-creator.sh` - LLM generation
-  - `llama-lore-integrator.sh` - Extract from documents
-  - `create-persona.sh` - Persona management
-  - `context-manager.sh` - Session lifecycle
+- **Pattern:** Shell scripts with jq for JSON manipulation
 
 ### Integration Layer
 - **Location:** `integration/`
 - **Purpose:** Pipeline orchestration
-- **Files:**
-  - `lore-flow.sh` - 5-step pipeline (main entry point)
-  - `persona-manager.py` - Persona context loading
-  - `persona-mapping.conf` - Git author mapping
+- **Pattern:** 5-step lore generation flow
 
 ### Orchestration Layer
 - **Location:** `orchestrator/`
 - **Purpose:** Session coordination and context management
-- **Files:**
-  - `orchestrator.py` (200+ lines) - Main orchestrator
-  - `identity/` - Orchestrator identity configs
-
-### Context Layer
-- **Location:** `context/`
-- **Purpose:** Session binding and state tracking
-- **Structure:**
-  - `templates/` - Context schemas
-  - `current/` - Active sessions (13 contexts)
-  - `archive/` - Completed sessions (5 contexts)
-
-### Scripts Layer
-- **Location:** `scripts/jq/`
-- **Purpose:** Standard JSON operations (reusable across projects)
-- **Operations:** crud-get, crud-set, crud-delete, crud-merge
-
-## Key Locations
-
-### Data Storage
-- **Lore Entries:** `/home/skogix/lore/knowledge/expanded/lore/entries/` (368 files)
-- **Lore Books:** `/home/skogix/lore/knowledge/expanded/lore/books/` (88 files)
-- **Personas:** `/home/skogix/lore/knowledge/expanded/personas/` (53 files)
-
-### Schemas (Contracts)
-- **Entry Schema:** `/home/skogix/lore/knowledge/core/lore/schema.json`
-- **Book Schema:** `/home/skogix/lore/knowledge/core/book-schema.json`
-- **Persona Schema:** `/home/skogix/lore/knowledge/core/persona/schema.json`
-
-### Context Management
-- **Templates:** `/home/skogix/lore/context/templates/`
-- **Active Sessions:** `/home/skogix/lore/context/current/` (13 contexts)
-- **Archive:** `/home/skogix/lore/context/archive/` (5 contexts)
-
-### Pipeline
-- **Main Pipeline:** `/home/skogix/lore/integration/lore-flow.sh`
-- **Persona Manager:** `/home/skogix/lore/integration/persona-bridge/persona-manager.py`
-- **Author Mapping:** `/home/skogix/lore/integration/persona-mapping.conf`
-
-### CLI Interface
-- **Argc CLI:** `/home/skogix/lore/Argcfile.sh` (argc-powered)
-- **Main Tool:** `/home/skogix/lore/tools/manage-lore.sh` (800+ lines)
-
-### Documentation
-- **Main Doc:** `/home/skogix/lore/CLAUDE.md` (CANONICAL)
-- **Current State:** `/home/skogix/lore/docs/CURRENT_UNDERSTANDING.md`
-- **API Docs:** `/home/skogix/lore/docs/api/{entry,book,persona}.md`
-- **Tool Reference:** `/home/skogix/lore/docs/api/generation-tools.md` (1078 lines)
-
-### Session Memories
-- **Location:** `/home/skogix/lore/.serena/memories/`
-- **Files:** 5 session memory files documenting learnings across sessions
+- **Pattern:** Knowledge categorization by ID prefix
 
 ## File Naming Conventions
 
 ### JSON Data Files
-- **Entry files:** `entry_<unix_timestamp>.json`
-  - Example: `entry_1743758088.json`
-  - Batch entries: `entry_<timestamp>_<hex_hash>.json` (quantum entanglement pattern)
-- **Book files:** `book_<unix_timestamp>.json` or `book_<timestamp>_<hex_hash>.json`
-  - Example: `book_1743774022_e2298400.json`
-- **Persona files:** `persona_<unix_timestamp>.json` or `<name>.json`
-  - Example: `persona_1743758088.json`, `amy.json`
-
-### Context Files
-- **Format:** `context-<session_id>.json`
-- **Session ID:** Unix timestamp (e.g., `context-1764990069.json`)
+| Type | Pattern | Example |
+|------|---------|---------|
+| Entry (Python) | `entry_<timestamp>.json` | `entry_1764992601.json` |
+| Entry (Shell) | `entry_<timestamp>_<hash>.json` | `entry_1764992601_a4b3c2d1.json` |
+| Book | `book_<timestamp>.json` | `book_1764992601.json` |
+| Persona | `persona_<timestamp>.json` | `persona_1764992753.json` |
+| Context | `context-<session_id>.json` | `context-1764990069.json` |
 
 ### Knowledge Files
-- **Numbered:** `XXNN.md` (e.g., `0000.md`, `0010.md`)
-- **Ranges:**
-  - 00-09: Core/Emergency
-  - 10-19: Navigation
-  - 20-29: Identity
-  - 30-99: Operational
-  - 100-199: Standards
-  - 200-299: Project-specific
-  - 300-399: Tools/Docs
-  - 1000+: Frameworks
+| Range | Category |
+|-------|----------|
+| 00-09 | Core/Emergency (load FIRST) |
+| 10-19 | Navigation |
+| 20-29 | Identity |
+| 30-99 | Operational |
+| 100-199 | Standards |
+| 200-299 | Project-specific |
+| 300-399 | Tools/Docs |
+| 1000+ | Frameworks |
 
-## Current Data Volume
+## Integration Points
 
-As of 2026-01-05:
-- **368 lore entries** (`knowledge/expanded/lore/entries/`)
-- **88 lore books** (`knowledge/expanded/lore/books/`)
-- **53 active personas** (`knowledge/expanded/personas/`)
-- **61+ archived personas** (`knowledge/archived/`)
-- **13 active session contexts** (`context/current/`)
-- **5 archived session contexts** (`context/archive/`)
-- **5 session memories** (`.serena/memories/`)
+### Entry Points by Use Case
 
-## Special Directories
+**Manual Lore Creation:**
+```
+User -> tools/manage-lore.sh create-entry -> knowledge/expanded/lore/entries/
+```
 
-### `.skogai/` - SkogAI Workflow State
-- Created by `/skogai:*` commands
-- Contains project planning and state
-- `plan/codebase/` - This codebase map
+**LLM-Generated Lore:**
+```
+User -> tools/llama-lore-creator.sh -> tools/manage-lore.sh -> entries/
+```
 
-### `.serena/` - Claude Code Session Memories
-- Maintains session learnings across conversations
-- Documents what worked vs what didn't
-- Key mistakes to avoid
-- Cross-session continuity
+**Pipeline Auto-Generation:**
+```
+Git commit -> integration/lore-flow.sh -> [5 steps] -> entries/ + books/ + personas/
+```
 
-### `.github/workflows/` - CI/CD Automation
-- `claude.yml` - Claude Code integration
-- `lore-growth.yml` - Growth monitoring (every 6 hours)
-- `doc-updater.yml` - Documentation consistency
-- `claude-code-review.yml` - Code review automation
+**Relationship Analysis:**
+```
+Book -> tools/llama-lore-integrator.sh analyze-connections -> LLM -> entries/ (updated)
+```
 
-### `lorefiles/` - Legacy Knowledge
-- Historical knowledge from previous system
-- `skogai/current/goose-memory-backup/` - Goose agent memory backup
-- Not actively used but preserved for historical reference
+**Context Management:**
+```
+Session start -> tools/context-manager.sh create -> context/current/
+Session end -> context-manager.sh archive -> context/archive/
+```
+
+## Module Patterns
+
+### Shell Tools Pattern
+```bash
+#!/bin/bash
+set -e
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+DATA_DIR="$REPO_ROOT/knowledge/expanded"
+
+function_name() {
+  local param=$1
+  # Implementation with atomic file operations
+}
+
+case "$1" in
+  command) function_name "$2" ;;
+  *) usage ;;
+esac
+```
+
+### Python API Pattern
+```python
+import logging
+from pathlib import Path
+from typing import Dict, Any, Optional, List
+
+logger = logging.getLogger(__name__)
+
+class LoreAPI:
+    def __init__(self):
+        self.repo_root = Path(__file__).parent.parent
+        self.data_dir = self.repo_root / "knowledge" / "expanded"
+        self.schemas = {}
+        self.load_schemas()
+
+    def method_name(self, param: str) -> Optional[Dict[str, Any]]:
+        """Docstring with type hints."""
+        try:
+            # Implementation with JSON file I/O
+            pass
+        except Exception as e:
+            logger.error(f"Error: {e}")
+            return None
+```
+
+### jq Transformation Pattern
+```
+scripts/jq/operation-name/
+├── transform.jq           # Transformation logic
+├── test.sh                # Test cases
+├── test-input-*.json      # Test fixtures
+└── README.md              # Usage documentation
+```
+
+## Key Observations
+
+### 1. Atomic Operations
+- All JSON updates use temp file + move pattern
+- Prevents corruption on write failures
+- Validation happens before atomicity
+
+### 2. Bidirectional Linking
+- Entry <-> Book: via `book_id` + `entries` array
+- Book <-> Persona: via `readers` + `lore_books` arrays
+- Entry <-> Entry: via `relationships` array
+
+### 3. Storage is Source of Truth
+- All data persists as JSON files
+- APIs are thin wrappers around file I/O
+- Schema validation ensures data integrity
+
+### 4. Context as Glue
+- Session ID (timestamp) ties all artifacts
+- Context files preserve session state
+- Enables cross-session continuity

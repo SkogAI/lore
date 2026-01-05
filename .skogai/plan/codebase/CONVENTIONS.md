@@ -1,380 +1,653 @@
 # Code Conventions
 
-## Naming Conventions
+**Generated:** 2026-01-05
 
-### Python Functions & Variables
-- **Functions:** snake_case
-  - `create_lore_entry()`, `load_schemas()`, `generate_id()`, `add_entry_to_book()`
-- **Variables:** snake_case
-  - `lore_entries_dir`, `book_id`, `persona_id`, `base_dir`
-- **Classes:** PascalCase
-  - `LoreAPI`, `AgentAPI`, `PersonaManager`
-- **Private/Internal:** Underscore prefix
-  - `_call_llm_api()`, `_parse_and_validate_response()`
+## Quick Reference
 
-### Shell Script Functions
-- **CLI Commands:** kebab-case (with hyphens)
-  - `create-entry`, `list-books`, `show-entry`, `validate-entry`
-- **Internal Helpers:** Underscore prefix
-  - `_essence_forms()`, `_time_epoch()`, `_get_category()`
-- **Constants/Environment Variables:** ALL_CAPS
-  - `SKOGAI_DIR`, `LORE_DIR`, `BOOKS_DIR`, `ENTRIES_DIR`, `PERSONA_DIR`
+| Aspect | Convention | Example |
+|--------|-----------|---------|
+| **Shell variables** | UPPERCASE for constants, lowercase for locals | `REPO_ROOT`, `local file=$1` |
+| **Python imports** | stdlib -> third-party -> local | See Python section |
+| **Error output** | Always to stderr | `echo "ERROR" >&2` |
+| **File operations** | Atomic (temp + move) | `mv tmp.json file.json` |
+| **JSON construction** | Always use jq | `jq --arg x "$x" '{x: $x}'` |
+| **ID generation** | Timestamp or timestamp+hash | `entry_1764992601_a4b3c2d1` |
+| **LLM prompts** | Multi-part with examples | See LLM section |
+| **Validation** | jq-based schema validation | See Schema section |
+| **Testing** | Deterministic fixtures | test-input-*.json |
+| **Temp files** | Use mktemp | `$(mktemp -t lore-XXXXXX)` |
+| **Logging** | Module-level logger | `logger.error(...)` |
 
-### JSON File Naming
-- **Entry files:** `entry_<unix_timestamp>.json`
-  - Example: `entry_1743758088.json`
-  - Batch entries: `entry_<timestamp>_<hex_hash>.json`
-- **Book files:** `book_<unix_timestamp>.json` or `book_<timestamp>_<hex_hash>.json`
-  - Example: `book_1743774022_e2298400.json`
-- **Persona files:** `persona_<unix_timestamp>.json` or `<name>.json`
-  - Example: `persona_1743758088.json`, `amy.json`
+## Shell Script Conventions
 
-### Argc CLI Commands (Argcfile.sh)
-- **Command names:** kebab-case (hyphens)
-  - `list-books`, `show-book`, `validate-entry`, `read-book-entries`
-- **Visual identification:** Emojis for categories
-  - `📚 Chronicles of the Digital Realm`
-- **Aliases:** snake_case when provided
+### Standard Header Pattern
+```bash
+#!/bin/bash
+set -e                      # Fail-fast execution (exit on error)
+set -u                      # Fail on undefined variables (optional)
 
-## Code Style Standards
+# Path resolution - consistent across all scripts
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
+```
 
-### Python Style
+### Variable Naming
+```bash
+# UPPERCASE: Constants, environment variables, global configuration
+LORE_DIR="/home/skogix/lore"
+ENTRIES_DIR="$LORE_DIR/knowledge/expanded/lore/entries"
+LLM_PROVIDER="${LLM_PROVIDER:-ollama}"
 
-**Import Ordering:**
+# lowercase: Function variables, local scope
+function process_entry() {
+  local entry_id=$1
+  local content=$2
+}
+```
+
+### Error Handling Patterns
+
+**File Existence Checks:**
+```bash
+if [ ! -f "$file" ]; then
+    echo "ERROR: File not found: $file" >&2
+    return 1
+fi
+```
+
+**Command Validation:**
+```bash
+if ! command -v ollama &>/dev/null; then
+    echo "ERROR: Ollama not found. Please install it first:" >&2
+    echo "  curl https://ollama.ai/install.sh | sh" >&2
+    exit 1
+fi
+```
+
+**jq Error Handling:**
+```bash
+if ! jq "$jq_expression" "$file" > "$temp_file" 2>/dev/null; then
+    echo "ERROR: jq transformation failed" >&2
+    rm -f "$temp_file"
+    return 1
+fi
+```
+
+**Error Output to stderr:**
+```bash
+echo "ERROR: message" >&2  # Always redirect errors to stderr
+echo "Warning: message" >&2  # Warnings too
+# Regular output to stdout (implicit)
+```
+
+### Atomic File Operations
+
+**Standard Pattern (from manage-lore.sh):**
+```bash
+atomic_update() {
+  local file="$1"
+  local jq_expression="$2"
+  local validate_type="$3"  # Optional schema validation
+
+  # 1. Check file exists
+  if [ ! -f "$file" ]; then
+    echo "ERROR: File not found: $file" >&2
+    return 1
+  fi
+
+  # 2. Create temp file
+  local temp_file="${file}.tmp.$$"
+
+  # 3. Apply jq transformation
+  if ! jq "$jq_expression" "$file" > "$temp_file" 2>/dev/null; then
+    echo "ERROR: jq transformation failed" >&2
+    rm -f "$temp_file"
+    return 1
+  fi
+
+  # 4. Optional: Validate against schema
+  if [ -n "$validate_type" ]; then
+    if ! validate_against_schema "$temp_file" "$validate_type"; then
+      echo "ERROR: Schema validation failed" >&2
+      rm -f "$temp_file"
+      return 1
+    fi
+  fi
+
+  # 5. Move temp file (atomic)
+  if ! mv "$temp_file" "$file"; then
+    echo "ERROR: Failed to update file" >&2
+    rm -f "$temp_file"
+    return 1
+  fi
+}
+```
+
+**Why Atomic:**
+- Crash during write -> Original file unchanged
+- Validation failure -> Original file unchanged
+- Process killed -> Original file unchanged
+
+### Function Naming
+
+**Command-style (kebab-case) for user-facing commands:**
+```bash
+create-entry()
+add-to-book()
+link-to-persona()
+```
+
+**Internal functions (snake_case):**
+```bash
+create_entry()
+add_to_book()
+generate_id()
+atomic_update()
+```
+
+### JSON Construction
+
+**NEVER use string concatenation:**
+```bash
+# BAD - Injection risk
+content="{\"title\": \"$title\", \"content\": \"$content\"}"
+```
+
+**ALWAYS use jq:**
+```bash
+# GOOD - Safe JSON construction
+jq -n \
+  --arg title "$title" \
+  --arg content "$content" \
+  '{title: $title, content: $content}'
+```
+
+### ID Generation Patterns
+
+**Format 1: Timestamp only (Python)**
+```bash
+entry_id = f"entry_{int(time.time())}"
+# Example: entry_1764992601
+```
+
+**Format 2: Timestamp + hash (Shell) - RECOMMENDED**
+```bash
+entry_id="entry_$(date +%s)_$(openssl rand -hex 4)"
+# Example: entry_1764992601_a4b3c2d1
+```
+
+### Provider Switching Pattern
+```bash
+case "$PROVIDER" in
+  ollama)
+    ollama run "$MODEL_NAME" "$prompt"
+    ;;
+  claude)
+    claude -p "$prompt"
+    ;;
+  openai)
+    curl -s "$base_url/chat/completions" \
+      -H "Authorization: Bearer $api_key" \
+      -H "Content-Type: application/json" \
+      -d "{\"model\":\"$MODEL_NAME\",\"messages\":[...]}" | \
+      jq -r '.choices[0].message.content'
+    ;;
+  *)
+    echo "ERROR: Unknown provider: $PROVIDER" >&2
+    exit 1
+    ;;
+esac
+```
+
+### Temp File Handling
+
+**Current Pattern (needs improvement):**
+```bash
+# BAD - Predictable paths, race condition risk
+TEMP_CONTENT="/tmp/lore-content-$SESSION_ID.txt"
+```
+
+**Recommended Pattern:**
+```bash
+# GOOD - Unique, secure temp files
+TEMP_CONTENT=$(mktemp -t lore-content-XXXXXX.txt)
+trap "rm -f $TEMP_CONTENT" EXIT  # Cleanup on exit
+```
+
+## Python Conventions
+
+### Import Order
 ```python
-import os           # stdlib
-import sys          # stdlib
-import json         # stdlib
-import logging      # stdlib
-from typing import Dict, Any, List, Optional  # stdlib
+# 1. Standard library
+import json
+import logging
+import os
+from pathlib import Path
+from typing import Dict, Any, Optional, List
 
-import requests     # third-party
+# 2. Third-party
+import requests
+import click
+import yaml
+
+# 3. Local
+from agents.api import lore_api
+```
+
+### Type Annotations
+```python
+def create_lore_entry(
+    self,
+    title: str,
+    content: str,
+    category: str,
+    tags: Optional[List[str]] = None,
+    summary: Optional[str] = None
+) -> Optional[Dict[str, Any]]:
+    """Create a new lore entry.
+
+    Args:
+        title: Entry title
+        content: Entry content in markdown
+        category: Entry category (character, place, event, object, concept, custom)
+        tags: Optional list of tags
+        summary: Optional brief summary
+
+    Returns:
+        Entry dictionary or None on failure
+    """
+    pass
+```
+
+### Error Handling
+
+**Current Pattern (overly broad):**
+```python
+# BAD - Catches all exceptions without distinction
+try:
+    with open(entry_path, "r") as f:
+        return json.load(f)
+except Exception as e:
+    logger.error(f"Failed to load lore entry {entry_id}: {e}")
+    return None  # Silent failure
+```
+
+**Recommended Pattern:**
+```python
+# GOOD - Specific exception handling
+try:
+    with open(entry_path, "r") as f:
+        return json.load(f)
+except FileNotFoundError:
+    logger.warning(f"Lore entry not found: {entry_id}")
+    return None
+except json.JSONDecodeError as e:
+    logger.error(f"Invalid JSON in {entry_id}: {e}")
+    raise  # Re-raise for caller to handle
+except IOError as e:
+    logger.error(f"Failed to read {entry_id}: {e}")
+    raise
+```
+
+### Logging Pattern
+```python
+import logging
+
+# Module-level logger
+logger = logging.getLogger(__name__)
+
+# Usage
+logger.info(f"Created lore entry: {entry_id}")
+logger.warning(f"Persona not found, using default")
+logger.error(f"Failed to load persona: {e}")
+logger.debug(f"Entry content: {content[:100]}")
+```
+
+### Path Management
+```python
 from pathlib import Path
 
-# Add project root to path
-sys.path.insert(0, ...)
+# Prefer Path objects
+self.repo_root = Path(__file__).parent.parent
+self.entries_dir = self.repo_root / "knowledge" / "expanded" / "lore" / "entries"
 
-from agents.api.lore_api import LoreAPI  # local
+# Convert to string only when needed
+entry_path = str(self.entries_dir / f"{entry_id}.json")
 ```
 
-**Type Annotations:**
-- Use `Dict[str, Any]`, `List[str]`, `Optional[Dict[str, Any]]`
-- Import from `typing` module
-- Type hints on function signatures
-
-**Docstrings:**
-- Triple-quoted strings for all classes and functions
-- Module docstrings at top of file with purpose and usage
-- Include Args/Returns for complex methods
-
-**Error Handling:**
-- Try/except with specific exception types
-- Informative logging on errors
-- Use `logger = logging.getLogger("module_name")`
-
-**Line Length:**
-- No explicit limit enforced
-- Keep lines reasonable (<100 chars preferred)
-
-**Logging:**
+### Docstring Convention
 ```python
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("module_name")
+def method_name(self, param: str) -> Optional[Dict[str, Any]]:
+    """One-line summary.
 
-logger.info("Info message")
-logger.error("Error message")
-```
+    Longer description if needed. Explain the purpose and any important
+    behavior or side effects.
 
-### Shell Script Style
+    Args:
+        param: Description of param
 
-**Shebang:**
-```bash
-#!/bin/bash
-# or
-#!/usr/bin/env bash
-```
+    Returns:
+        Description of return value
 
-**Set Options:**
-```bash
-set -e                 # Exit on error
-set -euo pipefail      # Strict mode (preferred)
-```
-
-**Function Definitions:**
-- Functions defined before usage
-- Clear function names describing action
-
-**Comments:**
-```bash
-# Single-line comments with clear descriptions
-# Multi-line comments for complex logic
-```
-
-**Variable Usage:**
-- Double-quoted for safety: `"${VAR}"`
-- Explicit array syntax for iteration
-
-**Path Handling:**
-```bash
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-```
-
-### Documentation in Code
-
-**Python Module Documentation:**
-```python
-#!/usr/bin/env python3
-"""Module purpose and description.
-
-Detailed explanation of what it does.
-Usage examples if applicable.
-"""
-
-import ...
-
-logging.basicConfig(...)
-logger = logging.getLogger("module_name")
-
-class ClassName:
-    """Class purpose.
-
-    Attributes:
-        attr_name: Description
+    Raises:
+        ValueError: When param is invalid
+        FileNotFoundError: When file doesn't exist
     """
-
-    def method(self, arg: str) -> Dict[str, Any]:
-        """Method purpose.
-
-        Args:
-            arg: Description
-
-        Returns:
-            Description of return value
-
-        Raises:
-            ExceptionType: When this happens
-        """
+    pass
 ```
 
-**Shell Script Documentation:**
+### ID Generation Pattern
+
+**Current:**
+```python
+def generate_id(self, prefix: str = "") -> str:
+    """Generate a unique identifier for a new entity."""
+    timestamp = int(time.time())
+    return f"{prefix}{timestamp}"
+```
+
+**Recommended (add collision avoidance):**
+```python
+import secrets
+
+def generate_id(self, prefix: str = "") -> str:
+    """Generate a unique identifier with collision avoidance."""
+    timestamp = int(time.time())
+    random_hex = secrets.token_hex(4)  # 8 hex chars
+    return f"{prefix}{timestamp}_{random_hex}"
+```
+
+## LLM Prompt Engineering Patterns
+
+### Multi-Part Structure
+```
+## CRITICAL INSTRUCTION
+Direct output instructions to prevent meta-commentary
+
+## Task
+What the LLM should do
+
+## Format Requirements
+Output format specifications
+
+## Quality Checklist (Internal - DO NOT OUTPUT)
+Validation criteria for LLM to self-check
+
+## Examples
+Correct output examples to guide LLM
+
+## Your Task
+Specific instructions with context
+```
+
+### Example Prompt (from llama-lore-creator.sh):
 ```bash
-#!/bin/bash
-# Script purpose
-#
-# Description of what it does
-# Features/capabilities listed
-#
-# Usage: ./script.sh [options]
+PROMPT="You are a master lore writer crafting narrative mythology.
 
-set -e
+## CRITICAL INSTRUCTION
+Write the lore entry content DIRECTLY. No meta-commentary, no explanations, no approval requests.
 
-# Path setup
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+## Task
+Create a $category entry titled \"$title\"
 
-# Function documentation as comments
-# validate_something() - Validates input
-# Args: $1 - input to validate
-# Returns: 0 on success, 1 on failure
-validate_something() {
-    # Implementation
-}
+## Format Requirements
+- 2-3 paragraphs of rich narrative prose
+- Present tense, immersive storytelling
+- Mythological/fantastical tone
+- NO phrases like: \"I will\", \"Let me\", \"I need\", \"Here is\", \"This entry\"
+
+## Quality Checklist (Internal - DO NOT OUTPUT)
+- Directly starts with narrative
+- No meta-commentary
+- 150-300 words
+- Establishes atmosphere and significance
+
+## Examples of CORRECT Output
+[Examples provided...]
+
+## Your Task
+Write the $category entry for \"$title\" NOW. Begin directly with narrative prose:"
 ```
 
-**Argc Command Documentation:**
+### Validation Pattern
 ```bash
-# @cmd Purpose of command with emoji
-# @arg arg_name![`_choice_function`] Description of argument
-# @option --flag Description of flag option
-# @alias alternative_name
-command_name() {
-    # Implementation
+validate_lore_output() {
+  local content="$1"
+  local errors=()
+
+  # Check for meta-commentary patterns at start
+  if echo "$content" | head -n 1 | grep -qiE '^[[:space:]]*(I will|Let me|Here is)'; then
+    errors+=("Contains meta-commentary in first line")
+  fi
+
+  # Check minimum length
+  word_count=$(echo "$content" | wc -w)
+  if [ "$word_count" -lt 100 ]; then
+    errors+=("Too short ($word_count words, recommended 100+)")
+  fi
+
+  # Report
+  if [ ${#errors[@]} -gt 0 ]; then
+    printf '%s\n' "${errors[@]}" >&2
+    return 1
+  fi
+
+  return 0
 }
+```
 
-# Choice function for argument validation
-_choice_function() {
-    # Return available choices
+### Stripping Pattern
+```bash
+strip_meta_commentary() {
+  local content="$1"
+
+  # Remove first line if it's meta-commentary
+  if echo "$content" | head -n 1 | grep -qiE '^[[:space:]]*(I will|Let me|Here is)'; then
+    echo "$content" | tail -n +2  # Skip first line
+  else
+    echo "$content"  # Return unchanged
+  fi
 }
 ```
 
-**README/Documentation (Markdown):**
-- Hierarchical headers (#, ##, ###)
-- Code blocks with language specification
-- Links to related documentation (`@docs/api/entry.md`)
-- Examples with context
-- Last updated timestamps
+## JSON Schema Validation
 
-## File Naming Patterns
-
-### Knowledge/Data Structure
-- **Schemas:** `knowledge/core/<domain>/schema.json`
-  - `knowledge/core/lore/schema.json`
-  - `knowledge/core/persona/schema.json`
-- **Expanded data:** `knowledge/expanded/<type>/<domain>/file_<timestamp>.json`
-- **Numbered knowledge:** `XXNN.md` (00-09 core, 10-19 navigation, etc.)
-
-### Scripts
-- **Tools:** `tools/<function>.sh`
-  - `manage-lore.sh`, `context-manager.sh`
-- **Pre-commit hooks:** `scripts/pre-commit/<validator>.sh` or `.py`
-- **Integration:** `integration/<workflow>.sh`
-- **Validation:** `validate.sh`, `validate.py`
-
-### Tests
-- **Test directory:** `tests/` (flat structure with subdirs)
-- **Test definitions:** `definition.json` format
-
-### Configuration
-- **Project config:** `pyproject.toml`
-- **Pre-commit:** `.pre-commit-config.yaml`
-- **Environment:** `.envrc` (direnv)
-- **Git ignore:** `.gitignore`
-
-## Directory Structure Patterns
-
-### Standard Layout
+### Schema Location Convention
 ```
-<module>/
-├── __init__.py          # Module initialization
-├── core.py              # Core functionality
-├── api.py               # Public API
-├── utils.py             # Utility functions
-└── tests/               # Module tests
+knowledge/core/
+├── lore/
+│   └── schema.json           # Entry schema
+├── book-schema.json          # Book schema
+└── persona/
+    └── schema.json           # Persona schema
 ```
 
-### Tool Layout
-```
-tools/
-├── <tool-name>.sh       # Shell implementation
-├── <tool-name>.py       # Python implementation (optional)
-└── <tool-name>-tests/   # Tool-specific tests
-```
+### Validation via jq
+```bash
+validate_against_schema() {
+  local file=$1
+  local schema_type=$2  # "entry", "book", or "persona"
 
-### Integration Layout
-```
-integration/
-├── <workflow>.sh        # Main workflow script
-├── <component>/         # Sub-components
-│   └── manager.py
-├── <config>.conf        # Configuration files
-└── services/            # Service daemon scripts
+  local schema_file="knowledge/core/${schema_type}/schema.json"
+
+  jq -f scripts/jq/schema-validation/transform.jq \
+    --argfile schema "$schema_file" \
+    "$file"
+}
 ```
 
-## Code Quality Standards
+### Required Fields by Type
 
-### Python Code Quality
-- **Type annotations:** Required on public APIs
-- **Docstrings:** Required on all classes and public methods
-- **Error handling:** Try/except with specific exceptions
-- **Logging:** Use configured logger, not print()
-- **Path handling:** Use `pathlib.Path` for cross-platform compatibility
-- **Configuration:** Load from config files with environment variable fallbacks
+**Entry:**
+```json
+{
+  "required": ["id", "title", "content", "category"],
+  "category": "enum[character|place|event|object|concept|custom]"
+}
+```
 
-### Shell Code Quality
-- **Strict mode:** Use `set -euo pipefail` at script start
-- **Quoting:** Always quote variables: `"${VAR}"`
-- **Error handling:** Check exit codes, use `|| exit 1` when needed
-- **Portability:** Use `#!/bin/bash` (not `/bin/sh`)
-- **Functions:** Declare functions before usage
-- **Comments:** Document non-obvious logic
+**Book:**
+```json
+{
+  "required": ["id", "title", "description"],
+  "status": "enum[draft|active|archived|deprecated]"
+}
+```
 
-### JSON Schema Standards
-- **Required fields:** Always specify in schema
-- **Enums:** Use for fixed value sets
-- **Descriptions:** Provide for all fields
-- **Examples:** Include in schema when helpful
-- **Validation:** Use JSON Schema draft-07 format
+**Persona:**
+```json
+{
+  "required": ["id", "name", "core_traits", "voice"],
+  "interaction_style.formality": "enum[very_formal|formal|neutral|casual|very_casual]",
+  "interaction_style.humor": "enum[none|subtle|occasional|frequent|constant]",
+  "interaction_style.directness": "enum[very_direct|direct|balanced|indirect|very_indirect]"
+}
+```
 
-## Version Control Standards
+## Context Management Patterns
 
-### Git Commit Messages
-- First line: Short summary (<50 chars)
-- Blank line separator
-- Detailed description if needed
-- Reference issues: `Fixes #123`
-- Auto-generated commits include:
-  ```
-  🤖 Generated with [Claude Code](https://claude.com/claude-code)
+### Session ID Generation
+```bash
+session_id=$(date +%s)
 
-  Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
-  ```
+# Used consistently:
+TEMP_FILE="/tmp/content-$session_id.txt"
+ENTRY_ID="entry_$session_id"
+CONTEXT_FILE="context/current/context-$session_id.json"
+```
 
-### Branch Strategy
-- **Default branch:** `master` (not `main`)
-- **Feature branches:** Descriptive names
-- **Remote:** https://github.com/SkogAI/lore
+### Context Update Pattern
+```bash
+# Via context-manager.sh:
+context-manager.sh update "$session_id" "system_state.orchestrator_mode" "lore"
 
-### Pre-commit Hooks
-- **Validation:** Check for hardcoded paths
-- **Standard hooks:** Check YAML, JSON, merge conflicts
-- **Line endings:** Mixed line ending check (LF)
-- **Whitespace:** Trailing whitespace removal
-- **End of file:** Ensure newline at EOF
+# Internally uses jq:
+jq ".system_state.orchestrator_mode = \"lore\"" "$context_file" > tmp.json
+mv tmp.json "$context_file"
+```
+
+## Relationship Patterns
+
+### Bidirectional Linking
+
+**Entry <-> Book:**
+```bash
+add_to_book() {
+  local entry_id=$1
+  local book_id=$2
+
+  # 1. Add entry_id to book.entries array
+  jq ".entries += [\"$entry_id\"]" "$book_file" > tmp.json
+  mv tmp.json "$book_file"
+
+  # 2. Set entry.book_id
+  jq ".book_id = \"$book_id\"" "$entry_file" > tmp.json
+  mv tmp.json "$entry_file"
+
+  # 3. Update timestamps
+  timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  jq ".metadata.updated_at = \"$timestamp\"" "$book_file" > tmp.json
+  mv tmp.json "$book_file"
+}
+```
+
+**Book <-> Persona:**
+```bash
+link_to_persona() {
+  local book_id=$1
+  local persona_id=$2
+
+  # 1. Add persona to book.readers
+  jq ".readers += [\"$persona_id\"]" "$book_file" > tmp.json
+  mv tmp.json "$book_file"
+
+  # 2. Add book to persona.knowledge.lore_books
+  jq ".knowledge.lore_books += [\"$book_id\"]" "$persona_file" > tmp.json
+  mv tmp.json "$persona_file"
+}
+```
+
+## Security Patterns
+
+### Avoid Predictable Temp Files
+```bash
+# BAD - Predictable path
+TEMP_FILE="/tmp/lore-$SESSION_ID.txt"
+
+# GOOD - Unique, secure temp file
+TEMP_FILE=$(mktemp -t lore-XXXXXX.txt)
+trap "rm -f $TEMP_FILE" EXIT  # Cleanup on exit
+```
+
+### API Key Handling
+```bash
+# Use environment variables
+api_key="${OPENROUTER_API_KEY}"
+
+# Pass in headers, not in URL
+curl -H "Authorization: Bearer $api_key" ...
+
+# AVOID exposing in process list
+# curl "https://api.com?key=$api_key" ...  # Visible in ps
+```
+
+### Input Sanitization
+```bash
+# BAD - Direct interpolation, injection risk
+title="$1"
+jq ".title = \"$title\"" entry.json
+
+# GOOD - Use jq arguments, safe
+title="$1"
+jq --arg title "$title" '.title = $title' entry.json
+```
 
 ## Documentation Standards
 
-### Code Documentation
-- **Module docstrings:** Every Python module
-- **Function docstrings:** All public functions
-- **Inline comments:** For non-obvious logic
-- **TODO comments:** Format: `# TODO: Description`
-- **FIXME comments:** Format: `# FIXME: Issue description`
+### Shell Function Documentation
+```bash
+# create_lore_entry - Create a new lore entry
+#
+# Arguments:
+#   $1 - title (required)
+#   $2 - category (required): character, place, event, object, concept, custom
+#   $3 - content (optional)
+#
+# Returns:
+#   Entry ID on success, exits with 1 on failure
+#
+# Example:
+#   entry_id=$(create_lore_entry "The Dark Tower" "place")
+```
 
-### API Documentation
-- **Location:** `docs/api/`
-- **Format:** Markdown
-- **Structure:**
-  - Schema reference
-  - Example structure
-  - CRUD operations
-  - Common patterns
-  - Integration examples
-
-### Project Documentation
-- **CLAUDE.md:** Canonical project documentation
-- **CURRENT_UNDERSTANDING.md:** System state and learnings
-- **ARCHITECTURE.md:** Technical architecture
-- **Last updated:** Timestamp at top of file
-
-## Best Practices
-
-### Path Handling
+### Python Function Documentation
 ```python
-# Python - Use pathlib
-from pathlib import Path
-repo_root = Path(__file__).parent.parent
-books_dir = repo_root / "knowledge" / "expanded" / "lore" / "books"
+def create_lore_entry(
+    self,
+    title: str,
+    content: str,
+    category: str,
+    tags: Optional[List[str]] = None
+) -> Optional[Dict[str, Any]]:
+    """Create a new lore entry.
+
+    Args:
+        title: Entry title
+        content: Entry content in markdown format
+        category: Entry category (character, place, event, object, concept, custom)
+        tags: Optional list of searchable tags
+
+    Returns:
+        Entry dictionary with generated ID and metadata, or None on failure
+
+    Example:
+        >>> api = LoreAPI()
+        >>> entry = api.create_lore_entry("The Dark Tower", "A mysterious fortress...", "place")
+        >>> print(entry['id'])
+        entry_1764992601
+    """
+    pass
 ```
-
-```bash
-# Bash - Use relative paths
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-books_dir="$REPO_ROOT/knowledge/expanded/lore/books"
-```
-
-### Environment Variables
-```bash
-# Required for LLM operations
-export OPENROUTER_API_KEY="sk-or-v1-..."
-
-# Optional provider configuration
-export LLM_PROVIDER="ollama"  # ollama|claude|openai
-export LLM_MODEL="llama3.2:3b"
-
-# Directory mappings (via direnv/.envrc)
-export SKOGAI_DIR="/path/to/lore"
-export LORE_DIR="$SKOGAI_DIR/knowledge/expanded/lore"
-```
-
-### Error Messages
-- **Python:** Use `logger.error()` with context
-- **Shell:** Echo to stderr: `echo "ERROR: message" >&2`
-- **Exit codes:** 0=success, 1=error, 2=usage error
-
-### Validation
-- **Python:** Use JSON Schema validation
-- **Shell:** Use `jq` for JSON validation
-- **Pre-commit:** Validate paths, syntax, formats
 
 ## Anti-Patterns to Avoid
 

@@ -1,145 +1,73 @@
 # Lore Project - Codebase Analysis
 
 **Generated:** 2026-01-05
-**Analysis Method:** Parallel Explore agents (4 concurrent agents)
 **Coverage:** Complete repository analysis
 
 ## Overview
 
-This directory contains a comprehensive analysis of the Lore project codebase, generated using parallel exploration agents. The analysis covers:
+This directory contains a comprehensive analysis of the Lore project codebase. The Lore system transforms work sessions (git commits, code changes, chat logs) into mythological narrative entries stored as JSON, creating persistent memory for AI agents across sessions.
 
-- Technology stack and dependencies
-- System architecture and design patterns
-- Directory structure and organization
-- Code conventions and style standards
-- Testing practices and validation
-- External integrations
-- Technical concerns and known issues
+**Core Philosophy:** "Automate EVERYTHING so we can drink mojitos on a beach"
 
-## Documents
+## Quick Navigation
 
-### [STACK.md](./STACK.md)
-**Languages, frameworks, and dependencies**
-- Python 3.12+ (core APIs, agents, orchestrator)
-- Bash/Shell (primary operational interface)
-- jq (JSON operations)
-- Key dependencies: anthropic, openai, requests, streamlit, gradio
-- Build tools: uv, pre-commit, argc
-
-### [INTEGRATIONS.md](./INTEGRATIONS.md)
-**External APIs and services**
-- LLM providers: Ollama (local), OpenRouter (cloud), Anthropic, OpenAI
-- Data storage: JSON file-based (no database)
-- Git integration for workflow automation
-- jq CRUD operations library
-- Environment configuration and API keys
-
-### [ARCHITECTURE.md](./ARCHITECTURE.md)
-**System design and components**
-- Orchestrator layer (session coordination)
-- Integration pipeline (5-step lore generation)
-- Agent APIs (CRUD operations, LLM integration)
-- Shell tools (primary interface)
-- Knowledge system (numbered organization)
-- Context management (session binding)
-
-### [STRUCTURE.md](./STRUCTURE.md)
-**Directory layout and organization**
-- Complete directory tree with file counts
-- Module organization by layer
-- Key locations for data, schemas, tools
-- File naming conventions
-- Current data volume: 368 entries, 88 books, 53 personas
-
-### [CONVENTIONS.md](./CONVENTIONS.md)
-**Code style and naming standards**
-- Python: snake_case functions, PascalCase classes
-- Shell: kebab-case CLI commands, ALL_CAPS constants
-- JSON: timestamp-based naming patterns
-- Documentation patterns (docstrings, comments, markdown)
-- Path handling standards
-- Anti-patterns to avoid
-
-### [TESTING.md](./TESTING.md)
-**Testing philosophy and practices**
-- Validation-first, schema-driven approach
-- Pre-commit hooks for path/syntax validation
-- GitHub Actions for integration testing
-- Manual testing procedures
-- Known testing gaps and recommendations
-
-### [CONCERNS.md](./CONCERNS.md)
-**Technical issues and debt**
-- 30 identified issues across 8 categories
-- 3 critical production blockers (including Issue #6)
-- 5 high severity issues
-- Security, performance, and scalability concerns
-- Immediate action items prioritized
-- Production readiness assessment
-
-## Quick Start
-
-### Understanding the System
-1. Read [ARCHITECTURE.md](./ARCHITECTURE.md) for high-level system design
-2. Check [STRUCTURE.md](./STRUCTURE.md) to navigate the codebase
-3. Review [CONVENTIONS.md](./CONVENTIONS.md) before making changes
-
-### Working with the Codebase
-1. Check [STACK.md](./STACK.md) for dependencies
-2. Review [INTEGRATIONS.md](./INTEGRATIONS.md) for API setup
-3. See [TESTING.md](./TESTING.md) for validation procedures
-
-### Addressing Issues
-1. Review [CONCERNS.md](./CONCERNS.md) for known issues
-2. Check Priority 0 items (critical blockers)
-3. See immediate action items for fixes
+| Document | Purpose | Start Here If... |
+|----------|---------|------------------|
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | System design, data flow, components | Understanding how things work |
+| [STRUCTURE.md](./STRUCTURE.md) | Directory layout, file organization | Finding where code lives |
+| [CONVENTIONS.md](./CONVENTIONS.md) | Code style, patterns, best practices | Writing new code |
+| [CONCERNS.md](./CONCERNS.md) | Technical debt, bugs, issues | Fixing problems |
+| [INTEGRATIONS.md](./INTEGRATIONS.md) | External APIs, LLM providers | Setting up environment |
+| [TESTING.md](./TESTING.md) | Test practices, coverage | Adding tests |
+| [STACK.md](./STACK.md) | Languages, dependencies | Understanding tech choices |
 
 ## Key Findings
 
 ### Strengths
-- ✅ Well-documented (CLAUDE.md is canonical)
-- ✅ Clear separation of concerns (layered architecture)
-- ✅ Schema-driven validation (JSON schemas as contracts)
-- ✅ Shell tools are primary, stable interface
-- ✅ Pre-commit hooks prevent bad commits
-- ✅ Multiple LLM provider support (ollama, claude, openai)
+- Well-documented (CLAUDE.md is canonical)
+- Clear separation of concerns (layered architecture)
+- Schema-driven validation (JSON schemas as contracts)
+- Shell tools are primary, stable interface
+- Pre-commit hooks prevent bad commits
+- Multiple LLM provider support (ollama, claude, openai)
+- Comprehensive jq transformation tests (100+ tests)
 
 ### Critical Issues
-- ❌ **Issue #6:** Pipeline creates entries with empty content (line 263 typo)
-- ❌ Variable interpolation without escaping (security risk)
-- ❌ No file locking (multi-user data loss risk)
+- **Issue #6:** Pipeline creates entries with empty content (line 263 typo)
+- Variable interpolation without escaping (security risk)
+- No file locking (multi-user data loss risk)
 
 ### High Priority Concerns
-- ⚠️ No schema validation in pipeline
-- ⚠️ Temporary file race conditions
-- ⚠️ Duplicate `run_llm()` implementations (6 copies)
-- ⚠️ Inconsistent error handling
+- No schema validation in pipeline
+- Temporary file race conditions
+- Duplicate `run_llm()` implementations (6 copies)
+- Inconsistent error handling
 
 ## Production Readiness
 
 | Scenario | Status | Notes |
 |----------|--------|-------|
-| **Single-user manual workflows** | ✅ Ready | Direct tool usage works well |
-| **Automated pipelines** | ❌ Not ready | Issue #6 blocks auto-generation |
-| **Multi-user scenarios** | ⚠️ At risk | No file locking, race conditions |
-| **Current scale (1.2k entries)** | ✅ Ready | Performance acceptable |
-| **Future scale (10k+ entries)** | ❌ Not ready | Need pagination, indexing |
+| **Single-user manual workflows** | Ready | Direct tool usage works well |
+| **Automated pipelines** | Not ready | Issue #6 blocks auto-generation |
+| **Multi-user scenarios** | At risk | No file locking, race conditions |
+| **Current scale (1.2k entries)** | Ready | Performance acceptable |
+| **Future scale (10k+ entries)** | Not ready | Need pagination, indexing |
 
 ## Current State (2026-01-05)
 
 **Data Volume:**
-- 368 lore entries
-- 88 lore books
-- 53 active personas
+- 1,202 lore entries
+- 107 lore books
+- 92 personas
 - 13 active session contexts
 - 5 archived session contexts
 
 **Verified Working:**
-- ✅ lore-flow.sh pipeline (5 steps)
-- ✅ All 3 LLM providers
-- ✅ Shell tool CRUD operations
-- ✅ argc CLI coverage
-- ✅ Session context tracking
+- lore-flow.sh pipeline (5 steps)
+- All 3 LLM providers (claude, openai, ollama)
+- Shell tool CRUD operations
+- argc CLI coverage
+- Session context tracking
 
 **Known Blockers:**
 - Issue #5: LLM meta-commentary (workaround exists)
@@ -158,29 +86,40 @@ This directory contains a comprehensive analysis of the Lore project codebase, g
 6. Fix variable escaping in Python interpolation
 7. Consolidate duplicate `run_llm()` functions
 
-See [CONCERNS.md](./CONCERNS.md) for complete priority list.
+See [CONCERNS.md](./CONCERNS.md) for complete priority list with 38 identified issues.
 
-## Analysis Methodology
+## Issue Summary
 
-This codebase map was generated using the `/skogai:map-codebase` command with 4 parallel Explore agents:
+| Category | Count | Severity |
+|----------|-------|----------|
+| Critical Issues | 3 | Production blocker |
+| High Severity | 8 | Must fix before scale |
+| Medium Severity | 4 | Quality issues |
+| Architectural Debt | 4 | Maintenance burden |
+| Known Bugs | 2 | Blocks auto-generation |
+| Security | 3 | Exploit risk |
+| Scalability | 3 | Blocks 10k+ entries |
+| Features | 5 | Incomplete system |
+| Quality | 3 | Hard to debug |
+| Documentation | 3 | Operational risk |
+| **TOTAL** | **38** | |
 
-1. **Agent 1:** Stack + Integrations (technology focus)
-2. **Agent 2:** Architecture + Structure (organization focus)
-3. **Agent 3:** Conventions + Testing (quality focus)
-4. **Agent 4:** Concerns (issues focus)
+## Quick Start
 
-Each agent analyzed the codebase independently with fresh context, ensuring comprehensive coverage without token limitations.
+### Understanding the System
+1. Read [ARCHITECTURE.md](./ARCHITECTURE.md) for high-level system design
+2. Check [STRUCTURE.md](./STRUCTURE.md) to navigate the codebase
+3. Review [CONVENTIONS.md](./CONVENTIONS.md) before making changes
 
-## Maintenance
+### Working with the Codebase
+1. Check [STACK.md](./STACK.md) for dependencies
+2. Review [INTEGRATIONS.md](./INTEGRATIONS.md) for API setup
+3. See [TESTING.md](./TESTING.md) for validation procedures
 
-**Update Frequency:** Run `/skogai:map-codebase` when:
-- Significant architectural changes occur
-- Major refactoring is completed
-- New components are added
-- Documentation becomes stale
-
-**Last Updated:** 2026-01-05
-**Next Review:** After Issue #6 fix and file locking implementation
+### Addressing Issues
+1. Review [CONCERNS.md](./CONCERNS.md) for known issues
+2. Check Priority 0 items (critical blockers)
+3. See immediate action items for fixes
 
 ## References
 
@@ -190,8 +129,12 @@ Each agent analyzed the codebase independently with fresh context, ensuring comp
 - **GitHub Repository:** https://github.com/SkogAI/lore
 - **GitHub Issues:** https://github.com/SkogAI/lore/issues
 
-## Notes
+## Maintenance
 
-This analysis provides a snapshot of the codebase at a specific point in time. Always refer to the actual code and CLAUDE.md for the most current information.
+**Update this analysis when:**
+- Significant architectural changes occur
+- Major refactoring is completed
+- New components are added
+- Documentation becomes stale
 
-The analysis focuses on **what exists** (structure, patterns, issues) rather than **what should exist** (recommendations, roadmap). For future planning, see project documentation in `/home/skogix/lore/docs/`.
+**Last Updated:** 2026-01-05

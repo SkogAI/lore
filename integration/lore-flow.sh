@@ -188,17 +188,21 @@ if [ -z "$EXTRACTED_LORE" ]; then
   GENERATED_NARRATIVE="Technical change from $INPUT_TYPE at session $SESSION_ID"
 else
   # Parse the JSON to get the narrative content
+  # Strip markdown code blocks (```json ... ```) that some LLM providers add
   GENERATED_NARRATIVE=$(echo "$EXTRACTED_LORE" | python3 -c "
-import json, sys
+import json, sys, re
 try:
-    data = json.load(sys.stdin)
+    raw = sys.stdin.read()
+    # Strip markdown code blocks if present
+    clean = re.sub(r'^\`\`\`json\n?|\`\`\`\s*$', '', raw.strip(), flags=re.MULTILINE)
+    data = json.loads(clean)
     entries = data.get('entries', [])
     if entries:
         print(entries[0].get('content', 'No content generated'))
     else:
         print('No entries extracted')
-except:
-    print('Failed to parse LLM output')
+except Exception as e:
+    print(f'Failed to parse LLM output: {e}')
 ")
 fi
 
@@ -273,11 +277,11 @@ fi
 # Add to persona's chronicle book
 # Find or create the persona's chronicle
 CHRONICLE_NAME="${PERSONA_NAME}'s Chronicles"
-CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" list-books | grep -F "$CHRONICLE_NAME" | grep -oP 'book_\d+' | head -1 || echo "")
+CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" list-books | grep -F "$CHRONICLE_NAME" | grep -oP 'book_\d+(_[a-f0-9]+)?' | head -1 || echo "")
 
 if [ -z "$CHRONICLE_ID" ]; then
   echo "Creating chronicle book: $CHRONICLE_NAME"
-  CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" create-book "$CHRONICLE_NAME" "Automated chronicles of $PERSONA_NAME's adventures" | grep -oP 'book_\d+' || echo "")
+  CHRONICLE_ID=$("$LORE_DIR/tools/manage-lore.sh" create-book "$CHRONICLE_NAME" "Automated chronicles of $PERSONA_NAME's adventures" | grep -oP 'book_\d+(_[a-f0-9]+)?' || echo "")
 
   if [ -n "$CHRONICLE_ID" ]; then
     # Link to persona

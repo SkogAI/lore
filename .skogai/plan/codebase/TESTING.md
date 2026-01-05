@@ -1,449 +1,479 @@
 # Testing Practices
 
-## Testing Philosophy
+**Generated:** 2026-01-05
 
-The Lore project follows a **validation-first, schema-driven testing philosophy** rather than traditional unit testing.
+## Current Testing Status
 
-**Key Principles:**
-1. **Schema validation** - JSON schemas are the source of truth
-2. **Pre-commit validation** - Prevent bad data at commit time
-3. **Integration testing** - Workflow-based testing via GitHub Actions
-4. **Real-world usage** - Production testing through actual operations
+| Area | Coverage | Framework |
+|------|----------|-----------|
+| Shell scripts (jq) | ~90% | Custom test.sh (100+ tests) |
+| Python API | ~10% | Manual only (no pytest) |
+| Integration | ~20% | Manual verification |
+| Provider integration | ~30% | Manual testing |
 
-## Test Framework & Structure
+## Test Directory Structure
 
-### Test Location
-- **Primary:** `/home/skogix/lore/tests/`
-- **Current structure:** Minimal - single subdirectory `tests/basic-flow/`
-- **Test format:** Simple JSON definitions (not pytest/unittest)
+```
+scripts/jq/
+├── crud-get/
+│   ├── transform.jq
+│   ├── test.sh                # 20+ test cases
+│   └── test-input-*.json
+├── crud-set/
+│   ├── transform.jq
+│   ├── test.sh                # 20+ test cases
+│   └── test-input-*.json
+├── crud-delete/
+│   ├── transform.jq
+│   ├── test.sh                # 15+ test cases
+│   └── test-input-*.json
+└── schema-validation/
+    ├── transform.jq
+    ├── test.sh                # 62 test cases
+    └── test-input-*.json
 
-### Test Definition Format
+agents/api/
+├── lore_api.py                # Manual test in __main__
+└── agent_api.py               # Manual test in __main__
+
+# Missing: tests/ directory for pytest
+```
+
+---
+
+## Shell Script Testing
+
+### Pattern: jq Transformation Testing
+
+**File:** `scripts/jq/schema-validation/test.sh`
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TRANSFORM="$SCRIPT_DIR/transform.jq"
+
+echo "Testing schema-validation transformation..."
+
+test_case() {
+  local name=$1
+  local input=$2
+  local expected=$3
+
+  echo -n "Test: $name... "
+  result=$(jq -c -f "$TRANSFORM" <<< "$input")
+
+  if [[ "$result" == "$expected" ]]; then
+    echo "PASS"
+  else
+    echo "FAIL"
+    echo "  Expected: $expected"
+    echo "  Got: $result"
+    exit 1
+  fi
+}
+
+# Test cases
+test_case "Valid object" '{"name":"test","age":30}' '{"valid":true,"errors":[]}'
+test_case "Missing field" '{"name":"test"}' '{"valid":false,"errors":["missing required field: age"]}'
+test_case "Falsy value null" '{"name":"test","age":null}' '{"valid":true,"errors":[]}'
+```
+
+### Test Coverage Categories (schema-validation)
+
+| Category | Tests | Purpose |
+|----------|-------|---------|
+| Happy Path | 5 | Valid objects, all JSON types |
+| Falsy Values | 6 | null, false, 0, "", [], {} |
+| Type Safety | 3 | Wrong types, missing fields |
+| Boundary Conditions | 4 | Empty schema, deep nesting |
+| Error Handling | 2 | Malformed schema |
+| **Total** | **62** | |
+
+### Test Principles
+
+1. **Deterministic Input** - No random data, fixtures in git
+2. **Exact Expected Output** - Compare exact JSON strings
+3. **Fail Fast** - `set -euo pipefail`, first failure stops
+4. **Edge Cases First** - Test boundaries before happy path
+
+### Running Shell Tests
+
+```bash
+# Run all jq tests
+for test in scripts/jq/*/test.sh; do
+  echo "Running $test..."
+  bash "$test"
+done
+
+# Run specific test suite
+bash scripts/jq/schema-validation/test.sh
+```
+
+---
+
+## Python API Testing
+
+### Current Pattern: Manual Testing
+
+**File:** `agents/api/lore_api.py:525-558`
+
+```python
+if __name__ == "__main__":
+    api = LoreAPI()
+
+    # Manual integration test
+    persona = api.create_persona(
+        name="Test Forest Guardian",
+        core_description="A magical protector",
+        personality_traits=["compassionate", "wise"],
+        voice_tone="serene"
+    )
+    print(f"Created test persona: {persona['id']}")  # No assertion
+```
+
+**Issues:**
+- No assertions
+- No cleanup (leaves test data)
+- No isolation
+- Can't run in CI/CD
+
+### Recommended Pattern: pytest
+
+**Proposed Structure:**
+```
+tests/
+├── __init__.py
+├── conftest.py                   # Shared fixtures
+├── unit/
+│   ├── test_lore_api.py
+│   ├── test_agent_api.py
+│   └── test_persona_manager.py
+├── integration/
+│   ├── test_lore_flow.py
+│   └── test_context_manager.py
+└── fixtures/
+    ├── test_persona.json
+    ├── test_entry.json
+    └── test_book.json
+```
+
+**Example Unit Test:**
+```python
+import pytest
+from pathlib import Path
+from agents.api.lore_api import LoreAPI
+
+@pytest.fixture
+def temp_lore_dir(tmp_path):
+    """Create temporary lore directory structure."""
+    lore_dir = tmp_path / "knowledge" / "expanded" / "lore"
+    lore_dir.mkdir(parents=True)
+    (lore_dir / "entries").mkdir()
+    (lore_dir / "books").mkdir()
+    (tmp_path / "knowledge" / "expanded" / "personas").mkdir(parents=True)
+    return tmp_path
+
+@pytest.fixture
+def api(temp_lore_dir, monkeypatch):
+    """Create LoreAPI instance with temp directory."""
+    monkeypatch.setattr("agents.api.lore_api.REPO_ROOT", temp_lore_dir)
+    return LoreAPI()
+
+def test_create_persona(api):
+    """Test persona creation."""
+    persona = api.create_persona(
+        name="Test Guardian",
+        core_description="Test description",
+        personality_traits=["wise", "kind", "patient", "gentle"],
+        voice_tone="serene"
+    )
+
+    assert persona is not None
+    assert persona["name"] == "Test Guardian"
+    assert "persona_" in persona["id"]
+
+def test_create_entry(api):
+    """Test entry creation."""
+    entry = api.create_lore_entry(
+        title="Test Entry",
+        content="Test content",
+        category="lore",
+        tags=["test"]
+    )
+
+    assert entry is not None
+    assert entry["title"] == "Test Entry"
+    assert "entry_" in entry["id"]
+
+def test_add_entry_to_book(api):
+    """Test bidirectional linking."""
+    entry = api.create_lore_entry("Test Entry", "Content", "lore")
+    book = api.create_lore_book("Test Book", "Description")
+
+    result = api.add_entry_to_book(entry["id"], book["id"])
+    assert result is True
+
+    updated_entry = api.get_lore_entry(entry["id"])
+    updated_book = api.get_lore_book(book["id"])
+
+    assert updated_entry["book_id"] == book["id"]
+    assert entry["id"] in updated_book["entries"]
+```
+
+**Running Tests:**
+```bash
+# Install pytest
+pip install pytest pytest-cov
+
+# Run all tests
+pytest tests/
+
+# Run with coverage
+pytest --cov=agents --cov-report=html tests/
+
+# Run specific test
+pytest tests/unit/test_lore_api.py::test_create_persona
+```
+
+---
+
+## Integration Testing
+
+### Current Practice: Manual
+
+```bash
+# 1. Create entry with pipeline
+./integration/lore-flow.sh manual "Fixed quantum mojito bug"
+
+# 2. Verify entry created
+ls knowledge/expanded/lore/entries/ | tail -1
+
+# 3. Verify content populated
+jq '.content' knowledge/expanded/lore/entries/entry_*.json | tail -1
+
+# 4. Verify book linked
+jq '.book_id' knowledge/expanded/lore/entries/entry_*.json | tail -1
+```
+
+### Recommended Integration Tests
+
+```python
+import pytest
+import subprocess
+import json
+from pathlib import Path
+
+@pytest.fixture
+def isolated_repo(tmp_path, monkeypatch):
+    """Create isolated repository for testing."""
+    repo = tmp_path / "lore"
+    repo.mkdir()
+    subprocess.run(["cp", "-r", "integration", str(repo)])
+    subprocess.run(["cp", "-r", "tools", str(repo)])
+    # Create directories...
+    monkeypatch.chdir(repo)
+    return repo
+
+def test_lore_flow_manual_input(isolated_repo):
+    """Test manual input pipeline."""
+    result = subprocess.run(
+        ["./integration/lore-flow.sh", "manual", "Test content"],
+        capture_output=True,
+        text=True
+    )
+
+    assert result.returncode == 0
+
+    entries_dir = isolated_repo / "knowledge" / "expanded" / "lore" / "entries"
+    entries = list(entries_dir.glob("entry_*.json"))
+    assert len(entries) == 1
+
+    with open(entries[0]) as f:
+        entry = json.load(f)
+
+    assert entry["content"] != ""  # Issue #6 test
+```
+
+---
+
+## Provider Testing
+
+### Manual Verification Script
+
+```bash
+#!/bin/bash
+echo "Testing LLM providers..."
+
+# Test Ollama
+echo "1. Testing Ollama..."
+LLM_PROVIDER=ollama ./tools/llama-lore-creator.sh - entry "Test Ollama" "place"
+[ $? -eq 0 ] && echo "Ollama: PASS" || echo "Ollama: FAIL"
+
+# Test Claude
+echo "2. Testing Claude..."
+LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Test Claude" "place"
+[ $? -eq 0 ] && echo "Claude: PASS" || echo "Claude: FAIL"
+
+# Test OpenAI
+echo "3. Testing OpenAI..."
+LLM_PROVIDER=openai ./tools/llama-lore-creator.sh openai entry "Test OpenAI" "place"
+[ $? -eq 0 ] && echo "OpenAI: PASS" || echo "OpenAI: FAIL"
+```
+
+### pytest Skip Pattern
+
+```python
+import pytest
+import os
+
+@pytest.mark.skipif(
+    not os.environ.get("OPENROUTER_API_KEY"),
+    reason="No OpenRouter API key"
+)
+def test_claude_provider():
+    """Test Claude provider via OpenRouter."""
+    pass
+
+@pytest.mark.skipif(
+    not os.environ.get("OLLAMA_HOST"),
+    reason="No Ollama host configured"
+)
+def test_ollama_provider():
+    """Test Ollama local provider."""
+    pass
+```
+
+---
+
+## Known Issues Testing
+
+### Issue #5: Meta-Commentary Detection
+
+```bash
+# Test validation function
+content="I will create a lore entry..."
+if validate_lore_output "$content"; then
+  echo "FAIL: Should detect meta-commentary"
+else
+  echo "PASS: Meta-commentary detected"
+fi
+
+content="The dark tower stands tall..."
+if validate_lore_output "$content"; then
+  echo "PASS: Clean narrative accepted"
+else
+  echo "FAIL: Should accept clean narrative"
+fi
+```
+
+### Issue #6: Empty Content Test
+
+```bash
+./integration/lore-flow.sh manual "Test content"
+entry_id=$(ls -t knowledge/expanded/lore/entries/ | head -1 | sed 's/\.json//')
+content=$(jq -r '.content' "knowledge/expanded/lore/entries/${entry_id}.json")
+
+if [ "$content" = "" ] || [ "$content" = "null" ]; then
+  echo "FAIL: Content is empty (Issue #6)"
+  exit 1
+else
+  echo "PASS: Content populated"
+fi
+```
+
+---
+
+## Test Coverage Goals
+
+| Area | Current | Target |
+|------|---------|--------|
+| Shell scripts | ~90% | 100% |
+| Python API | ~10% | 80%+ |
+| Integration | ~20% | 70%+ |
+| Provider integration | ~30% | 80%+ |
+
+---
+
+## Recommended CI/CD Pipeline
+
+**File:** `.github/workflows/test.yml`
+
+```yaml
+name: Test Suite
+
+on: [push, pull_request]
+
+jobs:
+  test-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run shell tests
+        run: |
+          for test in scripts/jq/*/test.sh; do
+            bash "$test"
+          done
+
+  test-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+      - name: Run pytest
+        run: pytest --cov=agents --cov-report=xml tests/
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2
+```
+
+---
+
+## Test Fixtures
+
+**Location:** `tests/fixtures/`
+
 ```json
+// tests/fixtures/test_persona.json
 {
-  "test_name": "basic-flow",
-  "description": "Basic workflow test for SkogAI orchestration",
-  "input": "Test input",
-  "expected_outcome": {
-    "response_type": "implementation",
-    "contains": ["expected", "strings"]
+  "id": "persona_test",
+  "name": "Test Persona",
+  "core_traits": {
+    "temperament": "balanced",
+    "values": ["wise", "kind"],
+    "motivations": ["patient", "gentle"]
   },
-  "tracking": {
-    "orchestrator_version": "v0",
-    "agents": ["agent_list"],
-    "knowledge_modules": ["core"]
+  "voice": {
+    "tone": "serene",
+    "patterns": [],
+    "vocabulary": "standard"
   }
 }
 ```
 
-### Test Coverage
-**Current state:** Minimal explicit test suite
-
-**What's tested:**
-- ✅ Schema validation (JSON schemas)
-- ✅ Path conventions (no hardcoded paths)
-- ✅ File structure and naming
-- ✅ Git workflow integrity
-- ✅ Growth metrics and patterns
-- ✅ Document updates
-- ❌ Unit tests (no pytest/unittest framework)
-- ❌ Code coverage (no coverage tools)
-
-## Validation & Pre-Commit
-
-### Pre-Commit Framework
-**Configuration:** `.pre-commit-config.yaml` (v6.0.0)
-
-**Local Validation Hooks:**
-```yaml
-- id: validate-shell-paths
-  name: Validate Shell Paths
-  entry: bash scripts/pre-commit/validate.sh
-  language: system
-  types: [shell]
-
-- id: validate-python-paths
-  name: Validate Python Paths
-  entry: python3 scripts/pre-commit/validate.py --strict
-  language: system
-  types: [python]
-```
-
-**Standard Hooks:**
-- `check-case-conflict` - Files that conflict in case-insensitive filesystems
-- `check-merge-conflict` - Merge conflict markers
-- `check-yaml` - YAML syntax validation
-- `check-json` - JSON syntax validation
-- `mixed-line-ending` - Line ending consistency (LF)
-- `trailing-whitespace` - Trailing whitespace removal
-- `end-of-file-fixer` - Ensure files end with newline
-
-### Validation Scripts
-
-**`scripts/pre-commit/validate.sh`** - Shell script path checking:
-- Detects hardcoded absolute paths in `.sh` files
-- Ensures relative path usage
-- Supports `--strict` mode for CI
-
-**`scripts/pre-commit/validate.py`** - Python hardcoded path detection:
-- Scans Python files for absolute paths
-- Validates path construction patterns
-- Strict mode enforces all checks
-
-**Execution:**
-```bash
-# Pre-commit validation
-bash scripts/pre-commit/validate.sh
-python3 scripts/pre-commit/validate.py --strict
-
-# Manual validation
-pre-commit run --all-files
-```
-
-## Integration Testing
-
-### GitHub Actions Workflows
-**Location:** `.github/workflows/`
-
-**Active Workflows:**
-
-1. **`claude.yml`** - Claude Code integration
-   - **Trigger:** On comment, issue, PR review
-   - **Purpose:** Claude Code automation
-   - **Tests:** Integration with Claude Code CLI
-
-2. **`lore-growth.yml`** - Growth monitoring
-   - **Trigger:** Scheduled (every 6 hours)
-   - **Purpose:** Monitor lore system health
-   - **Tests:** Entry/book/persona counts, pattern detection
-
-3. **`doc-updater.yml`** - Documentation updates
-   - **Trigger:** On push to master
-   - **Purpose:** Keep documentation synchronized
-   - **Tests:** Documentation consistency
-
-4. **`lore-keeper-bot.yml`** - Lore maintenance
-   - **Trigger:** Various events
-   - **Purpose:** Automated lore management
-   - **Tests:** Lore data integrity
-
-5. **`claude-code-review.yml`** - Code review automation
-   - **Trigger:** Pull requests
-   - **Purpose:** Automated code review
-   - **Tests:** Code quality checks
-
-6. **`release.yml`** - Release automation
-   - **Trigger:** Tagged releases
-   - **Purpose:** Automated releases
-   - **Tests:** Build and package verification
-
-### CI/CD Configuration
-**Workflow toggle:** `.github/workflow-config.yml`
-**Archived workflows:** `.github/workflows-old/`
-
-## Testing Practices
-
-### 1. Schema Validation Testing
-**Purpose:** Ensure all data conforms to JSON Schema contracts
-
-**Schemas:**
-- Entry: `knowledge/core/lore/schema.json`
-- Book: `knowledge/core/book-schema.json`
-- Persona: `knowledge/core/persona/schema.json`
-
-**Validation methods:**
-- `argc validate-entry <entry_id>` - CLI validation
-- `argc validate-book <book_id>` - Book validation
-- `argc validate-persona <persona_id>` - Persona validation
-- jq transformations in `scripts/jq/` - Field validation
-
-**Example:**
-```bash
-# Validate entry against schema
-argc validate-entry entry_1743758088
-
-# Check required fields
-jq 'has("id", "title", "content", "category")' entry.json
-```
-
-### 2. Path Validation Testing
-**Purpose:** Prevent hardcoded paths, ensure portability
-
-**Methods:**
-- Pre-commit hooks scan for absolute paths
-- Validation scripts check Python and Shell files
-- CI enforces strict mode
-
-**Example:**
-```bash
-# Check shell scripts
-bash scripts/pre-commit/validate.sh
-
-# Check Python files
-python3 scripts/pre-commit/validate.py --strict
-```
-
-### 3. Workflow Integration Testing
-**Purpose:** Test end-to-end pipeline functionality
-
-**Test approach:**
-- Real-world usage through GitHub Actions
-- Workflow definitions track orchestrator versions
-- Agent and knowledge module tracking
-
-**Example test flow:**
-```bash
-# Manual pipeline test
-./integration/lore-flow.sh manual "Test content"
-
-# Verify entry created
-argc list-entries | grep -i "test"
-
-# Validate created entry
-entry_id=$(argc list-entries | head -1 | cut -d: -f1)
-argc validate-entry "$entry_id"
-```
-
-### 4. Git Workflow Testing
-**Purpose:** Ensure git integration works correctly
-
-**Tests:**
-- Merge conflict detection
-- Case conflict detection
-- Line ending consistency
-- YAML/JSON syntax validation
-
-**Automated via:**
-- Pre-commit hooks
-- GitHub Actions workflows
-
-### 5. Growth Monitoring Testing
-**Purpose:** Track system health and patterns
-
-**Metrics tracked:**
-- Entry count growth rate
-- Book creation patterns
-- Persona utilization
-- Context session lifecycle
-
-**Monitoring:**
-- `lore-growth.yml` workflow (every 6 hours)
-- Pattern detection for anomalies
-- Automated alerts on issues
-
-## Manual Testing
-
-### Entry CRUD Testing
-```bash
-# Create entry
-./tools/manage-lore.sh create-entry "Test Entry" "lore"
-entry_id=$(./tools/manage-lore.sh list-entries | head -1 | cut -d: -f1)
-
-# Read entry
-./tools/manage-lore.sh show-entry "$entry_id"
-
-# Update entry (via jq)
-jq '.content = "Updated content"' \
-  "knowledge/expanded/lore/entries/${entry_id}.json" > tmp.json
-mv tmp.json "knowledge/expanded/lore/entries/${entry_id}.json"
-
-# Validate entry
-argc validate-entry "$entry_id"
-
-# Delete entry (manual - no delete command)
-rm "knowledge/expanded/lore/entries/${entry_id}.json"
-```
-
-### Book CRUD Testing
-```bash
-# Create book
-./tools/manage-lore.sh create-book "Test Book" "Description"
-book_id=$(./tools/manage-lore.sh list-books | head -1 | cut -d: -f1)
-
-# Link entry to book
-./tools/manage-lore.sh add-to-book "$entry_id" "$book_id"
-
-# Read book
-./tools/manage-lore.sh show-book "$book_id"
-
-# Validate book
-argc validate-book "$book_id"
-```
-
-### Pipeline Testing
-```bash
-# Test manual input
-./integration/lore-flow.sh manual "Fixed quantum mojito bug"
-
-# Test git diff extraction
-git add .
-git commit -m "test: pipeline testing"
-./integration/lore-flow.sh git-diff HEAD
-
-# Verify entry created with content
-entry_id=$(./tools/manage-lore.sh list-entries | head -1 | cut -d: -f1)
-./tools/manage-lore.sh show-entry "$entry_id" | grep -q "content"
-```
-
-### LLM Provider Testing
-```bash
-# Test Ollama (local)
-LLM_PROVIDER=ollama ./tools/llama-lore-creator.sh - entry "Test" "lore"
-
-# Test Claude (via OpenRouter)
-LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Test" "lore"
-
-# Test OpenAI (via OpenRouter)
-LLM_PROVIDER=openai ./tools/llama-lore-creator.sh gpt-4 entry "Test" "lore"
-```
-
-## Test Execution
-
-### Local Testing
-```bash
-# Run pre-commit hooks
-pre-commit run --all-files
-
-# Run validation scripts
-bash scripts/pre-commit/validate.sh
-python3 scripts/pre-commit/validate.py --strict
-
-# Test orchestrator
-python orchestrator/orchestrator.py init lore
-
-# Test argc commands
-argc list-entries
-argc list-books
-argc list-personas
-```
-
-### CI Testing
-- Push to master triggers workflows
-- Pull requests trigger code review
-- Scheduled workflows run every 6 hours
-- Manual workflow dispatch available
-
-## Known Testing Gaps
-
-### Missing Test Infrastructure
-- ❌ No pytest/unittest framework configured
-- ❌ No test discovery automation
-- ❌ No code coverage measurement tools
-- ❌ No mocking/stubbing infrastructure
-- ❌ No integration test suite
-- ❌ No performance/load testing
-
-### Compensating Factors
-- ✅ Strict pre-commit validation prevents bad data
-- ✅ Schema validation enforces data integrity
-- ✅ GitHub Actions provide workflow testing
-- ✅ Real-world usage validates functionality
-- ✅ Manual testing procedures documented
-
-### What Should Be Added
-1. **Pytest framework** - Unit tests for Python modules
-2. **Shell test framework** - bats or shunit2 for shell scripts
-3. **Code coverage** - pytest-cov for Python coverage
-4. **Integration tests** - End-to-end pipeline tests
-5. **Mock LLM responses** - Test without API calls
-6. **Load testing** - Test with 10k+ entries
-7. **Concurrent testing** - Multi-user scenarios
-
-## Testing Recommendations
-
-### Priority 1 (Critical)
-1. Add integration tests for `lore-flow.sh` pipeline
-2. Add unit tests for `lore_api.py` CRUD operations
-3. Add schema validation tests for all JSON files
-4. Add concurrent access tests (file locking)
-
-### Priority 2 (High)
-5. Add mock LLM tests (avoid API calls)
-6. Add shell script tests (bats framework)
-7. Add error handling tests
-8. Add edge case tests (empty fields, special characters)
-
-### Priority 3 (Nice-to-have)
-9. Add performance tests (large datasets)
-10. Add code coverage reporting
-11. Add mutation testing
-12. Add property-based testing
-
-## Test Data
-
-### Test Fixtures
-**Location:** Not currently organized
-**Recommendation:** Create `tests/fixtures/` with:
-- Sample entries, books, personas
-- Valid and invalid JSON samples
-- Edge case test data
-
-### Test Cleanup
-**Current:** Manual cleanup required
-**Recommendation:** Add teardown scripts to remove test data after runs
-
-## Debugging Tests
-
-### Enable Debug Logging
-```bash
-# Python
-export LOG_LEVEL=DEBUG
-python agents/api/lore_api.py
-
-# Shell (set -x)
-bash -x tools/manage-lore.sh list-entries
-```
-
-### Inspect Test Failures
-```bash
-# Check pre-commit output
-pre-commit run --all-files --verbose
-
-# Check GitHub Actions logs
-gh run list
-gh run view <run_id>
-```
-
-### Validate JSON Manually
-```bash
-# Check JSON syntax
-jq empty knowledge/expanded/lore/entries/entry_*.json
-
-# Validate against schema
-ajv validate -s knowledge/core/lore/schema.json \
-  -d knowledge/expanded/lore/entries/entry_1743758088.json
-```
-
-## Test Documentation
-
-### Test Coverage Documentation
-**Current:** Not maintained
-**Recommendation:** Document what's tested in each area
-
-### Test Plan Documentation
-**Current:** This document
-**Future:** Create detailed test plans per component
-
-### Bug Report Process
-**Location:** GitHub Issues
-**Known Issues:**
-- Issue #5: LLM meta-commentary in generated content
-- Issue #6: Pipeline creates entries with empty content
+---
 
 ## Summary
 
-The Lore project prioritizes **data integrity through schema validation and pre-commit hooks** over traditional unit testing. This approach works well for:
-- Ensuring valid JSON data
-- Preventing hardcoded paths
-- Validating workflows through automation
+**Strengths:**
+- Comprehensive jq transformation testing (100+ tests)
+- Deterministic test fixtures
+- Clear pass/fail criteria
 
-However, gaps exist in:
-- Unit test coverage
-- Integration test automation
-- Performance testing
-- Concurrent access testing
+**Gaps:**
+- No Python test framework
+- No integration test automation
+- No coverage tracking
+- No CI/CD pipeline
 
-The system compensates through:
-- Real-world usage testing
-- GitHub Actions automation
-- Manual testing procedures
-- Schema-driven validation
+**Immediate Actions:**
+1. Add pytest framework
+2. Create integration test suite
+3. Setup CI/CD pipeline
+4. Add coverage reporting

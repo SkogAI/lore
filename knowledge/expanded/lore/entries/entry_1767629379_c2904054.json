@@ -1,0 +1,26 @@
+{
+  "id": "entry_1767629379_c2904054",
+  "title": "Village Elder's Tale - Session 1767629228",
+  "content": "Failed to parse LLM output\n",
+  "summary": "Auto-generated lore from manual",
+  "category": "event",
+  "tags": [
+    "generated",
+    "automated",
+    "Village Elder",
+    "manual"
+  ],
+  "relationships": [],
+  "attributes": {},
+  "metadata": {
+    "created_by": "skogix",
+    "created_at": "2026-01-05T16:09:39Z",
+    "updated_at": "2026-01-05T16:09:39Z",
+    "version": "1.0",
+    "canonical": true
+  },
+  "visibility": {
+    "public": true,
+    "restricted_to": []
+  }
+}

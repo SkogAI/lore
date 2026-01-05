@@ -15,7 +15,7 @@ Wire the existing 5-step pipeline to run end-to-end with Ollama, producing quali
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Verify Pipeline** - End-to-end smoke test with Ollama
+- [x] **Phase 1: Verify Pipeline** - End-to-end smoke test with Ollama (DONE 2026-01-05)
 - [ ] **Phase 2: Quality Prompts** - Tune prompts for Village Elder quality output
 - [ ] **Phase 3: Auto-trigger** - Git hooks fire the pipeline automatically
 - [ ] **Phase 4: Polish** - Context continuity and relationship linking
@@ -26,7 +26,7 @@ Wire the existing 5-step pipeline to run end-to-end with Ollama, producing quali
 **Goal**: Confirm lore-flow.sh works end-to-end with Ollama, producing a real entry
 **Depends on**: Nothing (first phase)
 **Research**: Unlikely (existing tools)
-**Plans**: TBD
+**Plans**: 1 (Fix bug + verify)
 
 Key validations:
 - Ollama responds correctly to pipeline calls
@@ -74,7 +74,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Verify Pipeline | 0/TBD | Not started | - |
+| 1. Verify Pipeline | 1/1 | **DONE** | 2026-01-05 |
 | 2. Quality Prompts | 0/TBD | Not started | - |
 | 3. Auto-trigger | 0/TBD | Not started | - |
 | 4. Polish | 0/TBD | Not started | - |

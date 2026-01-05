@@ -98,15 +98,20 @@ The system outputs structured JSON data in `knowledge/expanded/`:
 - 368 entries
 - 53 personas
 
+**Garden State:**
+- Seed plugins: core, docs
+- Trial plugins: 0
+- Permanent plugins: 0
+
 *(Last updated: 2026-01-05)*
 
 ## How to Use lore_api
 
 > **⚠️ SHELL TOOLS ARE CANONICAL**
-> 
+>
 > The shell scripts (`manage-lore.sh`, `Argcfile.sh`) are the primary, supported interface for lore management.
 > They provide complete functionality with better error handling and validation.
-> 
+>
 > **Python API**: The Python `lore_api` module is provided for programmatic access but shell tools should be preferred for most operations.
 
 ### Shell Tools (Recommended)
@@ -807,6 +812,12 @@ These memories document:
 - Key mistakes and how to avoid them
 - Technical discoveries and insights
 - Cross-session continuity for future work
+
+## Plugin Garden
+
+Trial-based plugin evaluation. See `@.skogai/garden/README.md` for full documentation.
+
+Quick: `/garden:status` | `/garden:trial <plugin>` | `/garden:keep <plugin>`
 
 ## Key Documentation
 

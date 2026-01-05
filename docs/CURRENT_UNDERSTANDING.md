@@ -285,6 +285,34 @@ Claude Code (me)
 - 107 books (up from 102)
 - 92 personas (up from 89)
 
+### 6. Garden Plugin System (2026-01-05)
+
+**What We Learned:**
+- Garden manages plugin lifecycle through trial-based evaluation
+- State stored at `/home/skogix/skogai/config/garden-state.json`
+- 50-message threshold before prompting decisions
+- Philosophy: "Start small, add complexity only after testing"
+
+**Verified Working (Phase 1 & 2):**
+- `/garden:status` command displays formatted state
+- State file initialization via `init-garden.sh`
+- Message counting via `UserPromptSubmit` hook
+- Expiration detection via `SessionStart` hook
+- `/garden:trial <plugin>` - Start trialing a plugin
+- `/garden:keep <plugin>` - Promote trial to permanent
+- `/garden:swap <old> <new>` - Replace one trial with another
+- `/garden:reset <plugin>` - Extend trial (reset counter)
+- `/garden:remove <plugin>` - Remove from trial/permanent
+
+**Components Being Trialed:**
+- **Local skills** (`.claude/skills/`): lore-creation, skogai-jq (60+ transforms), skogai-argc
+- **skogai-core plugin**: 19 commands, 4 workflows, 9 references, 13 templates
+- **Hookify guardrails**: block force-push, block reset --hard, warn on commits
+
+**Key Files:**
+- `@.skogai/garden/README.md` - Garden plugin documentation
+- `@.skogai/CLAUDE.md` - .skogai directory overview
+
 ### What Changed Our Understanding
 
 **Context is not just session tracking** - it's the glue connecting:
@@ -300,6 +328,9 @@ Claude Code (me)
 - ✅ Shell tool CRUD operations
 - ✅ argc CLI coverage
 - ✅ Session context tracking
+- ✅ Garden plugin system (state, hooks, status command)
+- ✅ Local skills (lore-creation, skogai-jq, skogai-argc)
+- ✅ Hookify guardrails (4 active guards)
 
 **Known Issues Still Present:**
 - Issue #5: LLM generates meta-commentary instead of lore content
