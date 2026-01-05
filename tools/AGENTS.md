@@ -80,7 +80,6 @@ python lore_tui.py --base-dir ./knowledge/expanded
 
 ## NOTES
 
-**Shell tools are PRIMARY**: Use `manage-lore.sh`, `create-persona.sh`, and `llama-*.sh` scripts. Python API (`agents/api/lore_api.py`) is DEPRECATED.
 **Shell Tools Are Primary:** The shell scripts (`manage-lore.sh`, `llama-*.sh`) are the canonical interface. Python API (`agents/api/lore_api.py`) is for programmatic access but shell tools should be preferred.
 
 **Known Issue:** LLM sometimes outputs meta-commentary ("I need your approval...") instead of direct lore content. See [Issue #5](https://github.com/SkogAI/lore/issues/5).

@@ -19,9 +19,6 @@ lore/
 │   ├── expanded/         # Active lore (entries/, books/, personas/)
 │   └── archived/         # Historical preservation (NEVER delete)
 ├── orchestrator/         # Session context + knowledge loading
-├── scripts/jq/           # 50+ schema-driven jq transformations
-├── tools/                # CLI tools (manage-lore.sh, llama-*.sh) - PRIMARY
-└── context/              # Session state JSON files
 ├── scripts/              # Pre-commit hooks and validation
 ├── tools/                # CLI tools (manage-lore.sh, llama-*.sh)
 ├── context/              # Session state JSON files
