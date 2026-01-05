@@ -83,3 +83,6 @@ Thumbs.db
 
 # Octocode
 .octocode/
+
+# Runtime queues
+.lore-queue/
