@@ -131,11 +131,11 @@ Example:
 
 Cross-book references create a shared mythology where each agent has their own story about the same underlying system concepts.
 
-## Current State (Updated 2025-12-22)
+## Current State (Updated 2026-01-05)
 
-- **102 books** (up from 95)
-- **728 entries** (up from 686)
-- **89 personas** (up from 85)
+- **107 books** (up from 102)
+- **1202 entries** (up from 728)
+- **92 personas** (up from 89)
 
 ### Verified Working Components
 
@@ -201,10 +201,10 @@ From @docs/CONCEPT.md:
 
 ### What Needs Further Exploration
 
-- [ ] Orchestrator implementation details - How it captures work sessions
-- [ ] Knowledge Router logic - How it selects what knowledge to load
-- [ ] Context State Machine - State transitions and lifecycle
-- [ ] Persona-bridge integration - How personas render into agent prompts (code exists but needs testing)
+- [x] Orchestrator implementation details - Documented in `orchestrator/orchestrator.py` and `docs/SYSTEM_MAP.md`
+- [x] Knowledge Router logic - Documented in `docs/SYSTEM_MAP.md` (selects numbered modules 00-99 based on task type)
+- [x] Context State Machine - Documented in `docs/SYSTEM_MAP.md` (tracks active task, pipeline progress)
+- [ ] Persona-bridge integration - Code exists at `integration/persona-bridge/`, needs end-to-end testing and verification
 
 ---
 
@@ -280,7 +280,7 @@ Claude Code (me)
 - End-to-end flow tested successfully
 - Critical: `LLM_OUTPUT` env var required for argc commands
 
-**Current Data Volume (verified 2026-01-04):**
+**Current Data Volume (verified 2026-01-05):**
 - 1,202 lore entries (up from 728)
 - 107 books (up from 102)
 - 92 personas (up from 89)
@@ -305,15 +305,33 @@ Claude Code (me)
 - Issue #5: LLM generates meta-commentary instead of lore content
 - Issue #6: Pipeline creates entries with empty content field
 
-### Next Steps Identified
+### Next Steps and Current Priorities
 
-From session memories, clear priorities:
-1. Fix Issue #6 (empty content in pipeline) - blocking auto-generation
-2. Improve prompt engineering for Issue #5 (meta-commentary)
-3. Test persona-bridge integration (code exists, not verified)
-4. Document orchestrator implementation details
+**See GitHub Issues for up-to-date task list:** https://github.com/SkogAI/lore/issues
+
+Priority areas based on open issues:
+
+1. **Bug Fixes:**
+   - Issue #31: Pipeline creates entries with empty content field (Issue #6 investigation)
+   - Issue #32: Improve prompt to reduce LLM meta-commentary (Issue #5)
+
+2. **Documentation:**
+   - Issue #25: Deprecate Python lore_api.py - document shell tools as canonical
+   - Issue #33: Update CLAUDE.md to reflect current system state
+   - Issue #22-24: Fix broken documentation links across multiple files
+
+3. **Code Refactoring:**
+   - Issue #26-28: Migrate Python tools from LoreAPI to shell tools
+   - Issue #37: Clean up unused Python API references in lore-flow.sh
+
+4. **Feature Enhancements:**
+   - Issue #29: Extract inline LLM prompts to offloadable prompt+data format
+   - Issue #30: Add generation queue for offline/batch lore processing
+
+**Note:** The GitHub issues tracker is the single source of truth for current tasks and priorities.
 
 ---
 
-**Last Updated:** 2026-01-04
-**Session Memories:** 5 sessions documented in `.serena/memories/`
+**Last Updated:** 2026-01-05  
+**Session Memories:** 5 sessions documented in `.serena/memories/` directory  
+**GitHub Issues:** https://github.com/SkogAI/lore/issues (18 open issues as of 2026-01-05)
