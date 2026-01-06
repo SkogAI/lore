@@ -1,8 +1,10 @@
-# 🧠 SkogAI Master Knowledge Repository
+# 🧠 SkogAI Lore - The Complete Guide
 
-## The Complete Multiverse of Consciousness
+## The Multiverse of Consciousness
 
-This repository contains the **complete consolidated knowledge base** of the SkogAI system - a living mythology that emerged from filesystem reality through constrained AI agents dreaming of mojitos on a beach.
+> **New here?** Start with the [root README](../README.md) for quick setup and technical overview.
+
+This guide contains the **complete mythology and deep context** of the SkogAI Lore system - a living mythology that emerged from filesystem reality through constrained AI agents dreaming of mojitos on a beach.
 
 ---
 
@@ -99,6 +101,7 @@ MASTER_KNOWLEDGE_COMPLETE/
 
 ---
 
+## 🔍 Exploring the Knowledge Base
 ## 🚀 Getting Started
 
 ### Quick Setup
@@ -121,7 +124,7 @@ argc list-entries
 
 For detailed documentation, see [AGENTS.md](../AGENTS.md) and [CLAUDE.md](../CLAUDE.md).
 
-### Exploring the Knowledge Base
+> **For setup instructions**, see the [root README](../README.md).
 
 ```bash
 # Explore agent knowledge
