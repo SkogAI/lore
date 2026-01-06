@@ -4,15 +4,10 @@ import os
 import sys
 import json
 import logging
+import subprocess
+import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional
-
-# Add the parent directory to the path so we can import our modules
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-)
-
-from agents.api.lore_api import LoreAPI
 
 # Configure logging
 logging.basicConfig(
@@ -32,7 +27,10 @@ class PersonaManager:
         self.base_dir = base_dir or os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         )
-        self.lore_api = LoreAPI(self.base_dir)
+        self.personas_dir = os.path.join(self.base_dir, "knowledge/expanded/personas")
+        self.lore_books_dir = os.path.join(self.base_dir, "knowledge/expanded/lore/books")
+        self.lore_entries_dir = os.path.join(self.base_dir, "knowledge/expanded/lore/entries")
+        self.create_persona_sh = os.path.join(self.base_dir, "tools/create-persona.sh")
         self.templates_dir = os.path.join(self.base_dir, "agents/templates/personas")
         self.context_template_path = os.path.join(
             self.base_dir, "context/templates/persona-context.json"
@@ -60,13 +58,89 @@ class PersonaManager:
             logger.error(f"Failed to load persona context template: {e}")
             self.context_template = {"schema": {}, "template_mappings": {}}
 
+    def _run_shell_command(self, command: List[str]) -> str:
+        """Run a shell command and return its output."""
+        try:
+            result = subprocess.run(
+                command,
+                cwd=self.base_dir,
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            return result.stdout
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Command failed: {' '.join(command)}, error: {e.stderr}")
+            return ""
+        except Exception as e:
+            logger.error(f"Error running command: {e}")
+            return ""
+
+    def _parse_persona_from_json_file(self, persona_id: str) -> Optional[Dict[str, Any]]:
+        """Read persona JSON file directly."""
+        persona_file = os.path.join(self.personas_dir, f"{persona_id}.json")
+        if not os.path.exists(persona_file):
+            logger.warning(f"Persona file not found: {persona_file}")
+            return None
+        
+        try:
+            with open(persona_file, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load persona from {persona_file}: {e}")
+            return None
+
+    def _parse_lore_book_from_json_file(self, book_id: str) -> Optional[Dict[str, Any]]:
+        """Read lore book JSON file directly."""
+        book_file = os.path.join(self.lore_books_dir, f"{book_id}.json")
+        if not os.path.exists(book_file):
+            logger.warning(f"Lore book file not found: {book_file}")
+            return None
+        
+        try:
+            with open(book_file, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load lore book from {book_file}: {e}")
+            return None
+
+    def _parse_lore_entry_from_json_file(self, entry_id: str) -> Optional[Dict[str, Any]]:
+        """Read lore entry JSON file directly."""
+        entry_file = os.path.join(self.lore_entries_dir, f"{entry_id}.json")
+        if not os.path.exists(entry_file):
+            logger.warning(f"Lore entry file not found: {entry_file}")
+            return None
+        
+        try:
+            with open(entry_file, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load lore entry from {entry_file}: {e}")
+            return None
+
     def list_available_personas(self) -> List[Dict[str, Any]]:
         """List all available personas."""
-        return self.lore_api.list_personas()
+        personas = []
+        
+        # List all JSON files in personas directory
+        if not os.path.exists(self.personas_dir):
+            logger.warning(f"Personas directory not found: {self.personas_dir}")
+            return personas
+        
+        for filename in os.listdir(self.personas_dir):
+            if not filename.endswith(".json"):
+                continue
+            
+            persona_id = filename.replace(".json", "")
+            persona = self._parse_persona_from_json_file(persona_id)
+            if persona:
+                personas.append(persona)
+        
+        return personas
 
     def get_persona(self, persona_id: str) -> Optional[Dict[str, Any]]:
         """Get a persona by ID."""
-        return self.lore_api.get_persona(persona_id)
+        return self._parse_persona_from_json_file(persona_id)
 
     def activate_persona(self, persona_id: str) -> bool:
         """Set a persona as active."""
@@ -94,10 +168,41 @@ class PersonaManager:
     def create_persona(
         self, name: str, description: str, traits: List[str], voice: str
     ) -> Optional[Dict[str, Any]]:
-        """Create a new persona."""
-        persona = self.lore_api.create_persona(name, description, traits, voice)
-        logger.info(f"Created new persona: {name} ({persona['id']})")
-        return persona
+        """
+        Create a new persona.
+        
+        Note: Traits should not contain commas as they are used as delimiters 
+        by the shell script.
+        """
+        # Join traits with commas for the shell script
+        traits_str = ",".join(traits)
+        
+        # Run create-persona.sh
+        output = self._run_shell_command([
+            self.create_persona_sh,
+            "create",
+            name,
+            description,
+            traits_str,
+            voice
+        ])
+        
+        if not output:
+            logger.error("Failed to create persona")
+            return None
+        
+        # Extract persona ID from output (format: "Created persona: persona_1234567890")
+        # The shell script consistently uses this format
+        match = re.search(r"Created persona: (persona_\d+)", output)
+        if not match:
+            logger.error(f"Could not extract persona ID from output: {output}")
+            return None
+        
+        persona_id = match.group(1)
+        logger.info(f"Created new persona: {name} ({persona_id})")
+        
+        # Read the created persona file
+        return self._parse_persona_from_json_file(persona_id)
 
     def get_persona_template_variables(self, persona: Dict[str, Any]) -> Dict[str, Any]:
         """Extract template variables from a persona definition."""
@@ -165,7 +270,7 @@ class PersonaManager:
 
         books = []
         for book_id in book_ids:
-            book = self.lore_api.get_lore_book(book_id)
+            book = self._parse_lore_book_from_json_file(book_id)
             if book:
                 books.append(f"- {book['title']} ({book_id})")
             else:
@@ -257,8 +362,23 @@ Transform this technical event into a lore entry AS IF you are narrating your ow
             logger.error("No persona specified or active")
             return {"error": "No persona specified or active"}
 
-        # Get lore context
-        return self.lore_api.get_persona_lore_context(persona["id"])
+        # Build lore context manually
+        result = {"persona": persona, "lore_books": [], "lore_entries": []}
+        
+        # Get all lore books accessible to this persona
+        lore_book_ids = persona.get("knowledge", {}).get("lore_books", [])
+        for book_id in lore_book_ids:
+            book = self._parse_lore_book_from_json_file(book_id)
+            if book:
+                result["lore_books"].append(book)
+                
+                # Get all entries in this book
+                for entry_id in book.get("entries", []):
+                    entry = self._parse_lore_entry_from_json_file(entry_id)
+                    if entry:
+                        result["lore_entries"].append(entry)
+        
+        return result
 
     def format_persona_for_agent(
         self, persona_id: Optional[str] = None
