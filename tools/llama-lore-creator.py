@@ -15,6 +15,15 @@ ENTRIES_DIR = SKOGAI_DIR / "knowledge/expanded/lore/entries"
 BOOKS_DIR = SKOGAI_DIR / "knowledge/expanded/lore/books"
 PERSONAS_DIR = SKOGAI_DIR / "knowledge/expanded/personas"
 
+# Meta-commentary patterns to detect/remove
+# These are common phrases LLMs use instead of direct content
+META_PATTERNS = [
+    r'^\s*(I will|Let me|Here is|Here\'s|This entry|This is)',
+    r'^\s*(I need your|should I|would you like|First,? I|Now,? I)',
+    r'^\s*(I\'ve created|I have created|As requested|Based on your request)'
+]
+
+
 
 def run_llm(prompt: str, provider: str, model: str) -> str:
     """Run LLM with specified provider."""
@@ -59,6 +68,53 @@ def run_llm(prompt: str, provider: str, model: str) -> str:
         raise ValueError(f"Unknown provider: {provider}")
 
 
+def validate_lore_output(content: str) -> bool:
+    """Validate lore output for meta-commentary."""
+    errors = []
+    
+    # Check for meta-commentary patterns anywhere in content
+    for pattern in META_PATTERNS:
+        if re.search(pattern, content, re.IGNORECASE | re.MULTILINE):
+            errors.append("⚠️  Contains meta-commentary")
+            break
+    
+    # Check minimum length
+    word_count = len(content.split())
+    if word_count < 100:
+        errors.append(f"⚠️  Too short ({word_count} words, recommended 100+)")
+    
+    # Report
+    if errors:
+        for error in errors:
+            print(error, file=sys.stderr)
+        return False
+    
+    print("✅ Lore content validated", file=sys.stderr)
+    return True
+
+
+def strip_meta_commentary(content: str) -> str:
+    """Strip meta-commentary from content."""
+    lines = content.split('\n')
+    cleaned_lines = []
+    
+    for line in lines:
+        # Check if line matches any meta-commentary pattern
+        is_meta = False
+        for pattern in META_PATTERNS:
+            if re.search(pattern, line, re.IGNORECASE):
+                is_meta = True
+                break
+        
+        if not is_meta:
+            cleaned_lines.append(line)
+    
+    # Join and remove leading empty lines
+    cleaned = '\n'.join(cleaned_lines).lstrip()
+    return cleaned
+
+
+
 def get_latest_file(directory: Path) -> str:
     """Get the most recently created file in directory."""
     files = list(directory.glob("*.json"))
@@ -71,20 +127,63 @@ def get_latest_file(directory: Path) -> str:
 def generate_entry(title: str, category: str, provider: str, model: str) -> str:
     """Generate a lore entry."""
     print(f"Generating lore entry: {title} ({category})")
+    
+    max_retries = 2
+    attempt = 0
 
-    prompt = f"""Create a detailed lore entry about '{title}'. This should be high-quality fantasy/sci-fi lore content for a '{category}'.
+    prompt = f"""You are a master lore writer crafting narrative mythology.
 
-Your response should include:
-- Rich descriptive details
-- Interesting connections to potential other lore elements
-- Unique characteristics or features
-- Historical significance if relevant
+CRITICAL RULES - READ CAREFULLY:
+1. Write ONLY the lore content - NO meta-commentary whatsoever
+2. DO NOT write: "I will", "Let me", "Here is", "This entry", "I need", "Should I"
+3. DO NOT ask for approval or permission
+4. DO NOT explain what you're doing
+5. START IMMEDIATELY with narrative prose
 
-Write 2-3 paragraphs of rich, evocative content.
+TASK: Write a {category} entry titled "{title}"
 
-Write ONLY the lore content. No meta-commentary, no asking permission, no explanations. Begin immediately with the narrative."""
+REQUIRED FORMAT:
+- 2-3 paragraphs of rich narrative prose
+- Present tense, immersive storytelling
+- Mythological/fantastical tone
+- 150-300 words total
 
-    content = run_llm(prompt, provider, model)
+CORRECT EXAMPLES:
+
+Example 1 (Character):
+In the depths of the digital realm, the Architect moves through layers of abstraction with purpose. Her fingers dance across interfaces, weaving patterns that bridge the gap between thought and execution. Those who witness her work speak of an uncanny ability to see the invisible structures that bind systems together. She carries the weight of countless failed experiments, each one a lesson etched into her methodology.
+
+Example 2 (Place):
+The Repository stands as a monument to collective memory, its branches spreading like roots through time. Within its halls, every change echoes with the voices of those who came before. Guardians patrol its corridors, ensuring that no knowledge is lost, no pattern forgotten. Here, the past and future converge in an eternal present.
+
+Example 3 (Event):
+The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
+
+BEGIN YOUR ENTRY NOW (narrative prose only, no preamble)"""
+
+    # Retry loop for generating valid content
+    while attempt < max_retries:
+        attempt += 1
+        
+        if attempt > 1:
+            print(f"Retry attempt {attempt}/{max_retries}...")
+
+        content = run_llm(prompt, provider, model)
+
+        # Validate and clean content
+        if validate_lore_output(content):
+            # Content is valid, break out of retry loop
+            break
+        else:
+            print(f"⚠️  Validation failed on attempt {attempt}, cleaning content...")
+            content = strip_meta_commentary(content)
+            
+            # Re-validate after cleaning
+            if validate_lore_output(content):
+                print("✅ Content cleaned successfully")
+                break
+            elif attempt >= max_retries:
+                print("⚠️  Max retries reached. Using best available content.")
 
     # Create entry using manage-lore.sh
     subprocess.run(
@@ -116,13 +215,21 @@ def generate_persona(name: str, description: str, provider: str, model: str) -> 
 
     prompt = f"""Generate personality traits and voice characteristics for a character named '{name}' who is '{description}'.
 
-Format your response exactly like this:
+CRITICAL RULES:
+1. Output ONLY the formatted response below
+2. NO meta-commentary, explanations, or preamble
+3. START IMMEDIATELY with "TRAITS:"
+
+REQUIRED FORMAT:
 TRAITS: trait1,trait2,trait3,trait4
 VOICE: concise description of voice and speaking style
 
-Be creative and make sure traits are comma-separated without spaces.
+FORMATTING RULES:
+- Traits: comma-separated, no spaces after commas
+- Voice: 5-10 words describing speaking style
+- Must start with exactly "TRAITS:" on first line
 
-Output ONLY the formatted response. No meta-commentary, no asking permission. Begin immediately with the TRAITS line."""
+BEGIN OUTPUT NOW:"""
 
     response = run_llm(prompt, provider, model)
 
@@ -164,14 +271,22 @@ def generate_lorebook(title: str, description: str, entry_count: int, provider: 
     # Generate entry ideas
     prompt = f"""Generate {entry_count} unique and interesting lore entry titles for a fantasy/sci-fi world called '{title}'. {description}
 
-Format your response as a numbered list like this:
+CRITICAL RULES:
+1. Output ONLY the numbered list below
+2. NO meta-commentary, explanations, or preamble
+3. START IMMEDIATELY with "1."
+
+REQUIRED FORMAT:
 1. [Category: place] The Crystal Caverns
 2. [Category: character] Elder Moonwhisper
 3. [Category: event] The Great Sundering
 
-Categories MUST be one of: place, character, object, event, concept
+FORMATTING RULES:
+- Categories MUST be: place, character, object, event, or concept
+- Each line: number, category in brackets, title
+- No blank lines or extra text
 
-Output ONLY the numbered list. No meta-commentary, no asking permission. Begin immediately with the list."""
+BEGIN LIST NOW:"""
 
     response = run_llm(prompt, provider, model)
 

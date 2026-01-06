@@ -69,8 +69,8 @@ extract_lore_from_file() {
   local file_path="$1"
   local output_format="$2" # json or lore
 
-  echo "Analyzing file: $file_path"
-  echo "Using model: $MODEL_NAME"
+  echo "Analyzing file: $file_path" >&2
+  echo "Using model: $MODEL_NAME" >&2
 
   if [ ! -f "$file_path" ]; then
     echo "Error: File not found: $file_path"

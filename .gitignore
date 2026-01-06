@@ -89,3 +89,5 @@ queue/pending/*.json
 queue/processing/*.json
 queue/completed/*.json
 queue/failed/*.json
+# Runtime queues
+.lore-queue/
