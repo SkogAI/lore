@@ -10,8 +10,6 @@ set -e
 LORE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PERSONA_MANAGER="$LORE_DIR/integration/persona-bridge/persona-manager.py"
 ORCHESTRATOR="$LORE_DIR/orchestrator/orchestrator.py"
-AGENT_API="$LORE_DIR/agents/api/agent_api.py"
-LORE_API="$LORE_DIR/agents/api/lore_api.py"
 
 # Session ID
 SESSION_ID=$(date +%s)
