@@ -105,8 +105,65 @@ The system outputs structured JSON data in `knowledge/expanded/`:
 
 *(Last updated: 2026-01-05)*
 
-## How to Use lore_api
+## Recommended Tools (Shell-Based)
 
+> ⚠️ **IMPORTANT**: The Python API (`lore_api.py`, `agent_api.py`) is DEPRECATED due to known issues.  
+> Use shell tools instead. See `docs/api/DEPRECATION.md` for details.
+
+### Basic Operations (Shell Tools - PRIMARY)
+
+```bash
+# Create an entry
+entry_id=$(./tools/manage-lore.sh create-entry "The Test Chronicle" "lore")
+
+# Update entry content with jq
+jq -f scripts/jq/crud-set/transform.jq \
+  --arg path "content" \
+  --arg value "In the depths of the digital realm..." \
+  "knowledge/expanded/lore/entries/${entry_id}.json" > tmp.json
+mv tmp.json "knowledge/expanded/lore/entries/${entry_id}.json"
+
+# Or generate with LLM
+LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "The Test Chronicle" "lore"
+
+# Create a book
+book_id=$(./tools/manage-lore.sh create-book "Test Chronicles" "A collection of test entries")
+
+# Link entry to book
+./tools/manage-lore.sh add-to-book "$entry_id" "$book_id"
+
+# Create a persona
+./tools/create-persona.sh create "Aria Nightwhisper" \
+  "Digital archivist" \
+  "methodical,curious,patient,detail-oriented" \
+  "poetic yet precise"
+
+# Link persona to book
+./tools/manage-lore.sh link-to-persona "$book_id" persona_1764992753
+```
+
+### CLI Interface (argc)
+
+```bash
+# Create with flags
+argc create-entry --title "Chronicle" --category lore --content "..."
+argc create-book --title "Chronicles" --description "..."
+argc create-persona --name "Aria" --traits curious patient
+
+# List and show
+argc list-entries
+argc list-books
+argc show-book book_1764992601
+```
+
+## Deprecated Python API (Legacy)
+
+> ⚠️ **DO NOT USE**: Python API has known reliability issues.
+
+<details>
+<summary>Legacy Python API documentation (deprecated)</summary>
+
+### Basic Operations (Python) - DEPRECATED
 > **⚠️ SHELL TOOLS ARE CANONICAL**
 >
 > The shell scripts (`manage-lore.sh`, `Argcfile.sh`) are the primary, supported interface for lore management.
@@ -232,7 +289,7 @@ lore.link_book_to_persona(book['id'], persona['id'])
 
 **No magic - just file I/O with JSON.**
 
-## How to Use agent_api
+## How to Use agent_api - DEPRECATED
 
 > **Note**: `agent_api` is for LLM-powered content generation, not data management.
 > For creating/managing lore entries and books, use the shell tools described above.
@@ -266,6 +323,8 @@ print(result)
 **lore_api creates data (files)**
 
 These are separate concerns.
+
+</details>
 
 ## Integration with jq CRUD System
 

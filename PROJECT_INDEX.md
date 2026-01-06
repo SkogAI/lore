@@ -47,13 +47,16 @@ lore/
   - `argc validate-entry <id>` - Validate entry schema
 
 ### Python APIs
-- **agents/api/lore_api.py** - Core CRUD for entries/books/personas
+
+> ⚠️ **DEPRECATED**: Python API has known issues. Use shell tools instead. See `docs/api/DEPRECATION.md`.
+
+- **agents/api/lore_api.py** - Core CRUD for entries/books/personas (DEPRECATED)
   - `LoreAPI.create_lore_entry()` - Create new entry
   - `LoreAPI.create_lore_book()` - Create new book
   - `LoreAPI.create_persona()` - Create new persona
   - `LoreAPI.add_entry_to_book()` - Link entry to book
 
-- **agents/api/agent_api.py** - LLM API wrapper
+- **agents/api/agent_api.py** - LLM API wrapper (DEPRECATED)
   - `AgentAPI.process_agent_request()` - Call OpenRouter API
 
 ### Integration Pipelines
@@ -62,24 +65,56 @@ lore/
   - `./integration/lore-flow.sh git-diff HEAD` - Generate from commit
 
 ### Tools
-- **tools/manage-lore.sh** - Direct lore management
+
+**Shell scripts** (PRIMARY - actively maintained):
+- **tools/manage-lore.sh** - Direct lore management (CRUD operations)
+- **tools/create-persona.sh** - Persona management
 - **tools/llama-lore-creator.sh** - LLM-powered generation
 - **tools/llama-lore-integrator.sh** - Extract lore from documents
 - **tools/context-manager.sh** - Session lifecycle
 
+**Python tools** (using deprecated API):
+- **generate-agent-lore.py** - Agent lorebook generation (uses deprecated LoreAPI)
+- **tools/lore_tui.py** - Terminal UI (uses deprecated LoreAPI)
+
 ## 📦 Core Modules
 
-### agents/api/lore_api.py
-- **Exports:** `LoreAPI` class
+### Shell Tools (PRIMARY)
+
+**tools/manage-lore.sh**
+- **Purpose:** CRUD operations for entries and books (no LLM required)
+- **Operations:** create-entry, create-book, list-entries, list-books, show-entry, show-book, add-to-book, link-to-persona, search
+
+**tools/create-persona.sh**
+- **Purpose:** CRUD operations for personas
+- **Operations:** create, list, show, edit, delete
+
+**tools/llama-lore-creator.sh**
+- **Purpose:** LLM-powered content generation
+- **Operations:** entry, persona, lorebook, link
+- **Requires:** LLM_PROVIDER env var
+
+**tools/llama-lore-integrator.sh**
+- **Purpose:** Extract lore from existing documents
+- **Operations:** extract-lore, create-entries, import-directory, analyze-connections
+
+### Python APIs (DEPRECATED)
+
+> ⚠️ **Known issues**: These modules have reliability problems. Use shell tools instead.
+
+**agents/api/lore_api.py**
+- **Exports:** `LoreAPI` class (DEPRECATED)
 - **Purpose:** JSON file CRUD for entries/books/personas
 - **Storage:** `knowledge/expanded/lore/`, `knowledge/expanded/personas/`
 - **Operations:** create, read, update, link entities
+- **Status:** Deprecated, use shell tools
 
-### agents/api/agent_api.py
-- **Exports:** `AgentAPI` class
+**agents/api/agent_api.py**
+- **Exports:** `AgentAPI` class (DEPRECATED)
 - **Purpose:** LLM API wrapper (OpenRouter)
 - **Providers:** Claude, OpenAI, Ollama
 - **Output:** Narrative content generation
+- **Status:** Deprecated, use llama-lore-creator.sh
 
 ### orchestrator/orchestrator.py
 - **Exports:** `create_context()`, `prepare_task()`, `build_prompt()`
@@ -195,8 +230,38 @@ export LORE_DIR="/path/to/lore/knowledge/expanded/lore"
 ```
 
 ### 3. Create Your First Entry
+
+**Using shell tools (recommended):**
+
 ```bash
-# Using Python API
+# Create entry with manage-lore.sh
+entry_id=$(./tools/manage-lore.sh create-entry "My First Entry" "lore")
+
+# Update with content
+jq -f scripts/jq/crud-set/transform.jq \
+  --arg path "content" \
+  --arg value "In the beginning..." \
+  "knowledge/expanded/lore/entries/${entry_id}.json" > tmp.json
+mv tmp.json "knowledge/expanded/lore/entries/${entry_id}.json"
+
+# Or generate with LLM
+LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "My First Entry" "lore"
+```
+
+**Using CLI:**
+
+```bash
+argc create-entry --title "My First Entry" \
+                  --content "In the beginning..." \
+                  --category lore
+```
+
+**Using Python API (deprecated, not recommended):**
+
+<details>
+<summary>Legacy Python example</summary>
+
+```bash
 python -c "
 from agents.api.lore_api import LoreAPI
 lore = LoreAPI()
@@ -207,12 +272,9 @@ entry = lore.create_lore_entry(
 )
 print(f'Created: {entry[\"id\"]}')
 "
-
-# Using CLI
-argc create-entry --title "My First Entry" \
-                  --content "In the beginning..." \
-                  --category lore
 ```
+
+</details>
 
 ### 4. Generate From Git Commit
 ```bash
@@ -224,12 +286,18 @@ argc create-entry --title "My First Entry" \
 ```bash
 # List all books
 argc list-books
+./tools/manage-lore.sh list-books
 
 # Show specific book
 argc show-book book_1759486042
+./tools/manage-lore.sh show-book book_1759486042
 
 # Search entries
-tools/manage-lore.sh search "quantum"
+./tools/manage-lore.sh search "quantum"
+
+# List entries
+argc list-entries
+./tools/manage-lore.sh list-entries
 ```
 
 ## 🏗️ Architecture Patterns
