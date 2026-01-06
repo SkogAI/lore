@@ -19,14 +19,6 @@ argc list-entries
 tools/manage-lore.sh create-entry "The Discovery" "lore"
 ```
 
-## Key Documentation
-
-- **[AGENTS.md](AGENTS.md)** - Quick reference for developers
-- **[CLAUDE.md](CLAUDE.md)** - Complete system documentation
-- **[PROJECT_INDEX.md](PROJECT_INDEX.md)** - Repository overview and navigation
-- **[STATS.md](STATS.md)** - Current repository statistics
-- **[docs/CURRENT_UNDERSTANDING.md](docs/CURRENT_UNDERSTANDING.md)** - Latest system understanding
-
 ## Core Concepts
 
 - **Entry** - Atomic unit of lore (character, place, event, object, concept)
@@ -42,16 +34,21 @@ Git Commit → Extract → Persona Selection → LLM Generation → Store as JSO
 
 Files stored in `knowledge/expanded/lore/` as JSON with schema validation.
 
-## Current Scale
+## Documentation
 
-- **1202 lore entries** - Narrative units
+### For Developers
+- **[AGENTS.md](AGENTS.md)** - Quick reference for developers
+- **[CLAUDE.md](CLAUDE.md)** - Complete technical documentation
+- **[PROJECT_INDEX.md](PROJECT_INDEX.md)** - Repository overview and navigation
+- **[STATS.md](STATS.md)** - Current repository statistics
+
+### For Deep Dive
+- **[docs/README.md](docs/README.md)** - Complete mythology, history, and comprehensive guide
+- **[docs/CURRENT_UNDERSTANDING.md](docs/CURRENT_UNDERSTANDING.md)** - Latest system understanding
+- **1207 lore entries** - Narrative units
 - **107 books** - Collections
 - **92 personas** - AI characters
 
 ## The Prime Directive
 
 "Automate EVERYTHING so we can drink mojitos on a beach"
-
----
-
-For detailed documentation, see [CLAUDE.md](CLAUDE.md)

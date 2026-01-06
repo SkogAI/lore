@@ -1,6 +1,6 @@
 # 🗺️ Quick Navigation Index
 
-**Auto-generated:** 2026-01-04 18:21:42 UTC
+**Auto-generated:** 2026-01-06 09:09:56 UTC
 
 ## 📁 Main Documentation
 
@@ -19,6 +19,7 @@
 ### goose
 
 ### skogai
+- [.skogai](.skogai)
 
 ## 📅 Archive Directories by Date
 
@@ -27,14 +28,14 @@
 
 Directories with most knowledge files:
 ```
-1460 files: knowledge
+1465 files: knowledge
 ```
 
 ## 🔮 Lore Entry Locations
 
 Directories containing lore entries:
 - 834 entries: [knowledge/archived/lore/entries](knowledge/archived/lore/entries)
-- 368 entries: [knowledge/expanded/lore/entries](knowledge/expanded/lore/entries)
+- 373 entries: [knowledge/expanded/lore/entries](knowledge/expanded/lore/entries)
 
 ---
 *Navigate the multiverse. Find the patterns. Reach the Beach.*

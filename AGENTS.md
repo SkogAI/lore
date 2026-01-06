@@ -14,7 +14,7 @@ Multi-agent system transforming technical changes into narrative lore. Git commi
 lore/
 ├── agents/api/           # LoreAPI + AgentAPI (DEPRECATED - use shell tools)
 ├── integration/          # Automated lore pipeline (git → persona → narrative)
-├── knowledge/            # JSON data store (728 entries, 102 books, 89 personas)
+├── knowledge/            # JSON data store (1206 entries, 107 books, 92 personas)
 │   ├── core/             # Schemas + numbered knowledge (00-09 core)
 │   ├── expanded/         # Active lore (entries/, books/, personas/)
 │   └── archived/         # Historical preservation (NEVER delete)
@@ -22,6 +22,10 @@ lore/
 ├── scripts/jq/           # 50+ schema-driven jq transformations
 ├── tools/                # CLI tools (manage-lore.sh, llama-*.sh) - PRIMARY
 └── context/              # Session state JSON files
+├── scripts/              # Pre-commit hooks and validation
+├── tools/                # CLI tools (manage-lore.sh, llama-*.sh)
+├── context/              # Session state JSON files
+└── .claude/skills/       # Project skills (skogai-jq, skogai-argc, lore-creation)
 ```
 
 ## WHERE TO LOOK
@@ -33,7 +37,7 @@ lore/
 | Create persona | `tools/create-persona.sh create` | **PRIMARY** - Shell tools recommended |
 | Auto-generate from git | `integration/lore-flow.sh git-diff HEAD` | Maps author → persona |
 | LLM content generation | `tools/llama-lore-creator.sh` | Requires `LLM_PROVIDER` env |
-| JSON transforms | `scripts/jq/<transform>/transform.jq` | Schema in `schema.json` |
+| JSON transforms | `.claude/skills/skogai-jq/<transform>/transform.jq` | 60+ schema-driven transforms |
 | Entry schema | `knowledge/core/lore/schema.json` | Required: id, title, content, category |
 | Persona schema | `knowledge/core/persona/schema.json` | Required: id, name, core_traits, voice |
 | CLI commands | `./Argcfile.sh --help` | argc-based CLI |
@@ -95,10 +99,6 @@ python orchestrator/orchestrator.py init [content|lore|research]  # Start sessio
 ./integration/lore-flow.sh manual "description"                    # Manual input
 ./integration/lore-flow.sh git-diff HEAD                           # From git commit
 LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "Title" "category"
-
-# Testing
-./scripts/jq/test-all.sh                             # Run all jq tests (139 tests)
-./scripts/jq/crud-get/test.sh                        # Single transform test
 
 # Validation
 ./scripts/pre-commit/validate.sh                     # Check paths
@@ -162,6 +162,6 @@ Claude Code session memories documenting key learnings:
 
 ## SUBDIRECTORY AGENTS
 
-- `scripts/jq/AGENTS.md` - jq transformation conventions
 - `tools/AGENTS.md` - CLI tool documentation
 - `integration/AGENTS.md` - Pipeline workflows
+- `.claude/skills/skogai-jq/AGENTS.md` - jq transformation conventions

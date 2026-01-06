@@ -83,3 +83,11 @@ Thumbs.db
 
 # Octocode
 .octocode/
+
+# Queue System - track structure but not task files
+queue/pending/*.json
+queue/processing/*.json
+queue/completed/*.json
+queue/failed/*.json
+# Runtime queues
+.lore-queue/

@@ -22,25 +22,25 @@ Because having AI assistants that try to do everything usually means they do not
 
 ```bash
 # See the whole system layout
-find /home/skogix/skogai -maxdepth 2 -type d | sort
+find . -maxdepth 2 -type d | sort
 
 # See how the "boss" thinks
-cat /home/skogix/skogai/orchestrator/identity/core-v0.md
+cat orchestrator/identity/core-v0.md
 
 # See what a "planning expert" looks like
-cat /home/skogix/skogai/agents/implementations/planner-agent.md
+cat agents/implementations/planner-agent.md
 
 # Run a test workflow (simulated)
-/home/skogix/skogai/integration/orchestrator-flow.sh "Make me a sandwich"
+./integration/orchestrator-flow.sh "Make me a sandwich"
 
 # Check what the system remembers about your request
-cat /home/skogix/skogai/context/archive/*.json
+cat context/archive/*.json
 ```
 
 ## How is this organized?
 
 ```
-/skogai/
+lore/
 ├── knowledge/         # The organized library of stuff the system knows
 │   ├── core/          # Essential knowledge (numbered 00-09)
 │   ├── expanded/      # Detailed knowledge (numbered 10-89)
@@ -51,8 +51,7 @@ cat /home/skogix/skogai/context/archive/*.json
 ├── tools/             # Utility scripts
 ├── integration/       # How everything works together
 ├── docs/              # Documentation
-├── tests/             # Making sure it doesn't break
-└── metrics/           # Measuring how well it's working
+└── tests/             # Making sure it doesn't break
 ```
 
 ## What's special about this?
