@@ -45,6 +45,37 @@ run_llm() {
   esac
 }
 
+# Function to load prompt template from YAML file with fallback
+load_prompt_template() {
+  local prompt_file="$1"
+  local fallback_prompt="$2"
+  local prompt_path="$SKOGAI_DIR/prompts/$prompt_file"
+  
+  # Try to load from file if it exists and yq is available
+  if [ -f "$prompt_path" ] && command -v yq &>/dev/null; then
+    yq eval '.template' "$prompt_path" 2>/dev/null || echo "$fallback_prompt"
+  else
+    echo "$fallback_prompt"
+  fi
+}
+
+# Function to interpolate variables in prompt template
+interpolate_prompt() {
+  local template="$1"
+  shift
+  local result="$template"
+  
+  # Replace each variable pair (name, value)
+  while [ $# -gt 1 ]; do
+    local var_name="$1"
+    local var_value="$2"
+    result="${result//\{\{$var_name\}\}/$var_value}"
+    shift 2
+  done
+  
+  echo "$result"
+}
+
 # Function to validate lore output for meta-commentary
 validate_lore_output() {
   local content="$1"
@@ -122,8 +153,8 @@ generate_lore_entry() {
   echo "Generating lore entry: $title ($category)"
   echo "Using model: $MODEL_NAME"
 
-  # Optimized prompt for lore generation (reduces meta-commentary)
-  PROMPT="You are a master lore writer crafting narrative mythology.
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="You are a master lore writer crafting narrative mythology.
 
 CRITICAL RULES - READ CAREFULLY:
 1. Write ONLY the lore content - NO meta-commentary whatsoever
@@ -132,7 +163,8 @@ CRITICAL RULES - READ CAREFULLY:
 4. DO NOT explain what you're doing
 5. START IMMEDIATELY with narrative prose
 
-TASK: Write a $category entry titled \"$title\"
+## Task
+Create a {{category}} entry titled \"{{title}}\"
 
 REQUIRED FORMAT:
 - 2-3 paragraphs of rich narrative prose
@@ -151,7 +183,14 @@ The Repository stands as a monument to collective memory, its branches spreading
 Example 3 (Event):
 The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
 
-BEGIN YOUR ENTRY NOW (narrative prose only, no preamble):"
+## Your Task
+Write the {{category}} entry for \"{{title}}\" NOW. Begin directly with narrative prose:"
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "lore-entry-generation.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "title" "$title" "category" "$category")
 
   # Retry loop for generating valid content
   while [ $attempt -lt $max_retries ]; do
@@ -218,8 +257,8 @@ generate_persona() {
   echo "Description: $description"
   echo "Using model: $MODEL_NAME"
 
-  # Optimized prompt for persona traits generation
-  PROMPT="Generate personality traits and voice characteristics for a character named '$name' who is '$description'.
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="Generate personality traits and voice characteristics for a character named '{{name}}' who is '{{description}}'.
 
 CRITICAL RULES:
 1. Output ONLY the formatted response below
@@ -236,6 +275,12 @@ FORMATTING RULES:
 - Must start with exactly \"TRAITS:\" on first line
 
 BEGIN OUTPUT NOW:"
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "persona-generation.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "name" "$name" "description" "$description")
 
   # Run LLM to generate traits
   RESPONSE=$(run_llm "$PROMPT")
@@ -280,8 +325,8 @@ generate_lorebook() {
   # Get the ID of the newly created book
   BOOK_ID=$(ls -t $SKOGAI_LORE/knowledge/expanded/lore/books/ | head -n 1 | sed 's/\.json//')
 
-  # Optimized prompt for entry titles generation
-  PROMPT="Generate $entry_count unique lore entry titles for a fantasy/sci-fi world called '$title'. $description
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="Generate {{count}} unique lore entry titles for a fantasy/sci-fi world called '{{title}}'. {{description}}
 
 CRITICAL RULES:
 1. Output ONLY the numbered list below
@@ -299,6 +344,12 @@ FORMATTING RULES:
 - No blank lines or extra text
 
 BEGIN LIST NOW:"
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "lorebook-titles-generation.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "title" "$title" "description" "$description" "count" "$entry_count")
 
   # Run LLM to generate entry titles
   ENTRIES=$(run_llm "$PROMPT")

@@ -40,6 +40,37 @@ run_llm() {
     esac
 }
 
+# Function to load prompt template from YAML file with fallback
+load_prompt_template() {
+  local prompt_file="$1"
+  local fallback_prompt="$2"
+  local prompt_path="$SKOGAI_DIR/prompts/$prompt_file"
+  
+  # Try to load from file if it exists and yq is available
+  if [ -f "$prompt_path" ] && command -v yq &>/dev/null; then
+    yq eval '.template' "$prompt_path" 2>/dev/null || echo "$fallback_prompt"
+  else
+    echo "$fallback_prompt"
+  fi
+}
+
+# Function to interpolate variables in prompt template
+interpolate_prompt() {
+  local template="$1"
+  shift
+  local result="$template"
+  
+  # Replace each variable pair (name, value)
+  while [ $# -gt 1 ]; do
+    local var_name="$1"
+    local var_value="$2"
+    result="${result//\{\{$var_name\}\}/$var_value}"
+    shift 2
+  done
+  
+  echo "$result"
+}
+
 # Provider-specific setup
 if [ "$PROVIDER" = "ollama" ]; then
     if ! command -v ollama &>/dev/null; then
@@ -82,13 +113,13 @@ extract_lore_from_file() {
 
   # Optimized prompt for lore extraction
   if [ "$output_format" == "json" ]; then
-    PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
+    FALLBACK_PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
 
 ## Task
 Analyze this content and identify 3-5 lore-worthy entities.
 
 ## TEXT
-$content
+{{content}}
 
 ## CRITICAL: Output JSON ONLY
 No meta-commentary, no explanations, no preamble.
@@ -112,14 +143,17 @@ Rules:
 - Start IMMEDIATELY with \"{\"
 
 Output NOW:"
+
+    # Load prompt template from file or use fallback
+    TEMPLATE=$(load_prompt_template "lore-extraction-json.yaml" "$FALLBACK_PROMPT")
   else
-    PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
+    FALLBACK_PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
 
 ## Task
 Analyze this content and identify 3-5 lore-worthy entities.
 
 ## TEXT
-$content
+{{content}}
 
 ## CRITICAL: Output Format ONLY
 No meta-commentary, no explanations, no preamble.
@@ -144,7 +178,13 @@ Rules:
 - Start IMMEDIATELY with first \"---\"
 
 Output NOW:"
+
+    # Load prompt template from file or use fallback
+    TEMPLATE=$(load_prompt_template "lore-extraction-markdown.yaml" "$FALLBACK_PROMPT")
   fi
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "content" "$content")
 
   # Run LLM to analyze content
   ANALYSIS=$(run_llm "$PROMPT")
@@ -291,23 +331,29 @@ create_persona_from_text() {
   # Get file content, limiting to first 8000 chars
   local content=$(head -c 8000 "$file_path")
 
-  # Prompt for persona extraction
-  PROMPT="Analyze the following text and extract information about a character or persona.
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="Analyze the following text and extract information about a character or persona.
 
-    TEXT:
-    $content
+TEXT:
+{{content}}
 
-    Based on this text, create a detailed persona profile with the following:
+Based on this text, create a detailed persona profile with the following:
 
-    NAME: The character's name
-    DESCRIPTION: A brief description (1-2 sentences)
-    TRAITS: List 4-6 personality traits, comma-separated
-    VOICE: Description of their speaking style and voice
-    BACKGROUND: Their origin or background story
-    EXPERTISE: Areas of knowledge or skill, comma-separated
-    LIMITATIONS: Weaknesses or gaps in knowledge, comma-separated
+NAME: The character's name
+DESCRIPTION: A brief description (1-2 sentences)
+TRAITS: List 4-6 personality traits, comma-separated
+VOICE: Description of their speaking style and voice
+BACKGROUND: Their origin or background story
+EXPERTISE: Areas of knowledge or skill, comma-separated
+LIMITATIONS: Weaknesses or gaps in knowledge, comma-separated
 
-    Format your response exactly as shown above, with each field on a separate line."
+Format your response exactly as shown above, with each field on a separate line."
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "persona-from-text.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "content" "$content")
 
   # Run LLM to analyze content
   ANALYSIS=$(run_llm "$PROMPT")
@@ -385,19 +431,25 @@ analyze_lore_connections() {
   done
 
   # Prompt for connection analysis
-  PROMPT="Analyze these lore entries and identify meaningful connections between them:
+  FALLBACK_PROMPT="Analyze these lore entries and identify meaningful connections between them:
 
-    $ENTRY_DATA
+{{entry_data}}
 
-    For each connection you find, format your response like this:
+For each connection you find, format your response like this:
 
-    ## CONNECTION
-    SOURCE: [entry_id of source]
-    TARGET: [entry_id of target]
-    RELATIONSHIP: [describe relationship type: part_of, located_in, created_by, opposes, allies_with, etc.]
-    DESCRIPTION: [1-2 sentences describing the connection]
+## CONNECTION
+SOURCE: [entry_id of source]
+TARGET: [entry_id of target]
+RELATIONSHIP: [describe relationship type: part_of, located_in, created_by, opposes, allies_with, etc.]
+DESCRIPTION: [1-2 sentences describing the connection]
 
-    Identify at least 3-5 meaningful connections."
+Identify at least 3-5 meaningful connections."
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "connection-analysis.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables (use printf to handle the newlines properly)
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "entry_data" "$(printf '%s' "$ENTRY_DATA")")
 
   # Run LLM to analyze connections
   CONNECTIONS=$(run_llm "$PROMPT")

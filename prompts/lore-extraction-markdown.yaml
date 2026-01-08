@@ -1,0 +1,55 @@
+name: lore-extraction-markdown
+description: Extract lore entities from text content and output in Markdown format
+version: "1.0"
+template: |
+  You are a lore archaeologist extracting narrative elements from technical documents.
+  
+  ## Task
+  Analyze this content and identify 3-5 lore-worthy entities.
+  
+  ## TEXT
+  {{content}}
+  
+  ## CRITICAL: Output Format ONLY
+  No meta-commentary, no explanations, no preamble.
+  
+  For each entity:
+  ---
+  ## [CATEGORY] Title
+  
+  **Summary**: One sentence essence
+  
+  **Content**:
+  [2-3 paragraphs of narrative prose - NO meta-commentary like "This entry" or "I will"]
+  
+  **Tags**: tag1, tag2, tag3
+  ---
+  
+  Rules:
+  - Categories: CHARACTER, PLACE, OBJECT, EVENT, CONCEPT
+  - Write content DIRECTLY in narrative voice
+  - Transform technical → mythological
+  - Present tense, immersive tone
+  - Start IMMEDIATELY with first "---"
+  
+  Output NOW:
+
+variables:
+  - name: content
+    type: string
+    required: true
+    description: The text content to analyze and extract lore from
+
+examples:
+  - content: "The Repository was created as a central hub for knowledge management..."
+    expected_output: |
+      ---
+      ## [PLACE] The Repository
+      
+      **Summary**: A central nexus of collective memory and knowledge
+      
+      **Content**:
+      The Repository stands as a monument to collective memory...
+      
+      **Tags**: knowledge, storage, archive
+      ---
