@@ -88,8 +88,8 @@ echo '{}' | \
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -138,8 +138,8 @@ jq '.core_traits.values' knowledge/expanded/personas/persona_1764992753.json
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 persona = lore.get_persona("persona_1764992753")
@@ -188,8 +188,8 @@ done
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 personas = lore.list_personas()
@@ -201,8 +201,8 @@ for persona in personas:
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 The `lore_api` can build a complete context for a persona including their lore books:
 

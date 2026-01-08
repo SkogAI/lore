@@ -78,8 +78,8 @@ echo '{}' | \
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -131,8 +131,8 @@ jq '.entries' knowledge/expanded/lore/books/book_1764992601.json
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 book = lore.get_lore_book("book_1764992601")
@@ -187,8 +187,8 @@ mv tmp.json knowledge/expanded/lore/entries/entry_1764992601.json
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 lore.add_entry_to_book("entry_1764992601", "book_1764992601")
@@ -209,8 +209,8 @@ mv tmp.json knowledge/expanded/lore/books/book_1764992601.json
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 lore.link_book_to_persona("book_1764992601", "persona_1764992753")
@@ -238,8 +238,8 @@ done
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 books = lore.list_lore_books()

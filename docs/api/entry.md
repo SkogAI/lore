@@ -71,8 +71,8 @@ echo '{}' | \
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -116,8 +116,8 @@ jq '{title, content}' knowledge/expanded/lore/entries/entry_1764992601.json
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 entry = lore.get_lore_entry("entry_1764992601")
@@ -194,8 +194,8 @@ done
 
 ### Using lore_api (Python)
 
-> **Note:** The Python API (`lore_api.py`) is deprecated. 
-> Use shell tools for new code. See [DEPRECATION.md](../../DEPRECATION.md).
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 # All entries
