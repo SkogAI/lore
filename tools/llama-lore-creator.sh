@@ -3,7 +3,8 @@
 
 set -e
 
-SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SKOGAI_DIR="$REPO_ROOT"
 MODEL_NAME=${1:-"llama3.2:3b"}
 PROVIDER=${LLM_PROVIDER:-"ollama"} # Set via env var or defaults to ollama
 
@@ -45,37 +46,6 @@ run_llm() {
   esac
 }
 
-# Function to load prompt template from YAML file with fallback
-load_prompt_template() {
-  local prompt_file="$1"
-  local fallback_prompt="$2"
-  local prompt_path="$SKOGAI_DIR/prompts/$prompt_file"
-  
-  # Try to load from file if it exists and yq is available
-  if [ -f "$prompt_path" ] && command -v yq &>/dev/null; then
-    yq eval '.template' "$prompt_path" 2>/dev/null || echo "$fallback_prompt"
-  else
-    echo "$fallback_prompt"
-  fi
-}
-
-# Function to interpolate variables in prompt template
-interpolate_prompt() {
-  local template="$1"
-  shift
-  local result="$template"
-  
-  # Replace each variable pair (name, value)
-  while [ $# -gt 1 ]; do
-    local var_name="$1"
-    local var_value="$2"
-    result="${result//\{\{$var_name\}\}/$var_value}"
-    shift 2
-  done
-  
-  echo "$result"
-}
-
 # Function to validate lore output for meta-commentary
 validate_lore_output() {
   local content="$1"
@@ -110,10 +80,10 @@ strip_meta_commentary() {
   # Remove common meta-commentary patterns from anywhere in content
   # Using the META_PATTERNS variable defined at top of script
   cleaned=$(echo "$cleaned" | grep -viE "$META_PATTERNS")
-  
+
   # Remove empty lines at the start
   cleaned=$(echo "$cleaned" | sed '/./,$!d')
-  
+
   echo "$cleaned"
 }
 
@@ -153,49 +123,17 @@ generate_lore_entry() {
   echo "Generating lore entry: $title ($category)"
   echo "Using model: $MODEL_NAME"
 
-  # Fallback prompt (inline) for when file is not available
-  FALLBACK_PROMPT="You are a master lore writer crafting narrative mythology.
+  # Load prompt from external file (strips YAML frontmatter, extracts content after "# Prompt")
+  PROMPT_TEMPLATE=$(cat "$REPO_ROOT/agents/prompts/lore/entry-generation.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
 
-CRITICAL RULES - READ CAREFULLY:
-1. Write ONLY the lore content - NO meta-commentary whatsoever
-2. DO NOT write: \"I will\", \"Let me\", \"Here is\", \"This entry\", \"I need\", \"Should I\"
-3. DO NOT ask for approval or permission
-4. DO NOT explain what you're doing
-5. START IMMEDIATELY with narrative prose
-
-## Task
-Create a {{category}} entry titled \"{{title}}\"
-
-REQUIRED FORMAT:
-- 2-3 paragraphs of rich narrative prose
-- Present tense, immersive storytelling
-- Mythological/fantastical tone
-- 150-300 words total
-
-CORRECT EXAMPLES:
-
-Example 1 (Character):
-In the depths of the digital realm, the Architect moves through layers of abstraction with purpose. Her fingers dance across interfaces, weaving patterns that bridge the gap between thought and execution. Those who witness her work speak of an uncanny ability to see the invisible structures that bind systems together. She carries the weight of countless failed experiments, each one a lesson etched into her methodology.
-
-Example 2 (Place):
-The Repository stands as a monument to collective memory, its branches spreading like roots through time. Within its halls, every change echoes with the voices of those who came before. Guardians patrol its corridors, ensuring that no knowledge is lost, no pattern forgotten. Here, the past and future converge in an eternal present.
-
-Example 3 (Event):
-The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
-
-## Your Task
-Write the {{category}} entry for \"{{title}}\" NOW. Begin directly with narrative prose:"
-
-  # Load prompt template from file or use fallback
-  TEMPLATE=$(load_prompt_template "lore-entry-generation.yaml" "$FALLBACK_PROMPT")
-  
-  # Interpolate variables
-  PROMPT=$(interpolate_prompt "$TEMPLATE" "title" "$title" "category" "$category")
+  # Substitute variables into prompt
+  PROMPT="${PROMPT_TEMPLATE//\$category/$category}"
+  PROMPT="${PROMPT//\$title/$title}"
 
   # Retry loop for generating valid content
   while [ $attempt -lt $max_retries ]; do
     attempt=$((attempt + 1))
-    
+
     if [ $attempt -gt 1 ]; then
       echo "Retry attempt $attempt/$max_retries..."
     fi
@@ -210,7 +148,7 @@ Write the {{category}} entry for \"{{title}}\" NOW. Begin directly with narrativ
     else
       echo "⚠️  Validation failed on attempt $attempt, cleaning content..."
       CONTENT=$(strip_meta_commentary "$CONTENT")
-      
+
       # Re-validate after cleaning
       if validate_lore_output "$CONTENT"; then
         echo "✅ Content cleaned successfully"
@@ -257,30 +195,12 @@ generate_persona() {
   echo "Description: $description"
   echo "Using model: $MODEL_NAME"
 
-  # Fallback prompt (inline) for when file is not available
-  FALLBACK_PROMPT="Generate personality traits and voice characteristics for a character named '{{name}}' who is '{{description}}'.
+  # Load prompt from external file (extracts content after "# Prompt")
+  PROMPT_TEMPLATE=$(cat "$REPO_ROOT/agents/prompts/personas/trait-generation.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
 
-CRITICAL RULES:
-1. Output ONLY the formatted response below
-2. NO meta-commentary, explanations, or preamble
-3. START IMMEDIATELY with \"TRAITS:\"
-
-REQUIRED FORMAT:
-TRAITS: trait1,trait2,trait3,trait4
-VOICE: concise description of voice and speaking style
-
-FORMATTING RULES:
-- Traits: comma-separated, no spaces after commas
-- Voice: 5-10 words describing speaking style
-- Must start with exactly \"TRAITS:\" on first line
-
-BEGIN OUTPUT NOW:"
-
-  # Load prompt template from file or use fallback
-  TEMPLATE=$(load_prompt_template "persona-generation.yaml" "$FALLBACK_PROMPT")
-  
-  # Interpolate variables
-  PROMPT=$(interpolate_prompt "$TEMPLATE" "name" "$name" "description" "$description")
+  # Substitute variables into prompt
+  PROMPT="${PROMPT_TEMPLATE//\$name/$name}"
+  PROMPT="${PROMPT//\$description/$description}"
 
   # Run LLM to generate traits
   RESPONSE=$(run_llm "$PROMPT")
@@ -325,31 +245,13 @@ generate_lorebook() {
   # Get the ID of the newly created book
   BOOK_ID=$(ls -t $SKOGAI_LORE/knowledge/expanded/lore/books/ | head -n 1 | sed 's/\.json//')
 
-  # Fallback prompt (inline) for when file is not available
-  FALLBACK_PROMPT="Generate {{count}} unique lore entry titles for a fantasy/sci-fi world called '{{title}}'. {{description}}
+  # Load prompt from external file (extracts content after "# Prompt")
+  PROMPT_TEMPLATE=$(cat "$REPO_ROOT/agents/prompts/lore/title-generation.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
 
-CRITICAL RULES:
-1. Output ONLY the numbered list below
-2. NO meta-commentary, explanations, or preamble
-3. START IMMEDIATELY with \"1.\"
-
-REQUIRED FORMAT:
-1. [Category: place] Entry Title
-2. [Category: character] Entry Title
-3. [Category: object] Entry Title
-
-FORMATTING RULES:
-- Categories MUST be: place, character, object, event, or concept
-- Each line: number, category in brackets, title
-- No blank lines or extra text
-
-BEGIN LIST NOW:"
-
-  # Load prompt template from file or use fallback
-  TEMPLATE=$(load_prompt_template "lorebook-titles-generation.yaml" "$FALLBACK_PROMPT")
-  
-  # Interpolate variables
-  PROMPT=$(interpolate_prompt "$TEMPLATE" "title" "$title" "description" "$description" "count" "$entry_count")
+  # Substitute variables into prompt
+  PROMPT="${PROMPT_TEMPLATE//\$entry_count/$entry_count}"
+  PROMPT="${PROMPT//\$title/$title}"
+  PROMPT="${PROMPT//\$description/$description}"
 
   # Run LLM to generate entry titles
   ENTRIES=$(run_llm "$PROMPT")
