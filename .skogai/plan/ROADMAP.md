@@ -16,7 +16,7 @@ Wire the existing 5-step pipeline to run end-to-end with Ollama, producing quali
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Verify Pipeline** - End-to-end smoke test with Ollama (DONE 2026-01-05)
-- [ ] **Phase 2: Quality Prompts** - Tune prompts for Village Elder quality output
+- [x] **Phase 2: Quality Prompts** - Tune prompts for Village Elder quality output (DONE 2026-01-09)
 - [ ] **Phase 3: Auto-trigger** - Git hooks fire the pipeline automatically
 - [ ] **Phase 4: Polish** - Context continuity and relationship linking
 

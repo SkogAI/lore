@@ -40,37 +40,6 @@ run_llm() {
     esac
 }
 
-# Function to load prompt template from YAML file with fallback
-load_prompt_template() {
-  local prompt_file="$1"
-  local fallback_prompt="$2"
-  local prompt_path="$SKOGAI_DIR/prompts/$prompt_file"
-  
-  # Try to load from file if it exists and yq is available
-  if [ -f "$prompt_path" ] && command -v yq &>/dev/null; then
-    yq eval '.template' "$prompt_path" 2>/dev/null || echo "$fallback_prompt"
-  else
-    echo "$fallback_prompt"
-  fi
-}
-
-# Function to interpolate variables in prompt template
-interpolate_prompt() {
-  local template="$1"
-  shift
-  local result="$template"
-  
-  # Replace each variable pair (name, value)
-  while [ $# -gt 1 ]; do
-    local var_name="$1"
-    local var_value="$2"
-    result="${result//\{\{$var_name\}\}/$var_value}"
-    shift 2
-  done
-  
-  echo "$result"
-}
-
 # Provider-specific setup
 if [ "$PROVIDER" = "ollama" ]; then
     if ! command -v ollama &>/dev/null; then
@@ -111,80 +80,18 @@ extract_lore_from_file() {
   # Get file content, limiting to first 8000 chars to avoid context issues
   local content=$(head -c 8000 "$file_path")
 
-  # Optimized prompt for lore extraction
+  # Load external prompt for lore extraction
   if [ "$output_format" == "json" ]; then
-    FALLBACK_PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
-
-## Task
-Analyze this content and identify 3-5 lore-worthy entities.
-
-## TEXT
-{{content}}
-
-## CRITICAL: Output JSON ONLY
-No meta-commentary, no explanations, no preamble.
-
-Format EXACTLY like this:
-{
-  \"entries\": [
-    {
-      \"title\": \"Entity Name\",
-      \"category\": \"character\",
-      \"summary\": \"One sentence essence\",
-      \"content\": \"2-3 paragraphs narrative prose in present tense\",
-      \"tags\": [\"tag1\", \"tag2\", \"tag3\"]
-    }
-  ]
-}
-
-Rules:
-- Categories: character, place, object, event, concept
-- Content: narrative prose, NO meta-commentary
-- Start IMMEDIATELY with \"{\"
-
-Output NOW:"
-
-    # Load prompt template from file or use fallback
-    TEMPLATE=$(load_prompt_template "lore-extraction-json.yaml" "$FALLBACK_PROMPT")
+    # Extract prompt content from markdown (everything after "# Prompt" header)
+    PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/lore/extract-json.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+    # Substitute $content variable
+    PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$content|$(echo "$content" | sed 's/[&/\]/\\&/g')|g")
   else
-    FALLBACK_PROMPT="You are a lore archaeologist extracting narrative elements from technical documents.
-
-## Task
-Analyze this content and identify 3-5 lore-worthy entities.
-
-## TEXT
-{{content}}
-
-## CRITICAL: Output Format ONLY
-No meta-commentary, no explanations, no preamble.
-
-For each entity:
----
-## [CATEGORY] Title
-
-**Summary**: One sentence essence
-
-**Content**:
-[2-3 paragraphs of narrative prose - NO meta-commentary like \"This entry\" or \"I will\"]
-
-**Tags**: tag1, tag2, tag3
----
-
-Rules:
-- Categories: CHARACTER, PLACE, OBJECT, EVENT, CONCEPT
-- Write content DIRECTLY in narrative voice
-- Transform technical → mythological
-- Present tense, immersive tone
-- Start IMMEDIATELY with first \"---\"
-
-Output NOW:"
-
-    # Load prompt template from file or use fallback
-    TEMPLATE=$(load_prompt_template "lore-extraction-markdown.yaml" "$FALLBACK_PROMPT")
+    # Extract prompt content from markdown (everything after "# Prompt" header)
+    PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/lore/extract-markdown.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+    # Substitute $content variable
+    PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$content|$(echo "$content" | sed 's/[&/\]/\\&/g')|g")
   fi
-  
-  # Interpolate variables
-  PROMPT=$(interpolate_prompt "$TEMPLATE" "content" "$content")
 
   # Run LLM to analyze content
   ANALYSIS=$(run_llm "$PROMPT")
@@ -331,29 +238,11 @@ create_persona_from_text() {
   # Get file content, limiting to first 8000 chars
   local content=$(head -c 8000 "$file_path")
 
-  # Fallback prompt (inline) for when file is not available
-  FALLBACK_PROMPT="Analyze the following text and extract information about a character or persona.
-
-TEXT:
-{{content}}
-
-Based on this text, create a detailed persona profile with the following:
-
-NAME: The character's name
-DESCRIPTION: A brief description (1-2 sentences)
-TRAITS: List 4-6 personality traits, comma-separated
-VOICE: Description of their speaking style and voice
-BACKGROUND: Their origin or background story
-EXPERTISE: Areas of knowledge or skill, comma-separated
-LIMITATIONS: Weaknesses or gaps in knowledge, comma-separated
-
-Format your response exactly as shown above, with each field on a separate line."
-
-  # Load prompt template from file or use fallback
-  TEMPLATE=$(load_prompt_template "persona-from-text.yaml" "$FALLBACK_PROMPT")
-  
-  # Interpolate variables
-  PROMPT=$(interpolate_prompt "$TEMPLATE" "content" "$content")
+  # Load external prompt for persona extraction
+  # Extract prompt content from markdown (everything after "# Prompt" header)
+  PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/personas/character-analysis.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+  # Substitute $content variable
+  PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$content|$(echo "$content" | sed 's/[&/\]/\\&/g')|g")
 
   # Run LLM to analyze content
   ANALYSIS=$(run_llm "$PROMPT")
@@ -430,26 +319,11 @@ analyze_lore_connections() {
     fi
   done
 
-  # Prompt for connection analysis
-  FALLBACK_PROMPT="Analyze these lore entries and identify meaningful connections between them:
-
-{{entry_data}}
-
-For each connection you find, format your response like this:
-
-## CONNECTION
-SOURCE: [entry_id of source]
-TARGET: [entry_id of target]
-RELATIONSHIP: [describe relationship type: part_of, located_in, created_by, opposes, allies_with, etc.]
-DESCRIPTION: [1-2 sentences describing the connection]
-
-Identify at least 3-5 meaningful connections."
-
-  # Load prompt template from file or use fallback
-  TEMPLATE=$(load_prompt_template "connection-analysis.yaml" "$FALLBACK_PROMPT")
-  
-  # Interpolate variables (use printf to handle the newlines properly)
-  PROMPT=$(interpolate_prompt "$TEMPLATE" "entry_data" "$(printf '%s' "$ENTRY_DATA")")
+  # Load external prompt for connection analysis
+  # Extract prompt content from markdown (everything after "# Prompt" header)
+  PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/lore/analyze-connections.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+  # Substitute $ENTRY_DATA variable (ENTRY_DATA already properly formatted)
+  PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$ENTRY_DATA|$ENTRY_DATA|g")
 
   # Run LLM to analyze connections
   CONNECTIONS=$(run_llm "$PROMPT")
