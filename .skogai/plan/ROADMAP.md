@@ -34,16 +34,22 @@ Key validations:
 - Book and persona linking works
 
 ### Phase 2: Quality Prompts
-**Goal**: Generated entries match Village Elder richness (2-3 paragraphs, agent context, world-building)
+**Goal**: Extract embedded prompts from shell scripts into external files to enable iteration
 **Depends on**: Phase 1
-**Research**: Likely (prompt engineering for Ollama models)
-**Research topics**: Optimal prompt structure for local models, context window limits
+**Research**: Unlikely (simple refactoring)
 **Plans**: TBD
 
+Scope:
+- Extract 7 prompts from llama-lore-creator.sh, llama-lore-integrator.sh, lore-flow.sh
+- Move to agents/prompts/ following repository standards (YAML frontmatter, categories, examples)
+- Update scripts to read from external files
+- Verify functionality unchanged
+
 Key outcomes:
-- No meta-commentary in output (Issue #5 fixed)
-- Rich narrative with practical guidance
-- Consistent persona voice
+- Prompts externalized and documented
+- Scripts read from agents/prompts/ directory
+- Iteration enabled without touching shell code
+- Foundation for future prompt quality improvements (Issue #5 fixes come after)
 
 ### Phase 3: Auto-trigger
 **Goal**: Git commits automatically generate lore without manual intervention

@@ -99,6 +99,7 @@ Git Commit/Log/Manual Input
 | Shell tools canonical | Documented standard, better error handling | — Established |
 | Conservative integration | Wire existing tools, don't rebuild | — Pending |
 | Quality over quantity | Match Village Elder standard | — Pending |
+| Phase 2: Extract not tune | Externalize prompts first, iterate quality after | ✓ 2026-01-08 |
 
 ## Success Criteria
 
@@ -109,4 +110,4 @@ Git Commit/Log/Manual Input
 5. Local LLM does the actual generation work (no cloud dependency)
 
 ---
-*Last updated: 2026-01-05 after initialization*
+*Last updated: 2026-01-08 after Phase 2 context gathering*
