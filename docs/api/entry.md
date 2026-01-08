@@ -1,6 +1,22 @@
 # Entry API
 
+> ⚠️ **DEPRECATION NOTICE**: The Python API (`lore_api.py`) is deprecated. Please use shell tools instead.  
+> See [DEPRECATION.md](./DEPRECATION.md) for migration guide.
+
 An entry is a single piece of narrative content - the atomic unit of lore.
+
+## Recommended Tools
+
+**Shell scripts** (PRIMARY):
+- `tools/manage-lore.sh create-entry` - Create entries
+- `tools/manage-lore.sh list-entries` - List all entries
+- `tools/manage-lore.sh show-entry <id>` - Show entry details
+- `tools/manage-lore.sh search <keyword>` - Search entries
+- `tools/llama-lore-creator.sh - entry` - Generate with LLM
+
+**CLI** (argc-based):
+- `argc create-entry` - Create entry with flags
+- `argc list-entries` - List all entries
 
 ## Schema
 
@@ -99,7 +115,9 @@ print(f"Created: {entry['id']}")
 argc show-entry entry_1764992601
 ```
 
-### Using jq
+</details>
+
+### Using jq (Direct JSON manipulation)
 
 ```bash
 # Get full entry
@@ -210,7 +228,14 @@ for entry in lore_entries:
 
 ## Search Entries
 
-### By content
+### Using manage-lore.sh (Recommended)
+
+```bash
+./tools/manage-lore.sh search "quantum"
+./tools/manage-lore.sh search "forest"
+```
+
+### By content (shell)
 
 ```bash
 # Search for keyword in content

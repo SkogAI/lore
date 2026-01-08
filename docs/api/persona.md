@@ -1,6 +1,21 @@
 # Persona API
 
+> ⚠️ **DEPRECATION NOTICE**: The Python API (`lore_api.py`) is deprecated. Please use shell tools instead.  
+> See [DEPRECATION.md](./DEPRECATION.md) for migration guide.
+
 A persona is an AI character profile with unique voice, traits, and characteristics used to generate consistent narrative content.
+
+## Recommended Tools
+
+**Shell scripts** (PRIMARY):
+- `tools/create-persona.sh create` - Create personas
+- `tools/create-persona.sh list` - List all personas
+- `tools/create-persona.sh show <id>` - Show persona details
+- `tools/create-persona.sh edit <id> <field> <value>` - Edit personas
+
+**CLI** (argc-based):
+- `argc create-persona` - Create persona with flags
+- `argc list-personas` - List all personas
 
 ## Schema
 
@@ -181,8 +196,18 @@ See [@docs/api/book.md](./book.md#link-persona-to-book)
 ### Using shell
 
 ```bash
-for persona in knowledge/expanded/personas/*.json; do
-    jq -r '"\(.id): \(.name)"' "$persona"
+# Get persona with all linked books
+persona_id="persona_1764992753"
+
+# Show persona details
+./tools/create-persona.sh show "$persona_id"
+
+# Get linked books manually
+for book in knowledge/expanded/lore/books/*.json; do
+    if jq -e ".readers | contains([\"$persona_id\"])" "$book" > /dev/null; then
+        echo "Book: $(jq -r '.title' "$book")"
+        echo "Entries: $(jq '.entries | length' "$book")"
+    fi
 done
 ```
 
@@ -215,6 +240,8 @@ print(f"Books: {len(context['lore_books'])}")
 for book in context['lore_books']:
     print(f"  - {book['title']}: {len(book['entries'])} entries")
 ```
+
+</details>
 
 ## Common Patterns
 

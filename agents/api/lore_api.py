@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+"""
+⚠️  DEPRECATED - This Python API is deprecated and has known issues.
+
+Please use the shell tools instead:
+- tools/manage-lore.sh - CRUD operations for entries and books
+- tools/create-persona.sh - CRUD operations for personas
+- tools/llama-lore-creator.sh - LLM-powered content generation
+- tools/llama-lore-integrator.sh - Extract lore from documents
+
+See docs/api/DEPRECATION.md for full details and migration guide.
+
+Shell tools are more reliable, better tested, and actively maintained.
+"""
 
 import os
 import sys

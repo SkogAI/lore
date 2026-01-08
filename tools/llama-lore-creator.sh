@@ -7,6 +7,11 @@ SKOGAI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MODEL_NAME=${1:-"llama3.2:3b"}
 PROVIDER=${LLM_PROVIDER:-"ollama"} # Set via env var or defaults to ollama
 
+# Meta-commentary patterns to detect/remove
+# These are common phrases LLMs use instead of direct content
+META_PATTERNS='^\s*(I will|Let me|Here is|Here'\''s|This entry|This is|I need your|should I|would you like|First,? I|Now,? I|I'\''ve created|I have created|As requested|Based on your request)'
+
+
 # Function to run LLM with specified provider
 run_llm() {
   local prompt="$1"
@@ -40,14 +45,45 @@ run_llm() {
   esac
 }
 
+# Function to load prompt template from YAML file with fallback
+load_prompt_template() {
+  local prompt_file="$1"
+  local fallback_prompt="$2"
+  local prompt_path="$SKOGAI_DIR/prompts/$prompt_file"
+  
+  # Try to load from file if it exists and yq is available
+  if [ -f "$prompt_path" ] && command -v yq &>/dev/null; then
+    yq eval '.template' "$prompt_path" 2>/dev/null || echo "$fallback_prompt"
+  else
+    echo "$fallback_prompt"
+  fi
+}
+
+# Function to interpolate variables in prompt template
+interpolate_prompt() {
+  local template="$1"
+  shift
+  local result="$template"
+  
+  # Replace each variable pair (name, value)
+  while [ $# -gt 1 ]; do
+    local var_name="$1"
+    local var_value="$2"
+    result="${result//\{\{$var_name\}\}/$var_value}"
+    shift 2
+  done
+  
+  echo "$result"
+}
+
 # Function to validate lore output for meta-commentary
 validate_lore_output() {
   local content="$1"
   local errors=()
 
-  # Check for meta-commentary patterns at start of content
-  if echo "$content" | head -n 1 | grep -qiE '^[[:space:]]*(I will|Let me|Here is|This entry|I need your|should I|First,? I)'; then
-    errors+=("⚠️  Contains meta-commentary in first line")
+  # Check for meta-commentary patterns anywhere in content (not just first line)
+  if echo "$content" | grep -qiE "$META_PATTERNS"; then
+    errors+=("⚠️  Contains meta-commentary")
   fi
 
   # Check minimum length
@@ -69,13 +105,16 @@ validate_lore_output() {
 # Function to strip meta-commentary from content
 strip_meta_commentary() {
   local content="$1"
+  local cleaned="$content"
 
-  # If first line contains meta-commentary, remove it
-  if echo "$content" | head -n 1 | grep -qiE '^[[:space:]]*(I will|Let me|Here is|This entry|I need your|should I|First,? I)'; then
-    echo "$content" | tail -n +2
-  else
-    echo "$content"
-  fi
+  # Remove common meta-commentary patterns from anywhere in content
+  # Using the META_PATTERNS variable defined at top of script
+  cleaned=$(echo "$cleaned" | grep -viE "$META_PATTERNS")
+  
+  # Remove empty lines at the start
+  cleaned=$(echo "$cleaned" | sed '/./,$!d')
+  
+  echo "$cleaned"
 }
 
 # Provider-specific setup
@@ -108,32 +147,32 @@ fi
 generate_lore_entry() {
   local title="$1"
   local category="$2"
+  local max_retries=2
+  local attempt=0
 
   echo "Generating lore entry: $title ($category)"
   echo "Using model: $MODEL_NAME"
 
-  # Optimized prompt for lore generation (reduces meta-commentary)
-  PROMPT="You are a master lore writer crafting narrative mythology.
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="You are a master lore writer crafting narrative mythology.
 
-## CRITICAL INSTRUCTION
-Write the lore entry content DIRECTLY. No meta-commentary, no explanations, no approval requests.
+CRITICAL RULES - READ CAREFULLY:
+1. Write ONLY the lore content - NO meta-commentary whatsoever
+2. DO NOT write: \"I will\", \"Let me\", \"Here is\", \"This entry\", \"I need\", \"Should I\"
+3. DO NOT ask for approval or permission
+4. DO NOT explain what you're doing
+5. START IMMEDIATELY with narrative prose
 
 ## Task
-Create a $category entry titled \"$title\"
+Create a {{category}} entry titled \"{{title}}\"
 
-## Format Requirements
+REQUIRED FORMAT:
 - 2-3 paragraphs of rich narrative prose
 - Present tense, immersive storytelling
 - Mythological/fantastical tone
-- NO phrases like: \"I will\", \"Let me\", \"I need\", \"Here is\", \"This entry\"
+- 150-300 words total
 
-## Quality Checklist (Internal - DO NOT OUTPUT)
-✓ Directly starts with narrative
-✓ No meta-commentary
-✓ 150-300 words
-✓ Establishes atmosphere and significance
-
-## Examples of CORRECT Output
+CORRECT EXAMPLES:
 
 Example 1 (Character):
 In the depths of the digital realm, the Architect moves through layers of abstraction with purpose. Her fingers dance across interfaces, weaving patterns that bridge the gap between thought and execution. Those who witness her work speak of an uncanny ability to see the invisible structures that bind systems together. She carries the weight of countless failed experiments, each one a lesson etched into her methodology.
@@ -145,16 +184,42 @@ Example 3 (Event):
 The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
 
 ## Your Task
-Write the $category entry for \"$title\" NOW. Begin directly with narrative prose:"
+Write the {{category}} entry for \"{{title}}\" NOW. Begin directly with narrative prose:"
 
-  # Run LLM to generate content
-  CONTENT=$(run_llm "$PROMPT")
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "lore-entry-generation.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "title" "$title" "category" "$category")
 
-  # Validate and clean content
-  if ! validate_lore_output "$CONTENT"; then
-    echo "⚠️  Validation issues detected, attempting to clean content..."
-    CONTENT=$(strip_meta_commentary "$CONTENT")
-  fi
+  # Retry loop for generating valid content
+  while [ $attempt -lt $max_retries ]; do
+    attempt=$((attempt + 1))
+    
+    if [ $attempt -gt 1 ]; then
+      echo "Retry attempt $attempt/$max_retries..."
+    fi
+
+    # Run LLM to generate content
+    CONTENT=$(run_llm "$PROMPT")
+
+    # Validate and clean content
+    if validate_lore_output "$CONTENT"; then
+      # Content is valid, break out of retry loop
+      break
+    else
+      echo "⚠️  Validation failed on attempt $attempt, cleaning content..."
+      CONTENT=$(strip_meta_commentary "$CONTENT")
+      
+      # Re-validate after cleaning
+      if validate_lore_output "$CONTENT"; then
+        echo "✅ Content cleaned successfully"
+        break
+      elif [ $attempt -ge $max_retries ]; then
+        echo "⚠️  Max retries reached. Using best available content."
+      fi
+    fi
+  done
 
   # Create temporary file for content
   TEMP_FILE=$(mktemp)
@@ -192,22 +257,30 @@ generate_persona() {
   echo "Description: $description"
   echo "Using model: $MODEL_NAME"
 
-  # Optimized prompt for persona traits generation
-  PROMPT="Generate personality traits and voice characteristics for a character named '$name' who is '$description'.
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="Generate personality traits and voice characteristics for a character named '{{name}}' who is '{{description}}'.
 
-## CRITICAL: Output Format ONLY
-No meta-commentary, no explanations, no preamble.
+CRITICAL RULES:
+1. Output ONLY the formatted response below
+2. NO meta-commentary, explanations, or preamble
+3. START IMMEDIATELY with \"TRAITS:\"
 
-Format your response EXACTLY like this:
+REQUIRED FORMAT:
 TRAITS: trait1,trait2,trait3,trait4
 VOICE: concise description of voice and speaking style
 
-Rules:
-- Traits must be comma-separated without spaces
-- Voice should be 5-10 words describing speaking style
-- Start IMMEDIATELY with \"TRAITS:\"
+FORMATTING RULES:
+- Traits: comma-separated, no spaces after commas
+- Voice: 5-10 words describing speaking style
+- Must start with exactly \"TRAITS:\" on first line
 
-Output NOW:"
+BEGIN OUTPUT NOW:"
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "persona-generation.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "name" "$name" "description" "$description")
 
   # Run LLM to generate traits
   RESPONSE=$(run_llm "$PROMPT")
@@ -252,23 +325,31 @@ generate_lorebook() {
   # Get the ID of the newly created book
   BOOK_ID=$(ls -t $SKOGAI_LORE/knowledge/expanded/lore/books/ | head -n 1 | sed 's/\.json//')
 
-  # Optimized prompt for entry titles generation
-  PROMPT="Generate $entry_count unique lore entry titles for a fantasy/sci-fi world called '$title'. $description
+  # Fallback prompt (inline) for when file is not available
+  FALLBACK_PROMPT="Generate {{count}} unique lore entry titles for a fantasy/sci-fi world called '{{title}}'. {{description}}
 
-## CRITICAL: Format ONLY
-No meta-commentary, no explanations, no preamble.
+CRITICAL RULES:
+1. Output ONLY the numbered list below
+2. NO meta-commentary, explanations, or preamble
+3. START IMMEDIATELY with \"1.\"
 
-Format EXACTLY like this:
+REQUIRED FORMAT:
 1. [Category: place] Entry Title
 2. [Category: character] Entry Title
 3. [Category: object] Entry Title
 
-Rules:
+FORMATTING RULES:
 - Categories MUST be: place, character, object, event, or concept
-- Start IMMEDIATELY with \"1.\"
 - Each line: number, category in brackets, title
+- No blank lines or extra text
 
-Output NOW:"
+BEGIN LIST NOW:"
+
+  # Load prompt template from file or use fallback
+  TEMPLATE=$(load_prompt_template "lorebook-titles-generation.yaml" "$FALLBACK_PROMPT")
+  
+  # Interpolate variables
+  PROMPT=$(interpolate_prompt "$TEMPLATE" "title" "$title" "description" "$description" "count" "$entry_count")
 
   # Run LLM to generate entry titles
   ENTRIES=$(run_llm "$PROMPT")

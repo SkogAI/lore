@@ -324,7 +324,7 @@ source ~/.bashrc
 echo $SKOGAI_LORE
 ```
 
-For more detailed troubleshooting, see [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+For more detailed troubleshooting, check the service logs with `journalctl --user -u <service-name> --no-pager`
 
 ## Monitoring
 
@@ -367,11 +367,18 @@ ls -lt ${SKOGAI_LORE}/integration/services/logs/lore_generation/ | head -10
 
 ## Further Reading
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) - Detailed technical architecture
-- [CONFIGURATION.md](./CONFIGURATION.md) - Advanced configuration options
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Comprehensive problem solving
-- [UNIFIED_PLAN.md](./UNIFIED_PLAN.md) - Future unification roadmap
-- [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) - Upgrading existing deployments
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - Detailed technical architecture (planned)
+- [../AGENTS.md](../AGENTS.md) - Integration layer overview and conventions
+- [../README.md](../README.md) - Integration quick start guide
+- [../../CLAUDE.md](../../CLAUDE.md) - Complete system documentation
+- [../../docs/CURRENT_UNDERSTANDING.md](../../docs/CURRENT_UNDERSTANDING.md) - Latest system state
+
+<!-- TODO: Create these documentation files as needed
+- CONFIGURATION.md - Advanced configuration options
+- TROUBLESHOOTING.md - Comprehensive problem solving  
+- UNIFIED_PLAN.md - Future unification roadmap
+- MIGRATION_GUIDE.md - Upgrading existing deployments
+-->
 
 ## Contributing
 

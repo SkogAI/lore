@@ -1,0 +1,41 @@
+name: connection-analysis
+description: Analyze lore entries and identify meaningful connections between them
+version: "1.0"
+template: |
+  Analyze these lore entries and identify meaningful connections between them:
+  
+  {{entry_data}}
+  
+  For each connection you find, format your response like this:
+  
+  ## CONNECTION
+  SOURCE: [entry_id of source]
+  TARGET: [entry_id of target]
+  RELATIONSHIP: [describe relationship type: part_of, located_in, created_by, opposes, allies_with, etc.]
+  DESCRIPTION: [1-2 sentences describing the connection]
+  
+  Identify at least 3-5 meaningful connections.
+
+variables:
+  - name: entry_data
+    type: string
+    required: true
+    description: Formatted data of lore entries to analyze (ID, TITLE, CATEGORY, SUMMARY for each entry)
+
+examples:
+  - entry_data: |
+      ID: entry_001
+      TITLE: The Crystal Tower
+      CATEGORY: place
+      SUMMARY: A mystical tower of pure crystal
+      
+      ID: entry_002
+      TITLE: The Mage Council
+      CATEGORY: character
+      SUMMARY: Group of powerful mages
+    expected_output: |
+      ## CONNECTION
+      SOURCE: entry_002
+      TARGET: entry_001
+      RELATIONSHIP: located_in
+      DESCRIPTION: The Mage Council holds their meetings in the Crystal Tower, using its power to amplify their magic.

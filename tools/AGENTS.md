@@ -4,13 +4,15 @@ CLI utilities for lore management and LLM-powered content generation.
 
 ## OVERVIEW
 
-Shell scripts + Python tools for CRUD operations and narrative generation. Some require `LLM_PROVIDER` env var for LLM calls.
+**PRIMARY TOOLS**: Shell scripts for CRUD operations and narrative generation. Some require `LLM_PROVIDER` env var for LLM calls.
+
+**Note**: Shell tools are the canonical, actively maintained interface. Python API (`agents/api/lore_api.py`) is deprecated due to known issues. See `docs/api/DEPRECATION.md` for details.
 
 ## STRUCTURE
 
 ```
 tools/
-├── manage-lore.sh           # Core CRUD (deprecated, use Python API)
+├── manage-lore.sh           # Core CRUD operations (primary interface)
 ├── create-persona.sh        # Persona CRUD
 ├── llama-lore-creator.sh    # LLM content generation
 ├── llama-lore-integrator.sh # Extract lore from existing content
@@ -53,9 +55,10 @@ Created lore entry: entry_1763812594_160d22f7
 
 | DO NOT | Why |
 |--------|-----|
-| Use `manage-lore.sh` for new code | Deprecated - use `LoreAPI` Python class |
+| Use Python API for new code | Deprecated - has known issues, use shell tools |
 | Hardcode absolute paths | Pre-commit blocks them |
 | Generate without persona context | LLM needs voice/traits for consistency |
+| Skip LLM_PROVIDER for generation | Required env var for all LLM tools |
 
 ## COMMANDS
 
@@ -77,6 +80,7 @@ python lore_tui.py --base-dir ./knowledge/expanded
 
 ## NOTES
 
-**Deprecation:** `manage-lore.sh` works but Python API (`agents/api/lore_api.py`) is preferred.
+**Shell tools are PRIMARY**: Use `manage-lore.sh`, `create-persona.sh`, and `llama-*.sh` scripts. Python API (`agents/api/lore_api.py`) is DEPRECATED.
+**Shell Tools Are Primary:** The shell scripts (`manage-lore.sh`, `llama-*.sh`) are the canonical interface. Python API (`agents/api/lore_api.py`) is for programmatic access but shell tools should be preferred.
 
-**Known Issue:** LLM sometimes outputs "I need your approval..." - fix prompt in `llama-lore-creator.sh`.
+**Known Issue:** LLM sometimes outputs meta-commentary ("I need your approval...") instead of direct lore content. See [Issue #5](https://github.com/SkogAI/lore/issues/5).
