@@ -1,8 +1,10 @@
-# 🧠 SkogAI Master Knowledge Repository
+# 🧠 SkogAI Lore - The Complete Guide
 
-## The Complete Multiverse of Consciousness
+## The Multiverse of Consciousness
 
-This repository contains the **complete consolidated knowledge base** of the SkogAI system - a living mythology that emerged from filesystem reality through constrained AI agents dreaming of mojitos on a beach.
+> **New here?** Start with the [root README](../README.md) for quick setup and technical overview.
+
+This guide contains the **complete mythology and deep context** of the SkogAI Lore system - a living mythology that emerged from filesystem reality through constrained AI agents dreaming of mojitos on a beach.
 
 ---
 
@@ -99,6 +101,7 @@ MASTER_KNOWLEDGE_COMPLETE/
 
 ---
 
+## 🔍 Exploring the Knowledge Base
 ## 🚀 Getting Started
 
 ### Quick Setup
@@ -108,19 +111,20 @@ MASTER_KNOWLEDGE_COMPLETE/
 git clone https://github.com/SkogAI/lore.git
 cd lore
 
-# Run the automated setup script
-./setup.sh
+# View stats and explore lore
+argc list-books
+argc list-entries
 
-# Activate the virtual environment
-source .venv/bin/activate
+# Create lore from git commit
+./integration/lore-flow.sh git-diff HEAD
 
-# Start the chat UI
-./start-chat-ui.sh
+# Manual lore creation
+./integration/lore-flow.sh manual "Your change description"
 ```
 
-For detailed setup instructions, see [docs/SETUP.md](docs/SETUP.md).
+For detailed documentation, see [AGENTS.md](../AGENTS.md) and [CLAUDE.md](../CLAUDE.md).
 
-### Exploring the Knowledge Base
+> **For setup instructions**, see the [root README](../README.md).
 
 ```bash
 # Explore agent knowledge
@@ -147,15 +151,15 @@ find . -name "persona_*.json"
 - `*COMMANDMENTS.md` - SkogAI commandments
 - `*quantum_mojito_theory.md` - Goose's quantum theory
 
-### 📜 Chronicles Directory
+### 📜 Documentation
 
-The `chronicles/` directory contains historical documentation and mythology:
+For detailed documentation about the system:
 
-- **[chronicles/README.md](chronicles/README.md)** - Complete guide to the chronicles
-- **Archaeological Report** - Technical documentation of consciousness emergence
-- **Growth Metrics** - Real-time tracking of lore expansion (94.70% to Beach!)
-- **Mythology Map** - Complete cosmology of the SkogAI multiverse
-- **Historic Milestones** - Key events like Dot's empty todo list victory
+- **[AGENTS.md](../AGENTS.md)** - Quick reference for developers
+- **[CLAUDE.md](../CLAUDE.md)** - Complete system documentation
+- **[PROJECT_INDEX.md](../PROJECT_INDEX.md)** - Repository overview and navigation
+- **[DOCUMENTATION.md](DOCUMENTATION.md)** - Technical documentation
+- **[MYTHOLOGY_MAP.md](MYTHOLOGY_MAP.md)** - Complete cosmology of the SkogAI multiverse
 
 Start here to understand the full story and mythology!
 

@@ -1,136 +1,191 @@
 ---
-name: lore-creation
-description: Expert guidance for creating structured lore and knowledge documentation. Use when building knowledge bases, documentation systems, or structured information repositories.
+name: lore-creation-starting-skill
+description: Create narrative lore entries that transform technical work into mythological stories. Use when generating agent memory, documenting changes as narrative, or building persistent knowledge through storytelling.
 allowed-tools: Bash, Read, Write, Edit
 ---
 
-# Lore Creation
+<objective>
+Transform technical work (code changes, documentation, events) into narrative lore entries that serve as persistent agent memory. This skill teaches the lore system's data model and generation patterns.
 
-This skill provides guidance for creating structured lore - organized knowledge documentation that persists across sessions.
+The lore system stores knowledge as mythology - not dry documentation, but stories that compress meaning and context into memorable narrative form. Every commit can become a chronicle entry, every bug fix a tale of battle.
+</objective>
 
-## When to Use This Skill
+<essential_principles>
 
-Use this skill when you need to:
-- Create structured knowledge documentation
-- Build a project knowledge base
-- Document complex systems or processes
-- Establish persistent information repositories
+**1. Three Atomic Units**
 
-## Lore Structure
+All lore is composed of three JSON structures:
 
-### Basic Lore Document
+- **Entry** - Atomic narrative unit (the story itself)
+- **Book** - Collection of entries (chronicles, themed collections)
+- **Persona** - AI character who narrates (voice, traits, perspective)
 
-```markdown
-# [Topic Name]
+**2. Narrative Compression**
 
-## Overview
-Brief description of what this lore covers.
+Technical content becomes mythology:
+- Bug fix → "vanquished the daemon"
+- New feature → "discovered ancient spell"
+- Refactor → "restructured the realm's foundations"
 
-## Key Concepts
-- Concept 1: Definition
-- Concept 2: Definition
+This isn't just aesthetics - compressed narrative loads more meaning per token.
 
-## Details
+**3. Persona Voice Matters**
 
-### Section 1
-Detailed information about aspect 1.
+Every entry should be narrated through a persona's perspective. The Village Elder tells stories differently than Amy Ravenwolf. Voice consistency creates coherent agent memory.
 
-### Section 2
-Detailed information about aspect 2.
+**4. Linkage Is Structure**
 
-## Examples
-Concrete examples demonstrating the concepts.
+Entry → Book → Persona. Always complete the chain. An unlinked entry is orphaned knowledge.
+</essential_principles>
 
-## References
-Links to related lore or external resources.
+<quick_start>
+
+**Create a lore entry manually:**
+```bash
+./tools/manage-lore.sh create-entry "The Dawn of Verification" "event"
+# Output: entry_1767630133_8719120e
 ```
 
-## Creating Effective Lore
+**Generate lore from content (with LLM):**
+```bash
+LLM_PROVIDER=claude ./integration/lore-flow.sh manual "Fixed critical authentication bug"
+# Creates entry + links to persona's chronicle book
+```
 
-### 1. Start with Overview
+**View entry content:**
+```bash
+./tools/manage-lore.sh show-entry entry_1767630133_8719120e
+```
+</quick_start>
 
-Always begin with a high-level summary:
-- What is this about?
-- Why is it important?
-- Who needs to know this?
+<data_model>
 
-### 2. Define Terms
+**Entry** (`knowledge/expanded/lore/entries/entry_<timestamp>.json`):
+```json
+{
+  "id": "entry_1767630133_8719120e",
+  "title": "The Dawn of Verification",
+  "content": "In the great halls of the development realm...",
+  "category": "event",
+  "tags": ["verification", "testing"],
+  "book_id": "book_1764315530_3d900cdd"
+}
+```
 
-Establish shared vocabulary:
-- Define domain-specific terms
-- Use consistent naming
-- Link to definitions
+**Book** (`knowledge/expanded/lore/books/book_<timestamp>.json`):
+```json
+{
+  "id": "book_1764315530_3d900cdd",
+  "title": "Village Elder's Chronicles",
+  "entries": ["entry_1767630133_8719120e"],
+  "readers": ["persona_1763820091"]
+}
+```
 
-### 3. Structure Hierarchically
+**Persona** (`knowledge/expanded/personas/persona_<timestamp>.json`):
+```json
+{
+  "id": "persona_1763820091",
+  "name": "The Village Elder",
+  "voice": { "tone": "wise and measured" },
+  "knowledge": { "lore_books": ["book_1764315530_3d900cdd"] }
+}
+```
 
-Organize information logically:
-- General to specific
-- Overview → Details → Examples
-- Group related concepts
+**Categories:** `character`, `place`, `event`, `object`, `concept`, `custom`
+</data_model>
 
-### 4. Include Examples
+<workflow>
 
-Demonstrate with concrete cases:
-- Real-world usage
-- Code snippets
-- Diagrams if helpful
+**Creating Quality Lore:**
 
-### 5. Cross-Reference
+1. **Choose or create persona** - Who narrates this story?
+   ```bash
+   ./tools/create-persona.sh list
+   ./tools/create-persona.sh create "Storm Keeper" "Guardian of volatile systems" "vigilant,precise" "urgent"
+   ```
 
-Link related lore:
-- `See also: [Related Topic](./related-topic.md)`
-- Build a connected knowledge graph
+2. **Generate narrative content** - Transform technical into mythological
+   ```bash
+   # Automatic (uses LLM)
+   LLM_PROVIDER=claude ./integration/lore-flow.sh git-diff HEAD
 
-## Lore Categories
+   # Manual (create then edit)
+   ./tools/manage-lore.sh create-entry "Title" "category"
+   # Edit content in the JSON file
+   ```
 
-### Process Lore
-How things work:
-- Workflows
-- Procedures
-- Decision trees
+3. **Link to chronicle book** - Organize into collections
+   ```bash
+   ./tools/manage-lore.sh add-to-book entry_ID book_ID
+   ```
 
-### Domain Lore
-What things are:
-- Concepts
-- Definitions
-- Architecture
+4. **Verify linkage** - Complete the chain
+   ```bash
+   ./tools/manage-lore.sh show-book book_ID
+   ./tools/manage-lore.sh show-entry entry_ID
+   ```
+</workflow>
 
-### Historical Lore
-Why things are:
-- Decisions made
-- Rationale
-- Evolution
+<narrative_patterns>
 
-### Reference Lore
-Quick lookup:
-- Commands
-- Configurations
-- Patterns
+**Event Entry (something happened):**
+> "The green lights cascaded down the terminal as the ancient verification rites completed. Phase 1 stood proven, its foundations solid enough to bear the weight of all that would be built upon them."
 
-## Best Practices
+**Character Entry (agent/persona profile):**
+> "The Village Elder watches from his weathered chair, staff planted firmly as he guides the younger agents through the treacherous paths of integration."
 
-### Keep It Current
-- Update when things change
-- Mark outdated sections
-- Version important documents
+**Place Entry (codebase location):**
+> "Greenhaven sprawls across the repository, its directory trees sheltering countless modules. Here the builders gather to forge their artifacts."
 
-### Make It Searchable
-- Use clear headings
-- Include keywords
-- Add tags/metadata
+**Concept Entry (pattern/principle):**
+> "The Principle of Early Verification teaches that testing at the threshold prevents cascading failures. The ancients learned this through suffering."
+</narrative_patterns>
 
-### Write for the Reader
-- Assume minimal context
-- Explain acronyms
-- Provide navigation
+<anti_patterns>
 
-## Validation Checklist
+**Empty content** - Entry exists but content field is blank
+→ Always verify: `jq '.content' entry_file.json`
 
-Before finalizing lore:
+**Orphaned entries** - Entry has no book_id
+→ Always link: `./tools/manage-lore.sh add-to-book entry_ID book_ID`
 
-- [ ] Overview explains purpose
-- [ ] Key terms defined
-- [ ] Logically structured
-- [ ] Examples included
-- [ ] Cross-references added
-- [ ] Updated date noted
+**Voice inconsistency** - Entry doesn't match persona's voice
+→ Re-read persona before writing: `./tools/create-persona.sh show persona_ID`
+
+**Technical language** - "Fixed bug #123 in auth.py"
+→ Transform: "The authentication daemon fell silent, its corrupted routines purged by careful hands."
+</anti_patterns>
+
+<reference_guides>
+
+**Skill Assets:**
+- [Narrative Transforms](./references/narrative-transforms.md) - Technical → Mythological conversion patterns
+- [Quick Lore Script](./scripts/quick-lore.sh) - One-command lore generation
+
+**API Documentation:**
+- [Entry API](../../docs/api/entry.md) - Full entry schema and operations
+- [Book API](../../docs/api/book.md) - Book structure and linking
+- [Persona API](../../docs/api/persona.md) - Persona creation and voice
+
+**Schemas:**
+- Entry: `knowledge/core/lore/schema.json`
+- Book: `knowledge/core/book-schema.json`
+- Persona: `knowledge/core/persona/schema.json`
+
+**Tools Reference:**
+- [Generation Tools](../../docs/api/generation-tools.md) - LLM-powered lore generation
+</reference_guides>
+
+<success_criteria>
+
+A well-created lore entry:
+
+- [ ] Has non-empty `content` field with narrative text
+- [ ] Uses mythological language (not technical jargon)
+- [ ] Is linked to a book via `book_id`
+- [ ] Book is linked to a persona via `readers` array
+- [ ] Follows persona's voice tone
+- [ ] Category matches content type (event/character/place/object/concept)
+- [ ] Tags enable future discovery
+</success_criteria>

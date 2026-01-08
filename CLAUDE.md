@@ -1,5 +1,7 @@
 # Lore - Digital Mythology Generation System
 
+*Last Updated: 2026-01-05*
+
 A multi-agent system that generates narrative lore entries stored as JSON files, organized into books and linked to AI personas.
 
 ## Core Concepts
@@ -92,13 +94,139 @@ The system outputs structured JSON data in `knowledge/expanded/`:
 
 **Current Data:**
 
-- 102 books
-- 728 entries
-- 89 personas
+- 88 books
+- 368 entries
+- 53 personas
 
-## How to Use lore_api
+**Garden State:**
+- Seed plugins: core, docs
+- Trial plugins: 0
+- Permanent plugins: 0
 
-### Basic Operations (Python)
+*(Last updated: 2026-01-05)*
+
+## Recommended Tools (Shell-Based)
+
+> ⚠️ **IMPORTANT**: The Python API (`lore_api.py`, `agent_api.py`) is DEPRECATED due to known issues.  
+> Use shell tools instead. See `docs/api/DEPRECATION.md` for details.
+
+### Basic Operations (Shell Tools - PRIMARY)
+
+```bash
+# Create an entry
+entry_id=$(./tools/manage-lore.sh create-entry "The Test Chronicle" "lore")
+
+# Update entry content with jq
+jq -f scripts/jq/crud-set/transform.jq \
+  --arg path "content" \
+  --arg value "In the depths of the digital realm..." \
+  "knowledge/expanded/lore/entries/${entry_id}.json" > tmp.json
+mv tmp.json "knowledge/expanded/lore/entries/${entry_id}.json"
+
+# Or generate with LLM
+LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "The Test Chronicle" "lore"
+
+# Create a book
+book_id=$(./tools/manage-lore.sh create-book "Test Chronicles" "A collection of test entries")
+
+# Link entry to book
+./tools/manage-lore.sh add-to-book "$entry_id" "$book_id"
+
+# Create a persona
+./tools/create-persona.sh create "Aria Nightwhisper" \
+  "Digital archivist" \
+  "methodical,curious,patient,detail-oriented" \
+  "poetic yet precise"
+
+# Link persona to book
+./tools/manage-lore.sh link-to-persona "$book_id" persona_1764992753
+```
+
+### CLI Interface (argc)
+
+```bash
+# Create with flags
+argc create-entry --title "Chronicle" --category lore --content "..."
+argc create-book --title "Chronicles" --description "..."
+argc create-persona --name "Aria" --traits curious patient
+
+# List and show
+argc list-entries
+argc list-books
+argc show-book book_1764992601
+```
+
+## Deprecated Python API (Legacy)
+
+> ⚠️ **DO NOT USE**: Python API has known reliability issues.
+
+<details>
+<summary>Legacy Python API documentation (deprecated)</summary>
+
+### Basic Operations (Python) - DEPRECATED
+> **⚠️ SHELL TOOLS ARE CANONICAL**
+>
+> The shell scripts (`manage-lore.sh`, `Argcfile.sh`) are the primary, supported interface for lore management.
+> They provide complete functionality with better error handling and validation.
+>
+> **Python API**: The Python `lore_api` module is provided for programmatic access but shell tools should be preferred for most operations.
+
+### Shell Tools (Recommended)
+
+**Using `manage-lore.sh`:**
+
+```bash
+# Create an entry
+./tools/manage-lore.sh create-entry \
+  --title "The Test Chronicle" \
+  --content "In the depths of the digital realm..." \
+  --category lore \
+  --tags "test,chronicle"
+# Output: Created entry: entry_1764992601
+# File: knowledge/expanded/lore/entries/entry_1764992601.json
+
+# Create a book
+./tools/manage-lore.sh create-book \
+  --title "Test Chronicles" \
+  --description "A collection of test entries"
+# Output: Created book: book_1764992601
+# File: knowledge/expanded/lore/books/book_1764992601.json
+
+# Link entry to book
+./tools/manage-lore.sh link-entry-to-book entry_1764992601 book_1764992601
+
+# List all entries
+./tools/manage-lore.sh list-entries
+
+# Show specific entry
+./tools/manage-lore.sh show-entry entry_1764992601
+```
+
+**Using `Argcfile.sh` (argc-powered CLI):**
+
+```bash
+# List all books
+argc list-books
+
+# Show a specific book
+argc show-book book_1764992601
+
+# Read all entries in a book
+argc read-book-entries book_1764992601
+
+# Create new book
+argc create-book --title "My Book" --description "Description"
+
+# Create new entry
+argc create-entry --title "My Entry" --content "Content..." --category lore
+
+# Validate schemas
+argc validate-entry entry_1764992601
+argc validate-book book_1764992601
+argc validate-persona persona_1764992753
+```
+
+### Python API (Legacy)
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -161,7 +289,10 @@ lore.link_book_to_persona(book['id'], persona['id'])
 
 **No magic - just file I/O with JSON.**
 
-## How to Use agent_api
+## How to Use agent_api - DEPRECATED
+
+> **Note**: `agent_api` is for LLM-powered content generation, not data management.
+> For creating/managing lore entries and books, use the shell tools described above.
 
 ```python
 from agents.api.agent_api import AgentAPI
@@ -193,6 +324,8 @@ print(result)
 
 These are separate concerns.
 
+</details>
+
 ## Integration with jq CRUD System
 
 The lore system integrates with skogai's standard jq CRUD operations (`@scripts/jq/`):
@@ -220,24 +353,7 @@ mv tmp.json knowledge/expanded/lore/entries/entry_1764992601.json
 
 ## CLI Access
 
-Use `Argcfile.sh` for command-line operations:
-
-```bash
-# List all books
-argc list-books
-
-# Show a specific book
-argc show-book book_1764992601
-
-# Read all entries in a book
-argc read-book-entries book_1764992601
-
-# Create new book
-argc create-book --title "My Book" --description "Description"
-
-# Create new entry
-argc create-entry --title "My Entry" --content "Content..." --category lore
-```
+See the "How to Use lore_api" section above for complete shell tool examples using `manage-lore.sh` and `Argcfile.sh`.
 
 ## Context Management
 
@@ -320,11 +436,11 @@ session_id=$(./tools/context-manager.sh create base)
   lore_api.py        - JSON file CRUD (creates books/entries/personas)
 
 @knowledge/expanded/lore/
-  books/             - 89 book JSON files
-  entries/           - 301 entry JSON files
+  books/             - 88 book JSON files
+  entries/           - 368 entry JSON files
 
 @knowledge/expanded/personas/
-                     - 74 persona JSON files
+                     - 53 persona JSON files
 
 @scripts/jq/         - Standard jq CRUD operations (used across skogai)
   crud-get/          - Get values from JSON
@@ -756,24 +872,43 @@ These memories document:
 - Technical discoveries and insights
 - Cross-session continuity for future work
 
+## Plugin Garden
+
+Trial-based plugin evaluation. See `@.skogai/garden/README.md` for full documentation.
+
+Quick: `/garden:status` | `/garden:trial <plugin>` | `/garden:keep <plugin>`
+
 ## Key Documentation
 
 - **[Concept](docs/CONCEPT.md)** - Core vision: memory system for agents using narrative
-- **[Handover](docs/project/handover.md)** - Session context and current state
-- **[Pipeline Plan](docs/project/PIPELINE_PLAN.md)** - Implementation proposal for orchestrator
-- **[Operations Map](docs/OPERATIONS_MAP.md)** - Complete tool and workflow documentation
+- **[Current Understanding](docs/CURRENT_UNDERSTANDING.md)** - Current state and system understanding
 - **[System Map](docs/SYSTEM_MAP.md)** - Architecture and component relationships
 - **[Generation Tools](docs/api/generation-tools.md)** - Complete reference for all lore generation endpoints and tools
+- **[Architecture](docs/ARCHITECTURE.md)** - Technical architecture overview
 
 ## Build & Development Commands
 
+**Recommended - Shell Tools:**
+
 ```bash
-# Test API functionality
-python agents/api/agent_api.py
-python agents/api/lore_api.py
+# Manage lore entries, books, and personas
+./tools/manage-lore.sh list-entries
+./tools/manage-lore.sh create-entry --title "Title" --content "Content" --category lore
+
+# Use argc CLI
+argc list-books
+argc create-book --title "Title" --description "Description"
 
 # Initialize orchestrator session
 python orchestrator/orchestrator.py init [content|lore|research]
+```
+
+**Legacy - Direct API Testing:**
+
+```bash
+# Test Python API functionality (for development/debugging only)
+python agents/api/agent_api.py  # LLM operations
+python agents/api/lore_api.py   # Note: Shell tools are preferred for lore management
 ```
 
 ## Orchestrator Purpose
@@ -1228,14 +1363,19 @@ Delete a persona.
 
 ---
 
-### Tool Status (tested 2025-12-12)
+### Tool Status (updated 2026-01-05)
+
+**Primary Tools (Shell-based - Recommended):**
+
+- ✅ `./tools/manage-lore.sh` - All commands work, complete CRUD operations for entries, books, personas
+- ✅ `argc` commands via `Argcfile.sh` - Full CLI interface with shell completion
+- ✅ `./tools/context-manager.sh` - Session context management
+- ✅ `./tools/create-persona.sh` - Persona creation and management
 
 **Working (no LLM required):**
 
-- `./tools/manage-lore.sh` - All commands work ✓
-  - Fixed: Now properly writes entry and book JSON files
-- `python orchestrator/orchestrator.py init [content|lore|research]` ✓
-- `python agents/api/lore_api.py` ✓
+- ✓ `python orchestrator/orchestrator.py init [content|lore|research]` - Session initialization
+- ⚠️ `python agents/api/lore_api.py` - Legacy API (shell tools preferred)
 
 **Working with LLM - All Providers Tested:**
 
@@ -1276,6 +1416,10 @@ Delete a persona.
 - **Impact:** `lore-flow.sh` creates entry files but `content` field is empty
 - **Workaround:** Use `llama-lore-creator.sh` directly instead of pipeline
 - **Status:** Needs investigation in pipeline timing/paths
+
+**Tool Priorities:**
+
+> **Shell tools are the primary, canonical interface.** The Python `lore_api` is maintained for programmatic access and backward compatibility, but shell tools provide better error handling, validation, and user experience.
 
 **Agent APIs** (`agents/api/`):
 

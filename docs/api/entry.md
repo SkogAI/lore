@@ -1,6 +1,22 @@
 # Entry API
 
+> ⚠️ **DEPRECATION NOTICE**: The Python API (`lore_api.py`) is deprecated. Please use shell tools instead.  
+> See [DEPRECATION.md](./DEPRECATION.md) for migration guide.
+
 An entry is a single piece of narrative content - the atomic unit of lore.
+
+## Recommended Tools
+
+**Shell scripts** (PRIMARY):
+- `tools/manage-lore.sh create-entry` - Create entries
+- `tools/manage-lore.sh list-entries` - List all entries
+- `tools/manage-lore.sh show-entry <id>` - Show entry details
+- `tools/manage-lore.sh search <keyword>` - Search entries
+- `tools/llama-lore-creator.sh - entry` - Generate with LLM
+
+**CLI** (argc-based):
+- `argc create-entry` - Create entry with flags
+- `argc list-entries` - List all entries
 
 ## Schema
 
@@ -47,7 +63,29 @@ See the [full JSON Schema](../../knowledge/core/lore/schema.json) for complete f
 
 ## Create an Entry
 
-### Using lore_api (Python)
+### Using manage-lore.sh (Recommended)
+
+```bash
+# Create entry
+entry_id=$(./tools/manage-lore.sh create-entry "The Discovery" "lore")
+
+# Update with content using jq
+jq -f scripts/jq/crud-set/transform.jq \
+  --arg path "content" \
+  --arg value "In the twilight hours, the researcher uncovered patterns..." \
+  "knowledge/expanded/lore/entries/${entry_id}.json" > tmp.json
+mv tmp.json "knowledge/expanded/lore/entries/${entry_id}.json"
+
+# Or generate content with LLM
+LLM_PROVIDER=claude ./tools/llama-lore-creator.sh - entry "The Discovery" "lore"
+```
+
+### Using lore_api (Python) - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools or CLI instead.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -65,6 +103,8 @@ print(f"Created: {entry['id']}")
 # Output: Created: entry_1764992601
 # File: knowledge/expanded/lore/entries/entry_1764992601.json
 ```
+
+</details>
 
 ### Using argc (CLI)
 
@@ -92,7 +132,22 @@ echo '{}' | \
 
 ## Read an Entry
 
-### Using lore_api
+### Using manage-lore.sh (Recommended)
+
+```bash
+# Show full entry
+./tools/manage-lore.sh show-entry entry_1764992601
+
+# Get specific field with jq
+jq -r '.content' knowledge/expanded/lore/entries/entry_1764992601.json
+```
+
+### Using lore_api - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools instead.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 ```python
 entry = lore.get_lore_entry("entry_1764992601")
@@ -100,7 +155,9 @@ print(entry['title'])
 print(entry['content'])
 ```
 
-### Using jq
+</details>
+
+### Using jq (Direct JSON manipulation)
 
 ```bash
 # Get full entry
@@ -146,7 +203,30 @@ See [@docs/api/book.md](./book.md#link-entry-to-book)
 
 ## List Entries
 
-### Using lore_api
+### Using manage-lore.sh (Recommended)
+
+```bash
+# All entries
+./tools/manage-lore.sh list-entries
+
+# By category
+./tools/manage-lore.sh list-entries lore
+
+# Using argc
+argc list-entries
+
+# Using shell - all entries
+for entry in knowledge/expanded/lore/entries/*.json; do
+    jq -r '"\(.id): \(.title)"' "$entry"
+done
+```
+
+### Using lore_api - DEPRECATED
+
+> ⚠️ **Deprecated**: Use shell tools instead.
+
+<details>
+<summary>Legacy Python API example (not recommended)</summary>
 
 ```python
 # All entries
@@ -159,13 +239,9 @@ for entry in lore_entries:
     print(f"{entry['id']}: {entry['title']}")
 ```
 
-### Using argc
+</details>
 
-```bash
-argc list-entries
-```
-
-### Using shell
+### Using shell (Advanced filters)
 
 ```bash
 # All entries
@@ -190,7 +266,14 @@ done
 
 ## Search Entries
 
-### By content
+### Using manage-lore.sh (Recommended)
+
+```bash
+./tools/manage-lore.sh search "quantum"
+./tools/manage-lore.sh search "forest"
+```
+
+### By content (shell)
 
 ```bash
 # Search for keyword in content
