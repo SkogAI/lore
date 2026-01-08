@@ -1,11 +1,11 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-08 23:22:46 UTC
+**Generated:** 2026-01-08 23:31:12 UTC
 
 ## File Statistics
 
-- **Total Files:** 2765
-- **Markdown Files:** 195
+- **Total Files:** 2767
+- **Markdown Files:** 197
 - **JSON Files:** 2226
 - **YAML Files:** 25
 
@@ -39,7 +39,7 @@
 ```
 6.2M	knowledge/
 416K	docs/
-204K	tools/
+200K	tools/
 168K	integration/
 128K	agents/
 120K	context/
