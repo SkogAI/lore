@@ -45,9 +45,9 @@ Files stored in `knowledge/expanded/lore/` as JSON with schema validation.
 ### For Deep Dive
 - **[docs/README.md](docs/README.md)** - Complete mythology, history, and comprehensive guide
 - **[docs/CURRENT_UNDERSTANDING.md](docs/CURRENT_UNDERSTANDING.md)** - Latest system understanding
-- **1207 lore entries** - Narrative units
+- **1210 lore entries** - Narrative units
 - **107 books** - Collections
-- **92 personas** - AI characters
+- **93 personas** - AI characters
 
 ## The Prime Directive
 
