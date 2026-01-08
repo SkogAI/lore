@@ -1,13 +1,13 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-08 23:05:24 UTC
+**Generated:** 2026-01-08 23:11:38 UTC
 
 ## File Statistics
 
-- **Total Files:** 2762
-- **Markdown Files:** 194
+- **Total Files:** 2767
+- **Markdown Files:** 195
 - **JSON Files:** 2226
-- **YAML Files:** 19
+- **YAML Files:** 25
 
 ## Agent Directory Counts
 
@@ -44,9 +44,9 @@
 128K	agents/
 120K	context/
 44K	orchestrator/
+40K	prompts/
 28K	demo/
 24K	tests/
-24K	scripts/
 ```
 
 ---
