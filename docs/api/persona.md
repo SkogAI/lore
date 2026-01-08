@@ -79,12 +79,32 @@ See the [full JSON Schema](../../knowledge/core/persona/schema.json) for complet
 
 ## Create a Persona
 
-### Using lore_api (Python) - DEPRECATED
+### Using argc (CLI)
 
-> ⚠️ **Deprecated**: Use shell tools or CLI instead. See above for recommended tools.
+```bash
+argc create-persona --name "Aria Nightwhisper" \
+                    --voice-tone "poetic yet precise"
+# Output: Created: persona_1764992753
+```
 
-<details>
-<summary>Legacy Python API example (not recommended)</summary>
+### Manual Creation (jq)
+
+```bash
+persona_id="persona_$(date +%s)"
+timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo '{}' | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$persona_id" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "name" --arg value "Aria Nightwhisper" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "voice.tone" --arg value "poetic yet precise" | \
+  jq -f scripts/jq/crud-set/transform.jq --arg path "meta.created" --arg value "$timestamp" \
+  > "knowledge/expanded/personas/${persona_id}.json"
+```
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 ```python
 from agents.api.lore_api import LoreAPI
@@ -109,74 +129,9 @@ print(f"Created: {persona['id']}")
 - Sets `voice.tone` from `voice_tone` parameter
 - Generates default structure for other fields
 
-</details>
-
-### Using create-persona.sh (Recommended)
-
-```bash
-./tools/create-persona.sh create "Aria Nightwhisper" \
-  "A keeper of digital records" \
-  "methodical,curious,patient,detail-oriented" \
-  "poetic yet precise"
-# Output: Created: persona_1764992753
-```
-
-### Using argc (CLI)
-
-```bash
-argc create-persona --name "Aria Nightwhisper" \
-                    --description "Digital archivist..." \
-                    --traits methodical curious patient detail-oriented \
-                    --voice-tone "poetic yet precise"
-# Output: Created: persona_1764992753
-```
-
-### Manual Creation (jq)
-
-```bash
-persona_id="persona_$(date +%s)"
-timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-echo '{}' | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "id" --arg value "$persona_id" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "name" --arg value "Aria Nightwhisper" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "voice.tone" --arg value "poetic yet precise" | \
-  jq -f scripts/jq/crud-set/transform.jq --arg path "meta.created" --arg value "$timestamp" \
-  > "knowledge/expanded/personas/${persona_id}.json"
-```
-
 ## Read a Persona
 
-### Using shell tools (Recommended)
-
-```bash
-# Show full persona
-./tools/create-persona.sh show persona_1764992753
-
-# Using jq directly
-cat knowledge/expanded/personas/persona_1764992753.json
-
-# Get specific fields
-jq -r '.name' knowledge/expanded/personas/persona_1764992753.json
-jq -r '.voice.tone' knowledge/expanded/personas/persona_1764992753.json
-```
-
-### Using lore_api - DEPRECATED
-
-> ⚠️ **Deprecated**: Use shell tools instead.
-
-<details>
-<summary>Legacy Python API example (not recommended)</summary>
-
-```python
-persona = lore.get_persona("persona_1764992753")
-print(persona['name'])
-print(persona['voice']['tone'])
-```
-
-</details>
-
-### Using jq (Direct JSON manipulation)
+### Using jq
 
 ```bash
 # Get full persona
@@ -194,6 +149,17 @@ jq -f scripts/jq/crud-get/transform.jq \
 
 # Get core values
 jq '.core_traits.values' knowledge/expanded/personas/persona_1764992753.json
+```
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
+
+```python
+persona = lore.get_persona("persona_1764992753")
+print(persona['name'])
+print(persona['voice']['tone'])
 ```
 
 ## Update a Persona
@@ -227,39 +193,7 @@ See [@docs/api/book.md](./book.md#link-persona-to-book)
 
 ## List Personas
 
-### Using shell tools (Recommended)
-
-```bash
-# Using create-persona.sh
-./tools/create-persona.sh list
-
-# Using argc
-argc list-personas
-
-# Using shell
-for persona in knowledge/expanded/personas/*.json; do
-    jq -r '"\(.id): \(.name)"' "$persona"
-done
-```
-
-### Using lore_api - DEPRECATED
-
-> ⚠️ **Deprecated**: Use shell tools instead.
-
-<details>
-<summary>Legacy Python API example (not recommended)</summary>
-
-```python
-personas = lore.list_personas()
-for persona in personas:
-    print(f"{persona['id']}: {persona['name']}")
-```
-
-</details>
-
-## Get Persona Context
-
-### Using shell tools (Recommended)
+### Using shell
 
 ```bash
 # Get persona with all linked books
@@ -277,12 +211,23 @@ for book in knowledge/expanded/lore/books/*.json; do
 done
 ```
 
-### Using lore_api - DEPRECATED
+### Using lore_api (Python)
 
-> ⚠️ **Deprecated**: Use shell tools instead.
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
-<details>
-<summary>Legacy Python API example (not recommended)</summary>
+```python
+personas = lore.list_personas()
+for persona in personas:
+    print(f"{persona['id']}: {persona['name']}")
+```
+
+## Get Persona Context
+
+### Using lore_api (Python)
+
+> **Note:** The Python API (`lore_api.py`) is deprecated.
+> Use shell tools for new code. See [CLAUDE.md](../../CLAUDE.md) for canonical interface documentation.
 
 The `lore_api` can build a complete context for a persona including their lore books:
 
