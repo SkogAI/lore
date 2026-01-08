@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-08 23:32:34 UTC
+**Timestamp:** 2026-01-08 23:33:59 UTC
 
 ## Current State
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-8593781 - feat: add new lore book, entries, and persona (26 seconds ago)
+0a9c078 - docs: fix stale references and add tools README (3 days ago)
+M	AGENTS.md
+M	tools/AGENTS.md
+
+ec4cb59 - 📚 Auto-update documentation [skip ci] (86 seconds ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+M	README.md
+
+da80726 - Merge branch 'master' of https://github.com/SkogAI/lore (85 seconds ago)
+0f9253a - 📈 Lore growth detected [skip ci] (86 seconds ago)
+M	GROWTH.md
+
+201cb5f - Update lore statistics [skip ci] (86 seconds ago)
+M	STATS.md
+
+8593781 - feat: add new lore book, entries, and persona (2 minutes ago)
 A	knowledge/expanded/lore/books/book_1767914173_837a05c1.json
 A	knowledge/expanded/lore/entries/entry_1767913907_f5f29d58.json
 A	knowledge/expanded/lore/entries/entry_1767914151_fba7af06.json
-A	knowledge/expanded/lore/entries/entry_1767914194_fb3a6ab2.json
-A	knowledge/expanded/personas/persona_1767914166.json
-
-77f4ff7 - Merge branch 'master' of https://github.com/SkogAI/lore (80 seconds ago)
-e2e9c2e - 📈 Lore growth detected [skip ci] (81 seconds ago)
-M	GROWTH.md
-
-286e8a0 - Update lore statistics [skip ci] (81 seconds ago)
-M	STATS.md
-
-21ad023 - 📚 Auto-update documentation [skip ci] (83 seconds ago)
-M	LAST_MODIFIED.md
-M	NAVIGATION.md
-
-f3a859e - feat(2-2): Externalized 4 prompts from llama-lore-integrator.sh (4 minutes ago)
-M	.skogai/plan/ROADMAP.md
 ```
 
 ---
