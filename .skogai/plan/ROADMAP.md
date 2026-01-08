@@ -37,7 +37,7 @@ Key validations:
 **Goal**: Extract embedded prompts from shell scripts into external files to enable iteration
 **Depends on**: Phase 1
 **Research**: Unlikely (simple refactoring)
-**Plans**: TBD
+**Plans**: 2 (llama-lore-creator.sh, llama-lore-integrator.sh)
 
 Scope:
 - Extract 7 prompts from llama-lore-creator.sh, llama-lore-integrator.sh, lore-flow.sh
@@ -81,6 +81,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Verify Pipeline | 1/1 | **DONE** | 2026-01-05 |
-| 2. Quality Prompts | 0/TBD | Not started | - |
+| 2. Quality Prompts | 0/2 | Ready to execute | - |
 | 3. Auto-trigger | 0/TBD | Not started | - |
 | 4. Polish | 0/TBD | Not started | - |
