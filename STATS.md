@@ -1,6 +1,6 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-08 23:35:22 UTC
+**Generated:** 2026-01-09 06:39:56 UTC
 
 ## File Statistics
 
@@ -26,13 +26,13 @@
 ## Prime Directive Tracking
 
 - **Beach References:** 79
-- **Mojito Mentions:** 153
-- **Automation References:** 166
+- **Mojito Mentions:** 148
+- **Automation References:** 163
 
 ## Repository Size
 
 - **Total Size:** 16M
-- **Git History Size:** 3.0M
+- **Git History Size:** 3.1M
 
 ## Top 10 Largest Directories
 
