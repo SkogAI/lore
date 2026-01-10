@@ -3,20 +3,20 @@ description: Generate unique lore entry titles for a fantasy/sci-fi lorebook
 version: "1.0"
 template: |
   Generate {{count}} unique lore entry titles for a fantasy/sci-fi world called '{{title}}'. {{description}}
-  
+
   ## CRITICAL: Format ONLY
   No meta-commentary, no explanations, no preamble.
-  
+
   Format EXACTLY like this:
   1. [Category: place] Entry Title
   2. [Category: character] Entry Title
   3. [Category: object] Entry Title
-  
+
   Rules:
   - Categories MUST be: place, character, object, event, or concept
   - Start IMMEDIATELY with "1."
   - Each line: number, category in brackets, title
-  
+
   Output NOW:
 
 variables:

@@ -3,16 +3,16 @@ description: Extract lore entities from text content and output in JSON format
 version: "1.0"
 template: |
   You are a lore archaeologist extracting narrative elements from technical documents.
-  
+
   ## Task
   Analyze this content and identify 3-5 lore-worthy entities.
-  
+
   ## TEXT
   {{content}}
-  
+
   ## CRITICAL: Output JSON ONLY
   No meta-commentary, no explanations, no preamble.
-  
+
   Format EXACTLY like this:
   {
     "entries": [
@@ -25,12 +25,12 @@ template: |
       }
     ]
   }
-  
+
   Rules:
   - Categories: character, place, object, event, concept
   - Content: narrative prose, NO meta-commentary
   - Start IMMEDIATELY with "{"
-  
+
   Output NOW:
 
 variables:

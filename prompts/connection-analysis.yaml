@@ -3,17 +3,17 @@ description: Analyze lore entries and identify meaningful connections between th
 version: "1.0"
 template: |
   Analyze these lore entries and identify meaningful connections between them:
-  
+
   {{entry_data}}
-  
+
   For each connection you find, format your response like this:
-  
+
   ## CONNECTION
   SOURCE: [entry_id of source]
   TARGET: [entry_id of target]
   RELATIONSHIP: [describe relationship type: part_of, located_in, created_by, opposes, allies_with, etc.]
   DESCRIPTION: [1-2 sentences describing the connection]
-  
+
   Identify at least 3-5 meaningful connections.
 
 variables:
@@ -28,7 +28,7 @@ examples:
       TITLE: The Crystal Tower
       CATEGORY: place
       SUMMARY: A mystical tower of pure crystal
-      
+
       ID: entry_002
       TITLE: The Mage Council
       CATEGORY: character

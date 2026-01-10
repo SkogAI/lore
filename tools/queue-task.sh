@@ -66,11 +66,11 @@ add_entry_task() {
   local title="$1"
   local category="$2"
   shift 2
-  
+
   # Parse optional arguments
   local persona_id=""
   local priority="normal"
-  
+
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --persona)
@@ -87,25 +87,25 @@ add_entry_task() {
         ;;
     esac
   done
-  
+
   # Validate inputs
   if [ -z "$title" ] || [ -z "$category" ]; then
     echo "Error: Title and category are required" >&2
     echo "Usage: $0 entry \"Title\" \"category\" [--persona NAME|ID] [--priority PRIORITY]" >&2
     return 1
   fi
-  
+
   # Validate category
   if [[ ! "$category" =~ ^(place|character|object|event|concept|custom)$ ]]; then
     echo "Warning: Category '$category' is not standard. Valid categories: place, character, object, event, concept, custom" >&2
   fi
-  
+
   # Validate priority
   if [[ ! "$priority" =~ ^(low|normal|high)$ ]]; then
     echo "Error: Priority must be one of: low, normal, high" >&2
     return 1
   fi
-  
+
   # If persona is a name, try to resolve to ID
   if [ -n "$persona_id" ] && [[ ! "$persona_id" =~ ^persona_ ]]; then
     # Try to find persona by name
@@ -119,7 +119,7 @@ add_entry_task() {
         fi
       fi
     done
-    
+
     if [ -n "$found_id" ]; then
       persona_id="$found_id"
       echo "Resolved persona name to ID: $persona_id"
@@ -127,12 +127,12 @@ add_entry_task() {
       echo "Warning: Could not find persona '$persona_id', using as-is" >&2
     fi
   fi
-  
+
   # Generate task
   local task_id=$(generate_task_id)
   local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   local task_file="${PENDING_DIR}/${task_id}.json"
-  
+
   # Create task JSON
   cat > "$task_file" <<EOF
 {
@@ -149,7 +149,7 @@ add_entry_task() {
   "status": "pending"
 }
 EOF
-  
+
   echo "✅ Task added to queue: $task_id"
   echo "   Title: $title"
   echo "   Category: $category"
@@ -167,7 +167,7 @@ show_status() {
   local processing_count=$(ls -1 "${PROCESSING_DIR}"/*.json 2>/dev/null | wc -l)
   local completed_count=$(ls -1 "${COMPLETED_DIR}"/*.json 2>/dev/null | wc -l)
   local failed_count=$(ls -1 "${FAILED_DIR}"/*.json 2>/dev/null | wc -l)
-  
+
   echo "📊 Queue Status"
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   echo "  Pending:    $pending_count tasks"
@@ -180,7 +180,7 @@ show_status() {
 # List tasks
 list_tasks() {
   local state="${1:-pending}"
-  
+
   case "$state" in
     pending|processing|completed|failed)
       local dir="${QUEUE_DIR}/${state}"
@@ -200,10 +200,10 @@ list_tasks() {
       return 1
       ;;
   esac
-  
+
   echo "📋 Tasks ($state)"
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  
+
   local count=0
   for task_file in "$dir"/*.json; do
     if [ -f "$task_file" ]; then
@@ -212,7 +212,7 @@ list_tasks() {
       local category=$(jq -r '.data.category // "N/A"' "$task_file")
       local priority=$(jq -r '.priority // "normal"' "$task_file")
       local created_at=$(jq -r '.created_at // "N/A"' "$task_file")
-      
+
       echo "  $task_id"
       echo "    Title: $title"
       echo "    Category: $category"
@@ -222,7 +222,7 @@ list_tasks() {
       count=$((count + 1))
     fi
   done
-  
+
   if [ $count -eq 0 ]; then
     echo "  No tasks found"
     echo ""
@@ -232,12 +232,12 @@ list_tasks() {
 # Show task details
 show_task() {
   local task_id="$1"
-  
+
   if [ -z "$task_id" ]; then
     echo "Error: Task ID required" >&2
     return 1
   fi
-  
+
   # Search for task in all directories
   local task_file=""
   for dir in "$PENDING_DIR" "$PROCESSING_DIR" "$COMPLETED_DIR" "$FAILED_DIR"; do
@@ -246,12 +246,12 @@ show_task() {
       break
     fi
   done
-  
+
   if [ -z "$task_file" ]; then
     echo "Error: Task not found: $task_id" >&2
     return 1
   fi
-  
+
   echo "📄 Task Details: $task_id"
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   jq . "$task_file"
@@ -261,7 +261,7 @@ show_task() {
 clear_tasks() {
   local state="${1:-completed}"
   local auto_confirm="${2:-false}"
-  
+
   case "$state" in
     completed)
       local dir="${COMPLETED_DIR}"
@@ -279,24 +279,24 @@ clear_tasks() {
       return 1
       ;;
   esac
-  
+
   local count=$(ls -1 "$dir"/*.json 2>/dev/null | wc -l)
-  
+
   if [ $count -eq 0 ]; then
     echo "No $state tasks to clear"
     return 0
   fi
-  
+
   # Check for --yes flag or auto-confirm mode
   if [ "$auto_confirm" = "true" ]; then
     rm -f "$dir"/*.json
     echo "✅ Cleared $count $state task(s)"
     return 0
   fi
-  
+
   echo "Clear $count $state task(s)? (y/N)"
   read -r confirm
-  
+
   if [[ "$confirm" =~ ^[Yy]$ ]]; then
     rm -f "$dir"/*.json
     echo "✅ Cleared $count $state task(s)"

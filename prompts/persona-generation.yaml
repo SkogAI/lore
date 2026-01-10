@@ -3,19 +3,19 @@ description: Generate personality traits and voice characteristics for a charact
 version: "1.0"
 template: |
   Generate personality traits and voice characteristics for a character named '{{name}}' who is '{{description}}'.
-  
+
   ## CRITICAL: Output Format ONLY
   No meta-commentary, no explanations, no preamble.
-  
+
   Format your response EXACTLY like this:
   TRAITS: trait1,trait2,trait3,trait4
   VOICE: concise description of voice and speaking style
-  
+
   Rules:
   - Traits must be comma-separated without spaces
   - Voice should be 5-10 words describing speaking style
   - Start IMMEDIATELY with "TRAITS:"
-  
+
   Output NOW:
 
 variables:

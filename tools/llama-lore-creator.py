@@ -71,24 +71,24 @@ def run_llm(prompt: str, provider: str, model: str) -> str:
 def validate_lore_output(content: str) -> bool:
     """Validate lore output for meta-commentary."""
     errors = []
-    
+
     # Check for meta-commentary patterns anywhere in content
     for pattern in META_PATTERNS:
         if re.search(pattern, content, re.IGNORECASE | re.MULTILINE):
             errors.append("⚠️  Contains meta-commentary")
             break
-    
+
     # Check minimum length
     word_count = len(content.split())
     if word_count < 100:
         errors.append(f"⚠️  Too short ({word_count} words, recommended 100+)")
-    
+
     # Report
     if errors:
         for error in errors:
             print(error, file=sys.stderr)
         return False
-    
+
     print("✅ Lore content validated", file=sys.stderr)
     return True
 
@@ -97,7 +97,7 @@ def strip_meta_commentary(content: str) -> str:
     """Strip meta-commentary from content."""
     lines = content.split('\n')
     cleaned_lines = []
-    
+
     for line in lines:
         # Check if line matches any meta-commentary pattern
         is_meta = False
@@ -105,10 +105,10 @@ def strip_meta_commentary(content: str) -> str:
             if re.search(pattern, line, re.IGNORECASE):
                 is_meta = True
                 break
-        
+
         if not is_meta:
             cleaned_lines.append(line)
-    
+
     # Join and remove leading empty lines
     cleaned = '\n'.join(cleaned_lines).lstrip()
     return cleaned
@@ -127,7 +127,7 @@ def get_latest_file(directory: Path) -> str:
 def generate_entry(title: str, category: str, provider: str, model: str) -> str:
     """Generate a lore entry."""
     print(f"Generating lore entry: {title} ({category})")
-    
+
     max_retries = 2
     attempt = 0
 
@@ -164,7 +164,7 @@ BEGIN YOUR ENTRY NOW (narrative prose only, no preamble)"""
     # Retry loop for generating valid content
     while attempt < max_retries:
         attempt += 1
-        
+
         if attempt > 1:
             print(f"Retry attempt {attempt}/{max_retries}...")
 
@@ -177,7 +177,7 @@ BEGIN YOUR ENTRY NOW (narrative prose only, no preamble)"""
         else:
             print(f"⚠️  Validation failed on attempt {attempt}, cleaning content...")
             content = strip_meta_commentary(content)
-            
+
             # Re-validate after cleaning
             if validate_lore_output(content):
                 print("✅ Content cleaned successfully")

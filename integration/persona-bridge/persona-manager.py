@@ -82,7 +82,7 @@ class PersonaManager:
         if not os.path.exists(persona_file):
             logger.warning(f"Persona file not found: {persona_file}")
             return None
-        
+
         try:
             with open(persona_file, "r") as f:
                 return json.load(f)
@@ -96,7 +96,7 @@ class PersonaManager:
         if not os.path.exists(book_file):
             logger.warning(f"Lore book file not found: {book_file}")
             return None
-        
+
         try:
             with open(book_file, "r") as f:
                 return json.load(f)
@@ -110,7 +110,7 @@ class PersonaManager:
         if not os.path.exists(entry_file):
             logger.warning(f"Lore entry file not found: {entry_file}")
             return None
-        
+
         try:
             with open(entry_file, "r") as f:
                 return json.load(f)
@@ -121,21 +121,21 @@ class PersonaManager:
     def list_available_personas(self) -> List[Dict[str, Any]]:
         """List all available personas."""
         personas = []
-        
+
         # List all JSON files in personas directory
         if not os.path.exists(self.personas_dir):
             logger.warning(f"Personas directory not found: {self.personas_dir}")
             return personas
-        
+
         for filename in os.listdir(self.personas_dir):
             if not filename.endswith(".json"):
                 continue
-            
+
             persona_id = filename.replace(".json", "")
             persona = self._parse_persona_from_json_file(persona_id)
             if persona:
                 personas.append(persona)
-        
+
         return personas
 
     def get_persona(self, persona_id: str) -> Optional[Dict[str, Any]]:
@@ -170,13 +170,13 @@ class PersonaManager:
     ) -> Optional[Dict[str, Any]]:
         """
         Create a new persona.
-        
-        Note: Traits should not contain commas as they are used as delimiters 
+
+        Note: Traits should not contain commas as they are used as delimiters
         by the shell script.
         """
         # Join traits with commas for the shell script
         traits_str = ",".join(traits)
-        
+
         # Run create-persona.sh
         output = self._run_shell_command([
             self.create_persona_sh,
@@ -186,21 +186,21 @@ class PersonaManager:
             traits_str,
             voice
         ])
-        
+
         if not output:
             logger.error("Failed to create persona")
             return None
-        
+
         # Extract persona ID from output (format: "Created persona: persona_1234567890")
         # The shell script consistently uses this format
         match = re.search(r"Created persona: (persona_\d+)", output)
         if not match:
             logger.error(f"Could not extract persona ID from output: {output}")
             return None
-        
+
         persona_id = match.group(1)
         logger.info(f"Created new persona: {name} ({persona_id})")
-        
+
         # Read the created persona file
         return self._parse_persona_from_json_file(persona_id)
 
@@ -364,20 +364,20 @@ Transform this technical event into a lore entry AS IF you are narrating your ow
 
         # Build lore context manually
         result = {"persona": persona, "lore_books": [], "lore_entries": []}
-        
+
         # Get all lore books accessible to this persona
         lore_book_ids = persona.get("knowledge", {}).get("lore_books", [])
         for book_id in lore_book_ids:
             book = self._parse_lore_book_from_json_file(book_id)
             if book:
                 result["lore_books"].append(book)
-                
+
                 # Get all entries in this book
                 for entry_id in book.get("entries", []):
                     entry = self._parse_lore_entry_from_json_file(entry_id)
                     if entry:
                         result["lore_entries"].append(entry)
-        
+
         return result
 
     def format_persona_for_agent(

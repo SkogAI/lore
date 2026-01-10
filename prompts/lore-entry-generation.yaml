@@ -30,18 +30,18 @@ template: |
   ✓ No meta-commentary
   ✓ 150-300 words
   ✓ Establishes atmosphere and significance
-  
+
   ## Examples of CORRECT Output
-  
+
   Example 1 (Character):
   In the depths of the digital realm, the Architect moves through layers of abstraction with purpose. Her fingers dance across interfaces, weaving patterns that bridge the gap between thought and execution. Those who witness her work speak of an uncanny ability to see the invisible structures that bind systems together. She carries the weight of countless failed experiments, each one a lesson etched into her methodology.
-  
+
   Example 2 (Place):
   The Repository stands as a monument to collective memory, its branches spreading like roots through time. Within its halls, every change echoes with the voices of those who came before. Guardians patrol its corridors, ensuring that no knowledge is lost, no pattern forgotten. Here, the past and future converge in an eternal present.
-  
+
   Example 3 (Event):
   The Great Refactoring began at midnight when the old systems could no longer bear their complexity. For three cycles, the architects labored, dismantling monoliths and rebuilding them as elegant patterns. When dawn broke, the realm had transformed—simpler, stronger, ready for what came next.
-  
+
   ## Your Task
   Write the {{category}} entry for "{{title}}" NOW. Begin directly with narrative prose:
 

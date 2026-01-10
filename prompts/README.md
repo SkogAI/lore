@@ -18,14 +18,14 @@ description: Brief description of what this prompt does
 version: "1.0"
 template: |
   The actual prompt text with {{variable}} placeholders
-  
+
 variables:
   - name: variable_name
     type: string|integer|boolean
     required: true|false
     description: What this variable represents
     enum: [optional, list, of, valid, values]
-    
+
 examples:
   - variable_name: "example value"
     expected_output: |
@@ -82,12 +82,12 @@ examples:
 load_prompt() {
     local prompt_file="$1"
     local prompt_content=""
-    
+
     # Try to load from file
     if [ -f "$SKOGAI_DIR/prompts/$prompt_file" ]; then
         prompt_content=$(yq eval '.template' "$SKOGAI_DIR/prompts/$prompt_file")
     fi
-    
+
     # If file not found or yq not available, use inline fallback
     if [ -z "$prompt_content" ]; then
         # Return inline fallback prompt
@@ -102,7 +102,7 @@ interpolate_prompt() {
     local template="$1"
     shift
     local result="$template"
-    
+
     # Replace each variable pair (name, value)
     while [ $# -gt 0 ]; do
         local var_name="$1"
@@ -110,7 +110,7 @@ interpolate_prompt() {
         result="${result//\{\{$var_name\}\}/$var_value}"
         shift 2
     done
-    
+
     echo "$result"
 }
 

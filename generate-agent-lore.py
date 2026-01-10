@@ -47,30 +47,30 @@ def create_lore_entry_shell(title: str, content: str, category: str, tags: List[
     """Create a lore entry using manage-lore.sh and then update its content."""
     # Create the entry
     result = run_shell_tool([MANAGE_LORE_SCRIPT, "create-entry", title, category])
-    
+
     if not result["success"]:
         return {"id": None, "error": result.get("error")}
-    
+
     # Extract entry ID from output (format: "Created lore entry: entry_...")
     match = re.search(r'entry_\d+_[a-f0-9]+', result["output"])
     if not match:
         return {"id": None, "error": "Could not parse entry ID from output"}
-    
+
     entry_id = match.group(0)
     entry_path = os.path.join(LORE_ENTRIES_DIR, f"{entry_id}.json")
-    
+
     # Update the entry with content, tags, and summary
     try:
         with open(entry_path, 'r') as f:
             entry = json.load(f)
-        
+
         entry["content"] = content
         entry["summary"] = summary
         entry["tags"] = tags or []
-        
+
         with open(entry_path, 'w') as f:
             json.dump(entry, f, indent=2)
-        
+
         logger.info(f"Updated entry {entry_id} with content and metadata")
         return entry
     except Exception as e:
@@ -80,18 +80,18 @@ def create_lore_entry_shell(title: str, content: str, category: str, tags: List[
 def create_lore_book_shell(title: str, description: str) -> Dict[str, Any]:
     """Create a lore book using manage-lore.sh."""
     result = run_shell_tool([MANAGE_LORE_SCRIPT, "create-book", title, description])
-    
+
     if not result["success"]:
         return {"id": None, "error": result.get("error")}
-    
+
     # Extract book ID from output (format: "Created lore book: book_...")
     match = re.search(r'book_\d+_[a-f0-9]+', result["output"])
     if not match:
         return {"id": None, "error": "Could not parse book ID from output"}
-    
+
     book_id = match.group(0)
     book_path = os.path.join(LORE_BOOKS_DIR, f"{book_id}.json")
-    
+
     # Load the created book to return it
     try:
         with open(book_path, 'r') as f:
@@ -110,18 +110,18 @@ def create_persona_shell(name: str, core_description: str, personality_traits: L
     """Create a persona using create-persona.sh."""
     traits_str = ",".join(personality_traits)
     result = run_shell_tool([CREATE_PERSONA_SCRIPT, "create", name, core_description, traits_str, voice_tone])
-    
+
     if not result["success"]:
         return {"id": None, "error": result.get("error")}
-    
+
     # Extract persona ID from output (format: "Created persona: persona_...")
     match = re.search(r'persona_\d+', result["output"])
     if not match:
         return {"id": None, "error": "Could not parse persona ID from output"}
-    
+
     persona_id = match.group(0)
     persona_path = os.path.join(PERSONAS_DIR, f"{persona_id}.json")
-    
+
     # Load the created persona to return it
     try:
         with open(persona_path, 'r') as f:
@@ -333,14 +333,14 @@ def create_specialized_lorebook(agent_type: str, agent_description: str,
         title=f"Specialized Lore for {agent_type.title()} Agent",
         description=f"Lore collection specifically created for {agent_type} agents: {agent_description}"
     )
-    
+
     if not book.get("id"):
         logger.error(f"Failed to create book: {book.get('error', 'Unknown error')}")
         return {
             "success": False,
             "error": book.get("error", "Failed to create book")
         }
-    
+
     # Process each category
     entries_by_category = {}
     for category, entries in lore_needs.items():
@@ -365,7 +365,7 @@ def create_specialized_lorebook(agent_type: str, agent_description: str,
                 tags=[agent_type, category],
                 summary=reason
             )
-            
+
             if not entry.get("id"):
                 logger.error(f"Failed to create entry: {entry.get('error', 'Unknown error')}")
                 continue
@@ -376,7 +376,7 @@ def create_specialized_lorebook(agent_type: str, agent_description: str,
                 logger.info(f"Created {category} entry: {title}")
             else:
                 logger.error(f"Failed to add entry {entry['id']} to book {book['id']}")
-    
+
     # Update book categories
     book = get_lore_book_shell(book["id"])
     if book:
@@ -448,7 +448,7 @@ VOICE: [description of voice and speaking style]"""
         personality_traits=traits,
         voice_tone=voice
     )
-    
+
     if not persona.get("id"):
         logger.error(f"Failed to create persona: {persona.get('error', 'Unknown error')}")
         return {
@@ -487,14 +487,14 @@ def main():
     # Create the specialized lorebook
     description = args.description or f"A {args.agent_type} agent that helps with {args.agent_type} tasks"
     result = create_specialized_lorebook(args.agent_type, description, args.model, args.provider)
-    
+
     if not result.get("success", False):
         print(f"Failed to create lorebook: {result.get('error', 'Unknown error')}")
         sys.exit(1)
-    
+
     print(f"Created lorebook: {result['book_id']}")
     print(f"Total entries: {result['entry_count']}")
-    
+
     # Link to existing persona if specified
     if args.persona:
         link_result = link_to_existing_persona(result["book_id"], args.persona)

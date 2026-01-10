@@ -76,12 +76,12 @@ if [ -z "$ENTRY_ID" ]; then
   echo "ERROR: Could not extract entry ID from output"
   echo "Full output:"
   echo "$OUTPUT"
-  
+
   # Restore original integrator
   if [ -f "$BACKUP_INTEGRATOR" ]; then
     mv "$BACKUP_INTEGRATOR" "$ORIGINAL_INTEGRATOR"
   fi
-  
+
   exit 1
 fi
 
@@ -92,12 +92,12 @@ echo "Entry ID: $ENTRY_ID"
 ENTRY_FILE="$LORE_DIR/knowledge/expanded/lore/entries/${ENTRY_ID}.json"
 if [ ! -f "$ENTRY_FILE" ]; then
   echo "ERROR: Entry file not found: $ENTRY_FILE"
-  
+
   # Restore original integrator
   if [ -f "$BACKUP_INTEGRATOR" ]; then
     mv "$BACKUP_INTEGRATOR" "$ORIGINAL_INTEGRATOR"
   fi
-  
+
   exit 1
 fi
 
