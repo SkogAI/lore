@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-10 08:15:23 UTC
+**Timestamp:** 2026-01-10 12:31:13 UTC
 
 ## Current State
 
@@ -13,13 +13,13 @@
 
 ### Sacred Numbers Appearance
 - Number 7: 501 occurrences
-- Number 15: 264 occurrences
+- Number 15: 276 occurrences
 - Number 23.4: 41 occurrences
 - Number 4000: 35 occurrences
 
 ### Agent Activity Indicators
 - Amy mentions: 180
-- Claude mentions: 489
+- Claude mentions: 492
 - Dot mentions: 285
 - Goose mentions: 310
 
@@ -38,7 +38,17 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-b7322b6 - style: Standardize blank lines in shell scripts and Python files (40 minutes ago)
+4d33e97 - Update lore statistics [skip ci] (4 hours ago)
+M	STATS.md
+
+8053dbe - 📚 Auto-update documentation [skip ci] (4 hours ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+
+afb51a1 - 📈 Lore growth detected [skip ci] (4 hours ago)
+M	GROWTH.md
+
+b7322b6 - style: Standardize blank lines in shell scripts and Python files (5 hours ago)
 M	generate-agent-lore.py
 M	integration/persona-bridge/persona-manager.py
 M	prompts/README.md
@@ -48,16 +58,6 @@ M	prompts/lore-extraction-json.yaml
 M	prompts/lore-extraction-markdown.yaml
 M	prompts/lorebook-titles-generation.yaml
 M	prompts/persona-from-text.yaml
-M	prompts/persona-generation.yaml
-M	tests/test_lore_flow_content.sh
-M	tools/llama-lore-creator.py
-M	tools/process-queue.sh
-M	tools/queue-task.sh
-
-aa89482 - chore: archive completed planning docs (95% reduction) (25 hours ago)
-A	.skogai/plan/CLAUDE.md
-M	.skogai/plan/ROADMAP.md
-M	.skogai/plan/STATE.md
 ```
 
 ---
