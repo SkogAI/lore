@@ -1,6 +1,6 @@
 # ⏰ Last Modified Report
 
-**Generated:** 2026-01-09 06:39:59 UTC
+**Generated:** 2026-01-10 08:15:25 UTC
 
 ## Recently Modified Files (Last 24 Hours)
 
@@ -15,29 +15,29 @@
 ./.skogai/garden/implementation-summary.md
 ./.skogai/plan/PROJECT.md
 ./.skogai/plan/config.json
-./.skogai/plan/codebase/CONCERNS.md
-./.skogai/plan/codebase/STRUCTURE.md
-./.skogai/plan/codebase/ARCHITECTURE.md
-./.skogai/plan/codebase/STACK.md
-./.skogai/plan/codebase/README.md
-./.skogai/plan/codebase/CONVENTIONS.md
-./.skogai/plan/codebase/INTEGRATIONS.md
-./.skogai/plan/codebase/TESTING.md
-./.skogai/plan/phase-1-RESEARCH.md
-./.skogai/plan/phases/01-verify-pipeline/phase-1-1-PLAN.md
+./.skogai/plan/phases/CLAUDE.md
+./.skogai/plan/STATE.md
+./.skogai/plan/CLAUDE.md
+./.skogai/plan/ROADMAP.md
+./.skogai/CLAUDE.md
+./.lore-queue/queue_1767616184_e9d3429a.json
+./integration/orchestrator-flow.sh
+./integration/QUICK_START.md
+./integration/services/ARCHITECTURE.md
+./integration/services/skogai-agent-small-service.sh
 ```
 
 ## Most Recently Modified Directories
 
 ```
-2026-01-09 06:39 - tools
-2026-01-09 06:39 - tests/basic-flow
-2026-01-09 06:39 - tests
-2026-01-09 06:39 - scripts/pre-commit
-2026-01-09 06:39 - scripts
-2026-01-09 06:39 - queue/processing
-2026-01-09 06:39 - queue/pending
-2026-01-09 06:39 - queue/failed
-2026-01-09 06:39 - queue/completed
-2026-01-09 06:39 - queue
+2026-01-10 08:15 - tools
+2026-01-10 08:15 - tests/basic-flow
+2026-01-10 08:15 - tests
+2026-01-10 08:15 - scripts/pre-commit
+2026-01-10 08:15 - scripts
+2026-01-10 08:15 - queue/processing
+2026-01-10 08:15 - queue/pending
+2026-01-10 08:15 - queue/failed
+2026-01-10 08:15 - queue/completed
+2026-01-10 08:15 - queue
 ```
