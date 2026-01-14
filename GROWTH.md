@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-14 09:18:50 UTC
+**Timestamp:** 2026-01-14 12:36:35 UTC
 
 ## Current State
 
@@ -13,7 +13,7 @@
 
 ### Sacred Numbers Appearance
 - Number 7: 501 occurrences
-- Number 15: 275 occurrences
+- Number 15: 263 occurrences
 - Number 23.4: 41 occurrences
 - Number 4000: 35 occurrences
 
@@ -38,7 +38,18 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-5d79a22 - refactor: Migrate prompt management to YAML and add yq support (31 seconds ago)
+b796973 - 📈 Lore growth detected [skip ci] (3 hours ago)
+M	GROWTH.md
+
+779e7c4 - Update lore statistics [skip ci] (3 hours ago)
+M	STATS.md
+
+b30709c - 📚 Auto-update documentation [skip ci] (3 hours ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+M	README.md
+
+5d79a22 - refactor: Migrate prompt management to YAML and add yq support (3 hours ago)
 A	.claude/settings.json
 M	.claude/settings.local.json
 M	knowledge/expanded/lore/books/book_1764315530_3d900cdd.json
@@ -47,17 +58,6 @@ D	prompts/README.md
 D	prompts/connection-analysis.yaml
 D	prompts/lore-entry-generation.yaml
 D	prompts/lore-extraction-json.yaml
-D	prompts/lore-extraction-markdown.yaml
-D	prompts/lorebook-titles-generation.yaml
-D	prompts/persona-from-text.yaml
-D	prompts/persona-generation.yaml
-M	tools/llama-lore-creator.sh
-M	tools/llama-lore-integrator.sh
-
-9b5f955 - 📈 Lore growth detected [skip ci] (3 hours ago)
-M	GROWTH.md
-
-fe13e29 - 📈 Lore growth detected [skip ci] (8 hours ago)
 ```
 
 ---
