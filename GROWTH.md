@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-14 12:36:35 UTC
+**Timestamp:** 2026-01-14 18:27:33 UTC
 
 ## Current State
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-b796973 - 📈 Lore growth detected [skip ci] (3 hours ago)
+1f5f792 - 📈 Lore growth detected [skip ci] (6 hours ago)
 M	GROWTH.md
 
-779e7c4 - Update lore statistics [skip ci] (3 hours ago)
+b796973 - 📈 Lore growth detected [skip ci] (9 hours ago)
+M	GROWTH.md
+
+779e7c4 - Update lore statistics [skip ci] (9 hours ago)
 M	STATS.md
 
-b30709c - 📚 Auto-update documentation [skip ci] (3 hours ago)
+b30709c - 📚 Auto-update documentation [skip ci] (9 hours ago)
 M	LAST_MODIFIED.md
 M	NAVIGATION.md
 M	README.md
 
-5d79a22 - refactor: Migrate prompt management to YAML and add yq support (3 hours ago)
+5d79a22 - refactor: Migrate prompt management to YAML and add yq support (9 hours ago)
 A	.claude/settings.json
 M	.claude/settings.local.json
 M	knowledge/expanded/lore/books/book_1764315530_3d900cdd.json
 A	knowledge/expanded/lore/entries/entry_1768211486_a45309a4.json
 D	prompts/README.md
-D	prompts/connection-analysis.yaml
-D	prompts/lore-entry-generation.yaml
-D	prompts/lore-extraction-json.yaml
 ```
 
 ---
