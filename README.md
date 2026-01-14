@@ -45,7 +45,7 @@ Files stored in `knowledge/expanded/lore/` as JSON with schema validation.
 ### For Deep Dive
 - **[docs/README.md](docs/README.md)** - Complete mythology, history, and comprehensive guide
 - **[docs/CURRENT_UNDERSTANDING.md](docs/CURRENT_UNDERSTANDING.md)** - Latest system understanding
-- **1210 lore entries** - Narrative units
+- **1211 lore entries** - Narrative units
 - **107 books** - Collections
 - **93 personas** - AI characters
 
