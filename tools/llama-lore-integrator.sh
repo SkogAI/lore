@@ -80,17 +80,24 @@ extract_lore_from_file() {
   # Get file content, limiting to first 8000 chars to avoid context issues
   local content=$(head -c 8000 "$file_path")
 
-  # Load external prompt for lore extraction
+  # Load external prompt from YAML
   if [ "$output_format" == "json" ]; then
-    # Extract prompt content from markdown (everything after "# Prompt" header)
-    PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/lore/extract-json.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
-    # Substitute $content variable
-    PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$content|$(echo "$content" | sed 's/[&/\]/\\&/g')|g")
+    PROMPT_FILE="$SKOGAI_DIR/agents/prompts/lore/extraction-json.yaml"
   else
-    # Extract prompt content from markdown (everything after "# Prompt" header)
-    PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/lore/extract-markdown.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
-    # Substitute $content variable
-    PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$content|$(echo "$content" | sed 's/[&/\]/\\&/g')|g")
+    PROMPT_FILE="$SKOGAI_DIR/agents/prompts/lore/extraction-markdown.yaml"
+  fi
+
+  # Load prompt template from YAML (with fallback if yq not available)
+  if command -v yq &>/dev/null && [ -f "$PROMPT_FILE" ]; then
+    PROMPT_TEMPLATE=$(yq eval '.template' "$PROMPT_FILE")
+    # Escape content for safe substitution
+    CONTENT_ESCAPED=$(echo "$content" | jq -Rs .)
+    # Replace {{content}} placeholder (using perl for multiline safety)
+    PROMPT=$(echo "$PROMPT_TEMPLATE" | perl -pe "s|\{\{content\}\}|$content|gs")
+  else
+    # Fallback if yq not available or file missing
+    echo "Warning: yq not found or prompt file missing, using inline fallback" >&2
+    PROMPT="You are a lore archaeologist. Extract 3-5 narrative elements from this text:\n\n$content\n\nOutput as JSON with entries array."
   fi
 
   # Run LLM to analyze content
@@ -238,11 +245,18 @@ create_persona_from_text() {
   # Get file content, limiting to first 8000 chars
   local content=$(head -c 8000 "$file_path")
 
-  # Load external prompt for persona extraction
-  # Extract prompt content from markdown (everything after "# Prompt" header)
-  PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/personas/character-analysis.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
-  # Substitute $content variable
-  PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$content|$(echo "$content" | sed 's/[&/\]/\\&/g')|g")
+  # Load external prompt from YAML
+  PROMPT_FILE="$SKOGAI_DIR/agents/prompts/personas/from-text.yaml"
+
+  if command -v yq &>/dev/null && [ -f "$PROMPT_FILE" ]; then
+    PROMPT_TEMPLATE=$(yq eval '.template' "$PROMPT_FILE")
+    # Replace {{content}} placeholder (using perl for multiline safety)
+    PROMPT=$(echo "$PROMPT_TEMPLATE" | perl -pe "s|\{\{content\}\}|$content|gs")
+  else
+    # Fallback if yq not available or file missing
+    echo "Warning: yq not found or prompt file missing, using inline fallback" >&2
+    PROMPT="Extract persona information from this text:\n\n$content\n\nOutput fields: NAME, DESCRIPTION, TRAITS, VOICE, BACKGROUND, EXPERTISE, LIMITATIONS"
+  fi
 
   # Run LLM to analyze content
   ANALYSIS=$(run_llm "$PROMPT")
@@ -319,11 +333,18 @@ analyze_lore_connections() {
     fi
   done
 
-  # Load external prompt for connection analysis
-  # Extract prompt content from markdown (everything after "# Prompt" header)
-  PROMPT_TEMPLATE=$(cat "$SKOGAI_DIR/agents/prompts/lore/analyze-connections.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
-  # Substitute $ENTRY_DATA variable (ENTRY_DATA already properly formatted)
-  PROMPT=$(echo "$PROMPT_TEMPLATE" | sed "s|\$ENTRY_DATA|$ENTRY_DATA|g")
+  # Load external prompt from YAML
+  PROMPT_FILE="$SKOGAI_DIR/agents/prompts/lore/connection-analysis.yaml"
+
+  if command -v yq &>/dev/null && [ -f "$PROMPT_FILE" ]; then
+    PROMPT_TEMPLATE=$(yq eval '.template' "$PROMPT_FILE")
+    # Replace {{entry_data}} placeholder
+    PROMPT=$(echo "$PROMPT_TEMPLATE" | perl -pe "s|\{\{entry_data\}\}|$ENTRY_DATA|gs")
+  else
+    # Fallback if yq not available or file missing
+    echo "Warning: yq not found or prompt file missing, using inline fallback" >&2
+    PROMPT="Analyze these lore entries and identify connections:\n\n$ENTRY_DATA\n\nOutput format: SOURCE, TARGET, RELATIONSHIP, DESCRIPTION"
+  fi
 
   # Run LLM to analyze connections
   CONNECTIONS=$(run_llm "$PROMPT")

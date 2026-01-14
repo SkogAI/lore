@@ -123,12 +123,19 @@ generate_lore_entry() {
   echo "Generating lore entry: $title ($category)"
   echo "Using model: $MODEL_NAME"
 
-  # Load prompt from external file (strips YAML frontmatter, extracts content after "# Prompt")
-  PROMPT_TEMPLATE=$(cat "$REPO_ROOT/agents/prompts/lore/entry-generation.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+  # Load prompt from YAML file
+  PROMPT_FILE="$REPO_ROOT/agents/prompts/lore/entry-generation.yaml"
 
-  # Substitute variables into prompt
-  PROMPT="${PROMPT_TEMPLATE//\$category/$category}"
-  PROMPT="${PROMPT//\$title/$title}"
+  if command -v yq &>/dev/null && [ -f "$PROMPT_FILE" ]; then
+    PROMPT_TEMPLATE=$(yq eval '.template' "$PROMPT_FILE")
+    # Substitute variables into prompt
+    PROMPT="${PROMPT_TEMPLATE//\{\{category\}\}/$category}"
+    PROMPT="${PROMPT//\{\{title\}\}/$title}"
+  else
+    # Fallback if yq not available or file missing
+    echo "Warning: yq not found or prompt file missing, using inline fallback" >&2
+    PROMPT="Write a $category entry for '$title'. 2-3 paragraphs, present tense, mythological tone. Start NOW:"
+  fi
 
   # Retry loop for generating valid content
   while [ $attempt -lt $max_retries ]; do
@@ -195,12 +202,19 @@ generate_persona() {
   echo "Description: $description"
   echo "Using model: $MODEL_NAME"
 
-  # Load prompt from external file (extracts content after "# Prompt")
-  PROMPT_TEMPLATE=$(cat "$REPO_ROOT/agents/prompts/personas/trait-generation.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+  # Load prompt from YAML file
+  PROMPT_FILE="$REPO_ROOT/agents/prompts/personas/generation.yaml"
 
-  # Substitute variables into prompt
-  PROMPT="${PROMPT_TEMPLATE//\$name/$name}"
-  PROMPT="${PROMPT//\$description/$description}"
+  if command -v yq &>/dev/null && [ -f "$PROMPT_FILE" ]; then
+    PROMPT_TEMPLATE=$(yq eval '.template' "$PROMPT_FILE")
+    # Substitute variables into prompt
+    PROMPT="${PROMPT_TEMPLATE//\{\{name\}\}/$name}"
+    PROMPT="${PROMPT//\{\{description\}\}/$description}"
+  else
+    # Fallback if yq not available or file missing
+    echo "Warning: yq not found or prompt file missing, using inline fallback" >&2
+    PROMPT="Generate traits and voice for '$name' who is '$description'. Format: TRAITS: trait1,trait2,trait3 VOICE: description"
+  fi
 
   # Run LLM to generate traits
   RESPONSE=$(run_llm "$PROMPT")
@@ -245,13 +259,20 @@ generate_lorebook() {
   # Get the ID of the newly created book
   BOOK_ID=$(ls -t $SKOGAI_LORE/knowledge/expanded/lore/books/ | head -n 1 | sed 's/\.json//')
 
-  # Load prompt from external file (extracts content after "# Prompt")
-  PROMPT_TEMPLATE=$(cat "$REPO_ROOT/agents/prompts/lore/title-generation.md" | sed -n '/^# Prompt$/,$p' | tail -n +2)
+  # Load prompt from YAML file
+  PROMPT_FILE="$REPO_ROOT/agents/prompts/lore/title-generation.yaml"
 
-  # Substitute variables into prompt
-  PROMPT="${PROMPT_TEMPLATE//\$entry_count/$entry_count}"
-  PROMPT="${PROMPT//\$title/$title}"
-  PROMPT="${PROMPT//\$description/$description}"
+  if command -v yq &>/dev/null && [ -f "$PROMPT_FILE" ]; then
+    PROMPT_TEMPLATE=$(yq eval '.template' "$PROMPT_FILE")
+    # Substitute variables into prompt
+    PROMPT="${PROMPT_TEMPLATE//\{\{count\}\}/$entry_count}"
+    PROMPT="${PROMPT//\{\{title\}\}/$title}"
+    PROMPT="${PROMPT//\{\{description\}\}/$description}"
+  else
+    # Fallback if yq not available or file missing
+    echo "Warning: yq not found or prompt file missing, using inline fallback" >&2
+    PROMPT="Generate $entry_count lore entry titles for '$title'. $description. Format: 1. [Category: type] Title"
+  fi
 
   # Run LLM to generate entry titles
   ENTRIES=$(run_llm "$PROMPT")
