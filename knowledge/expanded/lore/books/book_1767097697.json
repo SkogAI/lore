@@ -1,7 +1,7 @@
 {
   "id": "book_1767097697",
-  "title": "Specialized Lore for Claude-Coder Agent",
-  "description": "Lore collection specifically created for claude-coder agents: always tries to do so much and thus gets almost nothing done",
+  "title": "Specialized Lore for Claude-Code Agent",
+  "description": "Lore collection specifically created for claude-code agents: always tries to do so much and thus gets almost nothing done",
   "entries": [
     "entry_1767097733",
     "entry_1767097774",
@@ -15,32 +15,15 @@
     "entry_1767098074"
   ],
   "categories": {
-    "character": [
-      "entry_1767097733",
-      "entry_1767097774"
-    ],
-    "place": [
-      "entry_1767097814",
-      "entry_1767097847"
-    ],
-    "object": [
-      "entry_1767097880",
-      "entry_1767097916"
-    ],
-    "event": [
-      "entry_1767097955"
-    ],
-    "concept": [
-      "entry_1767097999",
-      "entry_1767098031",
-      "entry_1767098074"
-    ]
+    "character": ["entry_1767097733", "entry_1767097774"],
+    "place": ["entry_1767097814", "entry_1767097847"],
+    "object": ["entry_1767097880", "entry_1767097916"],
+    "event": ["entry_1767097955"],
+    "concept": ["entry_1767097999", "entry_1767098031", "entry_1767098074"]
   },
   "tags": [],
   "owners": [],
-  "readers": [
-    "persona_1767098100"
-  ],
+  "readers": ["persona_1767098100"],
   "metadata": {
     "created_by": "skogix",
     "created_at": "2025-12-30T12:28:17Z",
