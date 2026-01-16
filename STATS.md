@@ -1,10 +1,10 @@
 # 📊 Lore Repository Statistics
 
-**Generated:** 2026-01-14 09:18:49 UTC
+**Generated:** 2026-01-16 10:44:08 UTC
 
 ## File Statistics
 
-- **Total Files:** 2751
+- **Total Files:** 2749
 - **Markdown Files:** 179
 - **JSON Files:** 2233
 - **YAML Files:** 18
