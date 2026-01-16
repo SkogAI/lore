@@ -1,10 +1,10 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-16 06:27:51 UTC
+**Timestamp:** 2026-01-16 12:35:11 UTC
 
 ## Current State
 
-- Total Files: 2751
+- Total Files: 2749
 - Lore Entries: 1211
 - Personas: 93
 - Beach References: 78
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-f16808a - 📈 Lore growth detected [skip ci] (5 hours ago)
+d2eb568 - Update lore statistics [skip ci] (2 hours ago)
+M	STATS.md
+
+65e2054 - Merge pull request #57 from SkogAI/prune-skogai-plan-docs (2 hours ago)
+c7a0028 - 📈 Lore growth detected [skip ci] (6 hours ago)
 M	GROWTH.md
 
-fad7956 - 📈 Lore growth detected [skip ci] (12 hours ago)
+f16808a - 📈 Lore growth detected [skip ci] (11 hours ago)
 M	GROWTH.md
 
-788424f - 📈 Lore growth detected [skip ci] (18 hours ago)
+fad7956 - 📈 Lore growth detected [skip ci] (18 hours ago)
 M	GROWTH.md
 
-1fabfe4 - 📈 Lore growth detected [skip ci] (24 hours ago)
+788424f - 📈 Lore growth detected [skip ci] (24 hours ago)
 M	GROWTH.md
 
-829768b - 📈 Lore growth detected [skip ci] (29 hours ago)
+1fabfe4 - 📈 Lore growth detected [skip ci] (30 hours ago)
 M	GROWTH.md
 
-ca82131 - 📈 Lore growth detected [skip ci] (2 days ago)
-M	GROWTH.md
-
-1f5f792 - 📈 Lore growth detected [skip ci] (2 days ago)
-M	GROWTH.md
+829768b - 📈 Lore growth detected [skip ci] (35 hours ago)
 ```
 
 ---
