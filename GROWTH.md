@@ -1,6 +1,6 @@
 # 📈 Lore Growth Report
 
-**Timestamp:** 2026-01-31 21:24:48 UTC
+**Timestamp:** 2026-02-01 01:55:32 UTC
 
 ## Current State
 
@@ -38,26 +38,26 @@
 ## Recent Activity (Last 7 Days)
 
 ```
-3251985 - chore: Update file permissions for project files (12 minutes ago)
+f1434fe - Update lore statistics [skip ci] (46 minutes ago)
+M	STATS.md
+
+12be2d2 - 📚 Auto-update documentation [skip ci] (5 hours ago)
+M	LAST_MODIFIED.md
+M	NAVIGATION.md
+M	README.md
+
+d2ba092 - Merge branch 'master' of https://github.com/SkogAI/lore (5 hours ago)
+656e62a - 📈 Lore growth detected [skip ci] (5 hours ago)
+M	GROWTH.md
+
+18726ec - Update lore statistics [skip ci] (5 hours ago)
+M	STATS.md
+
+3251985 - chore: Update file permissions for project files (5 hours ago)
 M	.claude/hookify.block-git-push-force.local.md
 M	.claude/hookify.block-git-reset-hard.local.md
 M	.claude/hookify.warn-diff-before-commit.local.md
 M	.claude/hookify.warn-git-reset.local.md
-M	.claude/settings.json
-M	.claude/settings.local.json
-M	.claude/skills/lore-creation-starting-skill/SKILL.md
-M	.claude/skills/lore-creation-starting-skill/references/narrative-transforms.md
-M	.claude/skills/skogai-argc/SKILL.md
-M	.claude/skills/skogai-argc/docs/command-runner.md
-M	.claude/skills/skogai-argc/docs/specification.md
-M	.claude/skills/skogai-argc/docs/variables.md
-M	.claude/skills/skogai-argc/examples/README.md
-M	.claude/skills/skogai-argc/references/quick-start-built.sh
-M	.claude/skills/skogai-argc/references/quick-start-export.json
-M	.claude/skills/skogai-jq/AGENTS.md
-M	.claude/skills/skogai-jq/CHEAT_SHEET.md
-M	.claude/skills/skogai-jq/CLAUDE.md
-M	.claude/skills/skogai-jq/IMPLEMENTATION_SPEC.md
 ```
 
 ---
