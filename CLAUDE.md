@@ -247,6 +247,14 @@ books_dir="$REPO_ROOT/knowledge/expanded/lore/books"
 - **Package Manager**: `uv` with `pyproject.toml` and `uv.lock`
 - **Python**: 3.12+ required
 
+## Data & Tooling Gotchas
+
+- **Bulk JSON via jq**: With 377+ entries, passing JSON as `--argjson` hits "Argument list too long". Use temp files + `--slurpfile` instead.
+- **Lore Explorer**: `lore-explorer.html` + `lore-data.js` — regenerate data with `./tools/build-explorer-data.sh`
+- **Persona ↔ Book links are bidirectional**: Check both `book.readers[]` (persona IDs) AND `persona.knowledge.lore_books[]` (book IDs)
+- **argc outputs JSON**: `argc show-book <id>`, `argc show-entry <id>`, `argc read-book-entries <id>` all output valid JSON — pipe to jq
+- **~40% of book entries may be missing from disk**: Some books reference entry IDs that don't exist as files (especially older Amy/Dot books)
+
 ## Important Notes
 
 - Historical preservation is critical - don't delete lore archives

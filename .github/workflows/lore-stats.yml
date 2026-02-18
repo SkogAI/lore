@@ -3,8 +3,6 @@ name: Lore Statistics Tracker
 on:
   push:
     branches: [master]
-  schedule:
-    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight
   workflow_dispatch:
     inputs:
       force_run:
