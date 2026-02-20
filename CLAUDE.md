@@ -220,6 +220,7 @@ tools/               # Shell scripts (PRIMARY interface)
 - **Type Annotations**: Use `Dict`, `List`, `Optional`, `Any` from typing
 - **Error Handling**: Try/except with specific exceptions and informative logging
 - **Naming**: snake_case for functions/variables, PascalCase for classes
+- **Documentation**: Docstrings with triple quotes for all classes/functions
 - **Logging**: `logger = logging.getLogger("module_name")`
 - **Configuration**: Config files with environment variable fallbacks
 
