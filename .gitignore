@@ -91,3 +91,6 @@ queue/completed/*.json
 queue/failed/*.json
 # Runtime queues
 .lore-queue/
+
+# Generated explorer data (rebuilt by build-explorer-data.sh)
+lore-data.js
