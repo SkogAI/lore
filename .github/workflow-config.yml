@@ -15,8 +15,9 @@ workflows:
   claude-lore-keeper: true    # Lore analysis and mythology tracking
 
   # Lore Management Workflows
-  lore-growth: true           # Monitor repository growth (runs every 6 hours)
-  lore-stats: true            # Generate repository statistics (runs weekly)
+  lore-growth: true           # Monitor repository growth (push only)
+  lore-stats: true            # Generate repository statistics (push only)
+  build-explorer-data: true   # Rebuild lore-explorer.html data (push only)
   lore-keeper-bot: true       # Lore analysis bot (@lore-keeper mentions)
 
   # Documentation Workflows
