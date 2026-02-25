@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronicles of the Digital Realm — Lore Explorer</title>
+<style>
+:root{--bg:#0a0a0f;--surface:#12121a;--s2:#1a1a28;--border:#2a2a3a;--text:#c8c8d8;--dim:#666680;--bright:#e8e8f8;--accent:#7b68ee;--a2:#ff6b9d;--a3:#4ecdc4;--a4:#ffd93d;--a5:#6bcb77;--a6:#4d96ff;--glow:rgba(123,104,238,.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'SF Mono','Cascadia Code','Fira Code',monospace;background:var(--bg);color:var(--text);height:100vh;overflow:hidden}
+.app{display:grid;grid-template-columns:280px 1fr;grid-template-rows:auto 1fr auto;height:100vh}
+.header{grid-column:1/-1;text-align:center;padding:14px 20px 10px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(123,104,238,.06) 0%,transparent 60%);animation:p 8s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:.5}50%{opacity:1}}
+.header h1{font-size:18px;color:var(--bright);letter-spacing:3px;text-transform:uppercase;position:relative;text-shadow:0 0 30px var(--glow)}
+.header .sub{font-size:10px;color:var(--dim);margin-top:3px;letter-spacing:4px;position:relative}
+.stats{display:flex;gap:16px;justify-content:center;margin-top:6px;position:relative}
+.stats span{font-size:9px;color:var(--dim)}.stats b{color:var(--accent)}
+.mtog{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:flex;gap:3px;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:3px;z-index:5}
+.mb{padding:5px 12px;background:transparent;border:none;border-radius:4px;color:var(--dim);font-family:inherit;font-size:10px;cursor:pointer;transition:all .2s}
+.mb.on{background:var(--accent);color:#fff}.mb:hover:not(.on){color:var(--text)}
+.sidebar{border-right:1px solid var(--border);overflow-y:auto;padding:10px}
+.sidebar h3{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:10px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--border)}
+.sidebar h3:first-child{margin-top:0}
+.sb{width:100%;padding:6px 8px;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:inherit;font-size:10px;outline:none}.sb:focus{border-color:var(--accent)}.sb::placeholder{color:var(--dim)}
+.cr{display:flex;flex-wrap:wrap;gap:3px}
+.cc{padding:2px 6px;border:1px solid var(--border);border-radius:10px;font-size:9px;background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;transition:all .2s}
+.cc:hover{border-color:var(--dim);color:var(--text)}.cc.on{border-color:var(--accent);color:var(--accent);background:rgba(123,104,238,.1)}
+.bc{padding:8px 10px;border:1px solid var(--border);border-radius:6px;cursor:pointer;margin-bottom:4px;transition:all .2s;position:relative;padding-left:14px}
+.bc:hover{border-color:var(--accent);background:var(--s2)}
+.bc.on{border-color:var(--accent);background:var(--s2);box-shadow:0 0 12px var(--glow)}
+.bc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:6px 0 0 6px}
+.bc .bt{font-size:10px;color:var(--bright);line-height:1.3;padding-right:30px}
+.bc .bm{font-size:8px;color:var(--dim);margin-top:2px}
+.bc .bn{position:absolute;right:6px;top:8px;font-size:8px;color:var(--dim);background:var(--surface);padding:1px 5px;border-radius:6px}
+.content{overflow:hidden;position:relative;display:flex;flex-direction:column}
+/* Cosmos */
+.cv{flex:1;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#0f0f1a 0%,var(--bg) 70%)}
+.cv canvas{position:absolute;inset:0;width:100%;height:100%}
+.cv.hid{display:none}
+#nodes{position:absolute;inset:0;overflow:hidden}
+.nd{position:absolute;padding:6px 9px;background:var(--surface);border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:all .25s;max-width:160px;z-index:2;opacity:0;animation:fi .5s ease forwards}
+@keyframes fi{to{opacity:1}}
+.nd:hover{border-color:var(--accent);box-shadow:0 0 12px var(--glow);z-index:10;transform:scale(1.05)}
+.nd .nt{font-size:9px;color:var(--bright);font-weight:bold}.nd .nc{font-size:7px;margin-top:1px;text-transform:uppercase;letter-spacing:1px}
+.ctr{position:absolute;bottom:8px;left:8px;z-index:20;font-size:9px;color:var(--dim);background:var(--surface);padding:2px 7px;border-radius:3px;border:1px solid var(--border)}
+/* Reader */
+.rv{flex:1;display:none;flex-direction:column;overflow:hidden}.rv.on{display:flex}
+.rh{padding:12px 20px;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:14px;flex-shrink:0}
+.rh .rc{width:4px;height:36px;border-radius:2px;flex-shrink:0}
+.rh .ri{flex:1}.rh .ri h2{font-size:15px;color:var(--bright);text-shadow:0 0 20px var(--glow)}.rh .ri p{font-size:9px;color:var(--dim);margin-top:2px;font-style:italic}
+.rn{display:flex;gap:5px}
+.rb{padding:5px 12px;background:var(--s2);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:inherit;font-size:9px;cursor:pointer;transition:all .2s}
+.rb:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}.rb:disabled{opacity:.3;cursor:default}
+.toc{width:100%;border-bottom:1px solid var(--border);padding:6px 20px;display:flex;gap:5px;overflow-x:auto;flex-shrink:0;background:var(--bg)}
+.pip{width:7px;height:7px;border-radius:50%;border:1px solid var(--border);cursor:pointer;transition:all .15s;flex-shrink:0}
+.pip:hover{transform:scale(1.4)}.pip.now{box-shadow:0 0 6px var(--glow)}.pip.rd{background:var(--a5);border-color:var(--a5)}
+.rbody{flex:1;overflow-y:auto}
+.ep{padding:28px 36px 40px;max-width:720px;margin:0 auto;animation:pf .35s ease}
+@keyframes pf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.ep .ec{font-size:8px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.ep .et{font-size:20px;color:var(--bright);line-height:1.4;text-shadow:0 0 20px var(--glow)}
+.ep .em{font-size:8px;color:var(--dim);margin-top:5px;display:flex;gap:8px;flex-wrap:wrap}
+.ep .ed{width:50px;height:1px;background:var(--border);margin:16px 0}
+.ep .ex{font-size:12.5px;line-height:2;color:var(--text);white-space:pre-wrap}
+.ep .ex strong{color:var(--accent)}.ep .ex em{color:var(--a2);font-style:italic}
+.ep .tg{display:flex;flex-wrap:wrap;gap:3px;margin-top:20px}
+.ep .tg span{font-size:7px;padding:2px 6px;border-radius:6px;background:var(--s2);border:1px solid var(--border);color:var(--dim)}
+.ep .en{display:flex;justify-content:space-between;margin-top:28px;padding-top:16px;border-top:1px solid var(--border)}
+.nb{padding:7px 16px;background:transparent;border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:inherit;font-size:10px;cursor:pointer;transition:all .2s;max-width:45%;text-align:left}
+.nb:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}.nb:disabled{opacity:.15;cursor:default}
+.nb .nl{font-size:7px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}.nb .nn{margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog{height:2px;background:var(--border);flex-shrink:0}.prog .bar{height:100%;background:var(--accent);transition:width .3s}
+/* Persona badge in reader */
+.persona-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;margin-top:8px}
+.persona-badge .pb-name{font-size:10px;color:var(--a2)}.persona-badge .pb-voice{font-size:8px;color:var(--dim);font-style:italic}
+/* Prompt */
+.pbar{grid-column:1/-1;border-top:1px solid var(--border);padding:8px 14px;display:flex;gap:10px;background:var(--surface);align-items:center}
+.pbar .pt{flex:1;font-size:9px;line-height:1.5;color:var(--text);max-height:50px;overflow-y:auto}
+.cpb{padding:6px 14px;background:var(--accent);border:none;border-radius:5px;color:#fff;font-family:inherit;font-size:10px;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.cpb:hover{background:#6a5ae0}.cpb.ok{background:var(--a5)}
+.tip{position:fixed;padding:7px 10px;background:var(--s2);border:1px solid var(--accent);border-radius:5px;font-size:8px;max-width:240px;pointer-events:none;z-index:100;opacity:0;transition:opacity .12s;box-shadow:0 3px 12px rgba(0,0,0,.5)}.tip.show{opacity:1}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--dim)}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+  <h1>Chronicles of the Digital Realm</h1>
+  <div class="sub">Interactive Lore Explorer</div>
+  <div class="stats" id="stats"></div>
+  <div class="mtog">
+    <button class="mb on" onclick="setMode('cosmos')">Cosmos</button>
+    <button class="mb" onclick="setMode('reader')">Book Reader</button>
+  </div>
+</div>
+<div class="sidebar">
+  <h3>Search</h3>
+  <input class="sb" id="search" placeholder="Search all chronicles...">
+  <h3>Categories</h3>
+  <div class="cr" id="cats"></div>
+  <h3>Books <span id="book-count" style="color:var(--accent)"></span></h3>
+  <div id="books"></div>
+</div>
+<div class="content">
+  <div class="cv" id="cv"><canvas id="stars"></canvas><div id="nodes"></div><div class="ctr" id="ctr"></div></div>
+  <div class="rv" id="rv">
+    <div class="rh" id="rh"></div>
+    <div class="toc" id="toc"></div>
+    <div class="rbody" id="rbody"></div>
+    <div class="prog"><div class="bar" id="bar"></div></div>
+  </div>
+</div>
+<div class="pbar"><div class="pt" id="pt"></div><button class="cpb" id="cpb" onclick="copyP()">Copy</button></div>
+</div>
+<div class="tip" id="tip"></div>
+
+<!-- Load real lore data generated by tools/build-explorer-data.sh -->
+<script src="lore-data.js"></script>
+
+<script>
+// =============================================================
+// PROCESS RAW DATA from lore-data.js
+// =============================================================
+const RAW = window.LORE_DATA || {books:[],entries:[],personas:[]};
+
+// Build lookup maps
+const entryMap = {};
+RAW.entries.forEach(e => entryMap[e.id] = e);
+
+const personaMap = {};
+RAW.personas.forEach(p => personaMap[p.id] = p);
+
+// Assign colors to books based on hash
+const PALETTE = ['#4ecdc4','#ff6b9d','#7b68ee','#ffd93d','#6bcb77','#4d96ff','#e06c75','#c678dd','#56b6c2','#d19a66','#98c379','#61afef'];
+function hashColor(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+  return PALETTE[Math.abs(h) % PALETTE.length];
+}
+
+// Process books: resolve persona from readers array
+const BOOKS = RAW.books.map(b => {
+  // Find persona linked via readers or owners
+  let persona = null;
+  for (const rid of [...(b.readers||[]), ...(b.owners||[])]) {
+    if (personaMap[rid]) { persona = personaMap[rid]; break; }
+  }
+  // Also check if any persona has this book in lore_books
+  if (!persona) {
+    for (const p of RAW.personas) {
+      if ((p.lore_books||[]).includes(b.id)) { persona = p; break; }
+    }
+  }
+  return {
+    ...b,
+    color: hashColor(b.id),
+    persona: persona ? persona.name : null,
+    personaVoice: persona?.voice?.tone || null,
+    entryCount: (b.entry_ids||[]).filter(eid => entryMap[eid]).length,
+  };
+}).filter(b => b.entryCount > 0)
+  .sort((a,b) => b.entryCount - a.entryCount);
+
+// Build flat entry list with book reference
+const ENTRIES = [];
+const bookMap = {};
+BOOKS.forEach(b => bookMap[b.id] = b);
+
+RAW.entries.forEach(e => {
+  if (!e.book_id || !bookMap[e.book_id]) return;
+  ENTRIES.push({
+    ...e,
+    book: bookMap[e.book_id],
+  });
+});
+
+const CATEGORIES = [...new Set(ENTRIES.map(e => e.cat))].sort();
+
+// Stats
+document.getElementById('stats').innerHTML = `<span><b>${ENTRIES.length}</b> entries</span><span><b>${BOOKS.length}</b> books</span><span><b>${RAW.personas.length}</b> personas</span>`;
+
+// =============================================================
+// STATE
+// =============================================================
+const S = {
+  mode: 'cosmos',
+  book: null,
+  entry: 0,
+  cat: null,
+  q: '',
+  read: new Set(),
+};
+
+// =============================================================
+// SIDEBAR
+// =============================================================
+function renderCats() {
+  const el = document.getElementById('cats');
+  let h = `<button class="cc${S.cat===null?' on':''}" onclick="setCat(null)">all</button>`;
+  CATEGORIES.forEach(c => h += `<button class="cc${S.cat===c?' on':''}" onclick="setCat('${c}')">${c}</button>`);
+  el.innerHTML = h;
+}
+
+function setCat(c) { S.cat = c; renderCats(); updateAll(); }
+
+function renderBooks() {
+  const el = document.getElementById('books');
+  const shown = BOOKS.filter(b => {
+    if (S.cat) {
+      const entries = getBookEntries(b.id);
+      if (entries.length === 0) return false;
+    }
+    if (S.q) {
+      const entries = getBookEntries(b.id);
+      if (entries.length === 0 && !(b.title+' '+b.desc).toLowerCase().includes(S.q)) return false;
+    }
+    return true;
+  });
+  document.getElementById('book-count').textContent = `(${shown.length})`;
+  el.innerHTML = shown.map(b =>
+    `<div class="bc${S.book===b.id?' on':''}" style="--c:${b.color}" onclick="openBook('${b.id}')">
+      <div class="bt" style="border-left-color:${b.color}">${b.title}</div>
+      <div class="bm">${b.persona||b.date||''}</div>
+      <div class="bn">${b.entryCount}</div>
+      <style>.bc[style*="${b.color}"]::before{background:${b.color}}</style>
+    </div>`
+  ).join('');
+}
+
+document.getElementById('search').addEventListener('input', e => { S.q = e.target.value.toLowerCase(); updateAll(); });
+
+// =============================================================
+// MODE
+// =============================================================
+function setMode(m) {
+  S.mode = m;
+  document.querySelectorAll('.mb').forEach(b => b.classList.toggle('on', b.textContent.toLowerCase().includes(m === 'cosmos' ? 'cosmos' : 'book')));
+  document.getElementById('cv').classList.toggle('hid', m !== 'cosmos');
+  document.getElementById('rv').classList.toggle('on', m === 'reader');
+  if (m === 'reader' && !S.book) openBook(BOOKS[0]?.id);
+  updateAll();
+}
+
+// =============================================================
+// FILTERING
+// =============================================================
+function getFiltered() {
+  return ENTRIES.filter(e => {
+    if (S.cat && e.cat !== S.cat) return false;
+    if (S.q && !(e.title+' '+e.content+' '+(e.tags||[]).join(' ')).toLowerCase().includes(S.q)) return false;
+    return true;
+  });
+}
+
+function getBookEntries(bookId) {
+  const book = bookMap[bookId];
+  if (!book) return [];
+  // Preserve book order
+  return (book.entry_ids||[])
+    .map(eid => entryMap[eid])
+    .filter(e => {
+      if (!e) return false;
+      if (S.cat && e.cat !== S.cat) return false;
+      if (S.q && !(e.title+' '+e.content+' '+(e.tags||[]).join(' ')).toLowerCase().includes(S.q)) return false;
+      return true;
+    });
+}
+
+// =============================================================
+// UPDATE
+// =============================================================
+function updateAll() {
+  renderBooks();
+  if (S.mode === 'cosmos') renderCosmos();
+  else renderReader();
+  updatePrompt();
+}
+
+// =============================================================
+// COSMOS
+// =============================================================
+function renderCosmos() {
+  const entries = getFiltered();
+  const container = document.getElementById('nodes');
+  container.innerHTML = '';
+  document.getElementById('ctr').textContent = entries.length + ' entries';
+  const rect = container.parentElement.getBoundingClientRect();
+  const w = rect.width, h = rect.height;
+  if (w < 10 || h < 10) return;
+
+  // Limit nodes for performance
+  const maxNodes = Math.min(entries.length, 120);
+  const shown = entries.slice(0, maxNodes);
+
+  const bpos = {};
+  const activeBooks = [...new Set(shown.map(e => e.book_id))];
+  const cx = w/2, cy = h/2, r = Math.min(w,h) * 0.3;
+  activeBooks.forEach((bid,i) => {
+    const a = (i/activeBooks.length)*Math.PI*2 - Math.PI/2;
+    bpos[bid] = { x: cx+Math.cos(a)*r, y: cy+Math.sin(a)*r };
+  });
+
+  shown.forEach((entry,i) => {
+    const book = bookMap[entry.book_id];
+    const bp = bpos[entry.book_id] || {x:cx,y:cy};
+    const scatter = 40 + Math.random()*50;
+    const a = Math.random()*Math.PI*2;
+    let x = Math.max(15, Math.min(w-170, bp.x+Math.cos(a)*scatter));
+    let y = Math.max(15, Math.min(h-45, bp.y+Math.sin(a)*scatter));
+
+    const n = document.createElement('div');
+    n.className = 'nd';
+    n.style.left = x+'px';
+    n.style.top = y+'px';
+    n.style.animationDelay = (i*0.02)+'s';
+    n.style.borderColor = book ? book.color+'40' : 'var(--border)';
+    n.innerHTML = `<div class="nt">${entry.title}</div><div class="nc" style="color:${book?book.color:'var(--dim)'}">${entry.cat}</div>`;
+    n.addEventListener('click', () => {
+      S.book = entry.book_id;
+      const be = getBookEntries(entry.book_id);
+      S.entry = be.findIndex(e => e.id === entry.id);
+      if (S.entry < 0) S.entry = 0;
+      setMode('reader');
+    });
+    n.addEventListener('mouseenter', ev => showTip(ev, entry));
+    n.addEventListener('mouseleave', () => document.getElementById('tip').classList.remove('show'));
+    container.appendChild(n);
+  });
+
+  if (entries.length > maxNodes) {
+    document.getElementById('ctr').textContent = `${maxNodes} of ${entries.length} shown`;
+  }
+}
+
+function showTip(ev, e) {
+  const t = document.getElementById('tip');
+  const book = bookMap[e.book_id];
+  t.innerHTML = `<div style="font-weight:bold;color:var(--bright);margin-bottom:2px">${e.title}</div><div style="color:var(--dim);margin-bottom:2px">${e.cat} · ${book?book.title:''}</div><div>${(e.content||'').substring(0,120)}...</div>`;
+  t.style.left = Math.min(ev.clientX+10, window.innerWidth-250)+'px';
+  t.style.top = (ev.clientY+10)+'px';
+  t.classList.add('show');
+}
+
+// =============================================================
+// READER
+// =============================================================
+function openBook(bookId) {
+  if (!bookId) return;
+  S.book = bookId;
+  S.entry = 0;
+  renderBooks();
+  if (S.mode !== 'reader') setMode('reader');
+  else renderReader();
+}
+
+function renderReader() {
+  const book = bookMap[S.book];
+  if (!book) return;
+  const entries = getBookEntries(book.id);
+  if (S.entry >= entries.length) S.entry = Math.max(0, entries.length - 1);
+  const entry = entries[S.entry];
+
+  // Book nav
+  const bi = BOOKS.indexOf(BOOKS.find(b => b.id === book.id));
+  const prev = BOOKS[bi-1], next = BOOKS[bi+1];
+
+  // Find persona
+  let personaInfo = '';
+  if (book.persona) {
+    personaInfo = ` — narrated by ${book.persona}`;
+    if (book.personaVoice) personaInfo += ` (${book.personaVoice.substring(0,80)}...)`;
+  }
+
+  document.getElementById('rh').innerHTML = `
+    <div class="rc" style="background:${book.color}"></div>
+    <div class="ri">
+      <h2>${book.title}</h2>
+      <p>${book.desc||''}${personaInfo}</p>
+    </div>
+    <div class="rn">
+      <button class="rb" ${prev?`onclick="openBook('${prev.id}')"`:'disabled'}>&lt; Prev book</button>
+      <button class="rb" ${next?`onclick="openBook('${next.id}')"`:'disabled'}>Next book &gt;</button>
+    </div>`;
+
+  // TOC
+  document.getElementById('toc').innerHTML = entries.map((e,i) => {
+    const isNow = i === S.entry;
+    const isRead = S.read.has(e.id);
+    return `<div class="pip${isNow?' now':''}${isRead?' rd':''}" title="${e.title}" onclick="goE(${i})" style="${isNow?'background:'+book.color+';border-color:'+book.color:isRead?'':'border-color:'+book.color+'40'}"></div>`;
+  }).join('');
+
+  // Progress
+  document.getElementById('bar').style.width = entries.length > 1 ? ((S.entry/(entries.length-1))*100)+'%' : '100%';
+
+  if (!entry) {
+    document.getElementById('rbody').innerHTML = '<div style="padding:40px;text-align:center;color:var(--dim)">No entries match your filters in this book.<br><br>Try clearing the category filter or search.</div>';
+    return;
+  }
+
+  S.read.add(entry.id);
+  const prevE = entries[S.entry-1], nextE = entries[S.entry+1];
+
+  // Persona badge
+  let personaBadge = '';
+  if (book.persona) {
+    personaBadge = `<div class="persona-badge"><span class="pb-name">${book.persona}</span>${book.personaVoice ? `<span class="pb-voice">${book.personaVoice.substring(0,60)}</span>` : ''}</div>`;
+  }
+
+  document.getElementById('rbody').innerHTML = `<div class="ep">
+    <div class="ec" style="color:${book.color}">${entry.cat} · Entry ${S.entry+1} of ${entries.length}</div>
+    <div class="et">${entry.title}</div>
+    <div class="em"><span>${book.title}</span><span>${entry.date||''}</span></div>
+    ${personaBadge}
+    <div class="ed"></div>
+    <div class="ex">${fmt(entry.content||'')}</div>
+    ${(entry.tags||[]).length ? '<div class="tg">' + entry.tags.map(t => '<span>'+t+'</span>').join('') + '</div>' : ''}
+    <div class="en">
+      <button class="nb" ${prevE?`onclick="goE(${S.entry-1})"`:'disabled'}>${prevE?`<div class="nl">Previous</div><div class="nn">${prevE.title}</div>`:''}</button>
+      <button class="nb" ${nextE?`onclick="goE(${S.entry+1})"`:'disabled'}>${nextE?`<div class="nl">Next</div><div class="nn">${nextE.title}</div>`:''}</button>
+    </div>
+  </div>`;
+  document.getElementById('rbody').scrollTop = 0;
+}
+
+function goE(i) { S.entry = i; renderReader(); updatePrompt(); }
+
+function fmt(t) {
+  return t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>');
+}
+
+// =============================================================
+// STARFIELD
+// =============================================================
+function initStars() {
+  const c = document.getElementById('stars'), ctx = c.getContext('2d');
+  let ss = [];
+  function resize() {
+    c.width = c.parentElement.clientWidth;
+    c.height = c.parentElement.clientHeight;
+    ss = Array.from({length:120},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1+.2,p:Math.random()*Math.PI*2,s:Math.random()*.005+.002}));
+  }
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    const t = Date.now()*.001;
+    ss.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(200,200,240,${.3+Math.sin(t*s.s*100+s.p)*.3})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); if(S.mode==='cosmos') renderCosmos(); });
+  draw();
+}
+
+// =============================================================
+// PROMPT
+// =============================================================
+function updatePrompt() {
+  const el = document.getElementById('pt');
+  if (S.mode === 'reader' && S.book) {
+    const book = bookMap[S.book];
+    const entries = getBookEntries(book.id);
+    const entry = entries[S.entry];
+    if (entry) {
+      el.textContent = `Generate a new ${entry.cat} entry for "${book.title}"${book.persona ? ` in the voice of ${book.persona}` : ''}. Style reference: "${entry.title}" — themes: ${(entry.tags||[]).join(', ')}. Maintain the mythological tone. Expand on or connect to existing lore.`;
+    } else {
+      el.textContent = `Reading "${book.title}" — ${book.desc||''}`;
+    }
+  } else {
+    const f = getFiltered();
+    el.textContent = `Exploring ${f.length} entries across ${BOOKS.length} books. ${S.cat?'Filtered to '+S.cat+'. ':''}Click any node to read its book.`;
+  }
+}
+
+function copyP() {
+  navigator.clipboard.writeText(document.getElementById('pt').textContent).then(() => {
+    const b = document.getElementById('cpb');
+    b.textContent = 'Copied!'; b.classList.add('ok');
+    setTimeout(() => { b.textContent='Copy'; b.classList.remove('ok'); }, 1500);
+  });
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (S.mode !== 'reader') return;
+  const entries = getBookEntries(S.book);
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') { if(S.entry<entries.length-1){e.preventDefault();goE(S.entry+1)} }
+  else if (e.key==='ArrowLeft'||e.key==='ArrowUp') { if(S.entry>0){e.preventDefault();goE(S.entry-1)} }
+  else if (e.key==='n'||e.key==='N') { const i=BOOKS.findIndex(b=>b.id===S.book); if(i<BOOKS.length-1) openBook(BOOKS[i+1].id); }
+  else if (e.key==='p'||e.key==='P') { const i=BOOKS.findIndex(b=>b.id===S.book); if(i>0) openBook(BOOKS[i-1].id); }
+});
+
+// Init
+renderCats();
+renderBooks();
+initStars();
+updateAll();
+</script>
+</body>
+</html>
