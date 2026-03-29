@@ -1,0 +1,80 @@
+name: Build Explorer Data
+
+on:
+  push:
+    paths:
+      - 'knowledge/expanded/**/*.json'
+      - 'tools/build-explorer-data.sh'
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force run even if disabled in config'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  check-toggle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: '.github/workflow-config.yml'
+          sparse-checkout-cone-mode: false
+
+      - name: Check if workflow is enabled
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.force_run }}" == "true" ]; then
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Force run requested - workflow enabled"
+            exit 0
+          fi
+
+          if [ -f ".github/workflow-config.yml" ]; then
+            ENABLED=$(grep "build-explorer-data:" .github/workflow-config.yml | head -1 | sed 's/.*: *//' | sed 's/ *#.*//' | tr -d ' ')
+            if [ "$ENABLED" == "false" ]; then
+              echo "enabled=false" >> $GITHUB_OUTPUT
+              echo "Workflow disabled via workflow-config.yml"
+            else
+              echo "enabled=true" >> $GITHUB_OUTPUT
+              echo "Workflow enabled"
+            fi
+          else
+            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "Config file not found - defaulting to enabled"
+          fi
+
+  build:
+    needs: check-toggle
+    if: needs.check-toggle.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Build explorer data
+        run: ./tools/build-explorer-data.sh
+
+      - name: Commit updated lore-data.js
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add lore-data.js
+          if git diff --staged --quiet; then
+            echo "No changes to lore-data.js"
+          else
+            git commit -m "Rebuild explorer data [skip ci]"
+            git push
+          fi
